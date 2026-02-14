@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    display: flex;
+    align-items: center;
+}
+
+.sideBar {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    justify-content: space-between;
+    height: 95dvh;
+    top: 0;
+    left: 0;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 500px;
+}
+
+.slogan {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: 100%;
+}
+
+.content {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100dvw;
+    height: 100%;
+}
+
+#contactList {
+    height: 100dvh;
+}
