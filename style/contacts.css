@@ -4,10 +4,12 @@
 }
 
 .contentHeader {
+    top: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 70px;
+    width: 100%;
 }
 
 body {
@@ -24,28 +26,30 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 200px;
+    width: 230px;
     justify-content: space-between;
     height: 100%;
     top: 0;
     left: 0;
     background-color: rgb(42,54,71);
+
 }
-.sideBar img {
+
+.joinLogo {
+    width: 80px;
+}
+.buttomLinks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     height: auto;
-    width: 80%;
 }
 
 nav {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     align-items: center;
-    height: 50%;
-}
-nav a {
-    color: white;
-    text-decoration: none;
+    width: 100%;
 }
 
 .slogan {
@@ -53,13 +57,16 @@ nav a {
     justify-content: center;
     align-items: center;
     gap: 20px;
-    height: 100%;
+}
+
+.contentBody {
+    display: flex;
 }
 
 .content {
     display: flex;
-    justify-content: space-evenly;
-    height: 100%;
+    flex-direction: column;
+    height: 100dvh;
 }
 
 #contactList {
