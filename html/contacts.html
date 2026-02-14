@@ -8,35 +8,41 @@
     <link rel="stylesheet" href="/style/contacts.css">
     <script defer src="/script/contacts.js"></script>
 </head>
-<body>
+<body onload="loadContacts()">
     <main>
         <div class="sideBar">
-            <nav>
-                <img src="/esstes/imgs/Capa 2 white.png" alt="Logo Join">
-                <img src="/esstes/imgs/Menu 3.png" alt="Menu Icons">
-            </nav>
-            <div>
-                <a href="./privacy.html">Privacy Policy</a>
-                <a href="./legal.html">Legal Notice</a>
-            </div>
+            <img class="joinLogo" src="/esstes/contact-imges/Capa 2 white.png" alt="Logo Join">
+                <nav>
+                    <img src="/esstes/contact-imges/Summary.png" alt="summary Icon">
+                    <img src="/esstes/contact-imges/Add Task.png" alt="add task Icon">
+                    <img src="/esstes/contact-imges/Board.png" alt="board Icon">
+                    <img class="navLinks" src="/esstes/contact-imges/Board icon.png" alt="contact Icon">
+                </nav>
+                <div class="buttomLinks">
+                    <img src="/esstes/contact-imges/Privacy Policy Text Button.png" alt="Privacy Policy Icon">
+                    <img src="/esstes/contact-imges/Legal Notice Text Button.png" alt="Legal Notice Icon">
+                </div>
         </div>
-        <div>
-            <div class="contentHeader">
-                <p>Kanban Project Managment Tool</p>
-            </div>
+            
 
             <div class="content">
-                <div id="contactList">
+                <div class="contentHeader">
+                    <p>Kanban Project Managment Tool</p>
+                </div>
+            <div class="contentBody">
+                <div">
                     <button onclick="addContact()">Add Contact</button>
+                    <ul id="contactListContent">
+
+                    </ul>
                     // Contact list will be dynamically generated here
                 </div>
-
                     <div class="slogan">
                         <h2>Contacts</h2>
                         <p>Better with a team</p>
                     </div>
+                </div>
             </div>
-        </div>
     </main>
 
     <footer>
