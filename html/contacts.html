@@ -6,37 +6,43 @@
     <title>Contacts</title>
 
     <link rel="stylesheet" href="/style/contacts.css">
+    <script defer src="/script/contacts.js"></script>
 </head>
-<body>
-    <header>
-        <p>Kanban Project Managment Tool</p>
-    </header>
-    
+<body onload="loadContacts()">
     <main>
         <div class="sideBar">
-            <img src="/esstes/imgs/Capa 2.svg" alt="Logo Join">
-            <nav>
-                <a href="./inndex.html">Summary</a>
-                <a href="./tasks.html">Add Task</a>
-                <a href="./board.html">Board</a>
-                <a href="./contacts.html">Contacts</a>
-            </nav>
-            <div>
-                <a href="./privacy.html">Privacy Policy</a>
-                <a href="./legal.html">Legal Notice</a>
-            </div>
-        </div>
-        <div class="content">
-            <div id="contactList">
-                <button onclick="addContact()">Add Contact</button>
-                // Contact list will be dynamically generated here
-            </div>
-
-                <div class="slogan">
-                    <h2>Contacts</h2>
-                    <p>Better with a team</p>
+            <img class="joinLogo" src="/esstes/contact-imges/Capa 2 white.png" alt="Logo Join">
+                <nav>
+                    <img src="/esstes/contact-imges/Summary.png" alt="summary Icon">
+                    <img src="/esstes/contact-imges/Add Task.png" alt="add task Icon">
+                    <img src="/esstes/contact-imges/Board.png" alt="board Icon">
+                    <img class="navLinks" src="/esstes/contact-imges/Board icon.png" alt="contact Icon">
+                </nav>
+                <div class="buttomLinks">
+                    <img src="/esstes/contact-imges/Privacy Policy Text Button.png" alt="Privacy Policy Icon">
+                    <img src="/esstes/contact-imges/Legal Notice Text Button.png" alt="Legal Notice Icon">
                 </div>
         </div>
+            
+
+            <div class="content">
+                <div class="contentHeader">
+                    <p>Kanban Project Managment Tool</p>
+                </div>
+            <div class="contentBody">
+                <div">
+                    <button onclick="addContact()">Add Contact</button>
+                    <ul id="contactListContent">
+
+                    </ul>
+                    // Contact list will be dynamically generated here
+                </div>
+                    <div class="slogan">
+                        <h2>Contacts</h2>
+                        <p>Better with a team</p>
+                    </div>
+                </div>
+            </div>
     </main>
 
     <footer>
