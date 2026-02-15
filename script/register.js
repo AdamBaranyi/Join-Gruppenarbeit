@@ -42,3 +42,45 @@ async function addUser() {
     alert("Es gab einen Netzwerkfehler.");
   }
 }
+
+// UI functions from main branch
+initInputs();
+
+function initInputs() {
+  const groups = document.querySelectorAll(".input-group");
+
+  groups.forEach((group) => {
+    const input = group.querySelector("input");
+    const icon = group.querySelector(".input-icon");
+    const type = group.dataset.type;
+
+    if (input && icon) {
+        input.addEventListener("input", () => handleInput(input, icon, type));
+        icon.addEventListener("click", () => handleIconClick(input, icon, type));
+    }
+  });
+}
+
+function handleInput(input, icon, type) {
+  if (type !== "password") return;
+
+  if (input.value.length === 0) {
+    input.type = "password";
+    icon.src = icon.dataset.default;
+    return;
+  }
+
+  if (input.type === "password") {
+    icon.src = icon.dataset.visible;
+  }
+}
+
+function handleIconClick(input, icon, type) {
+  if (type !== "password") return;
+  if (input.value.length === 0) return;
+
+  const isHidden = input.type === "password";
+
+  input.type = isHidden ? "text" : "password";
+  icon.src = isHidden ? icon.dataset.hidden : icon.dataset.visible;
+}
