@@ -1,8 +1,10 @@
+const BASE_URL = "https://join-backend-afae8-default-rtdb.europe-west1.firebasedatabase.app/users";
+
 /**
  * Initializes the login page.
  */
 async function init() {
-  await loadUsers(); // Load users from Firebase
+    // Optionally fetch users early if needed, but for now we fetch on login button click to ensure fresh data
 }
 
 /**
@@ -14,14 +16,37 @@ async function handleLogin(event) {
 
   let email = document.getElementById("loginEmail").value;
   let password = document.getElementById("loginPassword").value;
-  let user = users.find((u) => u.email === email && u.password === password);
 
-    if (user) {
-        sessionStorage.setItem("current_user", JSON.stringify(user));
-        showSuccessMessage();
-    } else {
-        alert("E-Mail oder Passwort falsch! (Hast du dich registriert?)");
+  try {
+    let response = await fetch(BASE_URL + ".json");
+    let users = await response.json();
+
+    let userFound = false;
+    let loggedInUser = null;
+
+    for (let id in users) {
+      if (
+        users[id].email === email &&
+        users[id].password === password
+      ) {
+        userFound = true;
+        loggedInUser = users[id];
+        // Add ID if needed later: loggedInUser.id = id;
+        break;
+      }
     }
+
+    if (userFound) {
+      sessionStorage.setItem("current_user", JSON.stringify(loggedInUser));
+      showSuccessMessage();
+    } else {
+      alert("E-Mail oder Passwort falsch! (Hast du dich registriert?)");
+    }
+
+  } catch (error) {
+    console.error("Fehler beim Login:", error);
+    alert("Ein Fehler ist aufgetreten via Firebase.");
+  }
 }
 
 
