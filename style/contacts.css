@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.contentHeader {
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    width: 100%;
+}
+
+body {
+    display: flex;
+    height: 100dvh;
+}
+
+main {
+    display: flex;
+    align-items: center;
+}
+
+.sideBar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 230px;
+    justify-content: space-between;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgb(42,54,71);
+
+}
+
+.joinLogo {
+    width: 80px;
+}
+.buttomLinks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.slogan {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.contentBody {
+    display: flex;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+}
+
+#contactList {
+    height: 90dvh;
+}

@@ -1,0 +1,47 @@
+/* Regular (400) */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    src: url('assets/fonts/Inter_18pt-Regular.ttf') format('truetype');
+}
+/* Medium (500) */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    src: url('assets/fonts/Inter_18pt-Medium.ttf') format('truetype');
+}
+/* Bold (700) */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    src: url('assets/fonts/Inter_18pt-Bold.ttf') format('truetype');
+}
+
+
+
+
+:root {
+  --color-bg: #f6f7f8;
+  --color-primary: #2a3647; /* Dark Blue Sidebar */
+  --color-secondary: #29abe2; /* Light Blue Accent */
+  --color-text: #000000;
+  --color-text-secondary: #a8a8a8;
+  --color-white: #ffffff;
+  --color-error: #ff8190;
+  --color-success: #5db329; /* Green for "Done" or success */
+
+  --font-primary: "Inter", sans-serif;
+}
+
+body {
+    font-family: var(--font-primary);
+    margin: 0;
+    font-weight: 400; /* Regular default */
+}
+
+input, textarea, button, select {
+    font-family: inherit;
+}

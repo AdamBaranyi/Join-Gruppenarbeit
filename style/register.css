@@ -1,0 +1,30 @@
+.logo{
+    width:80px;
+    height: 70px;
+    padding-left: 30px;
+    padding-top: 30px;
+}
+
+header{
+    height:160px;
+    width: 100%;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 50px;
+
+}
+input{
+    width: 420px;
+    height: 42px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 0 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+}
