@@ -13,9 +13,10 @@ async function loadContacts() {
    contactList.forEach(contact => {
        const contactElement = document.createElement("li");
        contactElement.innerHTML = `
-           <p>Name: ${contact.firstname}</p>
-           <p>Last Name: ${contact.lastname}</p>
-           <p>Email: ${contact.email}</p>
+        <div>
+           <p>${contact.firstname} ${contact.lastname}</p>
+           <p>${contact.email}</p>
+       </div>
        `;
        displayContactList.appendChild(contactElement);
    });
