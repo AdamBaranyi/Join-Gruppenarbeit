@@ -11,12 +11,12 @@
 <body onload="loadContacts()">
     <main>
         <div class="sideBar">
-            <img class="joinLogo" src="/esstes/contact-imges/Capa 2 white.png" alt="Logo Join">
+            <a href="./login.html"><img class="joinLogo" src="/esstes/contact-imges/Capa 2 white.png" alt="Logo Join"></a>
                 <nav>
-                    <img src="/esstes/contact-imges/Summary.png" alt="summary Icon">
-                    <img src="/esstes/contact-imges/Add Task.png" alt="add task Icon">
-                    <img src="/esstes/contact-imges/Board.png" alt="board Icon">
-                    <img class="navLinks" src="/esstes/contact-imges/Board icon.png" alt="contact Icon">
+                    <a href="/index.html"><img src="/esstes/contact-imges/Summary.png" alt="summary Icon"></a>
+                    <a href="./"><img src="/esstes/contact-imges/Add Task.png" alt="add task Icon"></a>
+                    <a href="./board.html"><img src="/esstes/contact-imges/Board.png" alt="board Icon"></a>
+                    <a href="./contacts.html"><img class="navLinks" src="/esstes/contact-imges/Board icon.png" alt="contact Icon"></a>
                 </nav>
                 <div class="buttomLinks">
                     <img src="/esstes/contact-imges/Privacy Policy Text Button.png" alt="Privacy Policy Icon">
@@ -28,25 +28,24 @@
             <div class="content">
                 <div class="contentHeader">
                     <p>Kanban Project Managment Tool</p>
-                </div>
-            <div class="contentBody">
-                <div">
-                    <button onclick="addContact()">Add Contact</button>
-                    <ul id="contactListContent">
-
-                    </ul>
-                    // Contact list will be dynamically generated here
-                </div>
-                    <div class="slogan">
-                        <h2>Contacts</h2>
-                        <p>Better with a team</p>
+                    <div>
+                        <a href="./"><img src="/esstes/contact-imges/help.png" alt="help Icon"></a>
+                        <a href="./"><img src="/esstes/contact-imges/User profile initials.png" alt="User Image"></a>
                     </div>
+                </div>
+                <div class="contentBody">
+                    <div>
+                        <button onclick="addContact()">Add Contact</button>
+                        <ul id="contactListContent">
+                        </ul>
+                    </div>
+                        <div class="slogan">
+                            <h2>Contacts</h2>
+                            <p>Better with a team</p>
+                        </div>
                 </div>
             </div>
     </main>
 
-    <footer>
-
-    </footer>
 </body>
 </html>
