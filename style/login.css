@@ -1,3 +1,4 @@
+/* Layout & Container */
 .login-container {
     display: flex;
     flex-direction: column;
@@ -9,6 +10,51 @@
     background-color: var(--color-bg);
 }
 
+.logo-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* Logo & Animation Control */
+.logo-anim {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    animation: moveLogo 1s ease-in-out forwards;
+    animation-delay: 0.5s;
+}
+
+.no-anim .logo-container {
+    position: absolute;
+    z-index: 10;
+    height: auto;
+    width: auto;
+    top: 60px;
+    left: 60px;
+}
+
+.no-anim .logo-anim {
+    animation: none;
+    width: 100px;
+    position: static;
+    transform: none;
+}
+
+.no-anim .login-card, 
+.no-anim .legal-links,
+.no-anim .top-signup-link {
+    animation: none;
+    opacity: 1;
+}
+
+/* Sign Up Link (Top Right) */
 .top-signup-link {
     position: absolute;
     top: 60px;
@@ -18,6 +64,9 @@
     gap: 35px;
     font-size: 20px;
     font-weight: 400;
+    opacity: 0;
+    animation: fadeInContent 1s ease-in-out forwards;
+    animation-delay: 1.2s;
 }
 
 .top-signup-link span {
@@ -26,6 +75,7 @@
     font-size: 20px;
 }
 
+/* Login Card */
 .login-card {
     background-color: var(--color-white);
     padding: 35px 40px; 
@@ -36,6 +86,10 @@
     align-items: center;
     width: 652px;
     max-width: 90%;
+    animation: slideIn 0.5s ease-out;
+    opacity: 0;
+    animation: fadeInContent 1s ease-in-out forwards;
+    animation-delay: 1.2s;
 }
 
 .login-card h1 {
@@ -45,6 +99,13 @@
     text-align: center;
 }
 
+.login-card form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
 .separator-blue {
     width: 150px;
     height: 3px;
@@ -52,13 +113,22 @@
     margin-bottom: 45px;
 }
 
+/* Form Inputs & Icons */
 .input-group {
     position: relative;
     margin-bottom: 20px;
     width: 422px;
 }
 
-/* --- ICONS --- */
+.input-group input {
+    width: 100%;
+    padding: 13px 50px 13px 21px;
+    font-size: 21px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    box-sizing: border-box; 
+}
+
 .input-group img, .password-toggle {
     position: absolute;
     top: 50%;
@@ -72,7 +142,10 @@
     pointer-events: none;
 }
 
-/* Eye Toggle */
+#loginPassword {
+    padding-right: 95px;
+}
+
 .password-toggle {
     right: 60px; 
     cursor: pointer;
@@ -82,36 +155,14 @@
     pointer-events: auto;
 }
 
-.input-group input {
-    width: 100%;
-    padding: 13px 50px 13px 21px;
-    font-size: 21px;
-    border: 1px solid #D1D1D1;
-    border-radius: 10px;
-    box-sizing: border-box; 
-}
-
-
-#loginPassword {
-    padding-right: 95px;
-}
-
-/* Center form elements */
-.login-card form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
 .checkbox-group {
     display: flex;
     align-items: center;
     gap: 8px;
     margin-bottom: 20px;
-   
 }
 
+/* Buttons */
 .login-buttons {
     display: flex;
     gap: 20px;
@@ -185,7 +236,7 @@
     box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
 }
 
-/* Legal Links Bottom */
+/* Footer / Legal Links */
 .legal-links {
     position: absolute;
     bottom: 30px;
@@ -194,6 +245,9 @@
     display: flex;
     justify-content: center;
     gap: 30px; 
+    opacity: 0;
+    animation: fadeInContent 1s ease-in-out forwards;
+    animation-delay: 1.2s;
 }
 
 .legal-links a {
@@ -206,7 +260,33 @@
     color: var(--color-secondary);
 }
 
-/* Animations (Basic) */
+/* Success Message (Overlay) */
+.success-message {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-primary);
+    color: white;
+    padding: 20px 40px;
+    border-radius: 20px;
+    font-size: 24px;
+    font-weight: 700;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: bottom 0.5s ease-in-out;
+}
+
+.success-message.show {
+    bottom: 50%;
+    transform: translate(-50%, 50%);
+}
+
+.d-none {
+    display: none;
+}
+
+/* Keyframe Animations */
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -218,40 +298,9 @@
     }
 }
 
-.login-card {
-    animation: slideIn 0.5s ease-out;
-}
-
-/* Logo Animation & Base Styles */
-.logo-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 999;
-}
-
-.logo-anim {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 250px;
-    animation: moveLogo 1s ease-in-out forwards;
-    animation-delay: 0.5s;
-}
-
 @keyframes moveLogo {
     0% { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 250px; }
     100% { top: 60px; left: 60px; transform: translate(0, 0); width: 100px; }
-}
-
-.top-signup-link, .login-card, .legal-links {
-    opacity: 0;
-    animation: fadeInContent 1s ease-in-out forwards;
-    animation-delay: 1.2s;
 }
 
 @keyframes fadeInContent {
@@ -259,31 +308,9 @@
     to { opacity: 1; }
 }
 
-/* No Anim Defaults */
-.no-anim .logo-container {
-    position: absolute;
-    z-index: 10;
-    height: auto;
-    width: auto;
-    top: 60px;
-    left: 60px;
-}
-.no-anim .logo-anim {
-    animation: none;
-    width: 100px;
-    position: static;
-    transform: none;
-}
-.no-anim .login-card, 
-.no-anim .legal-links,
-.no-anim .top-signup-link {
-    animation: none;
-    opacity: 1;
-}
+/* Media Queries */
 
-/* Responsive */
-
-/* (< 850px) */
+/* Tablet & Mobile (< 850px) */
 @media(max-width: 850px) {
     body {
         padding-top: 0 !important;
@@ -291,32 +318,31 @@
         min-height: 100vh;
     }
 
-    .login-card {
-        padding: 30px 16px;
-        width: min(400px, 90%); 
-        margin-top: 80px; 
+    .login-container {
+        justify-content: center;
+        padding-bottom: 60px; 
+        height: auto; 
+        min-height: 100vh;
     }
 
-    .input-group {
-        width: 100%;
+    /* Logo Mobile */
+    .logo-anim {
+        width: 80px;
+        animation-name: moveLogoMobile; 
+    }    
+
+    .no-anim .logo-container {
+        top: 40px; 
+        left: 40px; 
+        transform: none;
+        width: auto;
+        height: auto;
     }
-    
-    .input-group input {
-        width: 100%;
+    .no-anim .logo-anim {
+        width: 80px;
     }
-    
-    .login-buttons {
-        flex-direction: column;
-        width: 100%;
-        gap: 16px;
-        margin-top: 24px;
-    }
-    
-    .login-buttons .btn-dark, .login-buttons .btn-light {
-        width: 100%;
-        padding: 12px 0;
-    }
-    
+
+    /* Top Sign Up Link Mobile */
     .top-signup-link {
         display: flex; 
         position: static; 
@@ -335,23 +361,40 @@
     .top-signup-link span {
         font-size: 16px;
     }
+
+    /* Card Mobile */
+    .login-card {
+        padding: 30px 16px;
+        width: min(400px, 90%); 
+        margin-top: 80px; 
+    }
+
+    /* Inputs Mobile */
+    .input-group {
+        width: 100%;
+    }
+    
+    .input-group input {
+        width: 100%;
+    }
+    
+    /* Buttons Mobile */
+    .login-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 16px;
+        margin-top: 24px;
+    }
+    
+    .login-buttons .btn-dark, .login-buttons .btn-light {
+        width: 100%;
+        padding: 12px 0;
+    }
     
     .btn-primary-small {
         font-size: 16px;
         padding: 8px 16px;
     }
-
-    .login-container {
-        justify-content: center;
-        padding-bottom: 60px; 
-        height: auto; 
-        min-height: 100vh;
-    }
-    
-    .logo-anim {
-        width: 80px;
-        animation-name: moveLogoMobile; 
-    }    
     
     @keyframes moveLogoMobile {
         0% { 
@@ -369,20 +412,9 @@
             opacity: 1; 
         } 
     }
-    
-    .no-anim .logo-container {
-        top: 40px; 
-        left: 40px; 
-        transform: none;
-        width: auto;
-        height: auto;
-    }
-    .no-anim .logo-anim {
-        width: 80px;
-    }
 }
 
-/*480px-320px*/
+/* Small Mobile (< 480px) */
 @media(max-width: 480px) {
     html, body {
         overflow-x: hidden;
@@ -390,6 +422,26 @@
         padding-top: 0 !important;
     }
 
+    .login-container {
+        height: auto;
+        min-height: 100vh;
+        justify-content: center; 
+        padding-top: 100px; 
+        padding-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .no-anim .logo-container {
+         top: 20px;
+         left: 20px;
+         transform: scale(0.85); 
+         position: fixed; 
+    }
+
+    .logo-anim {
+        width: 60px; 
+    }
 
     .login-card {
         width: 92%; 
@@ -408,14 +460,12 @@
         width: 80px;
     }
     
-    /* Input Groups */
     .input-group {
         width: 100% !important; 
         margin-bottom: 16px; 
         max-width: none;
     }
     
-
     .input-group input {
         padding: 10px 40px 10px 14px; 
         font-size: 16px !important; 
@@ -423,27 +473,26 @@
         line-height: normal;
     }
     
-    /* Icon adjustments */
     .input-group img, .password-toggle {
         width: 18px;
         height: 18px;
         right: 12px;
         top: 50%;
     }
+
     .password-toggle {
         right: 35px;
     }
+
     #loginPassword {
         padding-right: 60px;
     }
 
-    /* Checkbox Label */
     .checkbox-group label, 
     .checkbox-group span {
         font-size: 16px !important;
     }
     
-    /* Compact Buttons */
     .login-buttons {
         gap: 12px;
         margin-top: 24px;
@@ -460,7 +509,6 @@
         justify-content: center;
     }
     
-
     .top-signup-link {
         width: 100%;
         flex-wrap: wrap; 
@@ -478,14 +526,12 @@
         color: #000;
     }
 
-    /* Sign Up Button */
     .btn-primary-small {
         padding: 8px 16px;
         font-size: 16px !important;
         height: auto;
     }
 
-    /* Footer*/
     .legal-links {
         position: relative; 
         bottom: auto;
@@ -501,36 +547,13 @@
         padding: 8px;
     }
     
-    /* Container */
-    .login-container {
-        height: auto;
-        min-height: 100vh;
-        justify-content: center; 
-        padding-top: 100px; 
-        padding-bottom: 20px;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    /* Logo adjustments start mobile */
-    .no-anim .logo-container {
-         top: 20px;
-         left: 20px;
-         transform: scale(0.85); 
-         position: fixed; 
-    }
-    
-    /* Animation end state */
     @keyframes moveLogoMobile {
         0% { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; }
         100% { top: 20px; left: 20px; transform: translate(0, 0); width: 60px; }
     }
-    
-    .logo-anim {
-        width: 60px; 
-    }
 }
 
+/* Small Height Screens (< 700px) */
 @media(max-height: 700px) {
     .login-card {
         margin-top: 20px; 
@@ -543,31 +566,4 @@
         font-size: 32px;
         margin-bottom: 10px;
     }
-}
-/* ... existing code ... */
-
-/* Success Message Overlay */
-.success-message {
-    position: fixed;
-    bottom: -100px; /* Start below the screen */
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--color-primary);
-    color: white;
-    padding: 20px 40px;
-    border-radius: 20px;
-    font-size: 24px;
-    font-weight: 700;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    transition: bottom 0.5s ease-in-out;
-}
-
-.success-message.show {
-    bottom: 50%; /* Center vertically or adjust as needed */
-    transform: translate(-50%, 50%); /* Center perfectly */
-}
-
-.d-none {
-    display: none;
 }
