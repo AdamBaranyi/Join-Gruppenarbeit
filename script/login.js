@@ -31,7 +31,7 @@ async function handleLogin(event) {
       ) {
         userFound = true;
         loggedInUser = users[id];
-        // Add ID if needed later: loggedInUser.id = id;
+        loggedInUser.id = id;
         break;
       }
     }

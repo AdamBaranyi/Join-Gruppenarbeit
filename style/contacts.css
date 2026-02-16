@@ -105,6 +105,12 @@ ul {
 
 }
 
+#contactListContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 .contactElement {
     width: 352;
     height: 78;
@@ -124,4 +130,7 @@ ul {
 
 .displayNone {
     display: none;
+}
+button {
+    cursor: pointer;
 }
