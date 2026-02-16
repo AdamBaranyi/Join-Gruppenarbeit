@@ -74,7 +74,7 @@ function showSuccessMessage() {
     }, 10);
 
     setTimeout(() => {
-        window.location.href = "summary.html";
+        window.location.href = "html/summary.html";
     }, 1500);
 }
 

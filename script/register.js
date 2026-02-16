@@ -31,7 +31,7 @@ async function addUser() {
 
     if (response.ok) {
       // Weiterleitung zum Login nach erfolgreicher Registrierung
-      window.location.href = "login.html?msg=Deine Registrierung war erfolgreich";
+      window.location.href = "../index.html?msg=Deine Registrierung war erfolgreich";
     } else {
       console.error("Fehler beim Speichern:", response.statusText);
       alert("Fehler bei der Registrierung.");
