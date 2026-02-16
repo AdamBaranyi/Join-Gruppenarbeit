@@ -1,38 +1,46 @@
+const BASE_URL = "https://join-backend-afae8-default-rtdb.europe-west1.firebasedatabase.app/";
 
-const baseURL = "https://join-backend-afae8-default-rtdb.europe-west1.firebasedatabase.app/contacts.json";
-const displayContactList = document.getElementById("contactListContent");
-let contactList = [];
 
-async function loadContacts() {
-    const response = await fetch(baseURL);
-    const data = await response.json();
-
-    contactList = Object.values(data);
-    displayContactList.innerHTML = "";
-    console.log(data)
-   contactList.forEach(contact => {
-       const contactElement = document.createElement("li");
-       contactElement.innerHTML = `
-        <div class="contactElement" onclick="showContactCard(${contact.id})">
-           <p>${contact.firstname} ${contact.lastname}</p>
-           <p class="mailStyle">${contact.email}</p>
-       </div>
-       `;
-       displayContactList.appendChild(contactElement);
-   });
+function getCurrentUser() {
+  return JSON.parse(sessionStorage.getItem("current_user"));
 }
 
-async function showContactCard(id) {
-    const response = await fetch(baseURL + `/${id}.json`);
-    const data = await response.json();
+async function loadContacts() {
+  const user = getCurrentUser();
+  const userId = user ? user.id : "guest";
 
-    const contact = contactList.find(c => c.id === data.id);
-    console.log(contact)
-    if (contact) {
-        const displayCard = document.querySelector(".displayContactCard");
-        displayCard.innerHTML = `
-            <h2>${contact.firstname} ${contact.lastname}</h2>
-            <p class="mailStyle">${contact.email}</p>
-        `;
-    }
+  const url = `${BASE_URL}/contacts/${userId}.json`;
+  const response = await fetch(url);
+  const data = await response.json();
+
+  const contacts = data ? Object.values(data) : [];
+  renderContacts(contacts);
+}
+
+function renderContacts(contacts) {
+  const list = document.getElementById("contactListContent");
+  list.innerHTML = "";
+
+  contacts.forEach(contact => {
+    list.innerHTML += `
+      <div class="contact-item">
+        <strong>${contact.firstname} ${contact.lastname}</strong><br>
+        <span>${contact.email}</span>
+      </div>
+    `;
+  });
+}
+
+async function addContact(contactData) {
+    const userId = currentUser || "guest";
+    const url = `${BASE_URL}/contacts/${userId}.json`;
+
+    const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(contactData)
+    });
+
+    const result = await res.json();
+    return result.name; // generierte Firebase-ID
 }
