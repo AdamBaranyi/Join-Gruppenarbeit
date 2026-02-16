@@ -3,6 +3,12 @@
     padding: 0;
 }
 
+:root {
+    --button-bg: #2A3647;
+    --email-color: #007CEE;
+    --header-height: 96px;
+}
+
 body {
     display: flex;
     height: 100dvh;
@@ -11,7 +17,6 @@ body {
 
 main {
     display: flex;
-    align-items: center;
     width: 100%;
     height: 100%;
 }
@@ -51,9 +56,39 @@ main {
 }
 
 .contentBody {
-    width: 100%;
-    height: 100%;
     display: flex;
+}
+
+.addContactBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--button-bg);
+    color: white;
+    width: 352px;
+    height: 56px;
+    top: 22.5px;
+    left: 52px;
+    opacity: 1;
+    border-radius: 10px;
+    border-width: 1px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    gap: 16px;
+
+}
+
+ul {
+    width: 352px;
+    height: 78px;
+    opacity: 1;
+    border-radius: 10px;
+    padding-top: 15px;
+    padding-right: 24px;
+    padding-bottom: 15px;
+    padding-left: 24px;
+    gap: 35px;
+    list-style: none;
 }
 
 .contactListStyle {
@@ -63,6 +98,28 @@ main {
     display: flex;
     align-items: flex-start;
     justify-content: space-evenly;
+
+    top: 96px;
+    left: 232px;
+    opacity: 1;
+
+}
+
+.contactElement {
+    width: 352;
+    height: 78;
+    opacity: 1;
+    border-radius: 10px;
+    padding-top: 15px;
+    padding-right: 24px;
+    padding-bottom: 15px;
+    padding-left: 24px;
+    gap: 35px;
+    cursor: pointer;
+}
+
+.mailStyle {
+    color: var(--email-color);
 }
 
 .displayNone {
