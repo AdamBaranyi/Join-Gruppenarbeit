@@ -42,6 +42,10 @@ body {
     font-weight: 400; /* Regular default */
 }
 
+* {
+    box-sizing: border-box;
+}
+
 input, textarea, button, select {
     font-family: inherit;
 }
