@@ -1,0 +1,121 @@
+/* Layout */
+.help-content {
+    background-color: #F6F7F8;
+    min-height: calc(100vh - 96px);
+}
+
+/* Header */
+.help-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.help-header h1 {
+    font-size: 61px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.btn-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    text-decoration: none;
+    transition: transform 0.2s;
+}
+
+.btn-back:hover {
+    transform: scale(1.1);
+}
+
+.btn-back img {
+    filter: invert(56%) sepia(68%) saturate(3088%) hue-rotate(176deg) brightness(96%) contrast(85%);
+}
+
+/* Content */
+.help-text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #000000;
+    margin-bottom: 25px;
+}
+
+.help-section-title {
+    font-size: 27px;
+    font-weight: 700;
+    margin-top: 40px;
+    margin-bottom: 25px;
+}
+
+/* Steps */
+.step-list {
+    list-style: none;
+    padding: 0;
+    counter-reset: step-counter;
+}
+
+.step-item {
+    display: flex;
+    margin-bottom: 30px;
+    align-items: flex-start;
+}
+
+.step-item::before {
+    counter-increment: step-counter;
+    content: counter(step-counter) ".";
+    font-size: 27px;
+    font-weight: 700;
+    color: #000000;
+    min-width: 35px;
+}
+
+.step-content h3 {
+    font-size: 27px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+}
+
+.step-content p {
+    font-size: 16px;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Links */
+.help-text a {
+    color: #29ABE2;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.help-text a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media(max-width: 850px) {
+    .help-header {
+        flex-direction: row;
+        margin-bottom: 20px;
+    }
+
+    .help-header h1 {
+        font-size: 40px;
+    }
+    
+    .help-section-title {
+        font-size: 21px;
+    }
+    
+    .step-item::before {
+        font-size: 21px;
+    }
+    
+    .step-content h3 {
+        font-size: 21px;
+    }
+}
