@@ -39,9 +39,17 @@
 body {
     font-family: var(--font-primary);
     margin: 0;
-    font-weight: 400; /* Regular default */
+    font-weight: 400; 
+}
+
+* {
+    box-sizing: border-box;
 }
 
 input, textarea, button, select {
     font-family: inherit;
+}
+
+.d-none {
+    display: none !important;
 }

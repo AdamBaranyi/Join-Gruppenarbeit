@@ -25,7 +25,7 @@ function renderContacts(contacts) {
     list.innerHTML += `
       <div class="contact-item">
         <strong>${contact.firstname} ${contact.lastname}</strong><br>
-        <span>${contact.email}</span>
+        <span class="mailStyle">${contact.email}</span>
       </div>
     `;
   });

@@ -6,14 +6,14 @@
     <title>Join - Help</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
-    <link rel="stylesheet" href="../css/sidebar.css">
-    <link rel="stylesheet" href="../css/help.css">
+    <link rel="stylesheet" href="../style/sidebar.css">
+    <link rel="stylesheet" href="../style/help.css">
     <script src="../script.js"></script>
 </head>
 <body onload="init()">
 
     <!-- Include Sidebar -->
-    <div w3-include-html="../assets/templates/sidebar.html"></div>
+    <div w3-include-html="../assets/templates/sidebar_guest.html"></div>
     <!-- Include Header -->
     <div w3-include-html="../assets/templates/header.html"></div>
     <!-- Include Mobile Menu -->
@@ -23,7 +23,7 @@
         
         <div class="help-header">
             <h1>Help</h1>
-            <a href="javascript:window.history.back()" class="btn-back">
+            <a href="#" onclick="goBack(); return false;" class="btn-back">
                 <img src="../assets/imgs/Vector.svg" alt="Back">
             </a>
         </div>

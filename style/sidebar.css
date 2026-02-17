@@ -1,3 +1,4 @@
+/* Global */
 :root {
     --sidebar-bg: #2A3647;
     --sidebar-width: 232px;
@@ -11,9 +12,10 @@ body {
     display: flex;
     background-color: #F6F7F8;
     min-height: 100vh;
+    width: 100vw;
 }
 
-/* Sidebar */
+/* Sidebar Layout */
 .sidebar {
     position: fixed;
     top: 0;
@@ -30,19 +32,21 @@ body {
 
 .sidebar-logo {
     padding: 0 40px;
-    margin-bottom: 60px;
+    margin-bottom: 114px;
 }
 
 .sidebar-logo img {
     width: 100px;
-    height: 120px;
+    height: 122px;
 }
 
+/* Sidebar Navigation */
 .sidebar-nav {
     display: flex;
     flex-direction: column;
     flex: 1;
     width: 100%;
+    gap: 15px;
 }
 
 .sidebar-nav a {
@@ -51,11 +55,20 @@ body {
     padding: 15px 40px;
     display: flex;
     align-items: center;
+    font-family: 'Inter', sans-serif;
     font-size: 16px;
+    font-weight: 400;
+    line-height: 120%;
+    letter-spacing: 0;
     transition: all 0.2s;
 }
 
-.sidebar-nav a:hover, .sidebar-nav a.active {
+.sidebar-nav a:hover {
+    background-color: #344762;
+    color: white;
+}
+
+.sidebar-nav a.active {
     background-color: #091931;
     color: white;
 }
@@ -65,12 +78,11 @@ body {
     width: 24px;
 }
 
-/* Guest nav specific styling */
 .guest-nav .nav-item {
     padding-left: 40px;
 }
 
-/* Footer Links in Sidebar */
+/* Sidebar Footer */
 .sidebar-footer {
     display: flex;
     flex-direction: column;
@@ -81,7 +93,12 @@ body {
 .sidebar-footer .nav-link-simple {
     color: #A8A8A8;
     text-decoration: none;
+    font-family: 'Inter', sans-serif;
     font-size: 16px;
+    font-weight: 400;
+    line-height: 120%;
+    letter-spacing: 0;
+    vertical-align: middle;
 }
 
 .sidebar-footer .nav-link-simple:hover {
@@ -99,17 +116,91 @@ body {
     background-color: white;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding-left: 114px;
+    padding-right: 50px;
+    justify-content: space-between;
     padding-left: 50px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.04);
     z-index: 900;
 }
 
-.header-content span {
+.header-title {
     font-size: 20px;
     color: #000000;
 }
 
-/* Main Content Adjustment */
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.help-icon img {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.user-profile-initials {
+    width: 56px;
+    height: 56px;
+    background-color: white;
+    border: 3px solid #29ABE2;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #29ABE2;
+    font-weight: 700;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* Profile Dropdown */
+.user-profile-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: 65px;
+    right: 0;
+    background-color: #2A3647;
+    border-radius: 20px 0px 20px 20px;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    z-index: 950;
+    overflow: hidden;
+}
+
+.profile-dropdown a {
+    text-decoration: none;
+    color: #CDCDCD;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 120%;
+    letter-spacing: 0;
+    height: 46px;
+    padding: 8px 24px;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.profile-dropdown a:hover {
+    background-color: #344762;
+    color: white;
+}
+
+/* Main Content */
 .simple-page-content, .content-container {
     margin-left: var(--sidebar-width);
     margin-top: var(--header-height);
@@ -118,14 +209,23 @@ body {
     width: calc(100% - var(--sidebar-width));
 }
 
+/* Responsive */
 @media(max-width: 850px) {
     .sidebar {
-        display: none; /* Hide desktop sidebar on mobile */
+        display: none;
     }
+    
     .header-content {
         left: 0;
         padding-left: 20px;
+        padding-right: 20px;
+        justify-content: space-between;
     }
+    
+    .header-title {
+        display: none; 
+    }
+    
     .simple-page-content, .content-container {
         margin-left: 0;
         width: 100%;
