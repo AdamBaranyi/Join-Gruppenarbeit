@@ -1,26 +1,31 @@
 const BASE_URL =
   "https://join-backend-afae8-default-rtdb.europe-west1.firebasedatabase.app/users";
 
+let email = document.getElementById("email");
+let password = document.getElementById("password");
+let confirmPassword = document.getElementById("confirmepsw");
+let singnupConfirmation = document.getElementById("singnup-confirmation");
+
 async function addUser() {
   let name = document.getElementById("username");
-  let email = document.getElementById("email");
-  let password = document.getElementById("password");
-  let confirmPassword = document.getElementById("confirmepsw");
 
   if (password.value !== confirmPassword.value) {
     alert("Die Passwörter stimmen nicht überein!");
     return;
   }
 
+  let userId = Date.now();
+
   let newUser = {
+    id: userId,
     name: name.value,
     email: email.value,
     password: password.value,
   };
 
   try {
-    let response = await fetch(BASE_URL + ".json", {
-      method: "POST",
+    let response = await fetch(`${BASE_URL}/${userId}.json`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -28,15 +33,16 @@ async function addUser() {
     });
 
     if (response.ok) {
-      window.location.href =
-        "../index.html?msg=Deine Registrierung war erfolgreich";
+      document.getElementById("successOverlay").style.display = "flex";
+
+      setTimeout(() => {
+        window.location.href = "../index.html";
+      }, 1000);
     } else {
-      console.error("Fehler beim Speichern:", response.statusText);
       alert("Fehler bei der Registrierung.");
     }
   } catch (error) {
-    console.error("Netzwerkfehler:", error);
-    alert("Es gab einen Netzwerkfehler.");
+    console.error("Es ist eine Fehler aufgetreten:", error);
   }
 }
 

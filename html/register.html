@@ -7,14 +7,14 @@
   <title>Register</title>
   <link rel="stylesheet" href="../style/register.css">
   <script src="../script/register.js" defer></script>
+  <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
-
   <header>
     <img src="..//assets/imgs/Capa 2.svg" alt="JLogo" class="logo" />
   </header>
-
+  
   <main class="container">
     <div class="card">
       <div class="title-row">
@@ -37,29 +37,35 @@
 
         <div class="input-group" data-type="password">
           <input type="password" id="password" placeholder="Password" required />
-          <img class="input-icon" src="..//assets/imgs/lock.svg" alt="lcokIocn" data-default="imgs/lock.svg" data-visible="\imgs\eye-off-line.svg"
-            data-hidden="\imgs\eye-line.svg">
+          <img class="input-icon" src="..//assets/imgs/lock.svg" alt="lcokIocn" data-default="imgs/lock.svg"
+            data-visible="../assets/imgs/eye-line.svg" data-hidden="../assets/imgs/eye-off-line.svg">
         </div>
 
         <div class="input-group" data-type="password">
           <input type="password" id="confirmepsw" placeholder="Confirm Password" required />
           <img class="input-icon" src="../assets/imgs/lock.svg" alt="lockIcon" data-default="imgs/lock.svg"
-            data-visible="\imgs\eye-off-line.svg" data-hidden="\imgs\eye-line.svg">
+            data-visible="../assets/imgs/eye-line.svg" data-hidden="../assets/imgs/eye-off-line.svg">
         </div>
 
         <div class="privacy">
           <input class="checkbox" type="checkbox" required />
-          <span>I accept the <a href="#">Privacy policy</a></span>
+          <span>I accept the <a href="privacy_policy.html">Privacy policy</a></span>
         </div>
 
         <button type="submit">Sign up</button>
       </form>
     </div>
+
+    <div id="successOverlay" class="overlay">
+      <div class="overlay-content">
+        <p>You signed up successfully!</p>
+      </div>
+    </div>
   </main>
 
   <footer>
-    <a href="#">Privacy Policy</a>
-    <a href="#">Legal notice</a>
+    <a href="privacy_policy.html">Privacy Policy</a>
+    <a href="legal_notice.html">Legal notice</a>
   </footer>
 
 </body>
