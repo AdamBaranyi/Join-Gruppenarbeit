@@ -126,7 +126,25 @@
     font-size: 21px;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
-    box-sizing: border-box; 
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+    border-color: #29ABE2;
+}
+
+.input-group.input-error input {
+    border-color: #FF8190;
+}
+
+.login-error-msg {
+    color: #FF8190;
+    font-size: 12px;
+    text-align: center;
+    margin-top: -12px;
+    margin-bottom: 8px;
 }
 
 .input-group img, .password-toggle {
