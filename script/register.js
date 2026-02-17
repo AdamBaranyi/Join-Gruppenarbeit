@@ -1,4 +1,5 @@
-const BASE_URL = "https://join-backend-afae8-default-rtdb.europe-west1.firebasedatabase.app/users";
+const BASE_URL =
+  "https://join-backend-afae8-default-rtdb.europe-west1.firebasedatabase.app/users";
 
 async function addUser() {
   let name = document.getElementById("username");
@@ -6,13 +7,11 @@ async function addUser() {
   let password = document.getElementById("password");
   let confirmPassword = document.getElementById("confirmepsw");
 
-  // Prüfen, ob Passwörter übereinstimmen
   if (password.value !== confirmPassword.value) {
     alert("Die Passwörter stimmen nicht überein!");
     return;
   }
 
-  // Benutzerobjekt erstellen
   let newUser = {
     name: name.value,
     email: email.value,
@@ -20,7 +19,6 @@ async function addUser() {
   };
 
   try {
-    // An Firebase senden (POST erstellt einen neuen Eintrag mit eindeutiger ID)
     let response = await fetch(BASE_URL + ".json", {
       method: "POST",
       headers: {
@@ -30,20 +28,18 @@ async function addUser() {
     });
 
     if (response.ok) {
-      // Weiterleitung zum Login nach erfolgreicher Registrierung
-      window.location.href = "../index.html?msg=Deine Registrierung war erfolgreich";
+      window.location.href =
+        "../index.html?msg=Deine Registrierung war erfolgreich";
     } else {
       console.error("Fehler beim Speichern:", response.statusText);
       alert("Fehler bei der Registrierung.");
     }
-
   } catch (error) {
     console.error("Netzwerkfehler:", error);
     alert("Es gab einen Netzwerkfehler.");
   }
 }
 
-// UI functions from main branch
 initInputs();
 
 function initInputs() {
@@ -55,8 +51,8 @@ function initInputs() {
     const type = group.dataset.type;
 
     if (input && icon) {
-        input.addEventListener("input", () => handleInput(input, icon, type));
-        icon.addEventListener("click", () => handleIconClick(input, icon, type));
+      input.addEventListener("input", () => handleInput(input, icon, type));
+      icon.addEventListener("click", () => handleIconClick(input, icon, type));
     }
   });
 }
