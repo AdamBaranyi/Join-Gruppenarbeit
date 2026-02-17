@@ -3,6 +3,7 @@
  */
 async function init() {
     await includeHTML();
+    setActiveNavItem();
     greetUser();
 }
 
