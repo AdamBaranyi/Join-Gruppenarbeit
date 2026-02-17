@@ -11,6 +11,7 @@ body {
     display: flex;
     background-color: #F6F7F8;
     min-height: 100vh;
+    width: 100%;
 }
 
 /* Sidebar */
@@ -99,6 +100,7 @@ body {
     background-color: white;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding-left: 50px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.04);
     z-index: 900;
@@ -107,6 +109,16 @@ body {
 .header-content span {
     font-size: 20px;
     color: #000000;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    width: 104px;
+    height: 56px;
+    opacity: 1;
+    gap: 16px;
+
 }
 
 /* Main Content Adjustment */
