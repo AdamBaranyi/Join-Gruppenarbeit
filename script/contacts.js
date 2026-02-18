@@ -8,10 +8,8 @@ function getCurrentUser() {
   if (currentUser === null) {
       const sidebarGuest = document.getElementById("sidebarGuest");
       const sidebarLogedIn = document.getElementById("sidebarLogedIn");
-      const dialog = document.getElementById("contactDialog");
       sidebarGuest.classList.remove("displayNone");
       sidebarLogedIn.classList.add("displayNone");
-      dialog.classList.remove("displayNone");
     } else if (currentUser != null) {
       const sidebarGuest = document.getElementById("sidebarGuest");
       const sidebarLogedIn = document.getElementById("sidebarLogedIn");
@@ -46,10 +44,20 @@ function renderContacts(contacts) {
   });
 }
 
-function openDialog() {
-  const dialog = document.getElementById("contactDialog");
-  dialog.showModal();
-}
+function openModal() {
+  let contactWindow = document.getElementById("contactModal")
+  let contactModal = document.getElementById("dialogModal")
+  contactModal.classList.remove("displayNone");
+  contactModal.showModal();
+  contactWindow.innerHTML = `
+    <form id="contactForm">
+      <input type="text" id="firstname" placeholder="First Name" required>
+      <input type="text" id="lastname" placeholder="Last Name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <button type="submit">Add Contact</button>
+    </form>
+  `;
+};
 
 async function addContact(contactData) {
     const userId = currentUser || "guest";

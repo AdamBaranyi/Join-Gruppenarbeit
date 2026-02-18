@@ -81,15 +81,14 @@ h2 {
 }
 
 .addContactBtn {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--button-bg);
     color: white;
-    max-width: 352px;
+    width: 352px;
     height: 56px;
-    top: 22.5px;
-    left: 52px;
     opacity: 1;
     border-radius: 10px;
     border-width: 1px;
@@ -150,7 +149,88 @@ ul {
     top: 311px;
     left: calc(750px - 456px - 232px);;
     gap: 21px;
-    background-color: rgb(229,229,229);
+    background-color: rgb(246,247,248);
+}
+
+dialog:open {
+    position: relative;
+    display: flex;
+    width: 1212px;
+    height: 592;
+    opacity: 1;
+    border-radius: 30px;
+
+}
+
+.leftSideModal {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: var(--button-bg);
+    width: 467px;
+    height: 594px;
+    opacity: 1;
+    padding-top: 66px;
+    padding-right: 48px;
+    padding-bottom: 66px;
+    padding-left: 48px;
+    gap: 12px;
+}
+
+.leftSideModal img {
+    width: 55.599586486816406px;
+    height: 66.48291015625px;
+    opacity: 1;
+}
+
+.rightSideModal {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.closeBtnContainer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 32px;
+}
+
+.closeBtn img {
+    width: 24px;
+    height: 24px;
+    opacity: 1;
+    top: 4px;
+    right: 4px;
+
+
+}
+
+.imgAndForm {
+    display: flex;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 422px;
+    height: 215px;
+    opacity: 1;
+    top: 137px;
+    left: 742px;
+    gap: 32px;
+
+}
+
+form input {
+    width: 422px;
+    height: 50px;
+    opacity: 1;
+    gap: 8px;
+
 }
 
 .mailStyle {
@@ -160,6 +240,25 @@ ul {
 .displayNone {
     display: none;
 }
+
 button {
     cursor: pointer;
+}
+
+.checkBtn {
+    background-color: var(--button-bg);
+    color: white;
+    width: 214px;
+    height: 57px;
+    opacity: 1;
+    gap: 4px;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.checkBtn img {
+    width: 24;
+    height: 24;
+    opacity: 1;
+
 }

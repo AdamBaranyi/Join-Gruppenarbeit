@@ -69,7 +69,7 @@
             </div>
             <div class="main-content">
                 <div class="contactListStyle">
-                    <button class="addContactBtn" onclick="openDialog()">Add new contact <img src="../assets/imgs/person_add.svg" alt="add person icon"></button>
+                    <button class="addContactBtn" onclick="openModal()">Add new contact <img src="../assets/imgs/person_add.svg" alt="add person icon"></button>
                     <ul>
                         <li id="contactListContent">
 
@@ -82,7 +82,27 @@
                             <img src="../assets/imgs/Vector 5.png" alt="Vector imgage">
                             <span class="sloganSpan">Better with a team</span>
                     </div>
-                    <dialog class="contactCard, displayNone" id="contactDialog"></dialog>
+                    <dialog id="dialogModal" class="contactCard, displayNone" onclick="openModal()">
+                        <div class="leftSideModal">
+                            <img src="../assets/imgs/logo_white.svg" alt="">
+                            <h3>Add contact</h3>
+                            <span>Tasks are better with a team/span>
+                        </div>
+                        <div class="rightSideModal">
+                            <div class="closeBtnContainer">
+                                <button class="closeBtn"><img src="../assets/imgs/Close.png" alt=""></button>
+                            </div>
+                            <div class="imgAndForm">
+                                <img src="../assets/imgs/Group 13.png" alt="">
+                                <div id="contactModal"></div>
+                            </div>
+                            <div class="btnContainer">
+                                <button class="cancelBtn">Cancel X</button>
+                                <button class="checkBtn">Create contact <img src="../assets/imgs/check.svg" alt=""> </button>
+                            </div>
+                            </div>
+                        </div>
+                    </dialog>
                 </div>
             </div>
     </main>
