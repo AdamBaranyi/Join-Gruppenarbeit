@@ -10,8 +10,9 @@ async function includeHTML() {
         const element = includeElements[i];
         let file = element.getAttribute("w3-include-html");
         
-        // Dynamic sidebar loading
-        if (file.includes('sidebar_guest.html') || file.includes('sidebar.html')) {
+        // Dynamic sidebar loading (skip mobile_sidebar which should always load as-is)
+        if (!file.includes('mobile_sidebar.html') && 
+            (file.includes('sidebar_guest.html') || file.includes('sidebar.html'))) {
             let user = sessionStorage.getItem('current_user');
             if (user) {
                 file = '../assets/templates/sidebar.html';
@@ -95,10 +96,13 @@ function goBack() {
  */
 function setActiveNavItem() {
     let currentPage = window.location.pathname.split('/').pop();
-    let navLinks = document.querySelectorAll('.sidebar-nav a');
+    // Select both desktop sidebar links and mobile sidebar links
+    let navLinks = document.querySelectorAll('.sidebar-nav a, .mobile-sidebar .nav-item');
+    
     for (let i = 0; i < navLinks.length; i++) {
         let linkHref = navLinks[i].getAttribute('href');
-        if (linkHref === currentPage) {
+        // Handle potential path differences (e.g. ./summary.html vs summary.html)
+        if (linkHref && (linkHref === currentPage || linkHref.endsWith('/' + currentPage))) {
             navLinks[i].classList.add('active');
         }
     }

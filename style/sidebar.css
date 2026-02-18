@@ -1,23 +1,26 @@
-/* Global */
+/* Variables */
+
 :root {
     --sidebar-bg: #2A3647;
     --sidebar-width: 232px;
     --header-height: 96px;
 }
 
+/* Base Layout */
+
 body {
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: flex-start;
     font-family: 'Inter', sans-serif;
     display: flex;
+    justify-content: flex-start;
     background-color: #F6F7F8;
     min-height: 100dvh;
     width: 100dvw;
 }
 
-/* Sidebar Layout */
+/* Sidebar */
+
 .sidebar {
     position: fixed;
     top: 0;
@@ -43,6 +46,7 @@ body {
 }
 
 /* Sidebar Navigation */
+
 .sidebar-nav {
     display: flex;
     flex-direction: column;
@@ -85,6 +89,7 @@ body {
 }
 
 /* Sidebar Footer */
+
 .sidebar-footer {
     display: flex;
     flex-direction: column;
@@ -109,6 +114,7 @@ body {
 }
 
 /* Header */
+
 .header-content {
     position: fixed;
     top: 0;
@@ -119,10 +125,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-left: 114px;
+    padding-left: 116px;
     padding-right: 50px;
-    justify-content: space-between;
-    padding-left: 50px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.04);
     z-index: 900;
 }
@@ -144,6 +148,8 @@ body {
     cursor: pointer;
 }
 
+/* User Profile Badge */
+
 .user-profile-initials {
     width: 56px;
     height: 56px;
@@ -159,13 +165,14 @@ body {
     cursor: pointer;
 }
 
-/* Profile Dropdown */
 .user-profile-container {
     position: relative;
     display: flex;
     align-items: center;
     cursor: pointer;
 }
+
+/* Profile Dropdown */
 
 .profile-dropdown {
     position: absolute;
@@ -202,7 +209,8 @@ body {
     color: white;
 }
 
-/* Main Content */
+/* Main Content Area */
+
 .simple-page-content, .content-container {
     margin-left: var(--sidebar-width);
     margin-top: var(--header-height);
@@ -211,12 +219,16 @@ body {
     width: calc(100% - var(--sidebar-width));
 }
 
-/* Responsive */
+/* Responsive: Mobile (max-width: 850px) */
+
 @media(max-width: 850px) {
+
+    /* Sidebar */
     .sidebar {
         display: none;
     }
-    
+
+    /* Header */
     .header-content {
         left: 0;
         padding-left: 20px;
@@ -227,10 +239,16 @@ body {
     .header-title {
         display: none; 
     }
-    
+
+    .header-logo-mobile {
+        display: block;
+    }
+
+    /* Main Content Area */
     .simple-page-content, .content-container {
         margin-left: 0;
         width: 100%;
         padding: 40px;
+        padding-bottom: 100px;
     }
 }

@@ -1,10 +1,11 @@
 /* Content Container */
+
 .simple-page-content {
     padding: 80px;
-    max-width: 1000px;
 }
 
-/* Header Section */
+/* Header */
+
 .simple-page-header {
     display: flex;
     justify-content: space-between;
@@ -13,6 +14,7 @@
 }
 
 /* Typography */
+
 .simple-page-content h1 {
     font-size: 61px;
     font-weight: 700;
@@ -33,12 +35,14 @@
 }
 
 /* Lists */
+
 .simple-page-content ul {
     margin-bottom: 15px;
     margin-left: 20px;
 }
 
 /* Back Button */
+
 .btn-back {
     cursor: pointer;
     transition: transform 0.2s;
@@ -48,15 +52,19 @@
     transform: scale(1.1);
 }
 
-/* Media Queries */
+/* Responsive: Tablet & Mobile (max-width: 850px) */
+
 @media(max-width: 850px) {
     .simple-page-content {
         padding: 40px;
     }
+
     .simple-page-content h1 {
         font-size: 40px;
     }
 }
+
+/* Responsive: Small Mobile (max-width: 450px) */
 
 @media(max-width: 450px) {
     .simple-page-content {
