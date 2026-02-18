@@ -1,11 +1,10 @@
-/* Global Variables */
+/* Global */
 :root {
     --sidebar-bg: #2A3647;
     --sidebar-width: 232px;
     --header-height: 96px;
 }
 
-/* Body */
 body {
     margin: 0;
     padding: 0;
@@ -18,7 +17,7 @@ body {
     width: 100dvw;
 }
 
-/* Sidebar Container */
+/* Sidebar Layout */
 .sidebar {
     position: fixed;
     top: 0;
@@ -33,15 +32,14 @@ body {
     z-index: 1000;
 }
 
-/* Sidebar Logo */
 .sidebar-logo {
     padding: 0 40px;
-    margin-bottom: 114px; /* User request: 114px from bottom to summary button */
+    margin-bottom: 114px;
 }
 
 .sidebar-logo img {
-    width: 100px; /* ~100.03px */
-    height: 122px; /* ~121.97px */
+    width: 100px;
+    height: 122px;
 }
 
 /* Sidebar Navigation */
@@ -50,7 +48,7 @@ body {
     flex-direction: column;
     flex: 1;
     width: 100%;
-    gap: 15px; /* User request: 15px gap between buttons */
+    gap: 15px;
 }
 
 .sidebar-nav a {
@@ -67,7 +65,12 @@ body {
     transition: all 0.2s;
 }
 
-.sidebar-nav a:hover, .sidebar-nav a.active {
+.sidebar-nav a:hover {
+    background-color: #344762;
+    color: white;
+}
+
+.sidebar-nav a.active {
     background-color: #091931;
     color: white;
 }
@@ -97,7 +100,7 @@ body {
     font-weight: 400;
     line-height: 120%;
     letter-spacing: 0;
-    vertical-align: middle; /* User request */
+    vertical-align: middle;
 }
 
 .sidebar-footer .nav-link-simple:hover {
@@ -105,7 +108,7 @@ body {
     font-weight: 700;
 }
 
-/* Header Content (Top Bar) */
+/* Header */
 .header-content {
     position: fixed;
     top: 0;
@@ -116,7 +119,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-left: 114px; /* User request: 114px from sidebar */
+    padding-left: 114px;
     padding-right: 50px;
     justify-content: space-between;
     padding-left: 50px;
@@ -132,14 +135,74 @@ body {
 .header-icons {
     display: flex;
     align-items: center;
-    width: 104px;
-    height: 56px;
-    opacity: 1;
     gap: 16px;
-
 }
 
-/* Main Content Adjustment */
+.help-icon img {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.user-profile-initials {
+    width: 56px;
+    height: 56px;
+    background-color: white;
+    border: 3px solid #29ABE2;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #29ABE2;
+    font-weight: 700;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* Profile Dropdown */
+.user-profile-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: 65px;
+    right: 0;
+    background-color: #2A3647;
+    border-radius: 20px 0px 20px 20px;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    z-index: 950;
+    overflow: hidden;
+}
+
+.profile-dropdown a {
+    text-decoration: none;
+    color: #CDCDCD;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 120%;
+    letter-spacing: 0;
+    height: 46px;
+    padding: 8px 24px;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.profile-dropdown a:hover {
+    background-color: #344762;
+    color: white;
+}
+
+/* Main Content */
 .simple-page-content, .content-container {
     margin-left: var(--sidebar-width);
     margin-top: var(--header-height);
@@ -148,7 +211,7 @@ body {
     width: calc(100% - var(--sidebar-width));
 }
 
-/* Media Queries */
+/* Responsive */
 @media(max-width: 850px) {
     .sidebar {
         display: none;

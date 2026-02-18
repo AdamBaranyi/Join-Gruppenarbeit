@@ -33,18 +33,17 @@
         <h1>Login</h1>
         <div class="separator-blue"></div>
 
-        <form onsubmit="handleLogin(event)">
-          <div class="input-group">
-            <input type="email" id="loginEmail" placeholder="Email" required />
+        <form onsubmit="handleLogin(event)" novalidate>
+          <div class="input-group" id="emailGroup">
+            <input type="email" id="loginEmail" placeholder="Email" />
             <img src="./assets/imgs/mail.svg" alt="Email" />
           </div>
 
-          <div class="input-group">
+          <div class="input-group" id="passwordGroup">
             <input
               type="password"
               id="loginPassword"
               placeholder="Password"
-              required
             />
             <div
               id="passwordToggle"
@@ -69,6 +68,7 @@
             </div>
             <img src="./assets/imgs/lock.svg" alt="Lock" />
           </div>
+          <span id="loginError" class="login-error-msg d-none">Check your email and password. Please try again.</span>
 
           <div class="login-buttons">
             <button type="submit" class="btn-dark">Log In</button>
