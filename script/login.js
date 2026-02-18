@@ -99,7 +99,7 @@ function guestLogin() {
 
 /**
  * Displays a success message overlay and redirects the user to the summary page
- * after a short animation delay.
+ * after a short animation delay. Sets a flag for the mobile splash greeting.
  */
 function showSuccessMessage() {
     let successMessage = document.getElementById('successMessage');
@@ -109,6 +109,7 @@ function showSuccessMessage() {
     }, 10);
 
     setTimeout(() => {
+        sessionStorage.setItem('showSplash', 'true');
         window.location.href = "html/summary.html";
     }, 1500);
 }
