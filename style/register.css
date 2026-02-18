@@ -94,7 +94,7 @@ form {
 .input-icon {
   position: absolute;
   right: 15px;
-  top: 50%;
+  bottom: 36%;
   transform: translateY(-50%);
   width: 20px;
   height: 20px;
@@ -142,6 +142,18 @@ input:focus {
 .inputs input:focus {
   outline: none;
   border: 1px solid #29abe2;
+}
+
+.error-message {
+  color: #ff8190;
+  font-size: 13px;
+  text-align: left;
+  margin-top: 4px;
+  min-height: 16px;
+}
+
+.input-error {
+  border: 1px solid #ff4d4f !important;
 }
 
 .privacy {
