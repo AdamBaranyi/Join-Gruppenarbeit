@@ -9,11 +9,13 @@
 body {
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: flex-start;
     font-family: 'Inter', sans-serif;
     display: flex;
     background-color: #F6F7F8;
-    min-height: 100vh;
-    width: 100vw;
+    min-height: 100dvh;
+    width: 100dvw;
 }
 
 /* Sidebar Container */
@@ -22,7 +24,7 @@ body {
     top: 0;
     left: 0;
     width: var(--sidebar-width);
-    height: 100vh;
+    height: 100dvh;
     background-color: var(--sidebar-bg);
     display: flex;
     flex-direction: column;
