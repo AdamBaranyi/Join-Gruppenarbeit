@@ -6,6 +6,7 @@
     <title>Join - Summary</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../style/sidebar.css">
+    <link rel="stylesheet" href="../style/mobile_sidebar.css">
     <link rel="stylesheet" href="../style/summary.css">
     <link rel="icon" type="image/svg+xml" href="../assets/imgs/logo.svg">
     <script src="../script.js"></script>
@@ -14,6 +15,7 @@
 <body onload="init()">
     
     <div w3-include-html="../assets/templates/sidebar.html"></div>
+    <div w3-include-html="../assets/templates/mobile_sidebar.html"></div>
     <div w3-include-html="../assets/templates/header.html"></div>
 
     <main class="content-container summary-content">
@@ -82,7 +84,7 @@
 
             <section class="greeting-container">
                 <span id="greeting-time">Good morning,</span>
-                <span id="greeting-name">Sofia Müller</span>
+                <span id="greeting-name"></span>
             </section>
         </div>
     </main>
