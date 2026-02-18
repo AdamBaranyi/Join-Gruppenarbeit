@@ -13,9 +13,10 @@ body {
     padding: 0;
     font-family: 'Inter', sans-serif;
     display: flex;
+    justify-content: flex-start;
     background-color: #F6F7F8;
-    min-height: 100vh;
-    width: 100vw;
+    min-height: 100dvh;
+    width: 100dvw;
 }
 
 /* Sidebar */
@@ -25,7 +26,7 @@ body {
     top: 0;
     left: 0;
     width: var(--sidebar-width);
-    height: 100vh;
+    height: 100dvh;
     background-color: var(--sidebar-bg);
     display: flex;
     flex-direction: column;

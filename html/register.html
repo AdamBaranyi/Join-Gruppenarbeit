@@ -5,12 +5,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/imgs/logo.svg">
   <link rel="stylesheet" href="../style/register.css">
   <script src="../script/register.js" defer></script>
+  <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
-
   <header>
     <img src="..//assets/imgs/Capa 2.svg" alt="JLogo" class="logo" />
   </header>
@@ -24,42 +25,57 @@
 
       <div class="underline"></div>
 
-      <form onsubmit="addUser();return false;">
+      <form onsubmit="addUser(); return false;">
         <div class="input-group" data-type="text">
-          <input type="text" id="username" placeholder="Name" required />
+          <input type="text" id="username" placeholder="Name" />
           <img class="input-icon" src="..//assets/imgs/person.svg" alt="PrsonIcon">
+          <div class="error-message" id="error-username"></div>
         </div>
 
         <div class="input-group" data-type="email">
-          <input type="email" id="email" placeholder="Email" required />
+          <input type="email" id="email" placeholder="Email" />
           <img class="input-icon" src="..//assets/imgs/mail.svg" alt="mailIocn">
+          <div class="error-message" id="error-email"></div>
+
         </div>
 
         <div class="input-group" data-type="password">
-          <input type="password" id="password" placeholder="Password" required />
-          <img class="input-icon" src="..//assets/imgs/lock.svg" alt="lcokIocn" data-default="imgs/lock.svg" data-visible="\imgs\eye-off-line.svg"
-            data-hidden="\imgs\eye-line.svg">
+          <input type="password" id="password" placeholder="Password" />
+          <img class="input-icon" src="..//assets/imgs/lock.svg" alt="lcokIocn" data-default="imgs/lock.svg"
+            data-visible="../assets/imgs/eye-line.svg" data-hidden="../assets/imgs/eye-off-line.svg">
+          <div class="error-message" id="error-password"></div>
+
         </div>
 
         <div class="input-group" data-type="password">
-          <input type="password" id="confirmepsw" placeholder="Confirm Password" required />
+          <input type="password" id="confirmepsw" placeholder="Confirm Password" />
           <img class="input-icon" src="../assets/imgs/lock.svg" alt="lockIcon" data-default="imgs/lock.svg"
-            data-visible="\imgs\eye-off-line.svg" data-hidden="\imgs\eye-line.svg">
+            data-visible="../assets/imgs/eye-line.svg" data-hidden="../assets/imgs/eye-off-line.svg">
+          <div class="error-message" id="error-confirmepsw"></div>
+
         </div>
 
         <div class="privacy">
-          <input class="checkbox" type="checkbox" required />
-          <span>I accept the <a href="#">Privacy policy</a></span>
+          <input class="checkbox" type="checkbox" />
+          <span>I accept the <a href="privacy_policy.html">Privacy policy</a></span>
+          <div class="error-message" id="error-privacy"></div>
+
         </div>
 
         <button type="submit">Sign up</button>
       </form>
     </div>
+
+    <div id="successOverlay" class="overlay">
+      <div class="overlay-content">
+        <p>You signed up successfully!</p>
+      </div>
+    </div>
   </main>
 
   <footer>
-    <a href="#">Privacy Policy</a>
-    <a href="#">Legal notice</a>
+    <a href="privacy_policy.html">Privacy Policy</a>
+    <a href="legal_notice.html">Legal notice</a>
   </footer>
 
 </body>

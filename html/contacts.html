@@ -11,7 +11,7 @@
 </head>
 <body onload="loadContacts()">
     <main>
-        <div class="sidebar">
+        <div id="sidebarGuest" class="sidebar">
             <div class="sidebar-logo">
                 <img src="../assets/imgs/logo_white.svg" alt="Join Logo">
             </div>
@@ -29,7 +29,7 @@
             </div>
         </div>
          
-        <div class="sidebar, displayNone">
+        <div id="sidebarLogedIn" class="sidebar">
             <div class="sidebar-logo">
                 <img src="../assets/imgs/logo_white.svg" alt="Join Logo">
             </div>
@@ -58,7 +58,7 @@
                 <a href="legal_notice.html" class="nav-link-simple">Legal notice</a>
             </div>
         </div>
-
+            
                 <div class="header-content">
                     <span class="headerSpan">Kanban Project Management Tool</span>
                 
@@ -67,21 +67,24 @@
                     <a href="../index.html"><img src="/assets/imgs/person.svg" alt="User Image"></a>
                 </div>
             </div>
-
+            <div class="main-content">
                 <div class="contactListStyle">
-                    <button class="addContactBtn" onclick="addContact()">Add new contact <img src="../assets/imgs/person_add.svg" alt="add person icon"></button>
+                    <button class="addContactBtn" onclick="openDialog()">Add new contact <img src="../assets/imgs/person_add.svg" alt="add person icon"></button>
                     <ul>
                         <li id="contactListContent">
 
                         </li>
                     </ul>
                 </div>
-                <div class="slogan">
-                        <h2>Contacts</h2>
-                        <img src="../assets/imgs/Vector 5.png" alt="Vector imgage">
-                        <span class="sloganSpan">Better with a team</span>
-                    <div class="displayContactCard"></div>
+                <div class="sloganAndCard-Container">
+                    <div class="slogan">
+                            <h2>Contacts</h2>
+                            <img src="../assets/imgs/Vector 5.png" alt="Vector imgage">
+                            <span class="sloganSpan">Better with a team</span>
+                    </div>
+                    <dialog class="contactCard, displayNone" id="contactDialog"></dialog>
                 </div>
+            </div>
     </main>
 
 </body>

@@ -2,7 +2,22 @@ const BASE_URL = "https://join-backend-afae8-default-rtdb.europe-west1.firebased
 
 
 function getCurrentUser() {
-  return JSON.parse(sessionStorage.getItem("current_user"));
+  let currentUser = JSON.parse(sessionStorage.getItem("current_user"));
+  
+  console.log("Current User:", currentUser); // Debugging: Log the current user
+  if (currentUser === null) {
+      const sidebarGuest = document.getElementById("sidebarGuest");
+      const sidebarLogedIn = document.getElementById("sidebarLogedIn");
+      const dialog = document.getElementById("contactDialog");
+      sidebarGuest.classList.remove("displayNone");
+      sidebarLogedIn.classList.add("displayNone");
+      dialog.classList.remove("displayNone");
+    } else if (currentUser != null) {
+      const sidebarGuest = document.getElementById("sidebarGuest");
+      const sidebarLogedIn = document.getElementById("sidebarLogedIn");
+      sidebarGuest.classList.add("displayNone");
+      sidebarLogedIn.classList.remove("displayNone");
+    }
 }
 
 async function loadContacts() {
@@ -29,6 +44,11 @@ function renderContacts(contacts) {
       </div>
     `;
   });
+}
+
+function openDialog() {
+  const dialog = document.getElementById("contactDialog");
+  dialog.showModal();
 }
 
 async function addContact(contactData) {
