@@ -139,24 +139,13 @@ ul {
     width: 100%;
 }
 
-.contactCard {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 461px;
-    height: 364px;
-    opacity: 1;
-    top: 311px;
-    left: calc(750px - 456px - 232px);;
-    gap: 21px;
-    background-color: rgb(246,247,248);
-}
+
 
 dialog:open {
     position: relative;
     display: flex;
     width: 1212px;
-    height: 592;
+    height: 592px;
     opacity: 1;
     border-radius: 30px;
 
@@ -176,7 +165,8 @@ dialog:open {
     padding-bottom: 66px;
     padding-left: 48px;
     gap: 12px;
-}
+
+    }
 
 .leftSideModal img {
     width: 55.599586486816406px;
@@ -185,7 +175,8 @@ dialog:open {
 }
 
 .rightSideModal {
-    width: 100%;
+    width: calc(1212px - 467px);
+    height: 592px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -211,6 +202,17 @@ dialog:open {
 
 .imgAndForm {
     display: flex;
+    justify-content: flex-start;
+}
+.imgAndForm img {
+    width: 120px;
+    height: 120px;
+    opacity: 1;
+    top: 204px;
+    left: 550px;
+    border-radius: 70px;
+    border-width: 3px;
+
 }
 
 form {
@@ -243,6 +245,23 @@ form input {
 
 button {
     cursor: pointer;
+}
+
+.btnContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancelBtn {
+    width: 126px;
+    height: 56px;
+    opacity: 1;
+    gap: 4px;
+    border-radius: 10px;
+    border-width: 1px;
+    padding: 16px;
+
 }
 
 .checkBtn {

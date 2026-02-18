@@ -54,7 +54,10 @@ function openModal() {
       <input type="text" id="firstname" placeholder="First Name" required>
       <input type="text" id="lastname" placeholder="Last Name" required>
       <input type="email" id="email" placeholder="Email" required>
-      <button type="submit">Add Contact</button>
+      <div class="btnContainer">
+        <button class="cancelBtn">Cancel X</button>
+        <button class="checkBtn">Create contact <img src="../assets/imgs/check.svg" alt=""> </button>
+      </div>
     </form>
   `;
 };
