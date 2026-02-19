@@ -8,56 +8,13 @@
     <link rel="stylesheet" href="/style/contacts.css">
     <link rel="stylesheet" href="/style/sidebar.css">
     <script defer src="/script/contacts.js"></script>
+    <script defer src="../script.js"></script>
 </head>
-<body onload="loadContacts()">
+<body onload="init(),loadContacts()">
     <main>
-        <div id="sidebarGuest" class="sidebar">
-            <div class="sidebar-logo">
-                <img src="../assets/imgs/logo_white.svg" alt="Join Logo">
-            </div>
-
-            <nav class="sidebar-nav guest-nav">
-            <a href="../index.html" class="nav-item">
-                    <img src="../assets/imgs/login.svg" alt="Log In">
-                    <span>Log In</span>
-            </a>
-            </nav>
-
-            <div class="sidebar-footer">
-                <a href="privacy_policy.html" class="nav-link-simple">Privacy Policy</a>
-                <a href="legal_notice.html" class="nav-link-simple">Legal notice</a>
-            </div>
-        </div>
-         
-        <div id="sidebarLogedIn" class="sidebar">
-            <div class="sidebar-logo">
-                <img src="../assets/imgs/logo_white.svg" alt="Join Logo">
-            </div>
-
-            <nav class="sidebar-nav">
-                <a href="summary.html" class="nav-item" id="nav-summary">
-                    <img src="../assets/imgs/summary.svg" alt="Summary">
-                    <span>Summary</span>
-                </a>
-                <a href="add_task.html" class="nav-item" id="nav-add_task">
-                    <img src="../assets/imgs/Add-task.svg" alt="Add Task">
-                    <span>Add Task</span>
-                </a>
-                <a href="board.html" class="nav-item" id="nav-board">
-                    <img src="../assets/imgs/Board.svg" alt="Board">
-                    <span>Board</span>
-                </a>
-                <a href="contacts.html" class="nav-item" id="nav-contacts">
-                    <img src="../assets/imgs/contacts.svg" alt="Contacts">
-                    <span>Contacts</span>
-                </a>
-            </nav>
-
-            <div class="sidebar-footer">
-                <a href="privacy_policy.html" class="nav-link-simple">Privacy Policy</a>
-                <a href="legal_notice.html" class="nav-link-simple">Legal notice</a>
-            </div>
-        </div>
+        <div w3-include-html="../assets/templates/header.html"></div>
+        <div w3-include-html="../assets/templates/sidebar.html"></div>
+        <div w3-include-html="../assets/templates/mobile_sidebar.html"></div>
             
                 <div class="header-content">
                     <span class="headerSpan">Kanban Project Management Tool</span>
@@ -82,6 +39,12 @@
                             <img src="../assets/imgs/Vector 5.png" alt="Vector imgage">
                             <span class="sloganSpan">Better with a team</span>
                     </div>
+                    
+                    <div id="contactCard">
+                        
+                    </div>
+
+
                     <dialog id="dialogModal" class="displayNone" onclick="openModal()">
                         <div class="leftSideModal">
                             <img src="../assets/imgs/logo_white.svg" alt="">

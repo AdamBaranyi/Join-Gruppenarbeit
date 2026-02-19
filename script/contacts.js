@@ -5,15 +5,11 @@ function getCurrentUser() {
   let currentUser = JSON.parse(sessionStorage.getItem("current_user"));
   
   console.log("Current User:", currentUser); // Debugging: Log the current user
-  if (currentUser === null) {
-      const sidebarGuest = document.getElementById("sidebarGuest");
+  if (currentUser == null) {
       const sidebarLogedIn = document.getElementById("sidebarLogedIn");
-      sidebarGuest.classList.remove("displayNone");
       sidebarLogedIn.classList.add("displayNone");
     } else if (currentUser != null) {
-      const sidebarGuest = document.getElementById("sidebarGuest");
       const sidebarLogedIn = document.getElementById("sidebarLogedIn");
-      sidebarGuest.classList.add("displayNone");
       sidebarLogedIn.classList.remove("displayNone");
     }
 }
@@ -43,6 +39,8 @@ function renderContacts(contacts) {
     `;
   });
 }
+
+
 
 function openModal() {
   let contactWindow = document.getElementById("contactModal")
