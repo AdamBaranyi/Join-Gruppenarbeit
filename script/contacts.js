@@ -33,16 +33,16 @@ function renderContacts(contacts) {
   });
 }
 
+const contactWindow = document.getElementById("contactModal")
+const contactModal = document.getElementById("dialogModal")
+
 function openModal() {
-  let contactWindow = document.getElementById("contactModal")
-  let contactModal = document.getElementById("dialogModal")
-  contactModal.classList.remove("displayNone");
   contactModal.showModal();
   contactWindow.innerHTML = `
-    <form id="contactForm">
-      <input type="text" id="firstname" placeholder="First Name" required>
-      <input type="text" id="lastname" placeholder="Last Name" required>
-      <input type="email" id="email" placeholder="Email" required>
+    <form method="dialog" id="contactForm">
+      <input type="text" id="firstname" autocomplete="given-name" placeholder="First Name" required>
+      <input type="text" id="lastname" autocomplete="family-name" placeholder="Last Name" required>
+      <input type="email" id="email" autocomplete="off" placeholder="Email" required>
       <div class="btnContainer">
         <button class="cancelBtn">Cancel X</button>
         <button class="checkBtn">Create contact <img src="../assets/imgs/check.svg" alt=""> </button>
@@ -50,6 +50,11 @@ function openModal() {
     </form>
   `;
 };
+
+function closeModal() {
+  contactModal.close();
+};
+  
 
 async function addContact(contactData) {
     const userId = currentUser || "guest";
