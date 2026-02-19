@@ -19,7 +19,6 @@ main {
     justify-content: flex-start;
     align-items: flex-start;
     position: relative;
-    top: 96px;
     left: 232px;
     opacity: 1;
     width: calc(100dvw - 232px);
@@ -62,11 +61,10 @@ h2 {
 .slogan {
     position: relative;
     display: flex;
-    width: 569px;
+    max-width: 569px;
     height: 73px;
     opacity: 1;
-    left: calc(743px - 456px - 232px);
-    top: 110px;
+    top: 206px;
     gap: 30px;
 
 
@@ -106,7 +104,7 @@ h2 {
     align-items: center;
     justify-content: flex-start;
     position: relative;
-    top: 0px;
+    top: 96px;
     opacity: 1;
     height: 100%;
     
@@ -135,6 +133,7 @@ ul {
 .sloganAndCard-Container {
     display: flex;
     flex-direction: column;
+    top: 96px;
     height: 100%;
     width: 100%;
 }
