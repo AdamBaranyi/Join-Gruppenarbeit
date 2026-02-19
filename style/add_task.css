@@ -2,24 +2,105 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: var(--font-primary);
 }
 
 body {
+    font-family: var(--font-primary);
     background: #f6f7f8;
     min-width: 320px;
-    /* max-width: 1920px; */
-    margin: 0 auto;
+    max-width: 1920px;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  
+}
+
+.main-container{
+    position: absolute;
+    /* left: 300px; */
+    top: 0px;
+    width: calc(100% - 300px);
+    height: 100vh;
+    padding: 30px;
 }
 
 h1 {
+    position: absolute;
+    left: 300px;
+    top: 150px;
     font-size: 61px;
+    color: #000000;
     font-weight: 700;
     line-height: 120%;
     letter-spacing: 0;
-    color: #2A3647;
-    margin-bottom: 30px;
+}
+.main-container .forma-container {
+    position: absolute;
+    left: 300px;
+    top: 250px;
+    width: 440px;
+    height: 376px;
+    border: none;
+}
+.input-title-container{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 96px;
+}
+.input-desc-container{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 168px;
+}
+.input-date-container{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 96px;
+}
+.input-title label{
+    font-size: 16px;
+    color: #000000;
+    font-weight: 400;
+    line-height: 120%;
+    letter-spacing: 0;
+   
+}
+.input-title-container .lableStr{
+    color: #ff8190;
+}
+
+.input-title-container input{
+    width: 440px;
+    height: 48px;
+    border: 1px solid #000000;
+   border-radius: 10px;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    
+}
+.input-desc-container textarea{
+    width: 440px;
+    height: 120px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 16px;
+    margin-bottom: 16px;
+    border: none;
+    
+}
+.input-date-container input{
+    width: 440px;
+    height: 48px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    
+}
+.input-date-container .lableStr{
+    color: #ff8190;
 }

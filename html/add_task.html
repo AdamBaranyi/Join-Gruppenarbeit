@@ -1,25 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Task</title>
     <link rel="icon" type="image/svg+xml" href="../assets/imgs/logo.svg">
-    <link rel="stylesheet" href="/style/add_task.css">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../style/sidebar.css">
-   
-    <script src="../script.js"></script>
-    <script src="../script/summary.js"></script>
+     <link rel="stylesheet" href="/style/add_task.css">
+    <script src="../script.js" defer></script>
+    <script src="../script/summary.js" defer></script>
+    <script src="/script/add_task.js" defer></script>
 </head>
 
 <body onload="init()">
     <div w3-include-html="../assets/templates/header.html"></div>
     <div w3-include-html="../assets/templates/sidebar.html"></div>
 
-    <main>
+    <main class="main-container">
         <h1>Add Task</h1>
+        <div class="forma-container">
+            <form action="#">
+                <div class="input-title-container">
+                    <labal for="taskTitle">Title<span class="lableStr">*</span></labal>
+                    <input type="text" id="taskTitle" placeholder="Enter a title" required>
+                </div>
+                <div class="input-desc-container">
+                    <label for="taskDescription">Description</label>
+                    <textarea name="txtArea" id="taskDsc" placeholder="Enter a Description"></textarea>
+                    
+                </div>
+                <div class="input-date-container">
+                    <label for="dueDate" id="dueDate">Due Date<span class="lableStr">*</span></label>
+                    <input type="date" id="dueDateInput" required>
+                </div>
+            </form>
+        </div>
+        <div class="periority-from-container">
+
+        </div>
     </main>
 
 </body>
