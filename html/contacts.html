@@ -5,66 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacts</title>
 
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="/style/contacts.css">
     <link rel="stylesheet" href="/style/sidebar.css">
+    <link rel="stylesheet" href="../style/mobile_sidebar.css">
     <script defer src="/script/contacts.js"></script>
     <script defer src="../script.js"></script>
 </head>
 <body onload="init(),loadContacts()">
+    <div w3-include-html="../assets/templates/sidebar.html"></div>
+    <div w3-include-html="../assets/templates/mobile_sidebar.html"></div>
+    <div w3-include-html="../assets/templates/header.html"></div>
     <main>
-        <div w3-include-html="../assets/templates/header.html"></div>
-        <div w3-include-html="../assets/templates/sidebar.html"></div>
-        <div w3-include-html="../assets/templates/mobile_sidebar.html"></div>
-            
-                <div class="header-content">
-                    <span class="headerSpan">Kanban Project Management Tool</span>
-                
-                <div class="header-icons">
-                    <a href="./help.html"><img src="/assets/imgs/help.svg" alt="help Icon"></a>
-                    <a href="../index.html"><img src="/assets/imgs/person.svg" alt="User Image"></a>
-                </div>
+        <div class="main-content">
+            <div class="contactListStyle">
+                <button class="addContactBtn" onclick="openModal()">Add new contact <img src="../assets/imgs/person_add.svg" alt="add person icon"></button>
+                <ul>
+                    <li id="contactListContent">
+                    </li>
+                </ul>
             </div>
-            <div class="main-content">
-                <div class="contactListStyle">
-                    <button class="addContactBtn" onclick="openModal()">Add new contact <img src="../assets/imgs/person_add.svg" alt="add person icon"></button>
-                    <ul>
-                        <li id="contactListContent">
-
-                        </li>
-                    </ul>
-                </div>
-                <div class="sloganAndCard-Container">
-                    <div class="slogan">
-                            <h2>Contacts</h2>
-                            <img src="../assets/imgs/Vector 5.png" alt="Vector imgage">
-                            <span class="sloganSpan">Better with a team</span>
+            <div class="sloganAndCard-Container">
+                <div class="slogan">
+                        <h2>Contacts</h2>
+                        <img src="../assets/imgs/Vector 5.png" alt="Vector imgage">
+                        <span class="sloganSpan">Better with a team</span>
+                </div>    
+            <div id="contactCard"> </div>
+                <dialog id="dialogModal" class="displayNone" onclick="openModal()">
+                    <div class="leftSideModal">
+                        <img src="../assets/imgs/logo_white.svg" alt="">
+                        <h3>Add contact</h3>
+                        <span>Tasks are better with a team </span>
                     </div>
-                    
-                    <div id="contactCard">
-                        
+                    <div class="rightSideModal">
+                        <div class="closeBtnContainer">
+                            <button class="closeBtn"><img src="../assets/imgs/Close.png" alt=""></button>
+                        </div>
+                        <div class="imgAndForm">
+                            <img src="../assets/imgs/Group 13.png" alt="">
+                            <div id="contactModal"></div>
+                        </div>    
                     </div>
-
-
-                    <dialog id="dialogModal" class="displayNone" onclick="openModal()">
-                        <div class="leftSideModal">
-                            <img src="../assets/imgs/logo_white.svg" alt="">
-                            <h3>Add contact</h3>
-                            <span>Tasks are better with a team </span>
-                        </div>
-                        <div class="rightSideModal">
-                            <div class="closeBtnContainer">
-                                <button class="closeBtn"><img src="../assets/imgs/Close.png" alt=""></button>
-                            </div>
-                            <div class="imgAndForm">
-                                <img src="../assets/imgs/Group 13.png" alt="">
-                                <div id="contactModal"></div>
-                            </div>
-                            
-                            </div>
-                        </div>
-                    </dialog>
-                </div>
-            </div>
+                </dialog>
+        </div>
     </main>
 
 </body>
