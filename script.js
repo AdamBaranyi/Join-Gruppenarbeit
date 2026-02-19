@@ -83,10 +83,14 @@ function updateHeaderVisibility() {
  * If not logged in -> Redirects to Login page.
  */
 function goBack() {
-    if (sessionStorage.getItem('current_user')) {
-        window.location.href = '../html/summary.html';
+    if (window.history.length > 1) {
+        window.history.back();
     } else {
-        window.location.href = '../index.html';
+        if (sessionStorage.getItem('current_user')) {
+            window.location.href = '../html/summary.html';
+        } else {
+            window.location.href = '../index.html';
+        }
     }
 }
 
