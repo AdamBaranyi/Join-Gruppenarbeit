@@ -8,11 +8,7 @@
     --email-color: #007CEE;
 }
 
-main {
-    display: flex;
-    max-width: 100%;
-    max-height: 100%;
-}
+
 
 .main-content {
     display: flex;
@@ -25,16 +21,7 @@ main {
     height: calc(100dvh - 96px);
 }
 
-.headerSpan {
-    display: flex;
-    font-family: Inter;
-    font-weight: 400;
-    font-style: Regular;
-    font-size: 20px;
-    line-height: 120%;
-    letter-spacing: 0%;
 
-}
 
 h2 {
     display: flex;
@@ -117,7 +104,7 @@ h2 {
 
 ul {
     display: flex;
-    max-width: 352px;
+    width: 352px;
     height: 78px;
     opacity: 1;
     border-radius: 10px;

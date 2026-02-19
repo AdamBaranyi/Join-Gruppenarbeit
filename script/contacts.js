@@ -9,7 +9,7 @@ function getCurrentUser() {
 
 async function loadContacts() {
   const user = getCurrentUser();
-  const userId = user ? user.id : "guest";
+  const userId = user?.id || "guest";
 
   const url = `${BASE_URL}/contacts/${userId}.json`;
   const response = await fetch(url);
@@ -42,7 +42,7 @@ function openModal() {
     <form method="dialog" id="contactForm">
       <input type="text" id="firstname" autocomplete="given-name" placeholder="First Name" required>
       <input type="text" id="lastname" autocomplete="family-name" placeholder="Last Name" required>
-      <input type="email" id="email" autocomplete="off" placeholder="Email" required>
+      <input type="email" id="email" autocomplete="email" placeholder="Email" required>
       <div class="btnContainer">
         <button class="cancelBtn">Cancel X</button>
         <button class="checkBtn">Create contact <img src="../assets/imgs/check.svg" alt=""> </button>
