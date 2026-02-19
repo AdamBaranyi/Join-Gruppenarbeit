@@ -18,8 +18,7 @@ main {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    position: absolute;
-    top: 96px;
+    position: relative;
     left: 232px;
     opacity: 1;
     width: calc(100dvw - 232px);
@@ -60,13 +59,12 @@ h2 {
 }
 
 .slogan {
-    position: absolute;
+    position: relative;
     display: flex;
-    width: 569px;
+    max-width: 569px;
     height: 73px;
     opacity: 1;
-    left: 743px;
-    top: 110px;
+    top: 206px;
     gap: 30px;
 
 
@@ -81,7 +79,7 @@ h2 {
 }
 
 .addContactBtn {
-    position: absolute;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -105,8 +103,8 @@ h2 {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    position: absolute;
-    top: 0px;
+    position: relative;
+    top: 96px;
     opacity: 1;
     height: 100%;
     
@@ -135,6 +133,7 @@ ul {
 .sloganAndCard-Container {
     display: flex;
     flex-direction: column;
+    top: 96px;
     height: 100%;
     width: 100%;
 }
@@ -142,7 +141,7 @@ ul {
 
 
 dialog:open {
-    position: absolute;
+    position: relative;
     display: flex;
     width: 1212px;
     height: 592px;
