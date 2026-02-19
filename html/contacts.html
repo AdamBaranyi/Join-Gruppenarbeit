@@ -5,25 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacts</title>
 
-    <link rel="stylesheet" href="/style/contacts.css">
-    <link rel="stylesheet" href="/style/sidebar.css">
-    <script defer src="/script/contacts.js"></script>
+    <link rel="stylesheet" href="../style/contacts.css">
+    <link rel="stylesheet" href="../style/sidebar.css">
+    <link rel="stylesheet" href="../style/mobile_sidebar.css">
+    <script defer src="../script/contacts.js"></script>
     <script defer src="../script.js"></script>
 </head>
-<body onload="init(),loadContacts()">
+<body onload="init(); loadContacts()">
     <main>
         <div w3-include-html="../assets/templates/header.html"></div>
         <div w3-include-html="../assets/templates/sidebar.html"></div>
         <div w3-include-html="../assets/templates/mobile_sidebar.html"></div>
             
-                <div class="header-content">
-                    <span class="headerSpan">Kanban Project Management Tool</span>
-                
-                <div class="header-icons">
-                    <a href="./help.html"><img src="/assets/imgs/help.svg" alt="help Icon"></a>
-                    <a href="../index.html"><img src="/assets/imgs/person.svg" alt="User Image"></a>
-                </div>
-            </div>
+
             <div class="main-content">
                 <div class="contactListStyle">
                     <button class="addContactBtn" onclick="openModal()">Add new contact <img src="../assets/imgs/person_add.svg" alt="add person icon"></button>
