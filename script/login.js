@@ -1,7 +1,13 @@
+/**
+ * The base URL for the Firebase Realtime Database.
+ * @constant {string}
+ */
 const BASE_URL = "https://join-backend-afae8-default-rtdb.europe-west1.firebasedatabase.app/users";
 
 /**
  * Initializes the login page.
+ * Currently serves as a placeholder for potential early data fetching.
+ * @async
  */
 async function init() {
     // Optionally fetch users early if needed, but for now we fetch on login button click to ensure fresh data
@@ -9,13 +15,23 @@ async function init() {
 
 /**
  * Handles the login form submission.
- * @param {Event} event - The form submission event
+ * Validates inputs, fetches users from Firebase, checks credentials,
+ * and redirects on success or shows error on failure.
+ * 
+ * @async
+ * @param {Event} event - The form submission event.
  */
 async function handleLogin(event) {
   event.preventDefault();
+  clearLoginError();
 
-  let email = document.getElementById("loginEmail").value;
+  let email = document.getElementById("loginEmail").value.trim();
   let password = document.getElementById("loginPassword").value;
+
+  if (!email || !password) {
+    showLoginError();
+    return;
+  }
 
   try {
     let response = await fetch(BASE_URL + ".json");
@@ -40,19 +56,38 @@ async function handleLogin(event) {
       sessionStorage.setItem("current_user", JSON.stringify(loggedInUser));
       showSuccessMessage();
     } else {
-      alert("E-Mail oder Passwort falsch! (Hast du dich registriert?)");
+      showLoginError();
     }
 
   } catch (error) {
     console.error("Fehler beim Login:", error);
-    alert("Ein Fehler ist aufgetreten via Firebase.");
+    showLoginError();
   }
 }
 
-
+/**
+ * Visualizes the login error state by adding error styling to input fields
+ * and displaying the error message text.
+ */
+function showLoginError() {
+  document.getElementById('emailGroup').classList.add('input-error');
+  document.getElementById('passwordGroup').classList.add('input-error');
+  document.getElementById('loginError').classList.remove('d-none');
+}
 
 /**
- * Logs in as a guest user.
+ * Clears the login error state by removing error styling from input fields
+ * and hiding the error message text.
+ */
+function clearLoginError() {
+  document.getElementById('emailGroup').classList.remove('input-error');
+  document.getElementById('passwordGroup').classList.remove('input-error');
+  document.getElementById('loginError').classList.add('d-none');
+}
+
+/**
+ * Logs in a user as a predefined Guest.
+ * Stores a guest user object in session storage and redirects to the summary page.
  */
 function guestLogin() {
   sessionStorage.setItem(
@@ -63,23 +98,25 @@ function guestLogin() {
 }
 
 /**
- * Shows the success message and redirects after a delay.
+ * Displays a success message overlay and redirects the user to the summary page
+ * after a short animation delay. Sets a flag for the mobile splash greeting.
  */
 function showSuccessMessage() {
     let successMessage = document.getElementById('successMessage');
     successMessage.classList.remove('d-none');
-    // Allow a small delay for the display:block to apply before adding the class for animation
     setTimeout(() => {
         successMessage.classList.add('show');
     }, 10);
 
     setTimeout(() => {
-        window.location.href = "summary.html";
+        sessionStorage.setItem('showSplash', 'true');
+        window.location.href = "html/summary.html";
     }, 1500);
 }
 
 /**
  * Toggles the visibility of the password input field.
+ * Switches the input type between 'password' and 'text' and updates the toggle icon.
  */
 function togglePasswordVisibility() {
   let input = document.getElementById("loginPassword");

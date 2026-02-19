@@ -1,3 +1,5 @@
+/* Layout & Container */
+
 .login-container {
     display: flex;
     flex-direction: column;
@@ -9,6 +11,64 @@
     background-color: var(--color-bg);
 }
 
+/* Logo Animation */
+
+.logo-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.logo-anim {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    animation: moveLogo 1s ease-in-out forwards;
+    animation-delay: 0.5s;
+}
+
+.logo-white {
+    display: none;
+}
+
+.logo-colored {
+    width: 100%;
+    display: block;
+}
+
+/* No-Animation State */
+
+.no-anim .logo-container {
+    position: absolute;
+    z-index: 10;
+    height: auto;
+    width: auto;
+    top: 60px;
+    left: 60px;
+}
+
+.no-anim .logo-anim {
+    animation: none;
+    width: 100px;
+    position: static;
+    transform: none;
+}
+
+.no-anim .login-card, 
+.no-anim .legal-links,
+.no-anim .top-signup-link {
+    animation: none;
+    opacity: 1;
+}
+
+/* Sign Up Link */
+
 .top-signup-link {
     position: absolute;
     top: 60px;
@@ -18,6 +78,9 @@
     gap: 35px;
     font-size: 20px;
     font-weight: 400;
+    opacity: 0;
+    animation: fadeInContent 1s ease-in-out forwards;
+    animation-delay: 1.2s;
 }
 
 .top-signup-link span {
@@ -25,6 +88,8 @@
     font-weight: 400;
     font-size: 20px;
 }
+
+/* Login Card */
 
 .login-card {
     background-color: var(--color-white);
@@ -36,6 +101,9 @@
     align-items: center;
     width: 652px;
     max-width: 90%;
+    opacity: 0;
+    animation: fadeInContent 1s ease-in-out forwards;
+    animation-delay: 1.2s;
 }
 
 .login-card h1 {
@@ -45,6 +113,13 @@
     text-align: center;
 }
 
+.login-card form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
 .separator-blue {
     width: 150px;
     height: 3px;
@@ -52,13 +127,41 @@
     margin-bottom: 45px;
 }
 
+/* Form Inputs */
+
 .input-group {
     position: relative;
     margin-bottom: 20px;
     width: 422px;
 }
 
-/* --- ICONS --- */
+.input-group input {
+    width: 100%;
+    padding: 13px 50px 13px 21px;
+    font-size: 21px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+    border-color: #29ABE2;
+}
+
+.input-group.input-error input {
+    border-color: #FF8190;
+}
+
+.login-error-msg {
+    color: #FF8190;
+    font-size: 12px;
+    text-align: center;
+    margin-top: -12px;
+    margin-bottom: 8px;
+}
+
 .input-group img, .password-toggle {
     position: absolute;
     top: 50%;
@@ -72,7 +175,10 @@
     pointer-events: none;
 }
 
-/* Eye Toggle */
+#loginPassword {
+    padding-right: 95px;
+}
+
 .password-toggle {
     right: 60px; 
     cursor: pointer;
@@ -82,35 +188,14 @@
     pointer-events: auto;
 }
 
-.input-group input {
-    width: 100%;
-    padding: 13px 50px 13px 21px;
-    font-size: 21px;
-    border: 1px solid #D1D1D1;
-    border-radius: 10px;
-    box-sizing: border-box; 
-}
-
-
-#loginPassword {
-    padding-right: 95px;
-}
-
-/* Center form elements */
-.login-card form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
 .checkbox-group {
     display: flex;
     align-items: center;
     gap: 8px;
     margin-bottom: 20px;
-   
 }
+
+/* Buttons */
 
 .login-buttons {
     display: flex;
@@ -185,7 +270,8 @@
     box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
 }
 
-/* Legal Links Bottom */
+/* Footer & Legal Links */
+
 .legal-links {
     position: absolute;
     bottom: 30px;
@@ -194,6 +280,9 @@
     display: flex;
     justify-content: center;
     gap: 30px; 
+    opacity: 0;
+    animation: fadeInContent 1s ease-in-out forwards;
+    animation-delay: 1.2s;
 }
 
 .legal-links a {
@@ -206,41 +295,41 @@
     color: var(--color-secondary);
 }
 
-/* Animations (Basic) */
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+/* Success Message Overlay */
 
-.login-card {
-    animation: slideIn 0.5s ease-out;
-}
-
-/* Logo Animation & Base Styles */
-.logo-container {
+.success-message {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 999;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-primary);
+    color: white;
+    padding: 20px 40px;
+    border-radius: 20px;
+    font-size: 24px;
+    font-weight: 700;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: bottom 0.5s ease-in-out;
+    text-align: center;
 }
 
-.logo-anim {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 250px;
-    animation: moveLogo 1s ease-in-out forwards;
-    animation-delay: 0.5s;
+.success-message.show {
+    bottom: 50%;
+    transform: translate(-50%, 50%);
+}
+
+/* Utilities */
+
+.d-none {
+    display: none;
+}
+
+/* Keyframe Animations */
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes moveLogo {
@@ -248,55 +337,118 @@
     100% { top: 60px; left: 60px; transform: translate(0, 0); width: 100px; }
 }
 
-.top-signup-link, .login-card, .legal-links {
-    opacity: 0;
-    animation: fadeInContent 1s ease-in-out forwards;
-    animation-delay: 1.2s;
-}
-
 @keyframes fadeInContent {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
-/* No Anim Defaults */
-.no-anim .logo-container {
-    position: absolute;
-    z-index: 10;
-    height: auto;
-    width: auto;
-    top: 60px;
-    left: 60px;
-}
-.no-anim .logo-anim {
-    animation: none;
-    width: 100px;
-    position: static;
-    transform: none;
-}
-.no-anim .login-card, 
-.no-anim .legal-links,
-.no-anim .top-signup-link {
-    animation: none;
-    opacity: 1;
-}
+/* Responsive: Tablet & Mobile (max-width: 850px) */
 
-/* Responsive */
-
-/* (< 850px) */
 @media(max-width: 850px) {
+
+    /* Layout */
     body {
         padding-top: 0 !important;
         height: auto; 
         min-height: 100vh;
     }
 
+    .login-container {
+        justify-content: center;
+        padding-bottom: 60px; 
+        height: auto; 
+        min-height: 100vh;
+    }
+
+    /* Logo Animation */
+    .logo-container {
+        background-color: #2A3647; 
+        animation: fadeOutBg 1s ease-in-out forwards;
+        animation-delay: 1.2s; 
+        pointer-events: none; 
+    }
+
+    .logo-anim {
+        width: 80px;
+        animation: moveLogoMobile 1.2s ease-in-out forwards; 
+        animation-delay: 0.5s;
+    }    
+    
+    .logo-white {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        animation: fadeOutWhite 1.2s ease-in-out forwards;
+        animation-delay: 0.5s; 
+    }
+    
+    .logo-colored {
+        width: 100%;
+    }
+
+    /* No-Animation State */
+    .no-anim .logo-container {
+        top: 40px; 
+        left: 40px; 
+        transform: none;
+        width: auto;
+        height: auto;
+        background-color: transparent;
+        animation: none;
+    }
+
+    .no-anim .logo-anim {
+        width: 80px;
+        animation: none;
+    }
+
+    .no-anim .logo-white {
+        display: none;
+        animation: none;
+    }
+
+    /* Login Card */
     .login-card {
         padding: 30px 16px;
         width: min(400px, 90%); 
         margin-top: 80px; 
+        order: 1; 
     }
 
+    /* Sign Up Link */
+    .top-signup-link {
+        display: flex; 
+        position: static; 
+        margin-top: 24px;
+        margin-bottom: 24px;
+        font-size: 16px; 
+        flex-direction: row;
+        align-items: center;
+        gap: 16px; 
+        justify-content: center; 
+        width: 100%;
+        text-align: center;
+        z-index: 10;
+        order: 2; 
+    }
+    
+    .top-signup-link span {
+        font-size: 16px;
+    }
+
+    .top-signup-link .btn-dark {
+        width: auto !important;
+        padding: 8px 16px !important;
+        font-size: 16px !important;
+        background-color: var(--color-primary);
+        color: white;
+        border-radius: 8px;
+        text-decoration: none;
+    }
+
+    /* Form Inputs */
     .input-group {
         width: 100%;
     }
@@ -304,7 +456,8 @@
     .input-group input {
         width: 100%;
     }
-    
+
+    /* Buttons */
     .login-buttons {
         flex-direction: column;
         width: 100%;
@@ -317,80 +470,79 @@
         padding: 12px 0;
     }
     
-    .top-signup-link {
-        display: flex; 
-        position: static; 
-        margin-top: 24px;
-        margin-bottom: 12px;
-        font-size: 16px; 
-        flex-direction: row;
-        align-items: center;
-        gap: 8px; 
-        justify-content: center; 
-        width: 100%;
-        text-align: center;
-        z-index: 10;
-    }
-    
-    .top-signup-link span {
-        font-size: 16px;
-    }
-    
     .btn-primary-small {
         font-size: 16px;
         padding: 8px 16px;
     }
 
-    .login-container {
-        justify-content: center;
-        padding-bottom: 60px; 
-        height: auto; 
-        min-height: 100vh;
+    /* Footer & Legal Links */
+    .legal-links {
+        position: relative; 
+        bottom: auto;
+        margin-top: 30px;
+        padding-bottom: 40px;
+        gap: 24px; 
+        flex-direction: row; 
+        align-items: center;
+        order: 3; 
     }
     
-    .logo-anim {
-        width: 80px;
-        animation-name: moveLogoMobile; 
-    }    
-    
+    .legal-links a {
+        font-size: 16px !important;
+        padding: 8px;
+    }
+
+    /* Keyframe Animations */
     @keyframes moveLogoMobile {
-        0% { 
-            top: 50%; 
-            left: 50%; 
-            transform: translate(-50%, -50%); 
-            width: 100px; 
-            opacity: 1;
-        }
-        100% { 
-            top: 40px; 
-            left: 40px; 
-            transform: translate(0, 0); 
-            width: 80px; 
-            opacity: 1; 
-        } 
+        0% { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100px; opacity: 1; }
+        100% { top: 40px; left: 40px; transform: translate(0, 0); width: 80px; opacity: 1; } 
     }
     
-    .no-anim .logo-container {
-        top: 40px; 
-        left: 40px; 
-        transform: none;
-        width: auto;
-        height: auto;
+    @keyframes fadeOutWhite {
+        0% { opacity: 1; }
+        100% { opacity: 0; }
     }
-    .no-anim .logo-anim {
-        width: 80px;
+    
+    @keyframes fadeOutBg {
+        from { background-color: #2A3647; }
+        to { background-color: transparent; }
     }
 }
 
-/*480px-320px*/
+/* Responsive: Small Mobile (max-width: 480px) */
+
 @media(max-width: 480px) {
+
+    /* Layout */
     html, body {
         overflow-x: hidden;
         width: 100%;
         padding-top: 0 !important;
     }
 
+    .login-container {
+        height: auto;
+        min-height: 100vh;
+        justify-content: center; 
+        padding-top: 100px; 
+        padding-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+    }
 
+    /* Logo */
+    .no-anim .logo-container {
+         top: 20px;
+         left: 20px;
+         transform: scale(0.85); 
+         position: fixed; 
+    }
+
+    .logo-anim {
+        width: 60px; 
+    }
+
+    /* Login Card */
     .login-card {
         width: 92%; 
         max-width: 320px; 
@@ -407,15 +559,14 @@
         margin-bottom: 24px; 
         width: 80px;
     }
-    
-    /* Input Groups */
+
+    /* Form Inputs */
     .input-group {
         width: 100% !important; 
         margin-bottom: 16px; 
         max-width: none;
     }
     
-
     .input-group input {
         padding: 10px 40px 10px 14px; 
         font-size: 16px !important; 
@@ -423,27 +574,27 @@
         line-height: normal;
     }
     
-    /* Icon adjustments */
     .input-group img, .password-toggle {
         width: 18px;
         height: 18px;
         right: 12px;
         top: 50%;
     }
+
     .password-toggle {
         right: 35px;
     }
+
     #loginPassword {
         padding-right: 60px;
     }
 
-    /* Checkbox Label */
     .checkbox-group label, 
     .checkbox-group span {
         font-size: 16px !important;
     }
-    
-    /* Compact Buttons */
+
+    /* Buttons */
     .login-buttons {
         gap: 12px;
         margin-top: 24px;
@@ -459,8 +610,14 @@
         align-items: center;
         justify-content: center;
     }
-    
 
+    .btn-primary-small {
+        padding: 8px 16px;
+        font-size: 16px !important;
+        height: auto;
+    }
+
+    /* Sign Up Link */
     .top-signup-link {
         width: 100%;
         flex-wrap: wrap; 
@@ -478,96 +635,52 @@
         color: #000;
     }
 
-    /* Sign Up Button */
-    .btn-primary-small {
-        padding: 8px 16px;
+    /* Error Message */
+    .login-error-msg {
         font-size: 16px !important;
-        height: auto;
     }
 
-    /* Footer*/
+    /* Footer & Legal Links */
     .legal-links {
         position: relative; 
         bottom: auto;
         margin-top: 30px;
         padding-bottom: 40px;
-        gap: 12px;
-        flex-direction: column; 
+        gap: 24px; 
+        flex-direction: row; 
         align-items: center;
+        order: 3; 
     }
     
     .legal-links a {
         font-size: 16px !important;
         padding: 8px;
     }
-    
-    /* Container */
-    .login-container {
-        height: auto;
-        min-height: 100vh;
-        justify-content: center; 
-        padding-top: 100px; 
-        padding-bottom: 20px;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    /* Logo adjustments start mobile */
-    .no-anim .logo-container {
-         top: 20px;
-         left: 20px;
-         transform: scale(0.85); 
-         position: fixed; 
-    }
-    
-    /* Animation end state */
+
+    /* Keyframe Animations */
     @keyframes moveLogoMobile {
         0% { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; }
         100% { top: 20px; left: 20px; transform: translate(0, 0); width: 60px; }
     }
-    
-    .logo-anim {
-        width: 60px; 
-    }
 }
 
+/* Responsive: Short Screens (max-height: 700px) */
+
 @media(max-height: 700px) {
+
+    /* Login Card */
     .login-card {
         margin-top: 20px; 
         padding: 20px 16px;
     }
+
     .separator-blue {
         margin-bottom: 20px;
     }
+
     .login-card h1 {
         font-size: 32px;
         margin-bottom: 10px;
     }
 }
-/* ... existing code ... */
 
-/* Success Message Overlay */
-.success-message {
-    position: fixed;
-    bottom: -100px; /* Start below the screen */
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--color-primary);
-    color: white;
-    padding: 20px 40px;
-    border-radius: 20px;
-    font-size: 24px;
-    font-weight: 700;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    transition: bottom 0.5s ease-in-out;
-}
-
-.success-message.show {
-    bottom: 50%; /* Center vertically or adjust as needed */
-    transform: translate(-50%, 50%); /* Center perfectly */
-}
-
-.d-none {
-    display: none;
-}

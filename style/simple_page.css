@@ -1,7 +1,10 @@
+/* Content Container */
+
 .simple-page-content {
     padding: 80px;
-    max-width: 1000px;
 }
+
+/* Header */
 
 .simple-page-header {
     display: flex;
@@ -10,19 +13,12 @@
     margin-bottom: 40px;
 }
 
+/* Typography */
+
 .simple-page-content h1 {
     font-size: 61px;
     font-weight: 700;
     margin: 0;
-}
-
-.btn-back {
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
-.btn-back:hover {
-    transform: scale(1.1);
 }
 
 .simple-page-content h2 {
@@ -38,19 +34,37 @@
     line-height: 1.5;
 }
 
+/* Lists */
+
 .simple-page-content ul {
     margin-bottom: 15px;
     margin-left: 20px;
 }
 
+/* Back Button */
+
+.btn-back {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.btn-back:hover {
+    transform: scale(1.1);
+}
+
+/* Responsive: Tablet & Mobile (max-width: 850px) */
+
 @media(max-width: 850px) {
     .simple-page-content {
         padding: 40px;
     }
+
     .simple-page-content h1 {
         font-size: 40px;
     }
 }
+
+/* Responsive: Small Mobile (max-width: 450px) */
 
 @media(max-width: 450px) {
     .simple-page-content {
