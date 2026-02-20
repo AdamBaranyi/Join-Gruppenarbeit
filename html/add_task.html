@@ -9,17 +9,50 @@
     <link rel="stylesheet" href="/style/add_task.css">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../style/sidebar.css">
-   
-    <script src="../script.js"></script>
-    <script src="../script/summary.js"></script>
+    <link rel="stylesheet" href="../style/mobile_sidebar.css">
+    <script src="../script.js" defer></script>
+    <script src="../script/summary.js" defer></script>
+    <script src="../script/add_task.js" defer></script>
 </head>
 
 <body onload="init()">
     <div w3-include-html="../assets/templates/header.html"></div>
     <div w3-include-html="../assets/templates/sidebar.html"></div>
+    <div w3-include-html="../assets/templates/mobile_sidebar.html"></div>
 
-    <main>
-        <h1>Add Task</h1>
+    <h1>Add Task</h1>
+    <main class="main-container">
+        
+        <div class="form-container">
+            <form action="#">
+                <div class="input-title-container">
+                    <labal for="taskTitle" class="title">Title<span class="span-str">*</span></labal>
+                    <input type="text" id="taskTitle" placeholder="Enter a title" required>
+                </div>
+                <div class="input-desc-container">
+                    <label for="taskDescription" class="title">Description</label>
+                    <textarea name="txtArea" id="taskDsc" placeholder="Enter a Description"></textarea>
+
+                </div>
+                <div class="input-date-container">
+                    <label for="dueDateInput" class="title">Due date<span class="span-str">*</span></label>
+                    <input type="date" name="datum" id="dueDateInput" title="Due Date" required>
+                </div>
+            </form>
+        </div>
+        <div class="periority-from-container">
+            <form action="#">
+                <div class="bnt-content">
+                    <label for="p-lable" class="btn-label">Priority</label>
+                    <div class="btns">
+                   <button type="submit" class="p-urgent"> Urgent <img src="/assets/imgs/urgent-priority-board.svg" alt="pr-uregent-icon"></button>
+                   <button type="submit" class="p-medium">Medium <img src="/assets/imgs/priority_medium.svg" alt="pr-medium-icon"></button>
+                   <button type="submit" class="p-low">Low <img src="/assets/imgs/low-priority-board.svg" alt="pr-low-icon"></button>
+                   </div>
+            
+                </div>
+            </form>
+        </div>
     </main>
 
 </body>
