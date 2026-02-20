@@ -13,7 +13,6 @@
     <script defer src="../script.js"></script>
 </head>
 <body onload="init(); loadContacts()">
-    <main>
         <div w3-include-html="../assets/templates/header.html"></div>
         <div w3-include-html="../assets/templates/sidebar.html"></div>
         <div w3-include-html="../assets/templates/mobile_sidebar.html"></div>
@@ -23,7 +22,6 @@
                     <button class="addContactBtn" onclick="openModal()">Add new contact <img src="../assets/imgs/person_add.svg" alt="add person icon"></button>
                     <ul>
                         <li id="contactListContent">
-
                         </li>
                     </ul>
                 </div>
@@ -34,14 +32,9 @@
                             <span class="sloganSpan">Better with a team</span>
                     </div>
                     
-        
-            <div id="contactCard">
-                        
-                    </div>
+            <div id="contactCard"></div>
 
-
-    
-                <dialog id="dialogModal" class="displayNone" onclick="openModal()">
+                <dialog id="dialogModal">
                         <div class="leftSideModal">
                             <img src="../assets/imgs/logo_white.svg" alt="">
                             <h3>Add contact</h3>
@@ -54,13 +47,10 @@
                             <div class="imgAndForm">
                                 <img src="../assets/imgs/Group 13.png" alt="">
                                 <div id="contactModal"></div>
-                            </div>
-                            
-                            </div>
+                            </div>    
+                        </div>
                     </dialog>
                 </div>
             </div>
-    </main>
-
 </body>
 </html>
