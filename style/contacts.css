@@ -121,11 +121,25 @@ ul {
 .sloganAndCard-Container {
     display: flex;
     flex-direction: column;
+    position: relative;
     height: 100%;
     width: 100%;
+    top: 96px;
 }
 
+#contactCard {
+    position: relative;
+    top: 25%;
+    width: 461px;
+    height: 364px;
+    opacity: 1;
+    gap: 21px;
 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+}
 
 dialog:open {
     position: relative;

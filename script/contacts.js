@@ -25,7 +25,7 @@ function renderContacts(contacts) {
 
   contacts.forEach(contact => {
     list.innerHTML += `
-      <div class="contact-item">
+      <div onclick="editContact('${contact.id}')" class="contact-item">
         <strong>${contact.firstname} ${contact.lastname}</strong><br>
         <span class="mailStyle">${contact.email}</span>
       </div>
@@ -68,4 +68,38 @@ async function addContact(contactData) {
 
     const result = await res.json();
     return result.name; // generierte Firebase-ID
+}
+
+async function editContact(contactId) {
+  const user = getCurrentUser();
+  const userId = user?.id || "guest";
+  const url = `${BASE_URL}/contacts/${userId}/${contactId}.json`;
+
+  const response = await fetch(url);
+  const contact = await response.json();
+
+  renderContactCard(contact);
+}
+
+function renderContactCard(contact) {
+  const card = document.getElementById("contactCard");
+  card.innerHTML += `
+      <div onclick="editContact('${contact.id}')" class="contact-item">
+        <strong>${contact.firstname} ${contact.lastname}</strong><br>
+        <div class="editAndDeleteBtnContainer">
+          <button onclick="renderEditForm('${contact.id}')" class="editBtn">Edit <img src="../assets/imgs/edit.svg" alt=""></button>
+          <button class="deleteBtn">Delete <img src="../assets/imgs/delete.svg" alt=""></button>
+        </div>
+      `;
+}
+
+function renderEditForm(contact) {
+  const form = document.getElementById("editForm");
+  form.innerHTML = `
+    <div class="editFormContainer">
+      <input type="text" id="editFirstname" autocomplete="given-name" placeholder="First Name" value="${contact.firstname}" required>
+      <input type="text" id="editLastname" autocomplete="family-name" placeholder="Last Name" value="${contact.lastname}" required>
+      <input type="email" id="editEmail" autocomplete="email" placeholder="Email" value="${contact.email}" required>
+    </div>
+  `;
 }
