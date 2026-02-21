@@ -23,10 +23,11 @@
     <main class="main-container">
         <h1>Add Task</h1>
         <div class="form-container">
-            <form action="#">
+            <form onsubmit="return validateForm();">
                 <div class="input-title-container">
                     <labal for="taskTitle" class="title">Title<span class="span-str">*</span></labal>
-                    <input type="text" id="taskTitle" placeholder="Enter a title" required>
+                    <input type="text" id="task-title" placeholder="Enter a title">
+                    <div class="error-msg" id="error-task-title"></div>
                 </div>
                 <div class="input-desc-container">
                     <label for="taskDescription" class="title">Description</label>
@@ -34,10 +35,16 @@
 
                 </div>
                 <div class="input-date-container">
-                    <label for="dueDateInput" class="title">Due date<span class="span-str">*</span></label>
-                    <input type="date" name="datum" id="dueDateInput" title="Due Date" required>
+                    <label class="title">Due date<span class="span-str">*</span></label>
+                    <input type="date" id="due-datet" title="Due Date">
+                    <div class="error-msg" id="error-due-datet"></div>
                 </div>
+                <button type="submit">Submit</button> <br><br> Diese Btn ist kurzfristig da, nur zum testzweck!
+
             </form>
+        </div>
+        <div class="separator">
+            <img src="../assets/imgs/Vector 4.png" alt="Victor-img">
         </div>
         <div class="periority-from-container">
             <form action="#">
@@ -79,11 +86,11 @@
 
     <footer>
         <div class="footer-container">
-            <p><span class="span-str">*</span>Thsi field is required</p>
+            <p><span class="span-str">*</span>This field is required</p>
             <div class="btn-footer">
-                <button type="button" class="clear-btn">Clear <img src="../assets/imgs/Close.png"
+                <button type="reset" class="clear-btn">Clear <img src="../assets/imgs/iconoir_cancel.svg"
                         alt="CreateBtn"></button>
-                <button type="button" class="create-btn">Create Task<img src="../assets/imgs/check.svg"
+                <button type="submit" class="create-btn">Create Task<img src="../assets/imgs/check.svg"
                         alt="ClearBtn"></button>
             </div>
 
