@@ -1,29 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Task</title>
     <link rel="icon" type="image/svg+xml" href="../assets/imgs/logo.svg">
-    
     <link rel="stylesheet" href="../style/add_task.css">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../style/sidebar.css">
     <link rel="stylesheet" href="../style/mobile_sidebar.css">
-   
-    <script defer src="../script/add_task.js"></script>
-    <script defer src="../script.js"></script>
+    <script src="../script.js" defer></script>
+    <script src="../script/summary.js" defer></script>
+    <script src="../script/add_task.js" defer></script>
 </head>
 
 <body onload="init()">
-    <main>
-        <div w3-include-html="../assets/templates/header.html"></div>
-        <div w3-include-html="../assets/templates/sidebar.html"></div>
-        <div w3-include-html="../assets/templates/mobile_sidebar.html"></div>
+    <div w3-include-html="../assets/templates/header.html"></div>
+    <div w3-include-html="../assets/templates/sidebar.html"></div>
+    <div w3-include-html="../assets/templates/mobile_sidebar.html"></div>
 
-        <div class="content-container">
-            <h1>Add Task</h1>
+    <main class="main-container">
+        <h1>Add Task</h1>
+        <div class="form-container">
+            <form action="#">
+                <div class="input-title-container">
+                    <labal for="taskTitle" class="title">Title<span class="span-str">*</span></labal>
+                    <input type="text" id="taskTitle" placeholder="Enter a title" required>
+                </div>
+                <div class="input-desc-container">
+                    <label for="taskDescription" class="title">Description</label>
+                    <textarea name="txtArea" id="taskDsc" placeholder="Enter a Description"></textarea>
+
+                </div>
+                <div class="input-date-container">
+                    <label for="dueDateInput" class="title">Due date<span class="span-str">*</span></label>
+                    <input type="date" name="datum" id="dueDateInput" title="Due Date" required>
+                </div>
+            </form>
+        </div>
+        <div class="periority-from-container">
+            <form action="#">
+                <div class="bnt-content">
+                    <label for="p-lable" class="btn-label">Priority</label>
+                    <div class="btns">
+                        <a href="#" class="urgent trigger">Urgent <img class="trigger"
+                                src="../assets/imgs/urgent-priority-board.svg" alt="uregent-icon"></a>
+                        <a href="#" class="medium trigger">Medium <img class="trigger"
+                                src="../assets/imgs/priority_medium.svg" alt="medium-icon"></a>
+                        <a href="#" class="low trigger">Low <img class="trigger"
+                                src="../assets/imgs/low-priority-board.svg" alt="low-icon"></a>
+                    </div>
+                </div>
+                <div class="assigned-container">
+                    <label for="assignedDropdown" class="assigned-dropdown">Assigned to</label>
+                    <select name="select" id="assignedDropdown" title="Assign to a person">
+                        <option>Select contact to assign</option>
+                        <option value="person2">Person 2</option>
+                        <option value="person3">Person 3</option>
+                    </select>
+                </div>
+                <div class="category-conrainer">
+                    <label for="categoryDropdown" class="assigned-dropdown">Category<span
+                            class="span-str">*</span></label>
+                    <select name="select" id="categoryDropdown" title="Select a category">
+                        <option value="person1">Technical Task</option>
+                        <option value="person2">User Story</option>
+                    </select>
+                </div>
+                <div class="subtask-conrainer">
+                    <label for="subtask" class="assigned-dropdown">Subtasks</label>
+                    <input type="text" id="subTask" placeholder="Add a new subtask" required>
+                </div>
+            </form>
+
         </div>
     </main>
+
+    <footer>
+        <div class="footer-container">
+            <p><span class="span-str">*</span>Thsi field is required</p>
+            <div class="btn-footer">
+                <button type="button" class="clear-btn">Clear <img src="../assets/imgs/Close.png"
+                        alt="CreateBtn"></button>
+                <button type="button" class="create-btn">Create Task<img src="../assets/imgs/check.svg"
+                        alt="ClearBtn"></button>
+            </div>
+
+        </div>
+
+    </footer>
+
 </body>
+
 </html>
