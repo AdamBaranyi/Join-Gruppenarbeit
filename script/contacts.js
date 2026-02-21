@@ -33,14 +33,22 @@ function renderContacts(contacts) {
   });
 }
 
+  let leftSide = document.getElementById('leftSideModal');
 const contactWindow = document.getElementById("contactModal")
 const contactModal = document.getElementById("dialogModal")
 
 function openModal() {
   contactModal.showModal();
+
+  leftSide.innerHTML = `
+    <img class="logoWhite" src="../assets/imgs/logo_white.svg" alt="">
+    <h3>Add contact</h3>
+    <span>Tasks are better with a team!</span>
+    <img class="vectorHorizontel" src="../assets/imgs/Vector horizontel.png" alt="">
+  `;
   contactWindow.innerHTML = `
     <form method="dialog" id="contactForm">
-      <input type="text" id="firstname" autocomplete="given-name" placeholder="First Name" required>
+      <input type="text" id="firstname" autocomplete="given-name" placeholder="First Name"  value="<img src='../assets/imgs/contacts.svg' alt='add person icon'>" required>
       <input type="text" id="lastname" autocomplete="family-name" placeholder="Last Name" required>
       <input type="email" id="email" autocomplete="email" placeholder="Email" required>
       <div class="btnContainer">
@@ -82,25 +90,39 @@ async function editContact(contactId) {
 }
 
 function renderContactCard(contact) {
-  const card = document.getElementById("contactCard");
-  card.innerHTML += `
-      <div onclick="editContact('${contact.id}')" class="contact-item">
+  const card = document.getElementById("contactCardContent");
+  card.innerHTML = `
+      <div class="contact-item">
+        <img src="../assets/imgs/Ellipse 3.svg" alt="contactInitals icon">
         <strong>${contact.firstname} ${contact.lastname}</strong><br>
         <div class="editAndDeleteBtnContainer">
-          <button onclick="renderEditForm('${contact.id}')" class="editBtn">Edit <img src="../assets/imgs/edit.svg" alt=""></button>
+          <button onclick="renderEditForm('${contact}')" class="editBtn">Edit <img src="../assets/imgs/edit.svg" alt=""></button>
           <button class="deleteBtn">Delete <img src="../assets/imgs/delete.svg" alt=""></button>
+        </div>
+        <span>Contact Information:</span><br>
+        <div class="contact-info">
+          <span>Email: <br> <span class="mailStyle">${contact.email}</span></span><br>
         </div>
       `;
 }
 
 function renderEditForm(contact) {
-  const form = document.getElementById("editForm");
-  form.innerHTML = `
-    <div class="editFormContainer">
-      <input type="text" id="editFirstname" autocomplete="given-name" placeholder="First Name" value="${contact.firstname}" required>
-      <input type="text" id="editLastname" autocomplete="family-name" placeholder="Last Name" value="${contact.lastname}" required>
-      <input type="email" id="editEmail" autocomplete="email" placeholder="Email" value="${contact.email}" required>
-    </div>
+  openModal();
+  leftSide.innerHTML = `
+    <img src="../assets/imgs/logo_white.svg" alt="Logo White">
+    <h3>Edit contact</h3>
+    <img class="vectorHorizontel" src="../assets/imgs/Vector horizontel.png" alt="">
+  `;
+  contactWindow.innerHTML = `
+    <form method="dialog" id="contactForm">
+      <input type="text" id="firstname" autocomplete="given-name" placeholder="First Name" value="${contact.firstname}" required>
+      <input type="text" id="lastname" autocomplete="family-name" placeholder="Last Name" value="${contact.lastname}" required>
+      <input type="email" id="email" autocomplete="email" placeholder="Email" value="${contact.email}" required>
+      <div class="btnContainer">
+        <button onclick="cancelContac()" class="cancelBtn">Cancel X</button>
+        <button class="checkBtn">Save changes <img src="../assets/imgs/check.svg" alt=""> </button>
+      </div>
+    </form>
   `;
 }
 
