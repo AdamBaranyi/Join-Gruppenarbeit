@@ -44,7 +44,7 @@ function openModal() {
       <input type="text" id="lastname" autocomplete="family-name" placeholder="Last Name" required>
       <input type="email" id="email" autocomplete="email" placeholder="Email" required>
       <div class="btnContainer">
-        <button class="cancelBtn">Cancel X</button>
+        <button onclick="cancelContac()" class="cancelBtn">Cancel X</button>
         <button class="checkBtn">Create contact <img src="../assets/imgs/check.svg" alt=""> </button>
       </div>
     </form>
@@ -102,4 +102,16 @@ function renderEditForm(contact) {
       <input type="email" id="editEmail" autocomplete="email" placeholder="Email" value="${contact.email}" required>
     </div>
   `;
+}
+
+function cancelContac() {
+  let firstname = document.getElementById('firstname');
+  let lastname = document.getElementById('lastname');
+  let email = document.getElementById('email');
+
+  firstname.value ='';
+  lastname.value ='';
+  email.value ='';
+
+
 }
