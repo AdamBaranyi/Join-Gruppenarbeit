@@ -25,7 +25,7 @@ function renderContacts(contacts) {
 
   contacts.forEach(contact => {
     list.innerHTML += `
-      <div onclick="editContact('${contact.id}')" class="contact-item">
+      <div onclick="showContactDetails('${contact}')" class="contact-item">
         <strong>${contact.firstname} ${contact.lastname}</strong><br>
         <span class="mailStyle">${contact.email}</span>
       </div>
@@ -78,7 +78,7 @@ async function addContact(contactData) {
     return result.name; // generierte Firebase-ID
 }
 
-async function editContact(contactId) {
+async function showContactDetails(contactId) {
   const user = getCurrentUser();
   const userId = user?.id || "guest";
   const url = `${BASE_URL}/contacts/${userId}/${contactId}.json`;
@@ -91,6 +91,9 @@ async function editContact(contactId) {
 
 function renderContactCard(contact) {
   const card = document.getElementById("contactCardContent");
+  if (screen.width <= 850){
+    renderEditForm(contact);
+  } else {  
   card.innerHTML = `
       <div class="contact-item">
         <img src="../assets/imgs/Ellipse 3.svg" alt="contactInitals icon">
@@ -104,12 +107,12 @@ function renderContactCard(contact) {
           <span>Email: <br> <span class="mailStyle">${contact.email}</span></span><br>
         </div>
       `;
-}
+}};
 
 function renderEditForm(contact) {
   openModal();
   leftSide.innerHTML = `
-    <img src="../assets/imgs/logo_white.svg" alt="Logo White">
+    <img class="logoWhite" src="../assets/imgs/logo_white.svg" alt="Logo White">
     <h3>Edit contact</h3>
     <img class="vectorHorizontel" src="../assets/imgs/Vector horizontel.png" alt="">
   `;
@@ -134,6 +137,4 @@ function cancelContac() {
   firstname.value ='';
   lastname.value ='';
   email.value ='';
-
-
-}
+};

@@ -342,19 +342,111 @@ button {
         display: none;
     }
 
-    .leftSideModal {
-        width: 50%;
-    }
-
     .contactListStyle {
         left: 0;
         width: 100%;
         height: 100%;
     }
 
-    .rightSideModal {
-        width: 50%;
+    ul {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
     }
+    
+    .contact-item {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    dialog:open {
+        width: 396px;
+        height: 760px;
+        top: 20;
+        left: 20;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    dialog h3 {
+        font-family: Inter;
+        font-weight: 700;
+        font-style: Bold;
+        font-size: 47px;
+        line-height: 120%;
+        letter-spacing: 0%;
+    }
+
+    dialog span {
+        font-family: Inter;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 20px;
+    line-height: 120%;
+    letter-spacing: 0%;
+    }
+
+    .closeBtnContainer {
+        position: absolute;
+        top: 0;
+        padding-top: 20px;
+    }
+
+    .leftSideModal {
+        justify-content: center;
+        align-items: flex-start;
+        width: 100%;
+        height: 50%;
+        overflow: hidden;
+    }
+
+    .rightSideModal {
+        width: 100%;
+        justify-content: center;
+        align-items: center;;
+        height: 50%;
+        overflow: hidden;
+    }
+
+    .imgAndForm {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .profileImg {
+        position: absolute;
+        top: 42%;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    .btnContainer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .logoWhite {
+        display: none;
+    }
+
+    .cancelBtn {
+        display: none;
+    }
+
     .sloganAndCard-Container {
         display: none;
     }
@@ -362,4 +454,14 @@ button {
     .slogan {
         display: none;
     }
+}
+
+@media (max-width: 550px) {
+    dialog:open {
+        width: 100%;
+        height: 90%;
+        top: 0;
+        left: 0;
+    }
+    
 }
