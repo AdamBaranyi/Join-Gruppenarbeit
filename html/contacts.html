@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../style/sidebar.css">
     <link rel="stylesheet" href="../style/mobile_sidebar.css">
     <link rel="stylesheet" href="../style.css">
+
     <script defer src="../script/contacts.js"></script>
     <script defer src="../script.js"></script>
 </head>
@@ -19,36 +20,40 @@
             
             <div class="main-content">
                 <div class="contactListStyle">
-                    <button class="addContactBtn" onclick="openModal()">Add new contact <img src="../assets/imgs/person_add.svg" alt="add person icon"></button>
+                    <button class="addContactBtn" onclick="openModal()"> <span>Add new contact</span> <img src="../assets/imgs/person_add.svg" alt="add person icon"></button>
                     <ul>
                         <li id="contactListContent">
                         </li>
                     </ul>
                 </div>
-                <div class="sloganAndCard-Container">
+            <div class="sloganAndCard-Container">
                     <div class="slogan">
                             <h2>Contacts</h2>
                             <img src="../assets/imgs/Vector 5.png" alt="Vector imgage">
                             <span class="sloganSpan">Better with a team</span>
                     </div>
-                    
-            <div id="contactCard"></div>
-                <dialog id="dialogModal">
-                        <div class="leftSideModal">
-                            <img class="logoWhite" src="../assets/imgs/logo_white.svg" alt="">
-                            <h3>Add contact</h3>
-                            <span>Tasks are better with a team!</span>
+            <div id="contactCard">
+                <div id="contactCardContent">
+                </div>
+            </div>
+            </div>
+            <dialog id="dialogModal">
+                    <div class="leftSideModal" id="leftSideModal">
+                        <img class="logoWhite" src="../assets/imgs/logo_white.svg" alt="">
+                        <h3>Add contact</h3>
+                        <span>Tasks are better with a team!</span>
                             <img class="vectorHorizontel" src="../assets/imgs/Vector horizontel.png" alt="">
-                        </div>
-                        <div class="rightSideModal">
-                            <div class="closeBtnContainer">
+                    </div>
+                    <div class="rightSideModal">
+                        <div class="closeBtnContainer">
                                 <button onclick="closeModal()" class="closeBtn"><img src="../assets/imgs/Close.png" alt="close Icon"></button>
-                            </div>
-                            <div class="imgAndForm">
-                                <img src="../assets/imgs/Group 13.png" alt="">
-                                <div id="contactModal"></div>
-                            </div>    
                         </div>
+                        <div class="imgAndForm">
+                                <img class="profileImg" src="../assets/imgs/Group 13.png" alt="john doe image">
+                                <div id="contactModal"></div>
+                        </div>    
+                    </div>
+                    
                 </dialog>
                 
 </body>
