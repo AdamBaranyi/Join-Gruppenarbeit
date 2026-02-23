@@ -48,31 +48,38 @@
                 <div class="bnt-content">
                     <label for="p-lable" class="btn-label">Priority</label>
                     <div class="btns">
-                        <!-- <a href="#" class="urgent trigger">Urgent <img class="trigger"
-                                src="../assets/imgs/urgent-priority-board.svg" alt="uregent-icon"></a>
-                        <a href="#" class="medium trigger">Medium <img class="trigger"
-                                src="../assets/imgs/priority_medium.svg" alt="medium-icon"></a>
-                        <a href="#" class="low trigger">Low <img class="trigger"
-                                src="../assets/imgs/low-priority-board.svg" alt="low-icon"></a> -->
 
+                        <button type="button" class="urgent trigger" data-priority="urgent">
+                            Urgent
+                            <svg class="trigger" xmlns="http://www.w3.org/2000/svg" width="17" height="12" fill="none"viewBox="0 0 17 12">
+                                <g fill="#ff3d00" clip-path="url(#a)"><path
+                                d="M8.5 4.755c.2 0 .394.061.555.176l7.568 5.434a.92.92 0 0 1 .368.595.89.89 0 0 1-.172.673.952.952 0 0 1-1.304.19L8.5 6.793l-7.014 5.03a.95.95 0 0 1-.693.168.95.95 0 0 1-.611-.358.9.9 0 0 1-.172-.673.9.9 0 0 1 .368-.595l7.568-5.434a.95.95 0 0 1 .554-.176" />
+                                <path
+                                d="M8.5 0c.2 0 .394.061.554.176l7.569 5.434a.888.888 0 0 1 .196 1.268.953.953 0 0 1-1.304.19L8.5 2.039l-7.014 5.03a.953.953 0 0 1-1.304-.19.89.89 0 0 1 .195-1.268L7.946.176A.95.95 0 0 1 8.5 0" />
+                                </g><defs><clipPath id="a"> <path fill="#fff" d="M17 12H0V0h17z" /></clipPath> </defs>
+                            </svg>
+                        </button>
 
-                    <button type="button" class="urgent trigger"  data-priority="urgent">
-                        Urgent
-                        <svg class="trigger" xmlns="http://www.w3.org/2000/svg" width="17" height="12" fill="none" viewBox="0 0 17 12"><g fill="#ff3d00" clip-path="url(#a)"><path d="M8.5 4.755c.2 0 .394.061.555.176l7.568 5.434a.92.92 0 0 1 .368.595.89.89 0 0 1-.172.673.952.952 0 0 1-1.304.19L8.5 6.793l-7.014 5.03a.95.95 0 0 1-.693.168.95.95 0 0 1-.611-.358.9.9 0 0 1-.172-.673.9.9 0 0 1 .368-.595l7.568-5.434a.95.95 0 0 1 .554-.176"/><path d="M8.5 0c.2 0 .394.061.554.176l7.569 5.434a.888.888 0 0 1 .196 1.268.953.953 0 0 1-1.304.19L8.5 2.039l-7.014 5.03a.953.953 0 0 1-1.304-.19.89.89 0 0 1 .195-1.268L7.946.176A.95.95 0 0 1 8.5 0"/></g><defs><clipPath id="a"><path fill="#fff" d="M17 12H0V0h17z"/></clipPath></defs></svg>
-                    </button>
+                        <button type="button" class="medium trigger" data-priority="medium">
+                            Medium
+                            <svg class="trigger" xmlns="http://www.w3.org/2000/svg" width="17" height="7"fill="none" viewBox="0 0 17 7"><g fill="#ffa800" clip-path="url(#a)">
+                            <path
+                             d="M16.069 6.333H.931a.93.93 0 0 1-.66-.274.94.94 0 0 1 0-1.327.93.93 0 0 1 .66-.275h15.137c.247 0 .483.099.658.275a.94.94 0 0 1 0 1.327.93.93 0 0 1-.659.274M16.069 1.877H.931a.93.93 0 0 1-.66-.275.94.94 0 0 1 0-1.327A.93.93 0 0 1 .933 0h15.137c.247 0 .483.099.658.275a.94.94 0 0 1 0 1.327.93.93 0 0 1-.659.275" />
+                                </g><defs><clipPath id="a"><path fill="#fff" d="M0 0h17v6.333H0z" /></clipPath>
+                                </defs>
+                            </svg>
+                        </button>
 
-                    <button type="button" class="medium trigger" data-priority="medium">
-                        Medium
-                      <svg class="trigger" xmlns="http://www.w3.org/2000/svg" width="17" height="7" fill="none" viewBox="0 0 17 7"><g fill="#ffa800" clip-path="url(#a)"><path d="M16.069 6.333H.931a.93.93 0 0 1-.66-.274.94.94 0 0 1 0-1.327.93.93 0 0 1 .66-.275h15.137c.247 0 .483.099.658.275a.94.94 0 0 1 0 1.327.93.93 0 0 1-.659.274M16.069 1.877H.931a.93.93 0 0 1-.66-.275.94.94 0 0 1 0-1.327A.93.93 0 0 1 .933 0h15.137c.247 0 .483.099.658.275a.94.94 0 0 1 0 1.327.93.93 0 0 1-.659.275"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h17v6.333H0z"/></clipPath></defs></svg>
-                    </button>
-
-                    <button type="button" class="low trigger" data-priority="low">
-                        Low
-                     <svg class="trigger" xmlns="http://www.w3.org/2000/svg" width="17" height="12" fill="none" viewBox="0 0 17 12"><path fill="#7ae229" d="M8.5 7.245a.95.95 0 0 1-.555-.176L.377 1.635a.92.92 0 0 1-.368-.595.89.89 0 0 1 .172-.673.953.953 0 0 1 1.304-.19L8.5 5.207l7.014-5.03a.95.95 0 0 1 .693-.168.95.95 0 0 1 .611.358.9.9 0 0 1 .172.673.9.9 0 0 1-.367.595L9.054 7.069a.95.95 0 0 1-.554.176"/><path fill="#7ae229" d="M8.5 12a.95.95 0 0 1-.554-.177L.377 6.39a.888.888 0 0 1-.196-1.268.953.953 0 0 1 1.304-.19L8.5 9.961l7.014-5.03a.953.953 0 0 1 1.304.19.89.89 0 0 1-.195 1.268l-7.569 5.434A.95.95 0 0 1 8.5 12"/></svg>
-                    </button>
+                        <button type="button" class="low trigger" data-priority="low">
+                            Low
+                            <svg class="trigger" xmlns="http://www.w3.org/2000/svg" width="17" height="12" fill="none"viewBox="0 0 17 12">
+                            <path fill="#7ae229"
+                            d="M8.5 7.245a.95.95 0 0 1-.555-.176L.377 1.635a.92.92 0 0 1-.368-.595.89.89 0 0 1 .172-.673.953.953 0 0 1 1.304-.19L8.5 5.207l7.014-5.03a.95.95 0 0 1 .693-.168.95.95 0 0 1 .611.358.9.9 0 0 1 .172.673.9.9 0 0 1-.367.595L9.054 7.069a.95.95 0 0 1-.554.176" />
+                            <path fill="#7ae229" d="M8.5 12a.95.95 0 0 1-.554-.177L.377 6.39a.888.888 0 0 1-.196-1.268.953.953 0 0 1 1.304-.19L8.5 9.961l7.014-5.03a.953.953 0 0 1 1.304.19.89.89 0 0 1-.195 1.268l-7.569 5.434A.95.95 0 0 1 8.5 12" />
+                            </svg>
+                        </button>
                     </div>
-                    
-                    
+
                 </div>
                 <div class="assigned-container">
                     <label for="assignedDropdown" class="assigned-dropdown">Assigned to</label>
@@ -86,7 +93,7 @@
                     <label for="categoryDropdown" class="assigned-dropdown">Category<span
                             class="span-str">*</span></label>
                     <select name="select" id="categoryDropdown" title="Select a category">
-                        
+
                         <option value="person1">Technical Task</option>
                         <option value="person2">User Story</option>
                     </select>
