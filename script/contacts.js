@@ -25,7 +25,7 @@ function renderContacts(contacts) {
 
   contacts.forEach(contact => {
     list.innerHTML += `
-      <div onclick="showContactDetails('${contact}')" class="contact-item">
+      <div onclick="showContactDetails('${contact.id}')" class="contact-item">
         <strong>${contact.firstname} ${contact.lastname}</strong><br>
         <span class="mailStyle">${contact.email}</span>
       </div>
@@ -92,12 +92,19 @@ async function showContactDetails(contactId) {
 function renderContactCard(contact) {
   const card = document.getElementById("contactCardContent");
   if (screen.width <= 850){
-    renderEditForm(contact);
-  } else {  
+  const sloganAndCardContainer = document.getElementById("sloganAndCardContainer");
+  const contactListContainer = document.getElementById("contactListContainer");
+  const mobileOptionsBtn = document.getElementById("mobileOptionsBtn");
+  contactListContainer.classList.add("displayNone");
+  sloganAndCardContainer.style.display = "flex";
+  }
+  
   card.innerHTML = `
       <div class="contact-item">
-        <img src="../assets/imgs/Ellipse 3.svg" alt="contactInitals icon">
-        <strong>${contact.firstname} ${contact.lastname}</strong><br>
+        <div class="contact-header">
+          <img src="../assets/imgs/Ellipse 3.svg" alt="contactInitals icon">
+          <strong>${contact.firstname} ${contact.lastname}</strong><br>
+        </div>
         <div class="editAndDeleteBtnContainer">
           <button onclick="renderEditForm('${contact}')" class="editBtn">Edit <img src="../assets/imgs/edit.svg" alt=""></button>
           <button class="deleteBtn">Delete <img src="../assets/imgs/delete.svg" alt=""></button>
@@ -107,7 +114,7 @@ function renderContactCard(contact) {
           <span>Email: <br> <span class="mailStyle">${contact.email}</span></span><br>
         </div>
       `;
-}};
+};
 
 function renderEditForm(contact) {
   openModal();
