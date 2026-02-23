@@ -46,9 +46,27 @@ function clearErrors() {
   });
 }
 
+//  Dynamisch Contacts einfügen:------------------------------------ !
+let contacts = ["Max Mustermann", "Anna Müller"];
 
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Dynamisch Contacts einfügen: !
- let contacts = ["Max Mustermann", "Anna Müller"];
+function renderContacts(){
+    const select = document.getElementById("assignedDropdown");
+
+    select.innerHTML = `
+    <option value="" disabled selected> Select contact to assig</option>
+    `;  
+    contacts.forEach(contact => {
+        const option = document.createElement("option");
+        option.value = contact;
+        option.textContent = contact;
+        select.appendChild(option);
+    });
+}
+
+//  Wenn wir später neuen Kontakte erstellen wollen!
+contacts.push("new contact");
+renderContacts();
+
 
 
 
