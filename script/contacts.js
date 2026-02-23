@@ -1,4 +1,7 @@
 const BASE_URL = "https://join-backend-afae8-default-rtdb.europe-west1.firebasedatabase.app/";
+const currentUser = getCurrentUser()?.id;
+const userId = currentUser || "guest";
+const url = `${BASE_URL}/contacts/${userId}.json`;
 
 
 function getCurrentUser() {
@@ -8,10 +11,6 @@ function getCurrentUser() {
 }
 
 async function loadContacts() {
-  const user = getCurrentUser();
-  const userId = user?.id || "guest";
-
-  const url = `${BASE_URL}/contacts/${userId}.json`;
   const response = await fetch(url);
   const data = await response.json();
 
@@ -30,10 +29,11 @@ function renderContacts(contacts) {
         <span class="mailStyle">${contact.email}</span>
       </div>
     `;
+    console.log("contact:", contact.id);
   });
 }
 
-  let leftSide = document.getElementById('leftSideModal');
+let leftSide = document.getElementById('leftSideModal');
 const contactWindow = document.getElementById("contactModal")
 const contactModal = document.getElementById("dialogModal")
 
@@ -53,7 +53,10 @@ function openModal() {
       <input type="email" id="email" autocomplete="email" placeholder="Email" required>
       <div class="btnContainer">
         <button onclick="cancelContac()" class="cancelBtn">Cancel X</button>
-        <button class="checkBtn">Create contact <img src="../assets/imgs/check.svg" alt=""> </button>
+        <button onclick="addContact({ 
+          firstname: document.getElementById('firstname').value,
+          lastname: document.getElementById('lastname').value,
+          email: document.getElementById('email').value })" class="checkBtn">Create contact <img src="../assets/imgs/check.svg" alt=""> </button>
       </div>
     </form>
   `;
@@ -65,29 +68,46 @@ function closeModal() {
   
 
 async function addContact(contactData) {
-    const userId = currentUser || "guest";
-    const url = `${BASE_URL}/contacts/${userId}.json`;
+    const res = await fetch(url);
+    const contacts = await res.json();
 
-    const res = await fetch(url, {
-        method: "POST",
+    let nextIdNumber = 1;
+
+    if (contacts) {
+        const ids = Object.keys(contacts)
+            .filter(id => id.startsWith("c"))
+            .map(id => parseInt(id.substring(1)))
+            .filter(num => !isNaN(num));
+
+        if (ids.length > 0) {
+            nextIdNumber = Math.max(...ids) + 1;
+        }
+    }
+
+    const newId = `c${nextIdNumber}`;
+    const contactWithId = {
+        id: newId,
+        ...contactData
+    };
+
+    await fetch(`${BASE_URL}/contacts/${userId}/${newId}.json`, {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(contactData)
+        body: JSON.stringify(contactWithId)
     });
-
-    const result = await res.json();
-    return result.name; // generierte Firebase-ID
+    await loadContacts();
+    return newId;
 }
 
 async function showContactDetails(contactId) {
-  const user = getCurrentUser();
-  const userId = user?.id || "guest";
-  const url = `${BASE_URL}/contacts/${userId}/${contactId}.json`;
-
   const response = await fetch(url);
-  const contact = await response.json();
+  const data = await response.json();
 
+  if (!data) return;
+
+  const contact = data[contactId];
   renderContactCard(contact);
-}
+};
 
 function renderContactCard(contact) {
   const card = document.getElementById("contactCardContent");
