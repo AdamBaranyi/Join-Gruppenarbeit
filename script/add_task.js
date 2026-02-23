@@ -1,18 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const buttons = document.querySelectorAll(".trigger");
-
-  buttons.forEach((button) => {
-    button.addEventListener("click", function (event) {
-      event.preventDefault();
-      buttons.forEach((btn) => btn.classList.remove("active"));
-      this.classList.add("active");
-    });
-  });
+  const triggers = document.querySelectorAll(".trigger");
+  triggers.forEach(btn => btn.addEventListener("click", e => {
+    e.preventDefault();
+    triggers.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    console.log("Selected Priority:", btn.dataset.priority);
+  }));
 });
+
 
 // Form Validation-------------------
 const tasktitle = document.getElementById("task-title");
-const taskdate = document.getElementById("due-datet");
+const taskdate = document.getElementById("due-date");
 
 function validateForm() {
   let isValid = true;
@@ -23,7 +22,7 @@ function validateForm() {
   }
 
   if (!taskdate.value.trim()) {
-    setError("due-datet", " * This field is required");
+    setError("due-date", " * This field is required");
     isValid = false;
   }
   return isValid;
@@ -47,4 +46,9 @@ function clearErrors() {
   });
 }
 
-// const date = moment('20120222', 'YYYYMMDD').fromNow();
+
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Dynamisch Contacts einfügen: !
+ let contacts = ["Max Mustermann", "Anna Müller"];
+
+
+
