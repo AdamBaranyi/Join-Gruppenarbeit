@@ -19,14 +19,14 @@
         <div w3-include-html="../assets/templates/mobile_sidebar.html"></div>
             
             <div class="main-content">
-                <div class="contactListStyle">
+                <div class="contactListStyle" id="contactListContainer">
                     <button class="addContactBtn" onclick="openModal()"> <span>Add new contact</span> <img src="../assets/imgs/person_add.svg" alt="add person icon"></button>
                     <ul>
                         <li id="contactListContent">
                         </li>
                     </ul>
                 </div>
-            <div class="sloganAndCard-Container">
+            <div class="sloganAndCard-Container" id="sloganAndCardContainer">
                     <div class="slogan">
                             <h2>Contacts</h2>
                             <img src="../assets/imgs/Vector 5.png" alt="Vector imgage">
@@ -35,6 +35,7 @@
             <div id="contactCard">
                 <div id="contactCardContent">
                 </div>
+            <img class="mobileEditMenu" id="mobileOptionsBtn" src="../assets/imgs/Menu Contact options.png" alt="contact options menu">
             </div>
             </div>
             <dialog id="dialogModal">
