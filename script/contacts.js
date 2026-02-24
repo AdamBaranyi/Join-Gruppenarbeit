@@ -114,13 +114,21 @@ function renderContactCard(contact) {
   if (screen.width <= 850){
   const sloganAndCardContainer = document.getElementById("sloganAndCardContainer");
   const contactListContainer = document.getElementById("contactListContainer");
-  const mobileOptionsBtn = document.getElementById("mobileOptionsBtn");
+  const closeCardBtn = document.getElementById("closeCardBtn");
+
+  card.classList.remove("displayNone");
+  closeCardBtn.classList.remove("displayNone");
   contactListContainer.classList.add("displayNone");
   sloganAndCardContainer.style.display = "flex";
   }
   console.log("contact:", contact);
   card.innerHTML = `
       <div class="contact-item">
+        <div class="content-slogan">
+          <h2>Contacts</h2>
+          <span class="sloganSpan">Better with a team</span>
+          <img src="../assets/imgs/Vector horizontel.png" alt="Vector imgage">
+        </div>
         <div class="contact-header">
           <img src="../assets/imgs/Ellipse 3.svg" alt="contactInitals icon">
           <strong>${contact.firstname} ${contact.lastname}</strong><br>
@@ -133,6 +141,8 @@ function renderContactCard(contact) {
         <div class="contact-info">
           <span>Email: <br> <span class="mailStyle">${contact.email}</span></span><br>
         </div>
+        <img class="mobileEditMenu" id="mobileOptionsBtn" src="../assets/imgs/Menu Contact options.png" alt="contact options menu" onclick="mobileEditMenu()">
+
       `;
 
   card.querySelector(".editBtn").addEventListener("click", () => {
@@ -143,6 +153,21 @@ function renderContactCard(contact) {
       deleteContact(contact.id);
     }
   });
+}
+
+function closeContactCard() {
+  const card = document.getElementById("contactCardContent");
+  if (screen.width <= 850){
+  const sloganAndCardContainer = document.getElementById("sloganAndCardContainer");
+  const contactListContainer = document.getElementById("contactListContainer");
+  const closeCardBtn = document.getElementById("closeCardBtn");
+
+  card.innerHTML = '';
+  card.classList.add("displayNone");
+  closeCardBtn.classList.add("displayNone");
+  contactListContainer.classList.remove("displayNone");
+  sloganAndCardContainer.style.display = "none";
+  }
 }
 
 function renderEditForm(contact) {
@@ -164,6 +189,25 @@ function renderEditForm(contact) {
       </div>
     </form>
   `;
+}
+
+function mobileEditMenu(contact) {
+  const mobileOptionsBtn = document.getElementById('mobileOptionsBtn');
+  mobileOptionsBtn.addEventListener('click', () => {
+    let menu = document.createElement('div');
+    menu.classList.add('mobile-edit-menu-dropdown');
+    menu.innerHTML = `
+      <button class="mobileEditBtn">Edit</button>
+      <button class="mobileDeleteBtn">Delete</button>
+    `;
+    document.body.appendChild(menu);
+  });
+  menu.querySelector(".mobileEditBtn").addEventListener("click", () => {
+    renderEditForm(contact);
+  });
+  menu.querySelector(".mobileDelteBtn").addEventListener("click", () => {
+    deleteContact(contact.id);
+  });
 }
 
 async function editContact(contactId) {

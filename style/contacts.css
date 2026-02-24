@@ -81,7 +81,11 @@ h2 {
     padding-top: 12px;
     padding-bottom: 12px;
     gap: 16px;
+}
 
+.addContactBtn:hover {
+    background-color: #344762;
+    color: white;
 }
 
 .contactListStyle {
@@ -231,8 +235,6 @@ dialog span {
     opacity: 1;
     top: 4px;
     right: 4px;
-
-
 }
 
 .imgAndForm {
@@ -307,6 +309,11 @@ button {
     gap: 4px;
     border-radius: 10px;
     padding: 16px;
+}
+
+.checkBtn:hover {
+    background-color: #344762;
+    color: white;
 }
 
 .checkBtn img {
@@ -393,6 +400,14 @@ button {
         flex-direction: column;
     }
 
+    #closeCardBtn {
+        position: absolute;
+        width: 32px;
+        height: 32px;
+        top: 5%;
+        right: 5%;
+    }
+
     .mobileEditMenu {
         position: absolute;
         display: flex;
@@ -401,6 +416,7 @@ button {
         top: 80%;
         right: 10%;
     }
+   
 
     dialog:open {
         width: 396px;
