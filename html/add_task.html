@@ -26,7 +26,7 @@
         <form id="taskForm" onsubmit="return validateForm();">
             <div class="form-container">
                 <div class="input-title-container">
-                    <labal for="taskTitle" class="title">Title<span class="span-str">*</span></labal>
+                    <labal class="title">Title<span class="span-str">*</span></labal>
                     <input type="text" id="task-title" placeholder="Enter a title">
                     <div class="error-msg" id="error-task-title"></div>
                 </div>
@@ -83,24 +83,40 @@
                 </div>
                 <div class="assigned-container">
                     <label for="assignedDropdown" class="assigned-dropdown">Assigned to</label>
-                    <select name="select" id="assignedDropdown" title="Assign to a person">
+                    <select id="assignedDropdown" title="Assign to a person">
                         <option value="" disabled selected>Select contact to assign</option>
                         <option value="person2">Person 2</option>
                         <option value="person3">Person 3</option>
                     </select>
                 </div>
                 <div class="category-conrainer">
-                    <label for="categoryDropdown" class="assigned-dropdown">Category<span
+                    <label  class="assigned-dropdown">Category<span
                             class="span-str">*</span></label>
-                    <select name="select" id="categoryDropdown" title="Select a category">
-
+                    <select id="categoryDropdown" title="Select a category">
+                        <option value="" disabled selected>Select task category</option>
                         <option value="person1">Technical Task</option>
-                        <option value="person2">User Story</option>
+                        <option value="person2">User Story</option>       
                     </select>
+                     <div class="error-msg" id="error-categoryDropdown"></div>
                 </div>
                 <div class="subtask-conrainer">
-                    <label for="subtask" class="assigned-dropdown">Subtasks</label>
-                    <input type="text" id="subTask" placeholder="Add a new subtask" required>
+                    <label class="assigned-dropdown">Subtasks</label>
+                 <div class="subtask-input">
+                    <input type="text" id="subTaskInput" placeholder="Add new subtask">
+                 <div class="input-actions">
+                        <button type="button" id="removeSubtaskBtn" title="Remove subtask">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="#2a3647" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12.001 12 5.243 5.243m-10.486 0L12.001 12zM17.244 6.757 12 12zM12 12 6.758 6.757z"/></svg>
+                        </button>
+                    <div class="separator-icons">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="3" height="24" fill="none" viewBox="0 0 3 62"><path stroke="#D1D1D1" stroke-linecap="round" stroke-width="3" d="M1.5 1.5v59"/></svg>
+                    </div>
+                        <button type="button" id="addSubtaskBtn" title="Add subtask">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><mask id="a" width="24" height="24" x="0" y="0" maskUnits="userSpaceOnUse" style="mask-type:alpha"><path fill="#d9d9d9" d="M0 0h24v24H0z"/></mask><g mask="url(#a)"><path fill="#2a3647" d="m9.55 15.15 8.476-8.475q.3-.3.712-.3.413 0 .713.3t.3.713q0 .411-.3.712l-9.2 9.2q-.3.3-.7.3a.96.96 0 0 1-.7-.3L4.55 13a.93.93 0 0 1-.288-.713 1.02 1.02 0 0 1 .313-.712q.3-.3.712-.3.413 0 .713.3z"/></g></svg>
+                        </button>
+                    </div>
+                 </div>
+
+                    <div id="subtaskList"></div>
                 </div>
             </div>
     </main>
