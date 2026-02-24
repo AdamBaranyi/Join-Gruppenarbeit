@@ -118,7 +118,7 @@ function renderContactCard(contact) {
   contactListContainer.classList.add("displayNone");
   sloganAndCardContainer.style.display = "flex";
   }
-  
+  console.log("contact:", contact);
   card.innerHTML = `
       <div class="contact-item">
         <div class="contact-header">
@@ -126,7 +126,7 @@ function renderContactCard(contact) {
           <strong>${contact.firstname} ${contact.lastname}</strong><br>
         </div>
         <div class="editAndDeleteBtnContainer">
-          <button onclick="renderEditForm('${contact}')" class="editBtn">Edit <img src="../assets/imgs/edit.svg" alt=""></button>
+          <button class="editBtn">Edit <img src="../assets/imgs/edit (1).png" alt=""></button>
           <button class="deleteBtn">Delete <img src="../assets/imgs/delete.svg" alt=""></button>
         </div>
         <span>Contact Information:</span><br>
@@ -134,9 +134,19 @@ function renderContactCard(contact) {
           <span>Email: <br> <span class="mailStyle">${contact.email}</span></span><br>
         </div>
       `;
-};
+
+  card.querySelector(".editBtn").addEventListener("click", () => {
+    renderEditForm(contact);
+  });
+  card.querySelector(".deleteBtn").addEventListener("click", () => {
+    if (confirm("Are you sure you want to delete this contact?")) {
+      deleteContact(contact.id);
+    }
+  });
+}
 
 function renderEditForm(contact) {
+  console.log(contact);
   openModal();
   leftSide.innerHTML = `
     <img class="logoWhite" src="../assets/imgs/logo_white.svg" alt="Logo White">
@@ -150,10 +160,41 @@ function renderEditForm(contact) {
       <input type="email" id="email" autocomplete="email" placeholder="Email" value="${contact.email}" required>
       <div class="btnContainer">
         <button onclick="cancelContac()" class="cancelBtn">Cancel X</button>
-        <button class="checkBtn">Save changes <img src="../assets/imgs/check.svg" alt=""> </button>
+        <button onclick="editContact('${contact.id}')" class="checkBtn">Save changes <img src="../assets/imgs/check.svg" alt=""> </button>
       </div>
     </form>
   `;
+}
+
+async function editContact(contactId) {
+  const firstname = document.getElementById('firstname').value;
+  const lastname = document.getElementById('lastname').value;
+  const email = document.getElementById('email').value;
+
+  const updatedContact = {
+    firstname,
+    lastname,
+    email
+  };
+
+  await fetch(`${BASE_URL}/contacts/${userId}/${contactId}.json`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(updatedContact)
+  });
+
+  await loadContacts();
+  await showContactDetails(contactId);
+}
+
+async function deleteContact(contactId) {
+  await fetch(`${BASE_URL}/contacts/${userId}/${contactId}.json`, {
+    method: "DELETE"
+  });
+
+  await loadContacts();
+  const card = document.getElementById("contactCardContent");
+  card.innerHTML = '';
 }
 
 function cancelContac() {
