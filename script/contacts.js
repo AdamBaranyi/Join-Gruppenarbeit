@@ -152,7 +152,9 @@ function renderContactCard(contact) {
   const sloganAndCardContainer = document.getElementById("sloganAndCardContainer");
   const contactListContainer = document.getElementById("contactListContainer");
   const closeCardBtn = document.getElementById("closeCardBtn");
+  const mobileSlogan = document.getElementById("mobileSlogan");
 
+  mobileSlogan.classList.remove("displayNone");
   card.classList.remove("displayNone");
   closeCardBtn.classList.remove("displayNone");
   contactListContainer.classList.add("displayNone");
@@ -161,11 +163,7 @@ function renderContactCard(contact) {
   console.log("contact:", contact);
   card.innerHTML = `
       <div class="contact-item">
-        <div class="content-slogan">
-          <h2>Contacts</h2>
-          <span class="sloganSpan">Better with a team</span>
-          <img src="../assets/imgs/Vector horizontel.png" alt="Vector imgage">
-        </div>
+        
         <div class="contact-header">
           <img src="../assets/imgs/Ellipse 3.svg" alt="contactInitals icon">
           <strong>${contact.firstname} ${contact.lastname}</strong><br>

@@ -102,9 +102,11 @@ h2 {
 }
 
 .contactRow {
+    box-shadow: 4px 0px 6px 0px #00000014;
     position: relative;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
     width: 100%;
     padding: 20px;
 }
