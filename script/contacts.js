@@ -10,27 +10,64 @@ function getCurrentUser() {
   return currentUser;
 }
 
+function sortContactsByFirstname(contacts) {
+  return [...contacts].sort((a, b) =>
+    a.firstname.localeCompare(b.firstname, "de", { sensitivity: "base" })
+  );
+}
+
+function groupContactsByLetter(contacts) {
+  const groups = {};
+
+  contacts.forEach(contact => {
+    const letter = contact.firstname.charAt(0).toUpperCase();
+
+    if (!groups[letter]) {
+      groups[letter] = [];
+    }
+
+    groups[letter].push(contact);
+  });
+
+  return groups;
+}
+
 async function loadContacts() {
   const response = await fetch(url);
   const data = await response.json();
 
   const contacts = data ? Object.values(data) : [];
-  renderContacts(contacts);
+  renderContactList(contacts);
 }
 
-function renderContacts(contacts) {
-  const list = document.getElementById("contactListContent");
-  list.innerHTML = "";
+function renderContactList(contacts) {
 
-  contacts.forEach(contact => {
-    list.innerHTML += `
-      <div onclick="showContactDetails('${contact.id}')" class="contact-item">
-        <strong>${contact.firstname} ${contact.lastname}</strong><br>
-        <span class="mailStyle">${contact.email}</span>
-      </div>
+  const container = document.getElementById("contactListContent");
+
+  container.innerHTML = "";
+
+  const sorted = sortContactsByFirstname(contacts);
+  const groups = groupContactsByLetter(sorted);
+
+  Object.keys(groups).sort().forEach(letter => {
+
+    container.innerHTML += `
+      <div class="letterHeader">${letter}</div>
     `;
-    console.log("contact:", contact.id);
+
+    groups[letter].forEach(contact => {
+
+      container.innerHTML += `
+        <div class="contactRow" onclick='renderContactCard(${JSON.stringify(contact)})'>
+          ${contact.firstname} ${contact.lastname} <br>
+          <span class="mailStyle">${contact.email}</span>
+        </div>
+      `;
+
+    });
+
   });
+
 }
 
 let leftSide = document.getElementById('leftSideModal');
@@ -192,9 +229,9 @@ function renderEditForm(contact) {
 }
 
 function mobileEditMenu(contact) {
+  let menu = document.createElement('div');
   const mobileOptionsBtn = document.getElementById('mobileOptionsBtn');
   mobileOptionsBtn.addEventListener('click', () => {
-    let menu = document.createElement('div');
     menu.classList.add('mobile-edit-menu-dropdown');
     menu.innerHTML = `
       <button class="mobileEditBtn">Edit</button>

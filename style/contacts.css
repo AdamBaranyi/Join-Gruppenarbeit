@@ -93,13 +93,20 @@ h2 {
     width: 456px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     position: relative;
-    
     opacity: 1;
     height: 100%;
     
+}
+
+.contactRow {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
 }
 
 #contactListContent {
