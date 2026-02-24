@@ -108,7 +108,8 @@ h2 {
     flex-direction: column;
     cursor: pointer;
     width: 100%;
-    padding: 20px;
+    padding-left: 20px;
+    padding-top: 20px;
 }
 
 #contactListContent {
@@ -123,8 +124,6 @@ ul {
     height: 78px;
     opacity: 1;
     border-radius: 10px;
-    padding-top: 15px;
-    padding-right: 24px;
     padding-bottom: 15px;
     padding-left: 24px;
     gap: 35px;
