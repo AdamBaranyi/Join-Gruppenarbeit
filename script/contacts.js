@@ -136,9 +136,14 @@ function renderContactCard(contact) {
       `;
 
   card.querySelector(".editBtn").addEventListener("click", () => {
-  renderEditForm(contact);
-});
-};
+    renderEditForm(contact);
+  });
+  card.querySelector(".deleteBtn").addEventListener("click", () => {
+    if (confirm("Are you sure you want to delete this contact?")) {
+      deleteContact(contact.id);
+    }
+  });
+}
 
 function renderEditForm(contact) {
   console.log(contact);
@@ -180,6 +185,16 @@ async function editContact(contactId) {
 
   await loadContacts();
   await showContactDetails(contactId);
+}
+
+async function deleteContact(contactId) {
+  await fetch(`${BASE_URL}/contacts/${userId}/${contactId}.json`, {
+    method: "DELETE"
+  });
+
+  await loadContacts();
+  const card = document.getElementById("contactCardContent");
+  card.innerHTML = '';
 }
 
 function cancelContac() {
