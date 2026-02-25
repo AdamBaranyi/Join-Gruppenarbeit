@@ -21,8 +21,144 @@
         <div w3-include-html="../assets/templates/sidebar.html"></div>
         <div w3-include-html="../assets/templates/mobile_sidebar.html"></div>
 
-        <div class="content-container">
-            <h1>Board</h1>
+        <div class="content-container board-container">
+            <div class="board-header">
+                <h1>Board</h1>
+                <div class="board-header-right">
+                    <div class="search-container">
+                        <input type="text" placeholder="Find Task" id="searchTaskInput">
+                        <div class="search-divider"></div>
+                        <img src="../assets/imgs/search.svg" alt="Search icon">
+                    </div>
+                    <button class="add-task-btn">Add task <img src="../assets/imgs/add.png" alt="Add Icon"></button>
+                </div>
+            </div>
+
+            <div class="board-columns-container">
+                <!-- To do Column -->
+                <div class="board-column">
+                    <div class="column-header">
+                        <h2>To do</h2>
+                        <button class="plus-btn"><img src="../assets/imgs/plus button.png" alt="Add"></button>
+                    </div>
+                    <div class="tasks-container" id="todo-list">
+                        <div class="no-tasks">No tasks To do</div>
+                    </div>
+                </div>
+
+                <!-- In progress Column -->
+                <div class="board-column">
+                    <div class="column-header">
+                        <h2>In progress</h2>
+                        <button class="plus-btn"><img src="../assets/imgs/plus button.png" alt="Add"></button>
+                    </div>
+                    <div class="tasks-container" id="in-progress-list">
+                        <!-- Mock Task Card 1 -->
+                        <div class="task-card" onclick="openTaskModal()">
+                            <div class="task-category category-user-story">User Story</div>
+                            <h3 class="task-title">Kochwelt Page & Recipe Recommender</h3>
+                            <p class="task-description">Build start page with recipe recommendation...</p>
+                            
+                            <div class="task-progress-container">
+                                <div class="progress-bar-bg">
+                                    <div class="progress-bar-fill" style="width: 50%;"></div>
+                                </div>
+                                <span class="progress-text">1/2 Subtasks</span>
+                            </div>
+
+                            <div class="task-footer">
+                                <div class="task-assignees">
+                                    <div class="assignee-badge bg-orange">AM</div>
+                                    <div class="assignee-badge bg-teal">EM</div>
+                                    <div class="assignee-badge bg-purple">MB</div>
+                                </div>
+                                <div class="task-priority">
+                                    <img src="../assets/imgs/priority_medium.svg" alt="Medium Priority">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Await feedback Column -->
+                <div class="board-column">
+                    <div class="column-header">
+                        <h2>Await feedback</h2>
+                        <button class="plus-btn"><img src="../assets/imgs/plus button.png" alt="Add"></button>
+                    </div>
+                    <div class="tasks-container" id="await-feedback-list">
+                        <!-- Mock Task Card 2 -->
+                        <div class="task-card" onclick="openTaskModal()">
+                            <div class="task-category category-technical-task">Technical Task</div>
+                            <h3 class="task-title">HTML Base Template Creation</h3>
+                            <p class="task-description">Create reusable HTML base templates...</p>
+                            
+                            <div class="task-footer mt-custom">
+                                <div class="task-assignees">
+                                    <div class="assignee-badge bg-orange">AM</div>
+                                    <div class="assignee-badge bg-teal">EM</div>
+                                    <div class="assignee-badge bg-purple">MB</div>
+                                </div>
+                                <div class="task-priority">
+                                    <img src="../assets/imgs/low-priority-board.svg" alt="Low Priority">
+                                </div>
+                            </div>
+                        </div>
+
+                         <!-- Mock Task Card 3 -->
+                        <div class="task-card" onclick="openTaskModal()">
+                            <div class="task-category category-user-story">User Story</div>
+                            <h3 class="task-title">Daily Kochwelt Recipe</h3>
+                            <p class="task-description">Implement daily recipe and portion calculator....</p>
+                            
+                            <div class="task-footer mt-custom">
+                                <div class="task-assignees">
+                                    <div class="assignee-badge bg-orange">AM</div>
+                                    <div class="assignee-badge bg-teal">EM</div>
+                                    <div class="assignee-badge bg-purple">MB</div>
+                                </div>
+                                <div class="task-priority">
+                                    <img src="../assets/imgs/priority_medium.svg" alt="Medium Priority">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Done Column -->
+                <div class="board-column">
+                    <div class="column-header">
+                        <h2>Done</h2>
+                    </div>
+                    <div class="tasks-container" id="done-list">
+                        <!-- Mock Task Card 4 -->
+                        <div class="task-card" onclick="openTaskModal()">
+                            <div class="task-category category-technical-task">Technical Task</div>
+                            <h3 class="task-title">CSS Architecture Planning</h3>
+                            <p class="task-description">Define CSS naming conventions and structure...</p>
+                            
+                            <div class="task-progress-container">
+                                <div class="progress-bar-bg">
+                                    <div class="progress-bar-fill" style="width: 100%;"></div>
+                                </div>
+                                <span class="progress-text">2/2 Subtasks</span>
+                            </div>
+
+                            <div class="task-footer">
+                                <div class="task-assignees">
+                                    <div class="assignee-badge bg-orange">AM</div>
+                                    <div class="assignee-badge bg-teal">EM</div>
+                                    <div class="assignee-badge bg-purple">MB</div>
+                                </div>
+                                <div class="task-priority">
+                                    <img src="../assets/imgs/urgent-priority-board.svg" alt="Urgent Priority">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </main>
 </body>

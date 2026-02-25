@@ -221,6 +221,7 @@
     font-weight: 700;
     font-size: 21px;
     transition: background-color 0.2s;
+    cursor: pointer;
 }
 
 .btn-dark:hover {
@@ -243,6 +244,7 @@
     font-weight: 700;
     font-size: 21px;
     transition: all 0.2s;
+    cursor: pointer;
 }
 
 .btn-light:hover {
@@ -263,6 +265,7 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .btn-primary-small:hover {

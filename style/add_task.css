@@ -84,6 +84,7 @@ h1 {
   border-radius: 10px;
   padding: 12px;
   font-size: 16px;
+  cursor: pointer;
 }
 
 .input-desc-container textarea {
@@ -93,6 +94,7 @@ h1 {
   border-radius: 10px;
   padding: 12px;
   font-size: 16px;
+  cursor: pointer;
 }
 
 .input-title-container .span-str {
@@ -110,6 +112,10 @@ h1 {
   border-radius: 10px;
   padding: 12px;
   font-size: 16px;
+  cursor: pointer;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
 }
 
 input:focus {
@@ -122,7 +128,25 @@ textarea:focus {
   border: 1px solid #29abe2;
 }
 
+.error-msg {
+  color: #ff8190;
+  font-size: 13px;
+  text-align: left;
+  margin-top: -2px;
+  min-height: 16px;
+}
+
+.input-error {
+  border: 1px solid #ff4d4f !important;
+}
+
 /* -------------------------------------Prioperty */
+
+.separator {
+  position: absolute;
+  left: 760px;
+  top: 302px;
+}
 
 .main-container {
   display: flex;
@@ -150,12 +174,12 @@ textarea:focus {
   align-items: center;
 }
 
-.btns a {
+.btns button {
   text-decoration: none;
   color: #000000;
 }
 
-.bnt-content img {
+.bnt-content svg {
   margin-left: 8px;
   font-size: 20px;
   width: 20px;
@@ -166,23 +190,23 @@ textarea:focus {
   color: white;
 }
 
-.trigger.active img {
+.trigger.active svg {
   filter: brightness(0) invert(1);
 }
 
 .trigger.urgent.active {
   background-color: #ff3d00;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .trigger.medium.active {
   background-color: #ffa800;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .trigger.low.active {
   background-color: #7ae229;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .trigger {
@@ -215,7 +239,7 @@ textarea:focus {
   border-radius: 10px;
   height: 56px;
   width: 136px;
-  font-size: 20;
+  font-size: 20px;
   font-weight: 400;
   cursor: pointer;
 }
@@ -227,7 +251,7 @@ textarea:focus {
   border-radius: 10px;
   height: 56px;
   width: 136px;
-  font-size: 20;
+  font-size: 20px;
   font-weight: 400;
   cursor: pointer;
 }
@@ -239,7 +263,7 @@ textarea:focus {
   border-radius: 10px;
   height: 56px;
   width: 136px;
-  font-size: 20;
+  font-size: 20px;
   font-weight: 400;
   cursor: pointer;
 }
@@ -275,8 +299,11 @@ textarea:focus {
   cursor: pointer;
 }
 
+
+/* --------------------- */
+
 select:focus {
-  outline: none;
+  outline-top: none;
   border: 1px solid #29abe2;
 }
 
@@ -315,6 +342,83 @@ select:focus {
   outline: none;
   border: 1px solid #29abe2;
 }
+
+/* ------------------------------------------ daran noch muss ich arbeiten! */
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  outline: none;
+  box-shadow: none;
+  border: 1px solid #d1d1d1;
+  background-color: white;
+
+  background-image: url("../assets/imgs/arrow_drop_downaa.svg");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 16px;
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+  box-shadow: none;
+  border: 1px solid #29abe2;
+}
+
+.custom-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.dropdown-header {
+  height: 48px;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  cursor: pointer;
+  background: white;
+}
+
+.dropdown-header:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.dropdown-list {
+  position: absolute;
+  top: 52px;
+  width: 100%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  border: none; /* KEIN outline */
+}
+
+.custom-dropdown.open .dropdown-list {
+  display: block;
+}
+
+
+.dropdown-arrow {
+  margin-left: auto;
+  transition: transform 0.2s ease;
+}
+
+.custom-dropdown.open .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+
+
+/* ---------------------------------------- */
 
 .subtask-conrainer {
   position: absolute;
@@ -383,8 +487,8 @@ footer {
 
 .btn-footer button {
   height: 56px;
-  padding: 0 16px;
-  border-radius: 10px;
+  padding: 16px;
+  border-radius: 8px;
   border: 1px solid #d1d1d1;
   cursor: pointer;
   display: flex;
@@ -396,15 +500,16 @@ footer {
   background-color: var(--color-white);
   color: var(--color-primary);
   border: 1px solid var(--color-primary);
-  border-radius: 8px;
   font-size: 21px;
+  font-weight: 700;
   transition: all 0.2s;
   width: 110px;
+  gap: 4px;
 }
 .btn-footer .clear-btn:hover {
   border-color: var(--color-secondary);
   color: var(--color-secondary);
-  font-weight: 700;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
 }
 
 .btn-footer .create-btn {
@@ -412,17 +517,117 @@ footer {
   color: var(--color-white);
   border-radius: 8px;
   font-size: 21px;
+  font-weight: 700;
   transition: background-color 0.2s;
   width: 183px;
+  gap: 4px;
 }
 
 .btn-footer .create-btn:hover {
   background: #29abe2;
-  font-weight: 700;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
 }
 
 .btn-footer .create-btn img {
-  margin-left: 3px;
-  width: 18px;
-  height: auto;
+  width: 24px;
+  height: 24px;
+}
+
+.btn-footer .clear-btn:hover img {
+  filter: brightness(0) saturate(100%) invert(54%) sepia(90%) saturate(500%)
+    hue-rotate(170deg);
+}
+
+
+.subtask-item {
+    display: flex;
+    justify-content: space-between;
+    background: #f5f5f5;
+    border-radius: 6px;
+}
+.input-actions {
+  position: absolute;
+  right: 10px;
+  display: flex;
+  gap: 6px;
+}
+
+.input-actions button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding-bottom: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-actions button:hover svg {
+  color: #29abe2;
+  transform: scale(1.15);
+}
+
+.subtask-actions{
+  position: absolute;
+  right: 10px;
+  display: flex;
+  gap: 6px;
+  padding-top: 6px;
+
+}
+
+.subtask-actions button {
+  margin-left: 5px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+}
+
+.subtask-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.subtask-input input {
+  width: 100%;
+  padding-right: 70px;
+  
+}
+
+.subtask-conrainer .subtaskInputList{
+  border: none;
+  height: 36px;
+}
+.subtask-conrainer .subtaskInputList:hover{
+  background: #D1D1D1;
+  transform: scale(1.01);
+
+}
+
+.subtask-actions svg {
+  transition: 0.2s ease;
+}
+
+.edit-btn:hover svg {
+  color: #29abe2;
+  transform: scale(1.15);
+}
+
+.delete-btn:hover svg {
+  color: #ff3d00;
+  transform: scale(1.15);
+}
+
+.subtask-icons{
+  padding: 0;
+  margin: 0;
+  gap: 0;
+}
+
+.separator-icons svg {
+  height: 18px;
 }
