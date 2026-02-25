@@ -136,11 +136,23 @@ async function addContact(contactData) {
           body: JSON.stringify(contactWithId)
       });
       await loadContacts();
+      await showSuccessMessage();
       return newId;
   }else {
     return;
   }
 };
+
+function showSuccessMessage() {
+    let successMessage = document.getElementById('successMessage');
+    successMessage.classList.remove('displayNone');
+    setTimeout(() => {
+        successMessage.classList.add('show');
+    }, 10);
+    setTimeout(() => {
+        successMessage.classList.add('displayNone');
+    }, 3000);
+}
 
 async function showContactDetails(contactId) {
   const response = await fetch(url);
@@ -181,7 +193,8 @@ function renderContactCard(contact) {
         <span>Contact Information:</span><br>
         <div class="contact-info">
           <span>Email: <br> <span class="mailStyle">${contact.email}</span></span><br>
-        </div>
+          <span>Phone Number: <br> ${contact.phone}</span>
+          </div>
         <img class="mobileEditMenu" id="mobileOptionsBtn" src="../assets/imgs/Menu Contact options.png" alt="contact options menu" onclick="mobileEditMenu()">
 
       `;
@@ -224,9 +237,11 @@ function renderEditForm(contact) {
       <input type="text" id="firstname" autocomplete="given-name" placeholder="First Name" value="${contact.firstname}" required>
       <input type="text" id="lastname" autocomplete="family-name" placeholder="Last Name" value="${contact.lastname}" required>
       <input type="email" id="email" autocomplete="email" placeholder="Email" value="${contact.email}" required>
+      <input type="text" id="phonenumber" autocomplete="tel" placeholder="Phone Number" value="${contact.phone}">
+
       <div class="btnContainer">
-        <button onclick="cancelContac()" class="cancelBtn">Cancel X</button>
-        <button onclick="editContact('${contact.id}')" class="checkBtn">Save changes <img src="../assets/imgs/check.svg" alt=""> </button>
+        <button onclick="deleteContact('${contact.id}')" class="deleteBtn">Delete X</button>
+        <button onclick="editContact('${contact.id}')" class="checkBtn">Save changes <img src="../assets/imgs/check.svg" alt="check symbol"> </button>
       </div>
     </form>
   `;

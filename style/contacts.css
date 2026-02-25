@@ -154,7 +154,8 @@ ul {
 }
 
 dialog {
-    position: absolute;
+    overflow: hidden;
+    position: relative;
     top: 15%;
     left: 15%;
 }
@@ -307,6 +308,18 @@ button {
 
 }
 
+.deleteBtn {
+    width: 126px;
+    height: 56px;
+    opacity: 1;
+    gap: 4px;
+    border-radius: 10px;
+    border-width: 1px;
+    padding: 16px;
+
+}
+
+
 .checkBtn {
     background-color: var(--button-bg);
     color: white;
@@ -332,6 +345,28 @@ button {
 
 .mobileEditMenu {
     display: none;
+}
+
+.success-message {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-primary);
+    color: white;
+    padding: 20px 40px;
+    border-radius: 20px;
+    font-size: 24px;
+    font-weight: 700;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: bottom 0.5s ease-in-out;
+    text-align: center;
+}
+
+.success-message.show {
+    bottom: 50%;
+    transform: translate(-50%, 50%);
 }
 
 @media(max-width: 850px) {
@@ -426,13 +461,13 @@ button {
    
 
     dialog:open {
+        position: relative;
         width: 396px;
         min-height: 760px;
-        top: 20;
-        left: 20;
+        top: 20%;
+        left: 20%;
         display: flex;
         flex-direction: column;
-        overflow: hidden;
     }
 
     dialog h3 {
@@ -485,7 +520,7 @@ button {
 
     .profileImg {
         position: absolute;
-        top: 33%;
+        top: 35%;
     }
 
     form {
@@ -530,6 +565,11 @@ button {
         height: 90%;
         top: 0;
         left: 0;
+    }
+
+    .profileImg {
+        position: absolute;
+        top: 35%;
     }
     
 }
