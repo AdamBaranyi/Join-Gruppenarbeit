@@ -85,15 +85,18 @@ function openModal() {
   `;
   contactWindow.innerHTML = `
     <form method="dialog" id="contactForm">
-      <input type="text" id="firstname" autocomplete="given-name" placeholder="First Name"  value="<img src='../assets/imgs/contacts.svg' alt='add person icon'>" required>
+      <input type="text" id="firstname" autocomplete="given-name" placeholder="First Name" required>
       <input type="text" id="lastname" autocomplete="family-name" placeholder="Last Name" required>
       <input type="email" id="email" autocomplete="email" placeholder="Email" required>
+      <input type="text" id="phonenumber" autocomplete="tel" placeholder="Phone Number">
       <div class="btnContainer">
         <button onclick="cancelContac()" class="cancelBtn">Cancel X</button>
         <button onclick="addContact({ 
           firstname: document.getElementById('firstname').value,
           lastname: document.getElementById('lastname').value,
-          email: document.getElementById('email').value })" class="checkBtn">Create contact <img src="../assets/imgs/check.svg" alt=""> </button>
+          email: document.getElementById('email').value,
+          phonenumber: document.getElementById('phonenumber').value
+        })" class="checkBtn">Create contact <img src="../assets/imgs/check.svg" alt=""> </button>
       </div>
     </form>
   `;
@@ -107,34 +110,37 @@ function closeModal() {
 async function addContact(contactData) {
     const res = await fetch(url);
     const contacts = await res.json();
-
+  if (contactData.firstname !== "" && contactData.lastname !== "" && contactData.email !== "") {
     let nextIdNumber = 1;
 
-    if (contacts) {
-        const ids = Object.keys(contacts)
-            .filter(id => id.startsWith("c"))
-            .map(id => parseInt(id.substring(1)))
-            .filter(num => !isNaN(num));
+      if (contacts) {
+          const ids = Object.keys(contacts)
+              .filter(id => id.startsWith("c"))
+              .map(id => parseInt(id.substring(1)))
+              .filter(num => !isNaN(num));
 
-        if (ids.length > 0) {
-            nextIdNumber = Math.max(...ids) + 1;
-        }
-    }
+          if (ids.length > 0) {
+              nextIdNumber = Math.max(...ids) + 1;
+          }
+      }
 
-    const newId = `c${nextIdNumber}`;
-    const contactWithId = {
-        id: newId,
-        ...contactData
-    };
+      const newId = `c${nextIdNumber}`;
+      const contactWithId = {
+          id: newId,
+          ...contactData
+      };
 
-    await fetch(`${BASE_URL}/contacts/${userId}/${newId}.json`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(contactWithId)
-    });
-    await loadContacts();
-    return newId;
-}
+      await fetch(`${BASE_URL}/contacts/${userId}/${newId}.json`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(contactWithId)
+      });
+      await loadContacts();
+      return newId;
+  }else {
+    return;
+  }
+};
 
 async function showContactDetails(contactId) {
   const response = await fetch(url);

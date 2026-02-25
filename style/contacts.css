@@ -264,7 +264,6 @@ dialog span {
 form {
     display: flex;
     flex-direction: column;
-    height: 215px;
     opacity: 1;
     gap: 32px;
     width: 422px;
@@ -428,7 +427,7 @@ button {
 
     dialog:open {
         width: 396px;
-        height: 760px;
+        min-height: 760px;
         top: 20;
         left: 20;
         display: flex;
@@ -447,11 +446,11 @@ button {
 
     dialog span {
         font-family: Inter;
-    font-weight: 400;
-    font-style: Regular;
-    font-size: 20px;
-    line-height: 120%;
-    letter-spacing: 0%;
+        font-weight: 400;
+        font-style: Regular;
+        font-size: 20px;
+        line-height: 120%;
+        letter-spacing: 0%;
     }
 
     .closeBtnContainer {
@@ -472,7 +471,7 @@ button {
         width: 100%;
         justify-content: center;
         align-items: center;;
-        height: 50%;
+        height: fit-content;
         overflow: hidden;
     }
 
@@ -486,11 +485,13 @@ button {
 
     .profileImg {
         position: absolute;
-        top: 42%;
+        top: 33%;
     }
 
     form {
         width: 100%;
+        padding-top: 70px;
+        padding-bottom: 30px;
     }
 
     .btnContainer {
