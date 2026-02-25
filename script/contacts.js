@@ -10,27 +10,64 @@ function getCurrentUser() {
   return currentUser;
 }
 
+function sortContactsByFirstname(contacts) {
+  return [...contacts].sort((a, b) =>
+    a.firstname.localeCompare(b.firstname, "de", { sensitivity: "base" })
+  );
+}
+
+function groupContactsByLetter(contacts) {
+  const groups = {};
+
+  contacts.forEach(contact => {
+    const letter = contact.firstname.charAt(0).toUpperCase();
+
+    if (!groups[letter]) {
+      groups[letter] = [];
+    }
+
+    groups[letter].push(contact);
+  });
+
+  return groups;
+}
+
 async function loadContacts() {
   const response = await fetch(url);
   const data = await response.json();
 
   const contacts = data ? Object.values(data) : [];
-  renderContacts(contacts);
+  renderContactList(contacts);
 }
 
-function renderContacts(contacts) {
-  const list = document.getElementById("contactListContent");
-  list.innerHTML = "";
+function renderContactList(contacts) {
 
-  contacts.forEach(contact => {
-    list.innerHTML += `
-      <div onclick="showContactDetails('${contact.id}')" class="contact-item">
-        <strong>${contact.firstname} ${contact.lastname}</strong><br>
-        <span class="mailStyle">${contact.email}</span>
-      </div>
+  const container = document.getElementById("contactListContent");
+
+  container.innerHTML = "";
+
+  const sorted = sortContactsByFirstname(contacts);
+  const groups = groupContactsByLetter(sorted);
+
+  Object.keys(groups).sort().forEach(letter => {
+
+    container.innerHTML += `
+      <div class="letterHeader">${letter}</div>
     `;
-    console.log("contact:", contact.id);
+
+    groups[letter].forEach(contact => {
+
+      container.innerHTML += `
+        <div class="contactRow" onclick='renderContactCard(${JSON.stringify(contact)})'>
+          ${contact.firstname} ${contact.lastname} <br>
+          <span class="mailStyle">${contact.email}</span>
+        </div>
+      `;
+
+    });
+
   });
+
 }
 
 let leftSide = document.getElementById('leftSideModal');
@@ -114,13 +151,19 @@ function renderContactCard(contact) {
   if (screen.width <= 850){
   const sloganAndCardContainer = document.getElementById("sloganAndCardContainer");
   const contactListContainer = document.getElementById("contactListContainer");
-  const mobileOptionsBtn = document.getElementById("mobileOptionsBtn");
+  const closeCardBtn = document.getElementById("closeCardBtn");
+  const mobileSlogan = document.getElementById("mobileSlogan");
+
+  mobileSlogan.classList.remove("displayNone");
+  card.classList.remove("displayNone");
+  closeCardBtn.classList.remove("displayNone");
   contactListContainer.classList.add("displayNone");
   sloganAndCardContainer.style.display = "flex";
   }
   console.log("contact:", contact);
   card.innerHTML = `
       <div class="contact-item">
+        
         <div class="contact-header">
           <img src="../assets/imgs/Ellipse 3.svg" alt="contactInitals icon">
           <strong>${contact.firstname} ${contact.lastname}</strong><br>
@@ -133,6 +176,8 @@ function renderContactCard(contact) {
         <div class="contact-info">
           <span>Email: <br> <span class="mailStyle">${contact.email}</span></span><br>
         </div>
+        <img class="mobileEditMenu" id="mobileOptionsBtn" src="../assets/imgs/Menu Contact options.png" alt="contact options menu" onclick="mobileEditMenu()">
+
       `;
 
   card.querySelector(".editBtn").addEventListener("click", () => {
@@ -143,6 +188,21 @@ function renderContactCard(contact) {
       deleteContact(contact.id);
     }
   });
+}
+
+function closeContactCard() {
+  const card = document.getElementById("contactCardContent");
+  if (screen.width <= 850){
+  const sloganAndCardContainer = document.getElementById("sloganAndCardContainer");
+  const contactListContainer = document.getElementById("contactListContainer");
+  const closeCardBtn = document.getElementById("closeCardBtn");
+
+  card.innerHTML = '';
+  card.classList.add("displayNone");
+  closeCardBtn.classList.add("displayNone");
+  contactListContainer.classList.remove("displayNone");
+  sloganAndCardContainer.style.display = "none";
+  }
 }
 
 function renderEditForm(contact) {
@@ -164,6 +224,25 @@ function renderEditForm(contact) {
       </div>
     </form>
   `;
+}
+
+function mobileEditMenu(contact) {
+  let menu = document.createElement('div');
+  const mobileOptionsBtn = document.getElementById('mobileOptionsBtn');
+  mobileOptionsBtn.addEventListener('click', () => {
+    menu.classList.add('mobile-edit-menu-dropdown');
+    menu.innerHTML = `
+      <button class="mobileEditBtn">Edit</button>
+      <button class="mobileDeleteBtn">Delete</button>
+    `;
+    document.body.appendChild(menu);
+  });
+  menu.querySelector(".mobileEditBtn").addEventListener("click", () => {
+    renderEditForm(contact);
+  });
+  menu.querySelector(".mobileDelteBtn").addEventListener("click", () => {
+    deleteContact(contact.id);
+  });
 }
 
 async function editContact(contactId) {
