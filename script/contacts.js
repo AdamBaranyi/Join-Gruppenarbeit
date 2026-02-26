@@ -103,8 +103,6 @@ function openModal() {
 };
 
 function closeModal() {
-  const contactImg = document.getElementById("cardInitials");
-  contactImg.classList.remove("contact-initials")
   contactModal.close();
 };
   
@@ -263,8 +261,9 @@ function renderEditForm(contact) {
       </div>
     </form>
   `;
-  const contactImg = document.getElementById("cardInitials");
+  const contactImg = document.getElementById("contactInitials");
   contactImg.classList.add("contact-initials")
+  contactImg.classList.remove("profileImg")
   showInitials(contact);
 }
 
@@ -291,7 +290,7 @@ async function editContact(contactId) {
   const firstname = document.getElementById('firstname').value;
   const lastname = document.getElementById('lastname').value;
   const email = document.getElementById('email').value;
-  const contactImg = document.getElementById("cardInitials");
+  const contactImg = document.getElementById("contactInitials");
   contactImg.classList.remove("contact-initials")
   const updatedContact = {
     firstname,
@@ -310,7 +309,7 @@ async function editContact(contactId) {
 }
 
 async function deleteContact(contactId) {
-  const contactImg = document.getElementById("cardInitials");
+  const contactImg = document.getElementById("contactInitials");
   contactImg.classList.remove("contact-initials")
   await fetch(`${BASE_URL}/contacts/${userId}/${contactId}.json`, {
     method: "DELETE"

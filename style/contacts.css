@@ -167,16 +167,21 @@ ul {
     flex-direction: column;
 }
 
-#cardInitials {
+.profileImg {
     position: relative;
     background-image: url('../assets/imgs/Group 13.png');
     background-size: cover;
+    width: 120px;
+    height: 120px;
+    opacity: 1;
 }
 
 .contact-initials {
+    position: relative;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    top: 33%;
     width: 120px;
     height: 120px;
     opacity: 1;
