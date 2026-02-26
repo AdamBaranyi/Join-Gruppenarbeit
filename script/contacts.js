@@ -179,11 +179,13 @@ function renderContactCard(contact) {
   sloganAndCardContainer.style.display = "flex";
   }
   console.log("contact:", contact);
+  
   card.innerHTML = `
       <div class="contact-item">
         
         <div class="contact-header">
-          <img src="../assets/imgs/Ellipse 3.svg" alt="contactInitals icon">
+          <div id="contactInitials" class="contact-initials">
+          </div>
           <strong>${contact.firstname} ${contact.lastname}</strong><br>
         </div>
         <div class="editAndDeleteBtnContainer">
@@ -192,11 +194,10 @@ function renderContactCard(contact) {
         </div>
         <span>Contact Information:</span><br>
         <div class="contact-info">
-          <span>Email: <br> <span class="mailStyle">${contact.email}</span></span><br>
-          <span>Phone Number: <br> ${contact.phone}</span>
+          <strong>Email:</strong> <br> <span class="mailStyle">${contact.email}</span><br>
+          <strong>Phone Number:</strong> <span>${contact.phone}</span>
           </div>
         <img class="mobileEditMenu" id="mobileOptionsBtn" src="../assets/imgs/Menu Contact options.png" alt="contact options menu" onclick="mobileEditMenu()">
-
       `;
 
   card.querySelector(".editBtn").addEventListener("click", () => {
@@ -207,7 +208,21 @@ function renderContactCard(contact) {
       deleteContact(contact.id);
     }
   });
+  showInitials(contact);
 }
+
+function showInitials(contact) {
+  const card = document.getElementById("contactCardContent");
+  let initialsElement = card.querySelector('.contact-initials');
+      if (initialsElement) { 
+        console.log("contact name:", contact.firstname, contact.lastname);
+        let nameParts = contact.firstname.split(' ') || contact.lastname.split(' ');
+        console.log("nameParts:", nameParts);
+        let initials = nameParts[0].charAt(0);
+        initialsElement.textContent = initials.toUpperCase();
+    }
+}
+
 
 function closeContactCard() {
   const card = document.getElementById("contactCardContent");
@@ -245,6 +260,10 @@ function renderEditForm(contact) {
       </div>
     </form>
   `;
+  const contactImg = document.getElementById("contactImg");
+  contactImg.src = '';
+  contactImg.classList.add("contact-initials")
+  showInitials(contact);
 }
 
 function mobileEditMenu(contact) {
