@@ -298,6 +298,15 @@
 
 /* 5. Responsives Design */
 
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.add-btn-mobile {
+    display: none;
+}
+
 @media (max-width: 1300px) {
     .board-header {
         flex-direction: column;
@@ -308,5 +317,119 @@
     .board-header-right {
         width: 100%;
         justify-content: space-between;
+    }
+    
+    .header-left {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .add-btn-desktop {
+        display: none; /* Hide text add button */
+    }
+    
+    .add-btn-mobile {
+        display: flex;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+    }
+    
+    .add-btn-mobile img {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .search-container {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .board-container {
+        padding: 0 40px;
+    }
+    
+    .board-columns-container {
+        flex-direction: column;
+        gap: 26px;
+    }
+    
+    .board-column {
+        width: 100%;
+    }
+    
+    .tasks-container {
+        min-height: 130px;
+    }
+}
+
+@media (max-width: 800px) {
+    .board-container {
+        padding: 0 16px;
+        margin-top: 30px;
+    }
+    
+    .board-header h1 {
+        font-size: 47px;
+    }
+}
+
+@media (max-width: 450px) {
+    .board-header h1 {
+        font-size: 47px;
+    }
+    
+    .task-card {
+        padding: 12px;
+    }
+    
+    .task-title {
+        font-size: 16px;
+    }
+    
+    .task-category {
+        font-size: 14px;
+        padding: 4px 12px;
+        margin-bottom: 20px;
+    }
+    
+    .task-description {
+        font-size: 14px;
+    }
+    
+    .search-container {
+        padding: 8px 12px;
+        height: 44px;
+    }
+    
+    .search-container input {
+        font-size: 16px;
+    }
+    
+    .search-divider {
+        margin: 0 10px;
+        height: 24px;
+    }
+    
+    .search-container img {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+@media (max-width: 350px) {
+    .board-container {
+        padding: 0 10px;
+    }
+    .board-header h1 {
+        font-size: 42px;
+    }
+    
+    .progress-bar-bg {
+        width: 100px;
     }
 }

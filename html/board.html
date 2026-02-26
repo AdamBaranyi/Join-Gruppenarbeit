@@ -23,14 +23,17 @@
 
         <div class="content-container board-container">
             <div class="board-header">
-                <h1>Board</h1>
+                <div class="header-left">
+                    <h1>Board</h1>
+                    <button class="add-task-btn add-btn-mobile"><img src="../assets/imgs/add-mobile.svg" alt="Add Icon" onerror="this.src='../assets/imgs/add.png'"></button>
+                </div>
                 <div class="board-header-right">
                     <div class="search-container">
                         <input type="text" placeholder="Find Task" id="searchTaskInput">
                         <div class="search-divider"></div>
-                        <img src="../assets/imgs/search.svg" alt="Search icon">
+                        <img class="search-icon" src="../assets/imgs/search.svg" alt="Search icon">
                     </div>
-                    <button class="add-task-btn">Add task <img src="../assets/imgs/add.png" alt="Add Icon"></button>
+                    <button class="add-task-btn add-btn-desktop">Add task <img src="../assets/imgs/add.png" alt="Add Icon"></button>
                 </div>
             </div>
 

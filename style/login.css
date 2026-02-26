@@ -175,17 +175,13 @@
     pointer-events: none;
 }
 
-#loginPassword {
-    padding-right: 95px;
+img.login-password-icon {
+    pointer-events: auto;
+    cursor: pointer;
 }
 
-.password-toggle {
-    right: 60px; 
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: auto;
+#loginPassword {
+    padding-right: 55px;
 }
 
 .checkbox-group {
@@ -584,12 +580,8 @@
         top: 50%;
     }
 
-    .password-toggle {
-        right: 35px;
-    }
-
     #loginPassword {
-        padding-right: 60px;
+        padding-right: 40px;
     }
 
     .checkbox-group label, 
