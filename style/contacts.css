@@ -152,6 +152,11 @@ ul {
     padding-left: 40px;
 }
 
+.contact-header {
+    display: flex;
+    align-items: center;
+}
+
 .contact-info {
     position: relative;
     padding-top: 16px;
@@ -160,6 +165,12 @@ ul {
 .contact-info span {
     display: flex;
     flex-direction: column;
+}
+
+#cardInitials {
+    position: relative;
+    background-image: url('../assets/imgs/Group 13.png');
+    background-size: cover;
 }
 
 .contact-initials {
@@ -558,7 +569,7 @@ button {
 
     .profileImg {
         position: absolute;
-        top: 35%;
+        top: 40%;
     }
 
     form {

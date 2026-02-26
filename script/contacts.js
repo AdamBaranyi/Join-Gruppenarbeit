@@ -103,6 +103,8 @@ function openModal() {
 };
 
 function closeModal() {
+  const contactImg = document.getElementById("cardInitials");
+  contactImg.classList.remove("contact-initials")
   contactModal.close();
 };
   
@@ -212,13 +214,14 @@ function renderContactCard(contact) {
 }
 
 function showInitials(contact) {
-  const card = document.getElementById("contactCardContent");
-  let initialsElement = card.querySelector('.contact-initials');
+  const cardInitials = document.getElementById("contactInitials");
+  let initialsElement = cardInitials;
       if (initialsElement) { 
-        console.log("contact name:", contact.firstname, contact.lastname);
-        let nameParts = contact.firstname.split(' ') || contact.lastname.split(' ');
-        console.log("nameParts:", nameParts);
-        let initials = nameParts[0].charAt(0);
+        initialsElement.style.postion = "absolute"
+        console.log("contact name:", contact.firstname + contact.lastname);
+        let nameParts = contact.firstname.split(' ') 
+        let lastnameParts = contact.lastname.split(' ')
+        let initials = nameParts[0].charAt(0) + lastnameParts[0].charAt(0);
         initialsElement.textContent = initials.toUpperCase();
     }
 }
@@ -260,8 +263,7 @@ function renderEditForm(contact) {
       </div>
     </form>
   `;
-  const contactImg = document.getElementById("contactImg");
-  contactImg.src = '';
+  const contactImg = document.getElementById("cardInitials");
   contactImg.classList.add("contact-initials")
   showInitials(contact);
 }
@@ -289,7 +291,8 @@ async function editContact(contactId) {
   const firstname = document.getElementById('firstname').value;
   const lastname = document.getElementById('lastname').value;
   const email = document.getElementById('email').value;
-
+  const contactImg = document.getElementById("cardInitials");
+  contactImg.classList.remove("contact-initials")
   const updatedContact = {
     firstname,
     lastname,
@@ -307,6 +310,8 @@ async function editContact(contactId) {
 }
 
 async function deleteContact(contactId) {
+  const contactImg = document.getElementById("cardInitials");
+  contactImg.classList.remove("contact-initials")
   await fetch(`${BASE_URL}/contacts/${userId}/${contactId}.json`, {
     method: "DELETE"
   });
