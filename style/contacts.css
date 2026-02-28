@@ -171,6 +171,7 @@ ul {
     position: relative;
     background-image: url('../assets/imgs/Group 13.png');
     background-size: cover;
+    margin-top: 60px;
     width: 120px;
     height: 120px;
     opacity: 1;
@@ -181,7 +182,6 @@ ul {
     display: flex;
     align-items: center;
     justify-content: center;
-    top: 33%;
     width: 120px;
     height: 120px;
     opacity: 1;
@@ -575,6 +575,7 @@ button {
     .profileImg {
         position: absolute;
         top: 40%;
+        margin-top: -40px;
     }
 
     form {
@@ -624,6 +625,7 @@ button {
     .profileImg {
         position: absolute;
         top: 35%;
+        margin-top: 80px;
     }
     
 }

@@ -241,7 +241,6 @@ function closeContactCard() {
 }
 
 function renderEditForm(contact) {
-  console.log(contact);
   openModal();
   leftSide.innerHTML = `
     <img class="logoWhite" src="../assets/imgs/logo_white.svg" alt="Logo White">
