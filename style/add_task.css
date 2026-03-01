@@ -27,8 +27,7 @@ body {
 h1 {
     margin-bottom: 40px;
     font-size: 61px;
-      color: #000000;
-    
+    color: #000000;
 }
 
 #taskForm {
@@ -561,6 +560,34 @@ input:focus, textarea:focus {
 
 .custom-dropdown.input-error .dropdown-header {
     border: 1px solid #ff3d00;
+}
+
+.bg-orange {
+  background-color: #FF7A00;
+}
+
+.bg-teal {
+  background-color: #1FD7C1;
+}
+
+.bg-purple {
+  background-color: #9747FF;
+}
+
+.bg-blue {
+  background-color: #0038FF;
+}
+
+.user-circle, .contact-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  border: 2px solid white;
 }
 
 @media (max-width: 1400px) {
