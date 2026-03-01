@@ -2,20 +2,25 @@ const BASE_URL = "https://join-backend-afae8-default-rtdb.europe-west1.firebased
 const currentUser = getCurrentUser()?.id;
 const userId = currentUser || "guest";
 const url = `${BASE_URL}/contacts/${userId}.json`;
+let leftSide = document.getElementById('leftSideModal');
+const contactWindow = document.getElementById("contactModal")
+const contactModal = document.getElementById("dialogModal")
 
-
+// zum laden des aktuellen Nutzers aus der Session Storage
 function getCurrentUser() {
   let currentUser = JSON.parse(sessionStorage.getItem("current_user"));
   console.log("current User:", currentUser )
   return currentUser;
 }
 
+// zum sortieren der Kontakte nach dem Vornamen
 function sortContactsByFirstname(contacts) {
   return [...contacts].sort((a, b) =>
     a.firstname.localeCompare(b.firstname, "de", { sensitivity: "base" })
   );
 }
 
+// zum gruppieren der Kontakte nach dem Anfangsbuchstaben des Vornamens
 function groupContactsByLetter(contacts) {
   const groups = {};
 
@@ -24,14 +29,14 @@ function groupContactsByLetter(contacts) {
 
     if (!groups[letter]) {
       groups[letter] = [];
-    }
-
+    };
     groups[letter].push(contact);
   });
 
   return groups;
 }
 
+// zum laden der Kontakte eines Nutzers
 async function loadContacts() {
   const response = await fetch(url);
   const data = await response.json();
@@ -40,100 +45,91 @@ async function loadContacts() {
   renderContactList(contacts);
 }
 
+// zum rendern der Kontaktliste mit den Kontakten eines Nutzers
 function renderContactList(contacts) {
-
   const container = document.getElementById("contactListContent");
-
-  container.innerHTML = "";
-
   const sorted = sortContactsByFirstname(contacts);
   const groups = groupContactsByLetter(sorted);
 
+  container.innerHTML = "";
   Object.keys(groups).sort().forEach(letter => {
 
     container.innerHTML += `
       <div class="letterHeader">${letter}</div>
     `;
-
     groups[letter].forEach(contact => {
-
       container.innerHTML += `
         <div class="contactRow" onclick='renderContactCard(${JSON.stringify(contact)})'>
           ${contact.firstname} ${contact.lastname} <br>
           <span class="mailStyle">${contact.email}</span>
         </div>
-      `;
-
-    });
-
+      `});
   });
-
 }
 
-let leftSide = document.getElementById('leftSideModal');
-const contactWindow = document.getElementById("contactModal")
-const contactModal = document.getElementById("dialogModal")
-
+// zum öffnen des Modals zum Erstellen eines neuen Kontakts
 function openModal() {
   contactModal.showModal();
 
-  leftSide.innerHTML = `
-    <img class="logoWhite" src="../assets/imgs/logo_white.svg" alt="">
-    <h3>Add contact</h3>
-    <span>Tasks are better with a team!</span>
-    <img class="vectorHorizontel" src="../assets/imgs/Vector horizontel.png" alt="">
-  `;
-  contactWindow.innerHTML = `
-    <form method="dialog" id="contactForm">
-      <input type="text" id="firstname" autocomplete="given-name" placeholder="First Name"  value="<img src='../assets/imgs/contacts.svg' alt='add person icon'>" required>
-      <input type="text" id="lastname" autocomplete="family-name" placeholder="Last Name" required>
-      <input type="email" id="email" autocomplete="email" placeholder="Email" required>
-      <div class="btnContainer">
-        <button onclick="cancelContac()" class="cancelBtn">Cancel X</button>
-        <button onclick="addContact({ 
-          firstname: document.getElementById('firstname').value,
-          lastname: document.getElementById('lastname').value,
-          email: document.getElementById('email').value })" class="checkBtn">Create contact <img src="../assets/imgs/check.svg" alt=""> </button>
-      </div>
-    </form>
-  `;
+  leftSide.innerHTML = openModalLeftSide();
+  contactWindow.innerHTML = openModalRightSide();
 };
 
+// zum schließen des Modals
 function closeModal() {
   contactModal.close();
 };
   
-
+// zum hinzufügen eines neuen Kontakts
 async function addContact(contactData) {
     const res = await fetch(url);
     const contacts = await res.json();
-
+  if (contactData.firstname !== "" && contactData.lastname !== "" && contactData.email !== "") {
     let nextIdNumber = 1;
 
-    if (contacts) {
-        const ids = Object.keys(contacts)
-            .filter(id => id.startsWith("c"))
-            .map(id => parseInt(id.substring(1)))
-            .filter(num => !isNaN(num));
+      if (contacts) {
+          const ids = Object.keys(contacts)
+              .filter(id => id.startsWith("c"))
+              .map(id => parseInt(id.substring(1)))
+              .filter(num => !isNaN(num));
 
-        if (ids.length > 0) {
-            nextIdNumber = Math.max(...ids) + 1;
-        }
-    }
+          if (ids.length > 0) {
+              nextIdNumber = Math.max(...ids) + 1;
+          }
+      }
+      const newId = `c${nextIdNumber}`;
+      const contactWithId = {
+          id: newId,
+          ...contactData
+      };
+      await putContactInBackend(newId, contactWithId);
+      await loadContacts();
+      showSuccessMessage();
+      return newId;
+  }else {
+    return;
+  }
+};
 
-    const newId = `c${nextIdNumber}`;
-    const contactWithId = {
-        id: newId,
-        ...contactData
-    };
+// zum speichern eines neuen Kontakts in der Datenbank
+async function putContactInBackend(newId, contactWithId) {
+  await fetch(`${BASE_URL}/contacts/${userId}/${newId}.json`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(contactWithId)
+      });
+}
 
-    await fetch(`${BASE_URL}/contacts/${userId}/${newId}.json`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(contactWithId)
-    });
-    await loadContacts();
-    return newId;
+// zum anzeigen einer Erfolgsmeldung nach dem Erstellen eines neuen Kontakts
+function showSuccessMessage() {
+    let successMessage = document.getElementById('successMessage');
+    successMessage.classList.remove('displayNone');
+    setTimeout(() => {
+        successMessage.classList.add('show');
+    }, 10);
+    setTimeout(() => {
+        successMessage.classList.add('displayNone');
+    }, 3000);
 }
 
 async function showContactDetails(contactId) {
@@ -146,6 +142,8 @@ async function showContactDetails(contactId) {
   renderContactCard(contact);
 };
 
+
+// zum rendern der Kontaktkarte mit den Details eines Kontakts
 function renderContactCard(contact) {
   const card = document.getElementById("contactCardContent");
   if (screen.width <= 850){
@@ -159,27 +157,8 @@ function renderContactCard(contact) {
   closeCardBtn.classList.remove("displayNone");
   contactListContainer.classList.add("displayNone");
   sloganAndCardContainer.style.display = "flex";
-  }
-  console.log("contact:", contact);
-  card.innerHTML = `
-      <div class="contact-item">
-        
-        <div class="contact-header">
-          <img src="../assets/imgs/Ellipse 3.svg" alt="contactInitals icon">
-          <strong>${contact.firstname} ${contact.lastname}</strong><br>
-        </div>
-        <div class="editAndDeleteBtnContainer">
-          <button class="editBtn">Edit <img src="../assets/imgs/edit (1).png" alt=""></button>
-          <button class="deleteBtn">Delete <img src="../assets/imgs/delete.svg" alt=""></button>
-        </div>
-        <span>Contact Information:</span><br>
-        <div class="contact-info">
-          <span>Email: <br> <span class="mailStyle">${contact.email}</span></span><br>
-        </div>
-        <img class="mobileEditMenu" id="mobileOptionsBtn" src="../assets/imgs/Menu Contact options.png" alt="contact options menu" onclick="mobileEditMenu()">
-
-      `;
-
+  }  
+  card.innerHTML = contactCard(contact);
   card.querySelector(".editBtn").addEventListener("click", () => {
     renderEditForm(contact);
   });
@@ -188,8 +167,25 @@ function renderContactCard(contact) {
       deleteContact(contact.id);
     }
   });
+  showInitials(contact);
 }
 
+
+// zum laden der Initalien von Vor- und Nachnamen
+function showInitials(contact) {
+  const cardInitials = document.getElementById("contactInitials");
+  let initialsElement = cardInitials;
+      if (initialsElement) { 
+        initialsElement.style.postion = "absolute"
+        console.log("contact name:", contact.firstname + contact.lastname);
+        let nameParts = contact.firstname.split(' ') 
+        let lastnameParts = contact.lastname.split(' ')
+        let initials = nameParts[0].charAt(0) + lastnameParts[0].charAt(0);
+        initialsElement.textContent = initials.toUpperCase();
+    }
+}
+
+// zum schließen der Kontaktkarte auf mobilen Geräten
 function closeContactCard() {
   const card = document.getElementById("contactCardContent");
   if (screen.width <= 850){
@@ -205,36 +201,24 @@ function closeContactCard() {
   }
 }
 
+// zum öffnen des Modals zum Bearbeiten eines Kontakts
 function renderEditForm(contact) {
-  console.log(contact);
   openModal();
-  leftSide.innerHTML = `
-    <img class="logoWhite" src="../assets/imgs/logo_white.svg" alt="Logo White">
-    <h3>Edit contact</h3>
-    <img class="vectorHorizontel" src="../assets/imgs/Vector horizontel.png" alt="">
-  `;
-  contactWindow.innerHTML = `
-    <form method="dialog" id="contactForm">
-      <input type="text" id="firstname" autocomplete="given-name" placeholder="First Name" value="${contact.firstname}" required>
-      <input type="text" id="lastname" autocomplete="family-name" placeholder="Last Name" value="${contact.lastname}" required>
-      <input type="email" id="email" autocomplete="email" placeholder="Email" value="${contact.email}" required>
-      <div class="btnContainer">
-        <button onclick="cancelContac()" class="cancelBtn">Cancel X</button>
-        <button onclick="editContact('${contact.id}')" class="checkBtn">Save changes <img src="../assets/imgs/check.svg" alt=""> </button>
-      </div>
-    </form>
-  `;
+  leftSide.innerHTML = editFormleftSide(contact);
+  contactWindow.innerHTML = editFormRightSide(contact);
+  const contactImg = document.getElementById("contactInitials");
+  contactImg.classList.add("contact-initials")
+  contactImg.classList.remove("profileImg")
+  showInitials(contact);
 }
 
+// zum öffnen des dropdown menus auf mobilen Geräten
 function mobileEditMenu(contact) {
   let menu = document.createElement('div');
   const mobileOptionsBtn = document.getElementById('mobileOptionsBtn');
   mobileOptionsBtn.addEventListener('click', () => {
     menu.classList.add('mobile-edit-menu-dropdown');
-    menu.innerHTML = `
-      <button class="mobileEditBtn">Edit</button>
-      <button class="mobileDeleteBtn">Delete</button>
-    `;
+    menu.innerHTML = menuTempl();
     document.body.appendChild(menu);
   });
   menu.querySelector(".mobileEditBtn").addEventListener("click", () => {
@@ -245,17 +229,19 @@ function mobileEditMenu(contact) {
   });
 }
 
+// zum bearbeiten eines Kontakts
 async function editContact(contactId) {
   const firstname = document.getElementById('firstname').value;
   const lastname = document.getElementById('lastname').value;
   const email = document.getElementById('email').value;
-
+  const contactImg = document.getElementById("contactInitials");
+  contactImg.classList.add("contact-initials");
+  contactImg.classList.remove("profileImg");
   const updatedContact = {
     firstname,
     lastname,
     email
   };
-
   await fetch(`${BASE_URL}/contacts/${userId}/${contactId}.json`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
@@ -266,7 +252,10 @@ async function editContact(contactId) {
   await showContactDetails(contactId);
 }
 
+// zum löschen eines Kontakts
 async function deleteContact(contactId) {
+  const contactImg = document.getElementById("contactInitials");
+  contactImg.classList.remove("contact-initials")
   await fetch(`${BASE_URL}/contacts/${userId}/${contactId}.json`, {
     method: "DELETE"
   });
@@ -276,6 +265,7 @@ async function deleteContact(contactId) {
   card.innerHTML = '';
 }
 
+// zum leeren der Eingabefelder im Modal 
 function cancelContac() {
   let firstname = document.getElementById('firstname');
   let lastname = document.getElementById('lastname');
