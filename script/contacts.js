@@ -2,20 +2,25 @@ const BASE_URL = "https://join-backend-afae8-default-rtdb.europe-west1.firebased
 const currentUser = getCurrentUser()?.id;
 const userId = currentUser || "guest";
 const url = `${BASE_URL}/contacts/${userId}.json`;
+let leftSide = document.getElementById('leftSideModal');
+const contactWindow = document.getElementById("contactModal")
+const contactModal = document.getElementById("dialogModal")
 
-
+// zum laden des aktuellen Nutzers aus der Session Storage
 function getCurrentUser() {
   let currentUser = JSON.parse(sessionStorage.getItem("current_user"));
   console.log("current User:", currentUser )
   return currentUser;
 }
 
+// zum sortieren der Kontakte nach dem Vornamen
 function sortContactsByFirstname(contacts) {
   return [...contacts].sort((a, b) =>
     a.firstname.localeCompare(b.firstname, "de", { sensitivity: "base" })
   );
 }
 
+// zum gruppieren der Kontakte nach dem Anfangsbuchstaben des Vornamens
 function groupContactsByLetter(contacts) {
   const groups = {};
 
@@ -24,14 +29,14 @@ function groupContactsByLetter(contacts) {
 
     if (!groups[letter]) {
       groups[letter] = [];
-    }
-
+    };
     groups[letter].push(contact);
   });
 
   return groups;
 }
 
+// zum laden der Kontakte eines Nutzers
 async function loadContacts() {
   const response = await fetch(url);
   const data = await response.json();
@@ -40,73 +45,42 @@ async function loadContacts() {
   renderContactList(contacts);
 }
 
+// zum rendern der Kontaktliste mit den Kontakten eines Nutzers
 function renderContactList(contacts) {
-
   const container = document.getElementById("contactListContent");
-
-  container.innerHTML = "";
-
   const sorted = sortContactsByFirstname(contacts);
   const groups = groupContactsByLetter(sorted);
 
+  container.innerHTML = "";
   Object.keys(groups).sort().forEach(letter => {
 
     container.innerHTML += `
       <div class="letterHeader">${letter}</div>
     `;
-
     groups[letter].forEach(contact => {
-
       container.innerHTML += `
         <div class="contactRow" onclick='renderContactCard(${JSON.stringify(contact)})'>
           ${contact.firstname} ${contact.lastname} <br>
           <span class="mailStyle">${contact.email}</span>
         </div>
-      `;
-
-    });
-
+      `});
   });
-
 }
 
-let leftSide = document.getElementById('leftSideModal');
-const contactWindow = document.getElementById("contactModal")
-const contactModal = document.getElementById("dialogModal")
-
+// zum öffnen des Modals zum Erstellen eines neuen Kontakts
 function openModal() {
   contactModal.showModal();
 
-  leftSide.innerHTML = `
-    <img class="logoWhite" src="../assets/imgs/logo_white.svg" alt="">
-    <h3>Add contact</h3>
-    <span>Tasks are better with a team!</span>
-    <img class="vectorHorizontel" src="../assets/imgs/Vector horizontel.png" alt="">
-  `;
-  contactWindow.innerHTML = `
-    <form method="dialog" id="contactForm">
-      <input type="text" id="firstname" autocomplete="given-name" placeholder="First Name" required>
-      <input type="text" id="lastname" autocomplete="family-name" placeholder="Last Name" required>
-      <input type="email" id="email" autocomplete="email" placeholder="Email" required>
-      <input type="text" id="phonenumber" autocomplete="tel" placeholder="Phone Number">
-      <div class="btnContainer">
-        <button onclick="cancelContac()" class="cancelBtn">Cancel X</button>
-        <button onclick="addContact({ 
-          firstname: document.getElementById('firstname').value,
-          lastname: document.getElementById('lastname').value,
-          email: document.getElementById('email').value,
-          phonenumber: document.getElementById('phonenumber').value
-        })" class="checkBtn">Create contact <img src="../assets/imgs/check.svg" alt=""> </button>
-      </div>
-    </form>
-  `;
+  leftSide.innerHTML = openModalLeftSide();
+  contactWindow.innerHTML = openModalRightSide();
 };
 
+// zum schließen des Modals
 function closeModal() {
   contactModal.close();
 };
   
-
+// zum hinzufügen eines neuen Kontakts
 async function addContact(contactData) {
     const res = await fetch(url);
     const contacts = await res.json();
@@ -123,26 +97,30 @@ async function addContact(contactData) {
               nextIdNumber = Math.max(...ids) + 1;
           }
       }
-
       const newId = `c${nextIdNumber}`;
       const contactWithId = {
           id: newId,
           ...contactData
       };
-
-      await fetch(`${BASE_URL}/contacts/${userId}/${newId}.json`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(contactWithId)
-      });
+      await putContactInBackend(newId, contactWithId);
       await loadContacts();
-      await showSuccessMessage();
+      showSuccessMessage();
       return newId;
   }else {
     return;
   }
 };
 
+// zum speichern eines neuen Kontakts in der Datenbank
+async function putContactInBackend(newId, contactWithId) {
+  await fetch(`${BASE_URL}/contacts/${userId}/${newId}.json`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(contactWithId)
+      });
+}
+
+// zum anzeigen einer Erfolgsmeldung nach dem Erstellen eines neuen Kontakts
 function showSuccessMessage() {
     let successMessage = document.getElementById('successMessage');
     successMessage.classList.remove('displayNone');
@@ -164,6 +142,8 @@ async function showContactDetails(contactId) {
   renderContactCard(contact);
 };
 
+
+// zum rendern der Kontaktkarte mit den Details eines Kontakts
 function renderContactCard(contact) {
   const card = document.getElementById("contactCardContent");
   if (screen.width <= 850){
@@ -177,29 +157,8 @@ function renderContactCard(contact) {
   closeCardBtn.classList.remove("displayNone");
   contactListContainer.classList.add("displayNone");
   sloganAndCardContainer.style.display = "flex";
-  }
-  console.log("contact:", contact);
-  
-  card.innerHTML = `
-      <div class="contact-item">
-        
-        <div class="contact-header">
-          <div id="contactInitials" class="contact-initials">
-          </div>
-          <strong>${contact.firstname} ${contact.lastname}</strong><br>
-        </div>
-        <div class="editAndDeleteBtnContainer">
-          <button class="editBtn">Edit <img src="../assets/imgs/edit (1).png" alt=""></button>
-          <button class="deleteBtn">Delete <img src="../assets/imgs/delete.svg" alt=""></button>
-        </div>
-        <span>Contact Information:</span><br>
-        <div class="contact-info">
-          <strong>Email:</strong> <br> <span class="mailStyle">${contact.email}</span><br>
-          <strong>Phone Number:</strong> <span>${contact.phone}</span>
-          </div>
-        <img class="mobileEditMenu" id="mobileOptionsBtn" src="../assets/imgs/Menu Contact options.png" alt="contact options menu" onclick="mobileEditMenu()">
-      `;
-
+  }  
+  card.innerHTML = contactCard(contact);
   card.querySelector(".editBtn").addEventListener("click", () => {
     renderEditForm(contact);
   });
@@ -211,6 +170,8 @@ function renderContactCard(contact) {
   showInitials(contact);
 }
 
+
+// zum laden der Initalien von Vor- und Nachnamen
 function showInitials(contact) {
   const cardInitials = document.getElementById("contactInitials");
   let initialsElement = cardInitials;
@@ -224,7 +185,7 @@ function showInitials(contact) {
     }
 }
 
-
+// zum schließen der Kontaktkarte auf mobilen Geräten
 function closeContactCard() {
   const card = document.getElementById("contactCardContent");
   if (screen.width <= 850){
@@ -240,41 +201,24 @@ function closeContactCard() {
   }
 }
 
+// zum öffnen des Modals zum Bearbeiten eines Kontakts
 function renderEditForm(contact) {
   openModal();
-  leftSide.innerHTML = `
-    <img class="logoWhite" src="../assets/imgs/logo_white.svg" alt="Logo White">
-    <h3>Edit contact</h3>
-    <img class="vectorHorizontel" src="../assets/imgs/Vector horizontel.png" alt="">
-  `;
-  contactWindow.innerHTML = `
-    <form method="dialog" id="contactForm">
-      <input type="text" id="firstname" autocomplete="given-name" placeholder="First Name" value="${contact.firstname}" required>
-      <input type="text" id="lastname" autocomplete="family-name" placeholder="Last Name" value="${contact.lastname}" required>
-      <input type="email" id="email" autocomplete="email" placeholder="Email" value="${contact.email}" required>
-      <input type="text" id="phonenumber" autocomplete="tel" placeholder="Phone Number" value="${contact.phone}">
-
-      <div class="btnContainer">
-        <button onclick="deleteContact('${contact.id}')" class="deleteBtn">Delete X</button>
-        <button onclick="editContact('${contact.id}')" class="checkBtn">Save changes <img src="../assets/imgs/check.svg" alt="check symbol"> </button>
-      </div>
-    </form>
-  `;
+  leftSide.innerHTML = editFormleftSide(contact);
+  contactWindow.innerHTML = editFormRightSide(contact);
   const contactImg = document.getElementById("contactInitials");
   contactImg.classList.add("contact-initials")
   contactImg.classList.remove("profileImg")
   showInitials(contact);
 }
 
+// zum öffnen des dropdown menus auf mobilen Geräten
 function mobileEditMenu(contact) {
   let menu = document.createElement('div');
   const mobileOptionsBtn = document.getElementById('mobileOptionsBtn');
   mobileOptionsBtn.addEventListener('click', () => {
     menu.classList.add('mobile-edit-menu-dropdown');
-    menu.innerHTML = `
-      <button class="mobileEditBtn">Edit</button>
-      <button class="mobileDeleteBtn">Delete</button>
-    `;
+    menu.innerHTML = menuTempl();
     document.body.appendChild(menu);
   });
   menu.querySelector(".mobileEditBtn").addEventListener("click", () => {
@@ -285,18 +229,19 @@ function mobileEditMenu(contact) {
   });
 }
 
+// zum bearbeiten eines Kontakts
 async function editContact(contactId) {
   const firstname = document.getElementById('firstname').value;
   const lastname = document.getElementById('lastname').value;
   const email = document.getElementById('email').value;
   const contactImg = document.getElementById("contactInitials");
-  contactImg.classList.remove("contact-initials")
+  contactImg.classList.add("contact-initials");
+  contactImg.classList.remove("profileImg");
   const updatedContact = {
     firstname,
     lastname,
     email
   };
-
   await fetch(`${BASE_URL}/contacts/${userId}/${contactId}.json`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
@@ -307,6 +252,7 @@ async function editContact(contactId) {
   await showContactDetails(contactId);
 }
 
+// zum löschen eines Kontakts
 async function deleteContact(contactId) {
   const contactImg = document.getElementById("contactInitials");
   contactImg.classList.remove("contact-initials")
@@ -319,6 +265,7 @@ async function deleteContact(contactId) {
   card.innerHTML = '';
 }
 
+// zum leeren der Eingabefelder im Modal 
 function cancelContac() {
   let firstname = document.getElementById('firstname');
   let lastname = document.getElementById('lastname');
