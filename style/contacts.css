@@ -150,11 +150,57 @@ ul {
     flex-direction: column;
     justify-content: flex-start;
     padding-left: 40px;
+}
 
+.contact-header {
+    display: flex;
+    align-items: center;
+}
+
+.contact-info {
+    position: relative;
+    padding-top: 16px;
+}
+
+.contact-info span {
+    display: flex;
+    flex-direction: column;
+}
+
+.profileImg {
+    position: relative;
+    background-image: url('../assets/imgs/Group 13.png');
+    background-size: cover;
+    margin-top: 60px;
+    width: 120px;
+    height: 120px;
+    opacity: 1;
+}
+
+.contact-initials {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    opacity: 1;
+    border-radius: 70px;
+    border-width: 3px;
+    border: 3px solid white;
+    color: white;
+    font-family: Inter;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 48px;
+    line-height: 120%;
+    letter-spacing: 0%;
+    background-color: orange
 }
 
 dialog {
-    position: absolute;
+    overflow: hidden;
+    position: relative;
     top: 15%;
     left: 15%;
 }
@@ -264,7 +310,6 @@ dialog span {
 form {
     display: flex;
     flex-direction: column;
-    height: 215px;
     opacity: 1;
     gap: 32px;
     width: 422px;
@@ -308,6 +353,18 @@ button {
 
 }
 
+.deleteBtn {
+    width: 126px;
+    height: 56px;
+    opacity: 1;
+    gap: 4px;
+    border-radius: 10px;
+    border-width: 1px;
+    padding: 16px;
+    border: none;
+}
+
+
 .checkBtn {
     background-color: var(--button-bg);
     color: white;
@@ -328,11 +385,42 @@ button {
     width: 24;
     height: 24;
     opacity: 1;
+}
 
+.editBtn {
+    width: 126px;
+    height: 56px;
+    opacity: 1;
+    gap: 4px;
+    border-radius: 10px;
+    border-width: 1px;
+    border: none;
 }
 
 .mobileEditMenu {
     display: none;
+}
+
+.success-message {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-primary);
+    color: white;
+    padding: 20px 40px;
+    border-radius: 20px;
+    font-size: 24px;
+    font-weight: 700;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: bottom 0.5s ease-in-out;
+    text-align: center;
+}
+
+.success-message.show {
+    bottom: 50%;
+    transform: translate(-50%, 50%);
 }
 
 @media(max-width: 850px) {
@@ -427,13 +515,13 @@ button {
    
 
     dialog:open {
+        position: relative;
         width: 396px;
-        height: 760px;
-        top: 20;
-        left: 20;
+        min-height: 760px;
+        top: 20%;
+        left: 20%;
         display: flex;
         flex-direction: column;
-        overflow: hidden;
     }
 
     dialog h3 {
@@ -447,11 +535,11 @@ button {
 
     dialog span {
         font-family: Inter;
-    font-weight: 400;
-    font-style: Regular;
-    font-size: 20px;
-    line-height: 120%;
-    letter-spacing: 0%;
+        font-weight: 400;
+        font-style: Regular;
+        font-size: 20px;
+        line-height: 120%;
+        letter-spacing: 0%;
     }
 
     .closeBtnContainer {
@@ -472,7 +560,7 @@ button {
         width: 100%;
         justify-content: center;
         align-items: center;;
-        height: 50%;
+        height: fit-content;
         overflow: hidden;
     }
 
@@ -486,11 +574,14 @@ button {
 
     .profileImg {
         position: absolute;
-        top: 42%;
+        top: 40%;
+        margin-top: -40px;
     }
 
     form {
         width: 100%;
+        padding-top: 70px;
+        padding-bottom: 30px;
     }
 
     .btnContainer {
@@ -529,6 +620,12 @@ button {
         height: 90%;
         top: 0;
         left: 0;
+    }
+
+    .profileImg {
+        position: absolute;
+        top: 35%;
+        margin-top: 80px;
     }
     
 }
