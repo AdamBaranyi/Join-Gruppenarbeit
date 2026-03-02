@@ -174,7 +174,8 @@ function renderContactCard(contact) {
 // zum laden der Initalien von Vor- und Nachnamen
 function showInitials(contact) {
   const cardInitials = document.getElementById("contactInitials");
-  let initialsElement = cardInitials;
+  const modalInitials = document.getElementById('modalInitials');
+  let initialsElement = cardInitials && modalInitials;
       if (initialsElement) { 
         initialsElement.style.postion = "absolute"
         console.log("contact name:", contact.firstname + contact.lastname);
@@ -188,7 +189,7 @@ function showInitials(contact) {
 // zum schließen der Kontaktkarte auf mobilen Geräten
 function closeContactCard() {
   const card = document.getElementById("contactCardContent");
-  if (screen.width <= 850){
+  if (window.innerWidth <= 850){
   const sloganAndCardContainer = document.getElementById("sloganAndCardContainer");
   const contactListContainer = document.getElementById("contactListContainer");
   const closeCardBtn = document.getElementById("closeCardBtn");
@@ -204,9 +205,9 @@ function closeContactCard() {
 // zum öffnen des Modals zum Bearbeiten eines Kontakts
 function renderEditForm(contact) {
   openModal();
-  leftSide.innerHTML = editFormleftSide(contact);
+  leftSide.innerHTML = editFormleftSide();
   contactWindow.innerHTML = editFormRightSide(contact);
-  const contactImg = document.getElementById("contactInitials");
+  const contactImg = document.getElementById("modalInitials");
   contactImg.classList.add("contact-initials")
   contactImg.classList.remove("profileImg")
   showInitials(contact);
@@ -224,7 +225,7 @@ function mobileEditMenu(contact) {
   menu.querySelector(".mobileEditBtn").addEventListener("click", () => {
     renderEditForm(contact);
   });
-  menu.querySelector(".mobileDelteBtn").addEventListener("click", () => {
+  menu.querySelector(".mobileDeleteBtn").addEventListener("click", () => {
     deleteContact(contact.id);
   });
 }
@@ -234,7 +235,7 @@ async function editContact(contactId) {
   const firstname = document.getElementById('firstname').value;
   const lastname = document.getElementById('lastname').value;
   const email = document.getElementById('email').value;
-  const contactImg = document.getElementById("contactInitials");
+  const contactImg = document.getElementById("modalInitials");
   contactImg.classList.add("contact-initials");
   contactImg.classList.remove("profileImg");
   const updatedContact = {
@@ -254,7 +255,7 @@ async function editContact(contactId) {
 
 // zum löschen eines Kontakts
 async function deleteContact(contactId) {
-  const contactImg = document.getElementById("contactInitials");
+  const contactImg = document.getElementById("modalInitials");
   contactImg.classList.remove("contact-initials")
   await fetch(`${BASE_URL}/contacts/${userId}/${contactId}.json`, {
     method: "DELETE"

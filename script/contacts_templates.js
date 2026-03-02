@@ -44,12 +44,12 @@ function contactCard(contact) {
             <strong>Email:</strong> <br> <span class="mailStyle">${contact.email}</span><br>
             <strong>Phone Number:</strong> <span>${contact.phone}</span>
             </div>
-            <img class="mobileEditMenu" id="mobileOptionsBtn" src="../assets/imgs/Menu Contact options.png" alt="contact options menu" onclick="mobileEditMenu()">
+            <img class="mobileEditMenu" id="mobileOptionsBtn" src="../assets/imgs/Menu Contact options.png" alt="contact options menu" onclick="mobileEditMenu(contact)">
         </div>
     `;
 }
 
-function editFormleftSide(contact) {
+function editFormleftSide() {
     return `
         <img class="logoWhite" src="../assets/imgs/logo_white.svg" alt="Logo White">
         <h3>Edit contact</h3>
