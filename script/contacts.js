@@ -51,6 +51,12 @@ function renderContactList(contacts) {
   const sorted = sortContactsByFirstname(contacts);
   const groups = groupContactsByLetter(sorted);
 
+  document.querySelectorAll(".contactRow").forEach(row =>
+  row.classList.remove("active")
+
+);
+
+
   container.innerHTML = "";
   Object.keys(groups).sort().forEach(letter => {
 
@@ -58,13 +64,60 @@ function renderContactList(contacts) {
       <div class="letterHeader">${letter}</div>
     `;
     groups[letter].forEach(contact => {
-      container.innerHTML += `
-        <div class="contactRow" onclick='renderContactCard(${JSON.stringify(contact)})'>
-          ${contact.firstname} ${contact.lastname} <br>
+  const initials =
+    contact.firstname.charAt(0) +
+    contact.lastname.charAt(0);
+
+  const bgColor = getColorFromName(contact.firstname + contact.lastname);
+
+  container.innerHTML += `
+    <div class="contactRow" onclick='renderContactCard(${JSON.stringify(contact)}); this.parentElement.querySelectorAll(".contactRow").forEach(row => row.classList.remove("active")); this.classList.add("active");'>
+      <div class="contactItem">
+        <div class="contactCircle" style="background:${bgColor}">
+          ${initials.toUpperCase()}
+        </div>
+        <div>
+          ${contact.firstname} ${contact.lastname}<br>
           <span class="mailStyle">${contact.email}</span>
         </div>
-      `});
+      </div>
+    </div>
+  `;
+
+  const cardWrapper = document.getElementById("contactCard");
+cardWrapper.classList.remove("show");
+
+setTimeout(() => {
+  cardWrapper.classList.add("show");
+}, 10);
+
+});
+
   });
+}
+
+const contactColors = [
+  "#FF7A00",
+  "#9327FF",
+  "#6E52FF",
+  "#FC71FF",
+  "#FFBB2B",
+  "#1FD7C1",
+  "#462F8A",
+  "#FF4646",
+  "#00BEE8",
+  "#FF745E"
+];
+
+function getColorFromName(name) {
+  let hash = 0;
+
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  const index = Math.abs(hash) % contactColors.length;
+  return contactColors[index];
 }
 
 // zum öffnen des Modals zum Erstellen eines neuen Kontakts
@@ -174,17 +227,27 @@ function renderContactCard(contact) {
 // zum laden der Initalien von Vor- und Nachnamen
 function showInitials(contact) {
   const cardInitials = document.getElementById("contactInitials");
+
+  if (!cardInitials) return;
+
+  
+
+  const fullName = contact.firstname + contact.lastname;
+
+  cardInitials.textContent = initials.toUpperCase();
+  cardInitials.style.backgroundColor = getColorFromName(fullName);
   const modalInitials = document.getElementById('modalInitials');
   let initialsElement = cardInitials && modalInitials;
       if (initialsElement) { 
         initialsElement.style.postion = "absolute"
         console.log("contact name:", contact.firstname + contact.lastname);
-        let nameParts = contact.firstname.split(' ') 
-        let lastnameParts = contact.lastname.split(' ')
-        let initials = nameParts[0].charAt(0) + lastnameParts[0].charAt(0);
+        let initials =
+        contact.firstname.charAt(0) +
+        contact.lastname.charAt(0);
         initialsElement.textContent = initials.toUpperCase();
     }
 }
+
 
 // zum schließen der Kontaktkarte auf mobilen Geräten
 function closeContactCard() {
