@@ -70,19 +70,7 @@ function renderContactList(contacts) {
 
   const bgColor = getColorFromName(contact.firstname + contact.lastname);
 
-  container.innerHTML += `
-    <div class="contactRow" onclick='renderContactCard(${JSON.stringify(contact)}); this.parentElement.querySelectorAll(".contactRow").forEach(row => row.classList.remove("active")); this.classList.add("active");'>
-      <div class="contactItem">
-        <div class="contactCircle" style="background:${bgColor}">
-          ${initials.toUpperCase()}
-        </div>
-        <div>
-          ${contact.firstname} ${contact.lastname}<br>
-          <span class="mailStyle">${contact.email}</span>
-        </div>
-      </div>
-    </div>
-  `;
+  container.innerHTML += renderContactListItem(contact, initials, bgColor);
 
   const cardWrapper = document.getElementById("contactCard");
 cardWrapper.classList.remove("show");
@@ -199,7 +187,7 @@ async function showContactDetails(contactId) {
 // zum rendern der Kontaktkarte mit den Details eines Kontakts
 function renderContactCard(contact) {
   const card = document.getElementById("contactCardContent");
-  if (screen.width <= 850){
+  if (window.innerWidth <= 850){
   const sloganAndCardContainer = document.getElementById("sloganAndCardContainer");
   const contactListContainer = document.getElementById("contactListContainer");
   const closeCardBtn = document.getElementById("closeCardBtn");
@@ -227,19 +215,16 @@ function renderContactCard(contact) {
 // zum laden der Initalien von Vor- und Nachnamen
 function showInitials(contact) {
   const cardInitials = document.getElementById("contactInitials");
+  const modalInitials = document.getElementById('modalInitials');
 
-  if (!cardInitials) return;
-
-  
+  if (!cardInitials && !modalInitials) return;
 
   const fullName = contact.firstname + contact.lastname;
 
-  cardInitials.textContent = initials.toUpperCase();
   cardInitials.style.backgroundColor = getColorFromName(fullName);
-  const modalInitials = document.getElementById('modalInitials');
   let initialsElement = cardInitials && modalInitials;
       if (initialsElement) { 
-        initialsElement.style.postion = "absolute"
+        initialsElement.style.position = "absolute"
         console.log("contact name:", contact.firstname + contact.lastname);
         let initials =
         contact.firstname.charAt(0) +
