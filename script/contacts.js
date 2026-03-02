@@ -53,6 +53,7 @@ function renderContactList(contacts) {
 
   document.querySelectorAll(".contactRow").forEach(row =>
   row.classList.remove("active")
+
 );
 
 
@@ -82,6 +83,14 @@ function renderContactList(contacts) {
       </div>
     </div>
   `;
+
+  const cardWrapper = document.getElementById("contactCard");
+cardWrapper.classList.remove("show");
+
+setTimeout(() => {
+  cardWrapper.classList.add("show");
+}, 10);
+
 });
 
   });

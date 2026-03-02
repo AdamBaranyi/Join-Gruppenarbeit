@@ -56,6 +56,19 @@ ul::-webkit-scrollbar-thumb {
     border-radius: 10px;
 
 }
+ul::-webkit-scrollbar {
+    width: 6px;
+}
+
+ul::-webkit-scrollbar-thumb {
+    background: #D1D1D1;
+    border-radius: 10px;
+}
+
+ul::-webkit-scrollbar-thumb:hover {
+    background: #A8A8A8;
+}
+
 
 .addContactBtn {
     width: 354px;
@@ -87,7 +100,7 @@ ul::-webkit-scrollbar-thumb {
 .contactListStyle {
     width: 456px;
     background: white;
-    box-shadow: 4px 0px 6px rgba(0,0,0,0.08);
+    box-shadow: 0 0 20px rgba(0,0,0,0.04);
     display: flex;
     flex-direction: column;
     padding: 32px 24px;
@@ -119,6 +132,16 @@ ul::-webkit-scrollbar-thumb {
     padding-left: 20px;
 }
 
+#contactCardContent {
+    animation: fadeIn 200ms ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
 ul {
     list-style: none;
     padding: 0;
@@ -130,7 +153,21 @@ ul {
 #contactCard {
     margin-top: 50px;
     max-width: 500px;
+    margin-top: 50px;
+    max-width: 500px;
+    opacity: 0;
+    transform: translateX(40px);
+    transition: all 250ms ease-in-out;
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
 }
+#contactCard.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
 
 .contact-header {
     margin-top: 40px;
@@ -201,7 +238,10 @@ ul {
 .contactRow.active {
     background: #2A3647;
     color: white;
+    transform: scale(1.02);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 }
+
 
 .contactRow.active .mailStyle {
     color: #29ABE2;
