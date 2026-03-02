@@ -1,4 +1,4 @@
-/* 1. Basis Layout */
+/* Basis Layout */
 
 .board-container {
     display: flex;
@@ -9,7 +9,7 @@
     margin-top: 50px;
 }
 
-/* 2. Header Bereich */
+/* Header Bereich */
 
 .board-header {
     display: flex;
@@ -102,7 +102,7 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-/* 3. Board Spalten */
+/* Board Spalten */
 
 .board-columns-container {
     display: flex;
@@ -173,7 +173,7 @@
     font-size: 16px;
 }
 
-/* 4. Task Karten */
+/* Task Karten */
 
 .task-card {
     display: flex;
@@ -296,7 +296,260 @@
     object-fit: contain;
 }
 
-/* 5. Responsives Design */
+/* Task Modal Pop-up */
+
+.task-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeInBackground 0.2s ease-out forwards;
+}
+
+@keyframes fadeInBackground {
+    from { background-color: rgba(0, 0, 0, 0); }
+    to { background-color: rgba(0, 0, 0, 0.4); }
+}
+
+.task-modal-content {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    padding: 48px 40px;
+    width: 525px;
+    max-width: 90%;
+    position: relative;
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-height: 90vh;
+    overflow-y: auto;
+    /* Animation definition */
+    transform: translateX(100vw);
+    animation: slideInRight 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100vw);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.task-modal-overlay.fade-out {
+    animation: fadeOutBackground 0.2s ease-in forwards;
+}
+
+@keyframes fadeOutBackground {
+    from { background-color: rgba(0, 0, 0, 0.4); }
+    to { background-color: rgba(0, 0, 0, 0); }
+}
+
+.task-modal-content.slide-out {
+    animation: slideOutRight 0.2s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100vw);
+        opacity: 0;
+    }
+}
+
+.modal-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-close-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+    position: absolute;
+    top: 40px;
+    right: 40px;
+}
+
+.modal-close-btn:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.modal-close-btn img {
+    width: 24px;
+    height: 24px;
+}
+
+#modalTitle {
+    font-size: 61px;
+    font-weight: 700;
+    margin: 0;
+    color: #000000;
+}
+
+#modalDescription {
+    font-size: 20px;
+    font-weight: 400;
+    color: #000000;
+    margin: 0;
+}
+
+.modal-details-row {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.modal-details-row:has(#modalPriority) {
+    display: flex;
+    align-items: center;
+}
+
+#modalPriority {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#modalPriority img {
+    width: 20px;
+    height: 15px;
+    object-fit: contain;
+}
+
+.detail-label {
+    font-size: 20px;
+    color: #42526E;
+    width: 100px;
+}
+
+.detail-value {
+    font-size: 20px;
+    color: #000000;
+}
+
+.modal-assignees-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.modal-assignees-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.assignee-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.assignee-row .assignee-badge {
+    margin-left: 0;
+    width: 42px;
+    height: 42px;
+    font-size: 15px;
+}
+
+.assignee-name {
+    font-size: 19px;
+    color: #000000;
+}
+
+.modal-subtasks-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.subtask-row {
+    padding: 6px 16px;
+    border-radius: 10px;
+    transition: background-color 0.1s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+}
+
+.subtask-row:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.subtask-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.modal-footer-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.action-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #2A3647;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.1s;
+}
+
+.action-btn:hover {
+    color: #29ABE2;
+    font-weight: 700;
+}
+
+.action-btn img {
+    width: 16px;
+    height: 16px;
+}
+
+.action-btn:hover img {
+    filter: invert(53%) sepia(80%) saturate(2400%) hue-rotate(166deg) brightness(98%) contrast(85%);
+}
+
+.action-divider {
+    height: 24px;
+    width: 1px;
+    background-color: #D1D1D1;
+}
+
+@media (max-width: 550px) {
+    #modalTitle {
+        font-size: 36px;
+    }
+}
+
+/* Responsives Design */
 
 .header-left {
     display: flex;
