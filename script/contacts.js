@@ -111,7 +111,10 @@ function getColorFromName(name) {
 // zum öffnen des Modals zum Erstellen eines neuen Kontakts
 function openModal() {
   contactModal.showModal();
-
+  const modalInitials = document.getElementById("modalInitials");
+  modalInitials.style.backgroundColor = "transparent";
+  modalInitials.classList.remove("contact-initials");
+  modalInitials.classList.add('profileImg');
   leftSide.innerHTML = openModalLeftSide();
   contactWindow.innerHTML = openModalRightSide();
 };
@@ -192,7 +195,7 @@ function renderContactCard(contact) {
   const contactListContainer = document.getElementById("contactListContainer");
   const closeCardBtn = document.getElementById("closeCardBtn");
   const mobileSlogan = document.getElementById("mobileSlogan");
-
+    
   mobileSlogan.classList.remove("displayNone");
   card.classList.remove("displayNone");
   closeCardBtn.classList.remove("displayNone");
@@ -217,19 +220,19 @@ function showInitials(contact) {
   const cardInitials = document.getElementById("contactInitials");
   const modalInitials = document.getElementById('modalInitials');
 
-  if (!cardInitials && !modalInitials) return;
+  if (!modalInitials && !cardInitials) return;
 
   const fullName = contact.firstname + contact.lastname;
 
   cardInitials.style.backgroundColor = getColorFromName(fullName);
-  let initialsElement = cardInitials && modalInitials;
-      if (initialsElement) { 
-        initialsElement.style.position = "absolute"
+  modalInitials.style.backgroundColor = getColorFromName(fullName);
+      if (cardInitials && modalInitials) { 
         console.log("contact name:", contact.firstname + contact.lastname);
         let initials =
         contact.firstname.charAt(0) +
         contact.lastname.charAt(0);
-        initialsElement.textContent = initials.toUpperCase();
+        cardInitials.textContent = initials.toUpperCase();
+        modalInitials.textContent= initials.toUpperCase();
     }
 }
 
@@ -241,7 +244,7 @@ function closeContactCard() {
   const sloganAndCardContainer = document.getElementById("sloganAndCardContainer");
   const contactListContainer = document.getElementById("contactListContainer");
   const closeCardBtn = document.getElementById("closeCardBtn");
-
+  
   card.innerHTML = '';
   card.classList.add("displayNone");
   closeCardBtn.classList.add("displayNone");
@@ -264,12 +267,7 @@ function renderEditForm(contact) {
 // zum öffnen des dropdown menus auf mobilen Geräten
 function mobileEditMenu(contact) {
   let menu = document.createElement('div');
-  const mobileOptionsBtn = document.getElementById('mobileOptionsBtn');
-  mobileOptionsBtn.addEventListener('click', () => {
-    menu.classList.add('mobile-edit-menu-dropdown');
-    menu.innerHTML = menuTempl();
-    document.body.appendChild(menu);
-  });
+  menu.innerHTML = menuTempl(contact);
   menu.querySelector(".mobileEditBtn").addEventListener("click", () => {
     renderEditForm(contact);
   });

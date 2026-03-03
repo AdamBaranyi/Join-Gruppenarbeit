@@ -232,7 +232,6 @@ ul {
     font-size: 48px;
     line-height: 120%;
     letter-spacing: 0%;
-    background-color: orange
 }
 
 .contactRow.active {
@@ -299,6 +298,10 @@ dialog span {
     line-height: 120%;
     letter-spacing: 0%;
 
+}
+
+#modalInitials {
+    top: 10%;
 }
 
 .logoWhite {
@@ -542,6 +545,11 @@ button {
         flex-direction: column;
     }
 
+    .contact-initials {
+        position: absolute;
+        top: 35%;
+    }
+
     #closeCardBtn {
         position: absolute;
         width: 32px;
@@ -612,6 +620,7 @@ button {
 
     .imgAndForm {
         width: 100%;
+        height: fit-content;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -620,8 +629,15 @@ button {
 
     .profileImg {
         position: absolute;
-        top: 40%;
-        margin-top: -40px;
+        
+    }
+
+    #contactInitials {
+        position: relative;
+    }
+
+    #modalInitials {
+        top: 25%;
     }
 
     form {
@@ -642,6 +658,10 @@ button {
     }
 
     .cancelBtn {
+        display: none;
+    }
+
+    .deleteBtn {
         display: none;
     }
 
@@ -674,4 +694,9 @@ button {
         margin-top: 80px;
     }
     
+    .contact-initials {
+        position: absolute;
+        top: 40%;
+    }
+
 }

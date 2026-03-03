@@ -12,9 +12,10 @@
     <link rel="stylesheet" href="../style/sidebar.css">
     <link rel="stylesheet" href="../style/mobile_sidebar.css">
 
-    <script defer src="../script/board.js" defer></script>
-    <script defer src="../script.js" defer></script>
-    <!-- <script src="../script/add_task.js" derfer></script> -->
+    <script defer src="../script/board_templates.js"></script>
+    <script defer src="../script/board_helpers.js"></script>
+    <script defer src="../script/board.js"></script>
+    <script defer src="../script.js"></script>
 </head>
 
 <body onload="init()">
@@ -101,36 +102,42 @@
         <!-- Verstecktes Modal Overlay -->
         <div id="taskModal" class="d-none task-modal-overlay" onclick="closeTaskPopup()">
             <div class="task-modal-content" onclick="event.stopPropagation()">
-                <div class="modal-header-row">
-                    <div id="modalCategory" class="task-category"></div>
-                    <button class="modal-close-btn" onclick="closeTaskPopup()">
-                        <img src="../assets/imgs/close.png" alt="Close">
-                    </button>
+                <!-- READ-ONLY VIEW -->
+                <div id="taskModalView">
+                    <div class="modal-header-row">
+                        <div id="modalCategory" class="task-category"></div>
+                        <button class="modal-close-btn" onclick="closeTaskPopup()">
+                            <img src="../assets/imgs/close.png" alt="Close">
+                        </button>
+                    </div>
+                    <h1 id="modalTitle"></h1>
+                    <p id="modalDescription"></p>
+                    <div class="modal-details-row">
+                        <span class="detail-label">Due date:</span>
+                        <span id="modalDate" class="detail-value"></span>
+                    </div>
+                    <div class="modal-details-row">
+                        <span class="detail-label">Priority:</span>
+                        <span id="modalPriority" class="detail-value"></span>
+                    </div>
+                    <div class="modal-assignees-container">
+                        <span class="detail-label">Assigned To:</span>
+                        <div id="modalAssignees" class="modal-assignees-list"></div>
+                    </div>
+                    <div class="modal-subtasks-container">
+                        <span class="detail-label">Subtasks:</span>
+                        <div id="modalSubtasks" class="modal-subtasks-list"></div>
+                    </div>
+                    
+                    <div class="modal-footer-actions">
+                        <button class="action-btn" onclick="deleteTask()"><img src="../assets/imgs/delete.svg"> Delete</button>
+                        <div class="action-divider"></div>
+                        <button class="action-btn" onclick="editTask()"><img src="../assets/imgs/edit.svg"> Edit</button>
+                    </div>
                 </div>
-                <h1 id="modalTitle"></h1>
-                <p id="modalDescription"></p>
-                <div class="modal-details-row">
-                    <span class="detail-label">Due date:</span>
-                    <span id="modalDate" class="detail-value"></span>
-                </div>
-                <div class="modal-details-row">
-                    <span class="detail-label">Priority:</span>
-                    <span id="modalPriority" class="detail-value"></span>
-                </div>
-                <div class="modal-assignees-container">
-                    <span class="detail-label">Assigned To:</span>
-                    <div id="modalAssignees" class="modal-assignees-list"></div>
-                </div>
-                <div class="modal-subtasks-container">
-                    <span class="detail-label">Subtasks:</span>
-                    <div id="modalSubtasks" class="modal-subtasks-list"></div>
-                </div>
-                
-                <div class="modal-footer-actions">
-                    <button class="action-btn" onclick="deleteTask()"><img src="../assets/imgs/delete.svg"> Delete</button>
-                    <div class="action-divider"></div>
-                    <button class="action-btn" onclick="editTask()"><img src="../assets/imgs/edit.svg"> Edit</button>
-                </div>
+
+                <!-- EDIT VIEW (Hidden by default) -->
+                <div id="taskModalEdit" class="d-none"></div>
             </div>
         </div>
     </main>

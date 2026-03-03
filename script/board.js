@@ -49,87 +49,6 @@ function renderTasks(tasks) {
   if (columns.done && columns.done.innerHTML === "") columns.done.innerHTML = '<div class="no-tasks">No tasks done</div>';
 }
 
-function generateTaskHTML(task, id) {
-  const assignedHTML = generateAssignedHTML(task.assignedTo);
-  const progressHTML = generateSubtaskProgress(task);
-  const priorityIcon = getPriorityIcon(task.priority);
-
-  return `
-    <div draggable="true" ondragstart="startDragging('${id}')" onclick="openTaskPopup('${id}')" class="task-card">
-      <div class="task-category ${getCategoryClass(task.category)}">
-        ${task.category || ""}
-      </div>
-
-      <h3 class="task-title">${task.title || ""}</h3>
-      <p class="task-description">${task.description || ""}</p>
-
-      ${progressHTML}
-
-      <div class="task-footer">
-        <div class="task-assignees">
-          ${assignedHTML}
-        </div>
-        <div class="task-priority">
-          <img src="${priorityIcon}" />
-        </div>
-      </div>
-
-    </div>
-  `;
-}
-
-function generateAssignedHTML(assignedTo) {
-  if (!assignedTo || assignedTo.length === 0) return "";
-
-  const colors = ["bg-orange", "bg-teal", "bg-purple", "bg-blue"];
-
-  return assignedTo
-    .map((name, index) => {
-      const initials = name
-        .split(" ")
-        .map((n) => n[0])
-        .join("")
-        .toUpperCase();
-
-      const colorClass = colors[index % colors.length];
-
-      return `<div class="assignee-badge ${colorClass}">${initials}</div>`;
-    })
-    .join("");
-}
-
-function generateSubtaskProgress(task) {
-  if (!task.subtasks || task.subtasks.length === 0) return "";
-
-  const total = task.subtasks.length;
-  const completed = task.subtasks.filter((st) => st.completed).length;
-  const percent = (completed / total) * 100;
-
-  return `
-    <div class="task-progress-container">
-      <div class="progress-bar-bg">
-        <div class="progress-bar-fill" style="width:${percent}%"></div>
-      </div>
-      <span class="progress-text">${completed}/${total} Subtasks</span>
-    </div>
-  `;
-}
-
-function getPriorityIcon(priority) {
-  if (priority === "Urgent") return "../assets/imgs/urgent-priority-board.svg";
-
-  if (priority === "Low") return "../assets/imgs/low-priority-board.svg";
-
-  return "../assets/imgs/priority_medium.svg";
-}
-
-function getCategoryClass(category) {
-  if (category === "Technical Task") return "category-technical-task";
-
-  if (category === "User Story") return "category-user-story";
-
-  return "";
-}
 
 /**
  * Sets the ID of the task that is currently being dragged.
@@ -201,6 +120,8 @@ function openTaskPopup(id) {
     
     if (task) {
         document.getElementById('taskModal').classList.remove('d-none');
+        document.getElementById('taskModalView').classList.remove('d-none');
+        document.getElementById('taskModalEdit').classList.add('d-none');
         
         document.getElementById('modalTitle').innerHTML = task.title || "";
         document.getElementById('modalDescription').innerHTML = task.description || "";
@@ -220,107 +141,56 @@ function openTaskPopup(id) {
     }
 }
 
-/**
- * Renders the assignee badges within the task modal.
- * @param {string[]} assignedTo - An array of assignee names.
- */
-function renderModalAssignees(assignedTo) {
-    let container = document.getElementById('modalAssignees');
-    container.innerHTML = "";
-    
-    if (!assignedTo || assignedTo.length === 0) return;
-    
-    const colors = ["bg-orange", "bg-teal", "bg-purple", "bg-blue"];
-    
-    assignedTo.forEach((name, index) => {
-        const initials = name.split(" ").map(n => n[0]).join("").toUpperCase();
-        const colorClass = colors[index % colors.length];
-        
-        container.innerHTML += `
-            <div class="assignee-row">
-                <div class="assignee-badge ${colorClass}">${initials}</div>
-                <span class="assignee-name">${name}</span>
-            </div>
-        `;
-    });
-}
 
 /**
- * Renders the subtasks list within the task modal.
- * @param {Object[]} subtasks - An array of subtask objects.
+ * Saves the edited task back to Firebase and refreshes the UI.
  */
-function renderModalSubtasks(subtasks) {
-    let container = document.getElementById('modalSubtasks');
-    container.innerHTML = "";
-    
-    if (!subtasks || subtasks.length === 0) {
-        container.innerHTML = "<span>No subtasks</span>";
+async function saveTask() {
+    if (!currentTaskId) return;
+
+    // 1. Gather data from inputs
+    let title = document.getElementById('editTaskTitle').value.trim();
+    let description = document.getElementById('editTaskDescription').value.trim();
+    let dueDate = document.getElementById('editTaskDueDate').value;
+    let priority = document.getElementById('editTaskPriority').value;
+
+    if (!title || !dueDate) {
+        alert("Title and Due Date are required.");
         return;
     }
-    
-    subtasks.forEach((st, index) => {
-        let iconPath = st.completed 
-            ? "../assets/imgs/Property 1=checked.svg" 
-            : "../assets/imgs/Property 1=Default.svg";
-            
-        container.innerHTML += `
-            <div class="subtask-row" onclick="toggleSubtask(${index})">
-                <img src="${iconPath}" class="subtask-icon">
-                <span class="subtask-text" style="font-size: 16px;">${st.title || st.name || "Subtask"}</span>
-            </div>
-        `;
-    });
-}
 
-/**
- * Toggles the completion state of a subtask, updates Firebase, and re-renders the UI.
- * @param {number} subtaskIndex - The index of the subtask in the array.
- */
-async function toggleSubtask(subtaskIndex) {
-    if (!currentTaskId) return;
-    
-    let task = allLoadedTasks[currentTaskId];
-    if (!task || !task.subtasks || !task.subtasks[subtaskIndex]) return;
-    
-    // Toggle the state locally
-    task.subtasks[subtaskIndex].completed = !task.subtasks[subtaskIndex].completed;
-    
-    // Re-render the modal list immediately for snappy UI
-    renderModalSubtasks(task.subtasks);
-    
-    // Re-render the board tasks to update the progress bar behind the modal
-    renderTasks(allLoadedTasks);
-    
-    // Update the subtasks array in Firebase
+    // 2. Prepare payload
+    let updatedData = {
+        title: title,
+        description: description,
+        dueDate: dueDate,
+        priority: priority,
+        assignedTo: editSelectedContacts,
+        subtasks: editCurrentSubtasks
+    };
+
+    // 3. Send to Firebase
     try {
-        await fetch(BASE_URL + `tasks/${currentTaskId}/subtasks.json`, {
-            method: "PUT",
+        await fetch(BASE_URL + `tasks/${currentTaskId}.json`, {
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(task.subtasks)
+            body: JSON.stringify(updatedData)
         });
+
+        // 4. Update local cache
+        Object.assign(allLoadedTasks[currentTaskId], updatedData);
+
+        // 5. Update UI
+        loadTasks(); // refreshes the columns
+        
+        // 6. Return back to View mode within the opened modal
+        openTaskPopup(currentTaskId); // Re-initializes view mode with new data
+
     } catch (error) {
-        console.error("Fehler beim Aktualisieren der Subtasks:", error);
+        console.error("Error saving task:", error);
+        alert("Could not save task.");
     }
 }
 
-/**
- * Closes the task details pop-up modal with an animation.
- */
-function closeTaskPopup() {
-    let modalOverlay = document.getElementById('taskModal');
-    let modalContent = modalOverlay.querySelector('.task-modal-content');
-    
-    // Add animation classes
-    modalOverlay.classList.add('fade-out');
-    modalContent.classList.add('slide-out');
-    
-    // Wait for the animation to finish (200ms) before hiding and cleaning up
-    setTimeout(() => {
-        modalOverlay.classList.add('d-none');
-        modalOverlay.classList.remove('fade-out');
-        modalContent.classList.remove('slide-out');
-        currentTaskId = null;
-    }, 200);
-}
