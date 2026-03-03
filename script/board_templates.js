@@ -185,13 +185,8 @@ function generateEditFormHTML(task) {
             
             <div class="form-group subtask-group">
                 <label>Subtasks</label>
-                <div class="subtask-input-wrapper" id="editSubtaskInputWrapper">
+                <div class="subtask-input-wrapper" id="editSubtaskInputWrapper" onclick="focusEditSubtaskInput()">
                     <input type="text" id="editSubtaskInput" placeholder="Add new subtask" class="edit-input" onkeypress="handleEditSubtaskKeypress(event)" oninput="handleEditSubtaskInput()">
-                    <div class="subtask-add-default" onclick="focusEditSubtaskInput()">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 4V20M4 12H20" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
                     <div class="subtask-input-actions">
                         <button type="button" class="clear-subtask-btn" onclick="clearEditSubtaskInput()">
                             <img src="../assets/imgs/iconoir_cancel.svg" alt="">

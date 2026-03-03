@@ -822,38 +822,12 @@
     padding-right: 100px; /* Make space for buttons */
 }
 
-.edit-task-form .subtask-add-default {
-    position: absolute;
-    right: 8px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    width: 28px;
-    height: 28px;
-    justify-content: center;
-    border-radius: 50%;
-    transition: background 0.2s;
-}
-
-.edit-task-form .subtask-add-default:hover {
-    background: #f0f0f0;
-}
-
-.edit-task-form .subtask-add-default img {
-    width: 14px;
-    height: 14px;
-}
-
 .edit-task-form .subtask-input-actions {
     position: absolute;
     right: 8px;
     display: none;
     align-items: center;
     gap: 4px;
-}
-
-.edit-task-form .subtask-input-wrapper.typing .subtask-add-default {
-    display: none;
 }
 
 .edit-task-form .subtask-input-wrapper.typing .subtask-input-actions {
