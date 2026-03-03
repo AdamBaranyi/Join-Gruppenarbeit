@@ -94,14 +94,14 @@ function clearErrors() {
   });
 }
 
-function initializeAssignedDropdown() {
+async function initializeAssignedDropdown() {
   const dropdown = document.getElementById("assignedDropdown");
   if (!dropdown) return;
 
   const elements = getDropdownElements(dropdown);
   selectedContacts = [];
-  
-  renderAllContacts(elements);
+
+  await renderAllContacts(elements);
   setupDropdownEventListeners(dropdown, elements);
 }
 
@@ -114,29 +114,37 @@ function getDropdownElements(dropdown) {
   };
 }
 
-function renderAllContacts(elements) {
-  const contacts = getContactsList();
+async function renderAllContacts(elements) {
+  const contacts = await getContactsList();
   const colors = ["bg-orange", "bg-teal", "bg-purple", "bg-blue"];
-  
-  contacts.forEach((name, index) => {
-    createContactElement(name, colors[index % colors.length], elements);
+
+  elements.dropdownList.innerHTML = "";
+
+  contacts.forEach((contact, index) => {
+    const fullName = `${contact.firstname} ${contact.lastname}`;
+    createContactElement(fullName, colors[index % colors.length], elements);
   });
-  
+
   updateSelectedUsersDisplay(elements);
 }
 
-function getContactsList() {
-  return [
-    "Sofiia Müller (You)",
-    "Anton Mayer",
-    "Anja Schulz",
-    "Benedikt Ziegler",
-    "David Eisenberg",
-  ];
+async function getContactsList() {
+  const response = await fetch(BASE_URL + "contacts.json");
+  const data = await response.json();
+
+  if (!data) return [];
+
+  let allContacts = [];
+  Object.values(data).forEach(group => {
+    if (group){
+      allContacts.push(...Object.values(group));
+    }
+  });
+  return allContacts;
 }
 
 function getInitials(name) {
-  return name.replace(" (You)", "")
+  return name
     .split(" ")
     .map(n => n[0])
     .join("")
@@ -146,12 +154,11 @@ function getInitials(name) {
 
 function createContactElement(name, colorClass, elements) {
   const initials = getInitials(name);
-  const isYou = name.includes("(You)");
-  
+
   const item = document.createElement("div");
   item.className = "contact-item";
-  item.innerHTML = renderContactsTemplate(initials, colorClass, name, isYou);  // Hier habe das HTML ausgelagert! 
-  setupContactCheckbox(item, name, isYou, elements);
+  item.innerHTML = renderContactsTemplate(initials, colorClass, name, false);  // Hier habe das HTML ausgelagert! 
+  setupContactCheckbox(item, name, false, elements);
   elements.dropdownList.appendChild(item);
 }
 
@@ -178,7 +185,7 @@ function updateSelectedUsersDisplay(elements) {
   elements.selectedContainer.innerHTML = "";
   const colors = ["bg-orange", "bg-teal", "bg-purple", "bg-blue"];
   
-  selectedContacts.slice(0, 4).forEach((name, index) => {
+  selectedContacts.slice(0, 5).forEach((name, index) => {
     const circle = createUserCircle(name, colors[index % colors.length]);
     elements.selectedContainer.appendChild(circle);
   });
@@ -396,7 +403,6 @@ function clearCompleteForm() {
   clearForm();
   document.getElementById("subTaskInput").value = "";
 }
-
 
 async function saveTaskToFirebase() {
   try {

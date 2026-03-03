@@ -9,43 +9,80 @@ let checkbox = document.querySelector(".checkbox");
 
 function validateForm() {
   clearErrors();
-  let isValid = true;
 
+  const validations = [
+    validateUsername(),
+    validateEmail(),
+    validatePassword(),
+    validatePasswordConfirmation(),
+    validatePrivacyPolicy()
+  ];
+
+  return validations.every(result => result === true);
+}
+
+function validateUsername() {
   if (!username.value.trim()) {
     setError("username", " * Please enter your name.");
-    isValid = false;
+    return false;
   }
+  return true;
+}
 
-  if (!email.value.trim()) {
+function validateEmail() {
+  const emailValue = email.value.trim();
+
+  if (!emailValue) {
     setError("email", "* please enter your email.");
-    isValid = false;
-  } else if (!isValidEmail(email.value.trim())) {
+    return false;
+  }
+
+  if (!isValidEmail(emailValue)) {
     setError("email", " * Invalid email address.");
-    isValid = false;
+    return false;
   }
 
-  if (!password.value.trim()) {
+  return true;
+}
+
+function validatePassword() {
+  const passwordValue = password.value.trim();
+
+  if (!passwordValue) {
     setError("password", "* please enter your password.");
-    isValid = false;
-  } else if (password.value.length < 6) {
+    return false;
+  }
+
+  if (passwordValue.length < 6) {
     setError("password", "* at least 6 characters.");
-    isValid = false;
+    return false;
   }
 
-  if (!confirmPassword.value.trim()) {
+  return true;
+}
+
+function validatePasswordConfirmation() {
+  const confirmValue = confirmPassword.value.trim();
+
+  if (!confirmValue) {
     setError("confirmepsw", "* please confirm your password.");
-    isValid = false;
-  } else if (password.value !== confirmPassword.value) {
+    return false;
+  }
+
+  if (password.value !== confirmPassword.value) {
     setError("confirmepsw", "* password do not match, please try again!");
-    isValid = false;
+    return false;
   }
 
+  return true;
+}
+
+function validatePrivacyPolicy() {
   if (!checkbox.checked) {
-    document.getElementById("error-privacy").innerText;
-    isValid = false;
+    document.getElementById("error-privacy").innerText = "* Please accept the privacy policy";
+    return false;
   }
-
-  return isValid;
+  return true;
 }
 
 function setError(fieldId, message) {
@@ -73,34 +110,61 @@ function isValidEmail(email) {
 async function addUser() {
   if (!validateForm()) return;
 
-  let userId = Date.now();
+  const userData = collectUserFormData();
 
-  let newUser = {
+  try {
+    await saveUserToDatabase(userData);
+    showSuccessMessageAndRedirectToLogin();
+  } catch (error) {
+    handleUserSaveError(error);
+  }
+}
+
+function collectUserFormData() {
+  const userId = generateUserId();
+
+  return {
     id: userId,
     name: username.value.trim(),
     email: email.value.trim(),
-    password: password.value.trim(),
+    password: password.value.trim()
   };
+}
 
-  try {
-    let response = await fetch(`${BASE_URL}/${userId}.json`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newUser),
-    });
+function generateUserId() {
+  return Date.now();
+}
 
-    if (response.ok) {
-      document.getElementById("successOverlay").style.display = "flex";
+async function saveUserToDatabase(userData) {
+  const response = await fetch(`${BASE_URL}/${userData.id}.json`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(userData)
+  });
 
-      setTimeout(() => {
-        window.location.href = "../index.html";
-      }, 1200);
-    } else {
-      alert("Fehler bei der Registrierung.");
-    }
-  } catch (error) {
-    console.error("Fehler:", error);
+  if (!response.ok) {
+    throw new Error("Fehler bei der Registrierung");
   }
+
+  return response;
+}
+
+function showSuccessMessageAndRedirectToLogin() {
+  showSuccessOverlay();
+  setTimeout(redirectToLoginPage, 1200);
+}
+
+function showSuccessOverlay() {
+  document.getElementById("successOverlay").style.display = "flex";
+}
+
+function redirectToLoginPage() {
+  window.location.href = "../index.html";
+}
+
+function handleUserSaveError(error) {
+  console.error("Fehler beim Speichern des Benutzers:", error);
+  alert("Fehler bei der Registrierung. Bitte versuchen Sie es später erneut.");
 }
 
 initInputs();
@@ -129,7 +193,7 @@ function handleInput(input, icon, type) {
     return;
   }
 
-  if (input.type === "password") {
+if (input.type === "password") {
     icon.src = icon.dataset.visible;
   }
 }
