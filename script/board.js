@@ -49,87 +49,6 @@ function renderTasks(tasks) {
   if (columns.done && columns.done.innerHTML === "") columns.done.innerHTML = '<div class="no-tasks">No tasks done</div>';
 }
 
-function generateTaskHTML(task, id) {
-  const assignedHTML = generateAssignedHTML(task.assignedTo);
-  const progressHTML = generateSubtaskProgress(task);
-  const priorityIcon = getPriorityIcon(task.priority);
-
-  return `
-    <div draggable="true" ondragstart="startDragging('${id}')" onclick="openTaskPopup('${id}')" class="task-card">
-      <div class="task-category ${getCategoryClass(task.category)}">
-        ${task.category || ""}
-      </div>
-
-      <h3 class="task-title">${task.title || ""}</h3>
-      <p class="task-description">${task.description || ""}</p>
-
-      ${progressHTML}
-
-      <div class="task-footer">
-        <div class="task-assignees">
-          ${assignedHTML}
-        </div>
-        <div class="task-priority">
-          <img src="${priorityIcon}" />
-        </div>
-      </div>
-
-    </div>
-  `;
-}
-
-function generateAssignedHTML(assignedTo) {
-  if (!assignedTo || assignedTo.length === 0) return "";
-
-  const colors = ["bg-orange", "bg-teal", "bg-purple", "bg-blue"];
-
-  return assignedTo
-    .map((name, index) => {
-      const initials = name
-        .split(" ")
-        .map((n) => n[0])
-        .join("")
-        .toUpperCase();
-
-      const colorClass = colors[index % colors.length];
-
-      return `<div class="assignee-badge ${colorClass}">${initials}</div>`;
-    })
-    .join("");
-}
-
-function generateSubtaskProgress(task) {
-  if (!task.subtasks || task.subtasks.length === 0) return "";
-
-  const total = task.subtasks.length;
-  const completed = task.subtasks.filter((st) => st.completed).length;
-  const percent = (completed / total) * 100;
-
-  return `
-    <div class="task-progress-container">
-      <div class="progress-bar-bg">
-        <div class="progress-bar-fill" style="width:${percent}%"></div>
-      </div>
-      <span class="progress-text">${completed}/${total} Subtasks</span>
-    </div>
-  `;
-}
-
-function getPriorityIcon(priority) {
-  if (priority === "Urgent") return "../assets/imgs/urgent-priority-board.svg";
-
-  if (priority === "Low") return "../assets/imgs/low-priority-board.svg";
-
-  return "../assets/imgs/priority_medium.svg";
-}
-
-function getCategoryClass(category) {
-  if (category === "Technical Task") return "category-technical-task";
-
-  if (category === "User Story") return "category-user-story";
-
-  return "";
-}
 
 /**
  * Sets the ID of the task that is currently being dragged.
@@ -201,6 +120,8 @@ function openTaskPopup(id) {
     
     if (task) {
         document.getElementById('taskModal').classList.remove('d-none');
+        document.getElementById('taskModalView').classList.remove('d-none');
+        document.getElementById('taskModalEdit').classList.add('d-none');
         
         document.getElementById('modalTitle').innerHTML = task.title || "";
         document.getElementById('modalDescription').innerHTML = task.description || "";
@@ -324,3 +245,264 @@ function closeTaskPopup() {
         currentTaskId = null;
     }, 200);
 }
+
+/**
+ * Deletes the currently opened task.
+ */
+async function deleteTask() {
+    if (!currentTaskId) return;
+
+    try {
+        await fetch(BASE_URL + `tasks/${currentTaskId}.json`, {
+            method: "DELETE"
+        });
+        
+        // Remove from local cache
+        delete allLoadedTasks[currentTaskId];
+        
+        // Close modal and refresh board
+        closeTaskPopup();
+        loadTasks(); // Ensuring we have latest from DB as well
+        
+    } catch (error) {
+        console.error("Error deleting task:", error);
+        alert("There was an error deleting the task.");
+    }
+}
+
+/**
+ * Triggers the edit mode for the currently opened task.
+ */
+function editTask() {
+    if (!currentTaskId) return;
+    
+    let task = allLoadedTasks[currentTaskId];
+    if (!task) return;
+    
+    // Copy subtasks and assignees to local edit arrays
+    editSelectedContacts = [...(task.assignedTo || [])];
+    editCurrentSubtasks = [...(task.subtasks || [])];
+    
+    let viewContainer = document.getElementById('taskModalView');
+    let editContainer = document.getElementById('taskModalEdit');
+    
+    editContainer.innerHTML = generateEditFormHTML(task);
+    
+    // Populate the form fields dynamically
+    renderEditAssignees();
+    renderEditAssigneesDropdown();
+    renderEditSubtasks();
+    
+    viewContainer.classList.add('d-none');
+    editContainer.classList.remove('d-none');
+}
+
+// Global state for the edit form
+let editSelectedContacts = [];
+let editCurrentSubtasks = [];
+
+
+
+/**
+ * Helper to update Assignees list UI in Edit Mode.
+ */
+function renderEditAssignees() {
+    let container = document.getElementById('editModalAssignees');
+    if (!container) return;
+    container.innerHTML = '';
+    const colors = ["bg-orange", "bg-teal", "bg-purple", "bg-blue"];
+    editSelectedContacts.forEach((name, index) => {
+        const initials = name.split(" ").map(n => n[0]).join("").toUpperCase().substring(0, 2);
+        const colorClass = colors[index % colors.length];
+        container.innerHTML += `<div class="user-circle ${colorClass}">${initials}</div>`;
+    });
+}
+
+/**
+ * Prepares the mock contacts dropdown. (Reuse from add_task if needed)
+ */
+function getMockContactsList() {
+    return [
+        "Sofiia Müller (You)",
+        "Anton Mayer",
+        "Anja Schulz",
+        "Benedikt Ziegler",
+        "David Eisenberg",
+    ];
+}
+
+function toggleEditAssignedDropdown() {
+    let dropdown = document.getElementById('editAssignedDropdown');
+    dropdown.classList.toggle('open');
+}
+
+function renderEditAssigneesDropdown() {
+    let list = document.getElementById('editDropdownList');
+    if (!list) return;
+    list.innerHTML = '';
+    const colors = ["bg-orange", "bg-teal", "bg-purple", "bg-blue"];
+    const contacts = getMockContactsList();
+    
+    contacts.forEach((name, index) => {
+        const initials = name.replace(" (You)", "").split(" ").map(n => n[0]).join("").substring(0, 2).toUpperCase();
+        const colorClass = colors[index % colors.length];
+        const isChecked = editSelectedContacts.includes(name) ? "checked" : "";
+        
+        list.innerHTML += `
+            <div class="contact-item">
+                <div class="contact-left">
+                  <div class="contact-circle ${colorClass}">${initials}</div>
+                  <span>${name}</span>
+                </div>
+                <input type="checkbox" value="${name}" ${isChecked} onchange="toggleEditContact('${name}', this.checked)">
+            </div>
+        `;
+    });
+}
+
+function toggleEditContact(name, isChecked) {
+    if (isChecked && !editSelectedContacts.includes(name)) {
+        editSelectedContacts.push(name);
+    } else if (!isChecked) {
+        editSelectedContacts = editSelectedContacts.filter(c => c !== name);
+    }
+    renderEditAssignees();
+}
+
+/**
+ * Subtasks management in Edit Form.
+ */
+function renderEditSubtasks() {
+    let list = document.getElementById('editModalSubtasks');
+    if (!list) return;
+    list.innerHTML = '';
+    
+    editCurrentSubtasks.forEach((sub, index) => {
+        list.innerHTML += `
+            <li>
+                <div class="subtask-text">${sub.title}</div>
+                <div class="subtask-actions">
+                    <img src="../assets/imgs/edit.svg" alt="Edit" onclick="editModalSubtask(${index})">
+                    <div class="divider"></div>
+                    <img src="../assets/imgs/delete.svg" alt="Delete" onclick="deleteEditSubtask(${index})">
+                </div>
+            </li>
+        `;
+    });
+}
+
+function clearEditSubtaskInput() {
+    let input = document.getElementById('editSubtaskInput');
+    input.value = '';
+    handleEditSubtaskInput();
+}
+
+function focusEditSubtaskInput() {
+    document.getElementById('editSubtaskInput').focus();
+}
+
+function handleEditSubtaskInput() {
+    let val = document.getElementById('editSubtaskInput').value;
+    let wrapper = document.getElementById('editSubtaskInputWrapper');
+    if (val.length > 0) {
+        wrapper.classList.add('typing');
+    } else {
+        wrapper.classList.remove('typing');
+    }
+}
+
+function addEditSubtask() {
+    let input = document.getElementById('editSubtaskInput');
+    let title = input.value.trim();
+    if (title) {
+        editCurrentSubtasks.push({ title: title, completed: false });
+        clearEditSubtaskInput();
+        renderEditSubtasks();
+    }
+}
+
+function handleEditSubtaskKeypress(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        addEditSubtask();
+    }
+}
+
+function deleteEditSubtask(index) {
+    editCurrentSubtasks.splice(index, 1);
+    renderEditSubtasks();
+}
+
+function editModalSubtask(index) {
+    let input = document.getElementById('editSubtaskInput');
+    input.value = editCurrentSubtasks[index].title;
+    input.focus();
+    deleteEditSubtask(index);
+}
+
+/**
+ * Helper to handle priority button clicks in the edit form.
+ */
+function setEditPriority(priority, btnElement) {
+    document.getElementById('editTaskPriority').value = priority;
+    
+    // Remove active class from all buttons in the edit form
+    let buttons = btnElement.parentElement.querySelectorAll('.trigger');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    
+    // Add active class to clicked button
+    btnElement.classList.add('active');
+}
+
+/**
+ * Saves the edited task back to Firebase and refreshes the UI.
+ */
+async function saveTask() {
+    if (!currentTaskId) return;
+
+    // 1. Gather data from inputs
+    let title = document.getElementById('editTaskTitle').value.trim();
+    let description = document.getElementById('editTaskDescription').value.trim();
+    let dueDate = document.getElementById('editTaskDueDate').value;
+    let priority = document.getElementById('editTaskPriority').value;
+
+    if (!title || !dueDate) {
+        alert("Title and Due Date are required.");
+        return;
+    }
+
+    // 2. Prepare payload
+    let updatedData = {
+        title: title,
+        description: description,
+        dueDate: dueDate,
+        priority: priority,
+        assignedTo: editSelectedContacts,
+        subtasks: editCurrentSubtasks
+    };
+
+    // 3. Send to Firebase
+    try {
+        await fetch(BASE_URL + `tasks/${currentTaskId}.json`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(updatedData)
+        });
+
+        // 4. Update local cache
+        Object.assign(allLoadedTasks[currentTaskId], updatedData);
+
+        // 5. Update UI
+        loadTasks(); // refreshes the columns
+        
+        // 6. Return back to View mode within the opened modal
+        openTaskPopup(currentTaskId); // Re-initializes view mode with new data
+
+    } catch (error) {
+        console.error("Error saving task:", error);
+        alert("Could not save task.");
+    }
+}
+
