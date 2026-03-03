@@ -632,6 +632,10 @@ button {
         
     }
 
+    #contactInitials {
+        position: relative;
+    }
+
     #modalInitials {
         top: 25%;
     }

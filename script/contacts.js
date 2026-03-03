@@ -195,7 +195,7 @@ function renderContactCard(contact) {
   const contactListContainer = document.getElementById("contactListContainer");
   const closeCardBtn = document.getElementById("closeCardBtn");
   const mobileSlogan = document.getElementById("mobileSlogan");
-
+    
   mobileSlogan.classList.remove("displayNone");
   card.classList.remove("displayNone");
   closeCardBtn.classList.remove("displayNone");
@@ -244,7 +244,7 @@ function closeContactCard() {
   const sloganAndCardContainer = document.getElementById("sloganAndCardContainer");
   const contactListContainer = document.getElementById("contactListContainer");
   const closeCardBtn = document.getElementById("closeCardBtn");
-
+  
   card.innerHTML = '';
   card.classList.add("displayNone");
   closeCardBtn.classList.add("displayNone");
@@ -267,12 +267,7 @@ function renderEditForm(contact) {
 // zum öffnen des dropdown menus auf mobilen Geräten
 function mobileEditMenu(contact) {
   let menu = document.createElement('div');
-  const mobileOptionsBtn = document.getElementById('mobileOptionsBtn');
-  mobileOptionsBtn.addEventListener('click', () => {
-    menu.classList.add('mobile-edit-menu-dropdown');
-    menu.innerHTML = menuTempl();
-    document.body.appendChild(menu);
-  });
+  menu.innerHTML = menuTempl(contact);
   menu.querySelector(".mobileEditBtn").addEventListener("click", () => {
     renderEditForm(contact);
   });
