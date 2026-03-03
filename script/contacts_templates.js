@@ -1,3 +1,19 @@
+function renderContactListItem(contact, initials, bgColor) {
+    return `
+    <div class="contactRow" onclick='renderContactCard(${JSON.stringify(contact)}); this.parentElement.querySelectorAll(".contactRow").forEach(row => row.classList.remove("active")); this.classList.add("active");'>
+      <div class="contactItem">
+        <div class="contactCircle" style="background:${bgColor}">
+          ${initials.toUpperCase()}
+        </div>
+        <div>
+          ${contact.firstname} ${contact.lastname}<br>
+          <span class="mailStyle">${contact.email}</span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function openModalLeftSide() {
     return `
         <img class="logoWhite" src="../assets/imgs/logo_white.svg" alt="">
@@ -44,12 +60,12 @@ function contactCard(contact) {
             <strong>Email:</strong> <br> <span class="mailStyle">${contact.email}</span><br>
             <strong>Phone Number:</strong> <span>${contact.phone}</span>
             </div>
-            <img class="mobileEditMenu" id="mobileOptionsBtn" src="../assets/imgs/Menu Contact options.png" alt="contact options menu" onclick="mobileEditMenu()">
+            <img class="mobileEditMenu" id="mobileOptionsBtn" src="../assets/imgs/Menu Contact options.png" alt="contact options menu" onclick="mobileEditMenu(${contact})">
         </div>
     `;
 }
 
-function editFormleftSide(contact) {
+function editFormleftSide() {
     return `
         <img class="logoWhite" src="../assets/imgs/logo_white.svg" alt="Logo White">
         <h3>Edit contact</h3>
@@ -73,7 +89,7 @@ function editFormRightSide(contact) {
   `;
 }
 
-function menuTempl() {
+function menuTempl(contact) {
     return `
       <button class="mobileEditBtn">Edit</button>
       <button class="mobileDeleteBtn">Delete</button>
