@@ -590,6 +590,34 @@ input:focus, textarea:focus {
   font-weight: bold;
   border: 2px solid white;
 }
+/* ------------------------------------ Board Task beginn! */
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.popup {
+    background: white;
+    width: 90%;
+    max-width: 1200px;
+    border-radius: 20px;
+    padding: 32px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.d-none {
+    display: none;
+}
+
+
+/* ----------------------------------------------ende */
 
 @media (max-width: 1400px) {
     .main-container {
