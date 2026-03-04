@@ -115,6 +115,7 @@ function openModal() {
   modalInitials.style.backgroundColor = "transparent";
   modalInitials.classList.remove("contact-initials");
   modalInitials.classList.add('profileImg');
+  modalInitials.textContent = '';
   leftSide.innerHTML = openModalLeftSide();
   contactWindow.innerHTML = openModalRightSide();
 };
