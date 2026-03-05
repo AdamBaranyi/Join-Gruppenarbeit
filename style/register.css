@@ -6,21 +6,28 @@
 }
 
 body {
-  background: #f6f7f8;
+  background: var(--color-bg);
   min-width: 320px;
-  /* max-width: 1920px; */
-  margin: 0 auto;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
+header, main, footer {
+  width: 100%;
+  margin: 0 auto;
+}
+
 header {
-  height: 150px;
+  height: 120px;
 }
 
 .logo {
-  padding: 40px;
+  margin-top: 80px;
+  margin-left: 70px;
+  height: 121px;
+  width: 100px;
+  
 }
 
 .container {
@@ -28,14 +35,14 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
 .card {
-  background: white;
-  width: 600px;
-  max-width: 100%;
-  height: 630px;
-  padding: 60px 0;
+  background: var(--color-bg);
+  width: 100%;
+  max-width: 600px;
+  padding: 60px 89px;
   border-radius: 30px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
   text-align: center;
@@ -50,9 +57,9 @@ header {
 
 .back-arrow {
   position: absolute;
-  left: 60px;
-  font-size: 22px;
-  color: #29abe2;
+  left: 0;
+  width: 24px;
+  color: var(--color-secondary);
   cursor: pointer;
 }
 
@@ -64,7 +71,7 @@ h1 {
 .underline {
   width: 150px;
   height: 4px;
-  background: #29abe2;
+  background: var(--color-secondary);
   margin: 15px auto 40px auto;
   border-radius: 3px;
 }
@@ -72,14 +79,13 @@ h1 {
 form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 12px;
+  margin-top: 30px;
+  gap: 16px;
 }
 
 .input-group {
   position: relative;
-  width: 420px;
-  max-width: 100%;
+  width: 100%;
 }
 
 .input-group input {
@@ -89,7 +95,6 @@ form {
   border: 1px solid #d1d1d1;
   padding: 0 45px 0 15px;
   font-size: 16px;
-  cursor: pointer;
 }
 
 .input-icon {
@@ -103,14 +108,13 @@ form {
 }
 
 .input-group input:focus {
-  border: 1px solid #29abe2;
+  border: 1px solid var(--color-secondary);
   outline: none;
-
 }
 
 input:focus {
   outline: none;
-  border: 1px solid #29abe2;
+  border: 1px solid var(--color-secondary);
 }
 
 .inputs {
@@ -126,13 +130,14 @@ input:focus {
   padding: 0 45px 0 15px;
   font-size: 16px;
 }
+
 .icon {
   position: absolute;
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 16px;
-  color: #a0a0a0;
+  color: var(--color-primary);
   pointer-events: none;
 }
 
@@ -143,11 +148,11 @@ input:focus {
 
 .inputs input:focus {
   outline: none;
-  border: 1px solid #29abe2;
+  border: 1px solid var(--color-secondary);
 }
 
 .error-message {
-  color: #ff8190;
+  color: var(--color-error);
   font-size: 13px;
   text-align: left;
   margin-top: 4px;
@@ -155,25 +160,25 @@ input:focus {
 }
 
 .input-error {
-  border: 1px solid #ff4d4f !important;
+  border: 1px solid var(--color-error) !important;
 }
 
 .privacy {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  margin-top: 10px;
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  flex-wrap: wrap;
 }
+
 
 .privacy a {
   color: #29abe2;
   text-decoration: none;
 }
 
-.privacy span {
-  font-size: 16px;
-  color: #999;
-}
 .privacy .checkbox {
   width: 18px;
   height: 18px;
@@ -184,23 +189,26 @@ input:focus {
 
 .privacy .checkbox:hover {
   transform: scale(1.08);
-  box-shadow: 0 8px 20px rgb(252, 251, 251);
+  box-shadow: 0 8px 20px rgb(252, 251, 251);  
 }
 
 button {
-  width: 125px;
+  margin-top: 15px;
+  width: 100%;
+  max-width: 140px;
   height: 55px;
-  background-color: #2a3647;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-white);
   border: none;
   border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
+  align-self: center;
   transition: 0.2s;
 }
 
 button:hover {
-  background: #29abe2;
+  background: var(--color-secondary);
 }
 
 .overlay {
@@ -229,80 +237,74 @@ button:hover {
 
 .overlay-content p {
   font-size: 20px;
-  color: white;
+  color: var(--color-white);
 }
 
 footer {
   text-align: center;
   padding: 20px;
-  color: #999;
+  color: var(--color-text-secondary);
 }
 
 footer a {
   margin: 0 15px;
   text-decoration: none;
-  color: #999;
+  color: var(--color-text-secondary);
 }
 
 footer a:hover {
-  color: #29abe2;
+  color: var(--color-secondary);
   font-weight: bold;
 }
 
-@media (max-width: 480px) {
-  .card {
-    width: 100%;
-    height: 500px;
-    padding: 32px 20px;
-    margin: 0 10px 0 10px;
-  }
-  .logo {
-    padding: 20px;
-    height: 85px;
-  }
+@media (max-width: 768px) {
   header {
-    height: 60px;
+    height: 100px;
   }
 
-  .input-group {
-    width: 100%;
+  .logo {
+    height: 78px;
+    width: 64px;
+    margin-left: 38px;
+    margin-top: 37px;
   }
 
-  form {
-    gap: 10px;
-    margin-bottom: 8px;
+  .card {
+    padding: 40px 25px;
   }
 
   h1 {
-    font-size: 32px;
-  }
-
-  .back-arrow {
-    left: 20px;
+    font-size: 45px;
   }
 }
 
-@media (max-width: 400px) {
+ @media (max-width: 480px) {
   .card {
-    width: 100%;
-    height: 450px;
-    padding: 0 20px;
-    margin: 0 10px 0 10px;
+    padding: 30px 20px;
+    border-radius: 20px;
   }
 
-  .logo {
-    padding: 10px;
-    height: 60px;
+  h1 {
+    font-size: 36px;
   }
 
-  form {
-    gap: 8px;
-    margin-bottom: 8px;
+  .back-arrow {
+    left: -5px;
   }
 
   button {
-    width: 180px;
-    height: 45px;
+    max-width: 180px;
+    height: 51px;
+  }
+}
+
+@media (max-width: 360px) {
+  h1 {
+    font-size: 26px;
+  }
+
+  .privacy {
+    font-size: 14px;
   }
 
   .overlay-content {
