@@ -1,4 +1,4 @@
-* {
+ * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -6,7 +6,7 @@
 }
 
 .add-task-body {
-    background: #F0F0F0;
+    background: var(--color-bg);
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -25,7 +25,7 @@
 .page-header h1 {
     height: 90px;
     font-size: 61px;
-    color: #000000;
+    color: var(--color-text);
     margin-top: 190px;
     padding-left: 328px;
     padding-bottom: 130px;
@@ -66,11 +66,11 @@
 label {
     font-weight: 500;
     font-size: 16px;
-    color: #2a3647;
+    color: var(--color-primary);
 }
 
 .required {
-    color: #ff8190;
+    color: var( --color-error);
 }
 
 input, textarea {
@@ -78,7 +78,7 @@ input, textarea {
     padding: 12px 16px;
     border-radius: 10px;
     border: 1px solid #d1d1d1;
-    background: white;
+    background: var(--color-bg);
     font-size: 16px;
     width: 100%;
     transition: border-color 0.2s;
@@ -92,8 +92,15 @@ textarea {
 
 input:focus, textarea:focus {
     outline: none;
-    border-color: #29abe2;
-  
+    border-color: var(--color-secondary);
+}
+ textarea:hover {
+    outline: none;
+    border-color: var(--color-secondary);
+}
+ input:hover {
+    outline: none;
+    border-color: var(--color-secondary);
 }
 
 .priority-buttons {
@@ -106,7 +113,7 @@ input:focus, textarea:focus {
     height: 56px;
     border-radius: 10px;
     border: 1px solid #d1d1d1;
-    background-color: white;
+    background: var(--color-bg);
     border: none;
     cursor: pointer;
     font-size: 20px;
@@ -118,7 +125,7 @@ input:focus, textarea:focus {
 }
 
 .trigger.active {
-  color: white;
+  color: var(--color-white);
 }
 
 .trigger.active svg {
@@ -126,17 +133,17 @@ input:focus, textarea:focus {
 }
 
 .trigger.urgent.active {
-  background-color: #ff3d00;
+  background-color: var(--color-btn-urgent);
   font-weight: 700;
 }
 
 .trigger.medium.active {
-  background-color: #ffa800;
+  background-color: var(--color-btn-medium);
   font-weight: 700;
 }
 
 .trigger.low.active {
-  background-color: #7ae229;
+  background-color: var(--color-success);
   font-weight: 700;
 }
 
@@ -156,7 +163,7 @@ input:focus, textarea:focus {
 
 .form-group label {
   font-size: 20px;
-  color: #000000;
+  color: var(--color-text);
   font-weight: 400;
   line-height: 120%;
   letter-spacing: 0;
@@ -175,18 +182,18 @@ input:focus, textarea:focus {
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
-    background: white;
+    background: var(--color-bg);
     cursor: pointer;
     transition: border-color 0.2s;
 }
 
 .dropdown-header:hover {
-    border-color: #29abe2;
+    border-color: var(--color-secondary);
 }
 
 .dropdown-header .arrow {
     font-size: 20px;
-    color: #2a3647;
+    color: var(--color-primary);
     transition: transform 0.3s;
     position: absolute;
     right: 14px;
@@ -197,7 +204,7 @@ input:focus, textarea:focus {
 }
 
 .dropdown-header .placeholder {
-    color: #666;
+    color: var(--color-placeholder-primary);
 }
 
 .dropdown-list {
@@ -207,10 +214,9 @@ input:focus, textarea:focus {
     border: 1px solid #d1d1d1;
    border: none;
     border-radius: 10px;
-    /* margin-top: 4px; */
     max-height: 240px;
     overflow-y: auto;
-    background: white;
+    background: var(--color-bg);
     z-index: 100;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
@@ -233,7 +239,7 @@ input:focus, textarea:focus {
 }
 
 .contact-item:hover, .category-item:hover {
-    background: #f0f0f0;
+    background: #e0e0e0;
 }
 
 .contact-left {
@@ -246,8 +252,8 @@ input:focus, textarea:focus {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: #2a3647;
-    color: white;
+    background: var(--color-primary);
+    color: var(--color-white);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -261,7 +267,7 @@ input:focus, textarea:focus {
     box-sizing: border-box;
     width: 18px;
     height: 18px;
-    border: 2px solid #2a3647;
+    border: 2px solid var(--color-primary);
     border-radius: 3px;
     background-color: transparent;
     cursor: pointer;
@@ -273,12 +279,12 @@ input:focus, textarea:focus {
 }
 
 .contact-item input[type="checkbox"]:hover {
-    border-color: #29abe2;
+    border-color: var(--color-secondary);
 }
 
 .contact-item input[type="checkbox"]:checked {
-    background-color: #2a3647;
-    border-color: #2a3647;
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
 }
 
 .contact-item input[type="checkbox"]:checked::after {
@@ -288,7 +294,7 @@ input:focus, textarea:focus {
     top: 1.5px;
     width: 5px;
     height: 8px;
-    border: solid white;
+    border: solid var(--color-white);
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
@@ -303,8 +309,8 @@ input:focus, textarea:focus {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: #2a3647;
-    color: white;
+    background: var(--color-primary);
+    color: var(--color-white);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -327,6 +333,7 @@ input:focus, textarea:focus {
 .subtask-input-wrapper input {
     width: 100%;
     padding-right: 100px;
+    color: var(--color-text-secondary);
 }
 
 .subtask-input-actions {
@@ -335,13 +342,11 @@ input:focus, textarea:focus {
     display: flex;
     align-items: center;
     gap: 4px;
-    /* padding-left: 8px; */
 }
 
 .subtask-input-actions button:hover {
     background: #e0e0e0;
     border-radius: 50%;
-
 }
 
 .clear-subtask-btn, .add-subtask-btn {
@@ -364,8 +369,8 @@ input:focus, textarea:focus {
 }
 
 .add-subtask-btn:hover {
-    background: #f0f0f0;
-    color: #2a3647;
+    background: var(--color-bg);
+    color: var(--color-primary);
 }
 
 .divider {
@@ -386,7 +391,6 @@ input:focus, textarea:focus {
 .subtask-item:hover{
    background: #e0e0e0;
    cursor: pointer;
-   color: red;
 }
 
 .subtask-item div{
@@ -403,9 +407,9 @@ input:focus, textarea:focus {
 }
 
 .subtask-item input:not(:disabled) {
-    background: white;
+    background: var(--color-bg);
     padding: 4px 8px;
-    border: 1px solid #29abe2;
+    border: 1px solid var(--color-secondary);
     border-radius: 4px;
     height: 100%;
 }
@@ -471,7 +475,7 @@ input:focus, textarea:focus {
 
 .overlay-content p {
   font-size: 20px;
-  color: white;
+  color: var(--color-white);
   padding-right: 16px;
 }
 
@@ -496,7 +500,7 @@ input:focus, textarea:focus {
     font-size: 20px;
     font-weight: 400;
     line-height: 120%;
-      color: #000000;
+    color: var(--color-text);
 }
 
 .button-group {
@@ -530,7 +534,7 @@ input:focus, textarea:focus {
   border-color: var(--color-secondary);
   color: var(--color-secondary);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
-  border: 2px solid #29abe2;
+  border: 2px solid var(--color-secondary);
 }
 
 .create-btn {
@@ -545,38 +549,38 @@ input:focus, textarea:focus {
 }
 
 .create-btn:hover {
-  background: #29abe2;
+  background: var(--color-secondary);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
 }
 
 .error-msg {
-    color: #ff3d00;
+    color: var(--color-error);
     font-size: 12px;
 
 }
 
 .input-error {
-    border-color: #ff3d00 !important;
+    border-color:var(--color-error);
 }
 
 .custom-dropdown.input-error .dropdown-header {
-    border: 1px solid #ff3d00;
+    border: 1px solid var(--color-error);
 }
 
 .bg-orange {
-  background-color: #FF7A00;
+  background-color: var(--color-btn-medium);
 }
 
 .bg-teal {
-  background-color: #1FD7C1;
+  background-color: var(--color-contact-iocn1);
 }
 
 .bg-purple {
-  background-color: #9747FF;
+  background-color: var(--color-contact-iocn2);
 }
 
 .bg-blue {
-  background-color: #0038FF;
+  background-color: var(--color-contact-iocn3);
 }
 
 .user-circle, .contact-circle {
@@ -586,13 +590,13 @@ input:focus, textarea:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color:var(--color-white);
   font-weight: bold;
-  border: 2px solid white;
+  border: 2px solid var(--color-white);
 }
 /* ------------------------------------ Board Task beginn! */
 
-.overlay {
+/* .overlay {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.4);
@@ -614,7 +618,7 @@ input:focus, textarea:focus {
 
 .d-none {
     display: none;
-}
+} */
 
 
 /* ----------------------------------------------ende */
@@ -717,7 +721,7 @@ input:focus, textarea:focus {
         left: 0;
         width: 100%;
         height: 120px;
-        background: white;
+        background: var(--color-white);
         display: flex;
         align-items: center;
         padding: 0 24px;
@@ -746,7 +750,7 @@ input:focus, textarea:focus {
         height: 56px;
     }
     .footer-section{
-        background: white;
+        background: var(--color-bg);
         padding-top: 26px;
     }
     .footer-container {
@@ -801,7 +805,7 @@ input:focus, textarea:focus {
         left: 0;
         width: 100%;
         height: 120px;
-        background: white;
+        background: var(--color-bg);
         display: flex;
         align-items: center;
         padding: 0 24px;
@@ -824,7 +828,7 @@ input:focus, textarea:focus {
         padding-right: 10px;
     }
       .footer-section{
-        background: white;
+        background: var(--color-bg);
         padding-top: 26px;
     }
 }
@@ -878,7 +882,7 @@ input:focus, textarea:focus {
         left: 0;
         width: 100%;
         height: 120px;
-        background: white;
+        background: var(--color-bg);
         display: flex;
         align-items: center;
         padding: 0 24px;

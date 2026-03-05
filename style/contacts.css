@@ -448,7 +448,19 @@ button {
     border: none;
 }
 
+#closeCardBtn {
+    display: none;
+}
+
 .mobileEditMenu {
+    display: none;
+}
+
+.mobileMenu {
+    display: none;
+}
+
+.content-slogan {
     display: none;
 }
 
@@ -472,6 +484,13 @@ button {
 .success-message.show {
     bottom: 50%;
     transform: translate(-50%, 50%);
+}
+
+@media (max-width: 1200px) {
+    dialog:open {
+        left: 80px;
+        max-width: 1000px;
+    }
 }
 
 @media(max-width: 850px) {
@@ -536,6 +555,11 @@ button {
         left: 0;
     }
 
+    .content-slogan {
+        display: flex;
+        flex-direction: column;
+    }
+
     .contact-item {
         width: 100%;
         height: 100%;
@@ -552,6 +576,8 @@ button {
 
     #closeCardBtn {
         position: absolute;
+        display: flex;
+        cursor: pointer;
         width: 32px;
         height: 32px;
         top: 5%;
@@ -561,12 +587,23 @@ button {
     .mobileEditMenu {
         position: absolute;
         display: flex;
+        cursor: pointer;
+        height: 56px;
+        width: 56px;
+        top: 74%;
+        right: 10%;
+    }
+
+    .mobileMenu {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
         height: 56px;
         width: 56px;
         top: 80%;
         right: 10%;
     }
-   
 
     dialog:open {
         position: relative;
@@ -625,6 +662,10 @@ button {
         justify-content: center;
         align-items: center;
         flex-direction: column;
+    }
+
+    .mobileMenu {
+        position: fixed;
     }
 
     .profileImg {
