@@ -39,11 +39,16 @@ function generateTaskHTML(task, id) {
  * @returns {string} The HTML string for the assigned badges.
  */
 function generateAssignedHTML(assignedTo) {
-  if (!assignedTo || assignedTo.length === 0) return "";
+  if (!assignedTo) return "";
+  
+  // Firebase might return an object instead of an array depending on how it was saved
+  let assigneesArray = Array.isArray(assignedTo) ? assignedTo : Object.values(assignedTo);
+  
+  if (assigneesArray.length === 0) return "";
 
   const colors = ["bg-orange", "bg-teal", "bg-purple", "bg-blue"];
 
-  return assignedTo
+  return assigneesArray
     .map((name, index) => {
       const initials = name
         .split(" ")

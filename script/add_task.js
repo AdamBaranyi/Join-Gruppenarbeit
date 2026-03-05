@@ -1,5 +1,4 @@
-const BASE_URL =
-  "https://join-backend-afae8-default-rtdb.europe-west1.firebasedatabase.app/";
+
 
 let selectedContacts = [];
 
@@ -13,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function initializePriorityButtons() {
   const triggers = document.querySelectorAll(".trigger");
+  if (!triggers.length) return;
 
   triggers.forEach((btn) => {
     btn.addEventListener("click", (e) => {
@@ -26,13 +26,15 @@ function initializePriorityButtons() {
 function initializeFormValidation() {
   const form = document.getElementById("taskForm");
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-    if (validateForm()) {
-      saveTaskToFirebase();
-    }
-  });
+      if (validateForm()) {
+        saveTaskToFirebase();
+      }
+    });
+  }
 }
 
 function validateForm() {
@@ -219,6 +221,7 @@ function initializeCategoryDropdown() {
   if (!dropdown) return;
   
   const elements = getCategoryDropdownElements(dropdown);
+  if (!elements.header) return;
   
   setupDropdownHeaderListener(dropdown, elements);
   setupCategoryItemsListeners(elements);
@@ -293,7 +296,7 @@ function closeDropdownIfClickOutside(event, dropdown) {
 
 function initializeSubtasks() {
   const elements = getSubtaskElements();
-  if (!elements) return;
+  if (!elements || !elements.addButton || !elements.input || !elements.list || !elements.clearButton) return;
   
   addSubtaskButtonListeners(elements);
   addSubtaskInputListeners(elements);

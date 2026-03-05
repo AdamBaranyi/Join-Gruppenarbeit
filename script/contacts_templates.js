@@ -60,7 +60,8 @@ function contactCard(contact) {
             <strong>Email:</strong> <br> <span class="mailStyle">${contact.email}</span><br>
             <strong>Phone Number:</strong> <span>${contact.phone}</span>
             </div>
-            <img onclick='mobileEditMenu(${JSON.stringify(contact)})' class="mobileEditMenu" src="../assets/imgs/Menu Contact options.png" alt="contact options menu">
+            <img onclick='mobileEditMenu(${JSON.stringify(contact)}, event)' id="mobileOptionMenu" class="mobileEditMenu" src="../assets/imgs/Menu Contact options.png" alt="contact options menu">
+            <div class="displayNone" id="mobileMenu"></div>
         </div>
     `;
 }
@@ -91,7 +92,9 @@ function editFormRightSide(contact) {
 
 function menuTempl(contact) {
     return `
-      <button onclick="editContact('${contact.id}')" class="mobileEditBtn">Edit</button>
-      <button onclick="deleteContact('${contact.id}')" class="mobileDeleteBtn">Delete</button>
+      <div class="mobileMenu">
+          <button onclick="editContact('${contact.id}')" class="mobileEditBtn">Edit</button>
+          <button onclick="deleteContact('${contact.id}')" class="mobileDeleteBtn">Delete</button>
+      </div>
     `;
 }

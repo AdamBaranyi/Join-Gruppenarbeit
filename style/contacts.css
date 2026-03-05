@@ -456,6 +456,14 @@ button {
     display: none;
 }
 
+.mobileMenu {
+    display: none;
+}
+
+.content-slogan {
+    display: none;
+}
+
 .success-message {
     position: fixed;
     bottom: -100px;
@@ -547,6 +555,11 @@ button {
         left: 0;
     }
 
+    .content-slogan {
+        display: flex;
+        flex-direction: column;
+    }
+
     .contact-item {
         width: 100%;
         height: 100%;
@@ -577,10 +590,20 @@ button {
         cursor: pointer;
         height: 56px;
         width: 56px;
+        top: 74%;
+        right: 10%;
+    }
+
+    .mobileMenu {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        height: 56px;
+        width: 56px;
         top: 80%;
         right: 10%;
     }
-   
 
     dialog:open {
         position: relative;
@@ -639,6 +662,10 @@ button {
         justify-content: center;
         align-items: center;
         flex-direction: column;
+    }
+
+    .mobileMenu {
+        position: fixed;
     }
 
     .profileImg {

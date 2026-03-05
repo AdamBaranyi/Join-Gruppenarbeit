@@ -1,5 +1,3 @@
-const BASE_URL =
-  "https://join-backend-afae8-default-rtdb.europe-west1.firebasedatabase.app/users";
 
 let username = document.getElementById("username");
 let email = document.getElementById("email");
