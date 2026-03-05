@@ -1,7 +1,6 @@
-const BASE_URL = "https://join-backend-afae8-default-rtdb.europe-west1.firebasedatabase.app/";
-const currentUser = getCurrentUser()?.id;
-const userId = currentUser || "guest";
-const url = `${BASE_URL}/contacts/${userId}.json`;
+let currentUser;
+let userId;
+let url;
 let leftSide = document.getElementById('leftSideModal');
 const contactWindow = document.getElementById("contactModal")
 const contactModal = document.getElementById("dialogModal")
@@ -38,6 +37,10 @@ function groupContactsByLetter(contacts) {
 
 // zum laden der Kontakte eines Nutzers
 async function loadContacts() {
+  currentUser = getCurrentUser()?.id;
+  userId = currentUser || "guest";
+  url = `${BASE_URL}/contacts/${userId}.json`;
+  
   const response = await fetch(url);
   const data = await response.json();
 

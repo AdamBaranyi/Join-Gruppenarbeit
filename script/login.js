@@ -1,8 +1,3 @@
-/**
- * The base URL for the Firebase Realtime Database.
- * @constant {string}
- */
-const BASE_URL = "https://join-backend-afae8-default-rtdb.europe-west1.firebasedatabase.app/users";
 
 /**
  * Initializes the login page.
