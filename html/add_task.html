@@ -23,9 +23,9 @@
     <div w3-include-html="../assets/templates/sidebar.html"></div>
     <div w3-include-html="../assets/templates/mobile_sidebar.html"></div>
         
-  <div class="page-header">
+    <div class="page-header">
     <h1>Add Task</h1>
-</div>
+    </div>
 
     <main class="main-container">
         
@@ -187,11 +187,13 @@
             <div class="button-group">
                 <button type="button" class="clear-btn" onclick="clearForm()">
                     <span class="btn-text">Clear</span>
-                    <span class="btn-icon close-icon">✖</span>
+                    <svg class="btn-icon close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12.001 12 5.243 5.243m-10.486 0L12.001 12zM17.244 6.757 12 12zM12 12 6.758 6.757z"/>
+                    </svg>
                 </button>
                 <button type="submit" class="create-btn" form="taskForm">
                     <span class="btn-text">Create Task</span>
-                    <span class="btn-icon create-icon">✓</span>
+                    <svg class="btn-icon create-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><mask id="a" width="24" height="24" x="0" y="0" maskUnits="userSpaceOnUse" style="mask-type:alpha"><path fill="#d9d9d9" d="M0 0h24v24H0z"/></mask><g mask="url(#a)"><path fill="#fff" d="m9.55 15.15 8.476-8.475q.3-.3.712-.3.413 0 .713.3t.3.713q0 .411-.3.712l-9.2 9.2q-.3.3-.7.3a.96.96 0 0 1-.7-.3L4.55 13a.93.93 0 0 1-.288-.713 1.02 1.02 0 0 1 .313-.712q.3-.3.712-.3.413 0 .713.3z"/></g></svg>
                 </button>
             </div>
         </div>

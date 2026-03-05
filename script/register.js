@@ -79,7 +79,7 @@ function validatePasswordConfirmation() {
 
 function validatePrivacyPolicy() {
   if (!checkbox.checked) {
-    document.getElementById("error-privacy").innerText = "* Please accept the privacy policy";
+    document.getElementById("error-privacy");
     return false;
   }
   return true;

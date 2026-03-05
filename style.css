@@ -29,9 +29,16 @@
   --color-secondary: #29abe2; /* Light Blue Accent */
   --color-text: #000000;
   --color-text-secondary: #a8a8a8;
+  --color-placeholder-primary: #666;
   --color-white: #ffffff;
   --color-error: #ff8190;
-  --color-success: #5db329; /* Green for "Done" or success */
+  --color-success: #7ae229; /* Green for "Done" or success */
+  --color-btn-medium:#ffa800;
+  --color-btn-urgent:#ff3d00;
+  --color-contact-iocn1:#1FD7C1;
+  --color-contact-iocn2:#9747FF;
+  --color-contact-iocn3:#0038FF;
+  
 
   --font-primary: "Inter", sans-serif;
 }
