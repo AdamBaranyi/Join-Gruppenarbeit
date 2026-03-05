@@ -266,9 +266,12 @@ function renderEditForm(contact) {
 }
 
 // zum öffnen des dropdown menus auf mobilen Geräten
-function mobileEditMenu(contact) {
-  let menu = document.createElement('div');
+function mobileEditMenu(contact, event) {
+  event.stopPropagation();
+  let menu = document.getElementById('mobileMenu');
   menu.innerHTML = menuTempl(contact);
+  menu.classList.toggle('mobileMenu');
+  menu.classList.toggle("displayNone");
   menu.querySelector(".mobileEditBtn").addEventListener("click", () => {
     renderEditForm(contact);
   });
