@@ -18,7 +18,7 @@
 
 </head>
 
-<body onload="init()">
+<body class="add-task-body" onload="init()">
     <div w3-include-html="../assets/templates/header.html"></div>
     <div w3-include-html="../assets/templates/sidebar.html"></div>
     <div w3-include-html="../assets/templates/mobile_sidebar.html"></div>
@@ -172,7 +172,7 @@
             </div>
         </form>
 
-        <div id="successOverlay" class="overlay">
+        <div id="successOverlay" class="overlay" style="display: none;">
             <div class="overlay-content">
                 <p>Task added to Board </p>
                 <img src="../assets/imgs/Board.svg" alt="">
