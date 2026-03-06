@@ -1,92 +1,114 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join - Summary</title>
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../style/sidebar.css">
-    <link rel="stylesheet" href="../style/mobile_sidebar.css">
-    <link rel="stylesheet" href="../style/summary.css">
-    <link rel="icon" type="image/svg+xml" href="../assets/imgs/logo.svg">
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../style/sidebar.css" />
+    <link rel="stylesheet" href="../style/mobile_sidebar.css" />
+    <link rel="stylesheet" href="../style/summary.css" />
+    <link rel="icon" type="image/svg+xml" href="../assets/imgs/logo.svg" />
     <script src="../script.js"></script>
     <script src="../script/summary.js"></script>
-</head>
-<body onload="init()">
-    
+  </head>
+  <body onload="init()">
     <div w3-include-html="../assets/templates/sidebar.html"></div>
     <div w3-include-html="../assets/templates/mobile_sidebar.html"></div>
     <div w3-include-html="../assets/templates/header.html"></div>
 
     <main class="content-container summary-content">
-        <div class="summary-header-container">
-            <h1>Join 360</h1>
-            <div class="summary-divider"></div>
-            <span class="subtitle">Key Metrics at a Glance</span>
-        </div>
+      <div class="summary-header-container">
+        <h1>Join 360</h1>
+        <div class="summary-divider"></div>
+        <span class="subtitle">Key Metrics at a Glance</span>
+      </div>
 
-        <div class="summary-main-wrapper">
-            <section class="metrics-container">
-                <div class="metrics-row">
-                    <div class="metric-card" onclick="location.href='board.html'">
-                        <div class="metric-icon-circle icon-edit">
-                            <img src="../assets/imgs/edit_white.svg" alt="To-do">
-                        </div>
-                        <div class="metric-info">
-                            <span class="metric-number">1</span>
-                            <span class="metric-label">To-do</span>
-                        </div>
-                    </div>
-                    
-                    <div class="metric-card" onclick="location.href='board.html'">
-                        <div class="metric-icon-circle icon-check">
-                            <img src="../assets/imgs/check.svg" alt="Done"> 
-                        </div>
-                        <div class="metric-info">
-                            <span class="metric-number">1</span>
-                            <span class="metric-label">Done</span>
-                        </div>
-                    </div>
-                </div>
+      <div class="summary-main-wrapper">
+        <section class="metrics-container">
+          <div class="metrics-row">
+            <div class="metric-card" onclick="location.href = 'board.html'">
+              <div class="metric-icon-circle icon-edit">
+                <img src="../assets/imgs/edit_white.svg" alt="To-do" />
+              </div>
+              <div class="metric-info">
+                <span class="metric-number" id="metric-todo">1</span>
+                <span class="metric-label">To-do</span>
+              </div>
+            </div>
 
-                <div class="metric-card urgent-card" onclick="location.href='board.html'">
-                    <div class="urgent-left">
-                        <div class="metric-icon-circle icon-urgent">
-                            <img src="../assets/imgs/urgent-icon.png" alt="Urgent">
-                        </div>
-                        <div class="metric-info">
-                            <span class="metric-number">1</span>
-                            <span class="metric-label">Urgent</span>
-                        </div>
-                    </div>
-                    <div class="urgent-divider"></div>
-                    <div class="urgent-right">
-                        <span class="urgent-date">October 16, 2026</span>
-                        <span class="urgent-label">Upcoming Deadline</span>
-                    </div>
-                </div>
+            <div class="metric-card" onclick="location.href = 'board.html'">
+              <div class="metric-icon-circle icon-check">
+                <img src="../assets/imgs/check.svg" alt="Done" />
+              </div>
+              <div class="metric-info">
+                <span class="metric-number" id="metric-done">1</span>
+                <span class="metric-label">Done</span>
+              </div>
+            </div>
+          </div>
 
-                <div class="metrics-row small-cards">
-                    <div class="metric-card small" onclick="location.href='board.html'">
-                        <span class="metric-number">5</span>
-                        <span class="metric-label">Tasks in <br> Board</span>
-                    </div>
-                    <div class="metric-card small" onclick="location.href='board.html'">
-                        <span class="metric-number">2</span>
-                        <span class="metric-label">Tasks In <br> Progress</span>
-                    </div>
-                    <div class="metric-card small" onclick="location.href='board.html'">
-                        <span class="metric-number">2</span>
-                        <span class="metric-label">Awaiting <br> Feedback</span>
-                    </div>
-                </div>
-            </section>
+          <div
+            class="metric-card urgent-card"
+            onclick="location.href = 'board.html'"
+          >
+            <div class="urgent-left">
+              <div class="metric-icon-circle icon-urgent">
+                <img src="../assets/imgs/urgent-icon.png" alt="Urgent" />
+              </div>
+              <div class="metric-info">
+                <span class="metric-number" id="metric-urgent">1</span>
+                <span class="metric-label">Urgent</span>
+              </div>
+            </div>
+            <div class="urgent-divider"></div>
+            <div class="urgent-right">
+              <span class="urgent-date" id="urgent-date-display"
+                >October 16, 2026</span
+              >
+              <span class="urgent-label">Upcoming Deadline</span>
+            </div>
+          </div>
 
-            <section class="greeting-container">
-                <span id="greeting-time">Good morning,</span>
-                <span id="greeting-name"></span>
-            </section>
-        </div>
+          <div class="metrics-row small-cards">
+            <div
+              class="metric-card small"
+              onclick="location.href = 'board.html'"
+            >
+              <span class="metric-number" id="metric-board">5</span>
+              <span class="metric-label"
+                >Tasks in <br />
+                Board</span
+              >
+            </div>
+            <div
+              class="metric-card small"
+              onclick="location.href = 'board.html'"
+            >
+              <span class="metric-number" id="metric-progress">2</span>
+              <span class="metric-label"
+                >Tasks In <br />
+                Progress</span
+              >
+            </div>
+            <div
+              class="metric-card small"
+              onclick="location.href = 'board.html'"
+            >
+              <span class="metric-number" id="metric-feedback">2</span>
+              <span class="metric-label"
+                >Awaiting <br />
+                Feedback</span
+              >
+            </div>
+          </div>
+        </section>
+
+        <section class="greeting-container">
+          <span id="greeting-time">Good morning,</span>
+          <span id="greeting-name"></span>
+        </section>
+      </div>
     </main>
-</body>
+  </body>
 </html>

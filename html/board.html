@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../style/mobile_sidebar.css" />
     <link rel="stylesheet" href="../style/add_task.css" />
     <link rel="stylesheet" href="../style/popup_add_task.css" />
+    <script defer src="../script/contacts.js"></script>
     <script defer src="../script/board_templates.js"></script>
     <script defer src="../script/board_helpers.js"></script>
     <script defer src="../script/board.js"></script>
@@ -69,10 +70,12 @@
           </div>
         </div>
 
-        <div class="board-columns-container"
-              id="todo"
-              ondrop="moveTo('todo')"
-              ondragover="allowDrop(event)">
+        <div
+          class="board-columns-container"
+          id="todo"
+          ondrop="moveTo('todo')"
+          ondragover="allowDrop(event)"
+        >
           <!-- To do -->
           <div class="board-column">
             <div class="column-header">
@@ -86,51 +89,50 @@
             </div>
           </div>
 
-          <div class="board-column"
-                id="inProgress"
-                ondrop="moveTo('inProgress')"
-                ondragover="allowDrop(event)">
+          <div
+            class="board-column"
+            id="inProgress"
+            ondrop="moveTo('inProgress')"
+            ondragover="allowDrop(event)"
+          >
             <div class="column-header">
               <h2>In progress</h2>
               <button class="plus-btn">
                 <img src="../assets/imgs/plus button.png" alt="Add" />
               </button>
             </div>
-            <div
-              class="tasks-container"
-              id="taskInProgress"
-            >
+            <div class="tasks-container" id="taskInProgress">
               <div class="no-tasks">No tasks in progress</div>
             </div>
           </div>
 
-          <div class="board-column"
-                id="awaitingFeedback"
-                ondrop="moveTo('awaitingFeedback')"
-                ondragover="allowDrop(event)">
+          <div
+            class="board-column"
+            id="awaitingFeedback"
+            ondrop="moveTo('awaitingFeedback')"
+            ondragover="allowDrop(event)"
+          >
             <div class="column-header">
               <h2>Await feedback</h2>
               <button class="plus-btn">
                 <img src="../assets/imgs/plus button.png" alt="Add" />
               </button>
             </div>
-            <div
-              class="tasks-container"
-              id="taskAwaitingFeedback">
+            <div class="tasks-container" id="taskAwaitingFeedback">
               <div class="no-tasks">No tasks awaiting feedback</div>
             </div>
           </div>
 
-          <div class="board-column"
-                id="done"
-                ondrop="moveTo('done')"
-                ondragover="allowDrop(event)">
+          <div
+            class="board-column"
+            id="done"
+            ondrop="moveTo('done')"
+            ondragover="allowDrop(event)"
+          >
             <div class="column-header">
               <h2>Done</h2>
             </div>
-            <div
-              class="tasks-container"
-              id="taskDone">
+            <div class="tasks-container" id="taskDone">
               <div class="no-tasks">No tasks done</div>
             </div>
           </div>
