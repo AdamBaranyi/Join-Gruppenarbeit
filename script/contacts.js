@@ -37,14 +37,13 @@ function groupContactsByLetter(contacts) {
 
 // load contacts of a user
 async function loadContacts() {
-  currentUser = getCurrentUser()?.id;
-  userId = currentUser || "guest";
-  url = `${BASE_URL}/contacts/${userId}.json`;
+  url = `${BASE_URL}/contacts/.json`;
   
   const response = await fetch(url);
   const data = await response.json();
 
   const contacts = data ? Object.values(data) : [];
+  console.log("contacts:", contacts);
   renderContactList(contacts);
 }
 
@@ -155,7 +154,7 @@ async function addContact(contactData) {
 
 // save a new contact to the database
 async function putContactInBackend(newId, contactWithId) {
-  await fetch(`${BASE_URL}/contacts/${userId}/${newId}.json`, {
+  await fetch(`${BASE_URL}/contacts/${newId}.json`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(contactWithId)
@@ -290,7 +289,7 @@ async function editContact(contactId) {
     lastname,
     email
   };
-  await fetch(`${BASE_URL}/contacts/${userId}/${contactId}.json`, {
+  await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(updatedContact)
@@ -304,7 +303,7 @@ async function editContact(contactId) {
 async function deleteContact(contactId) {
   const contactImg = document.getElementById("modalInitials");
   contactImg.classList.remove("contact-initials")
-  await fetch(`${BASE_URL}/contacts/${userId}/${contactId}.json`, {
+  await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
     method: "DELETE"
   });
 
