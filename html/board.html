@@ -69,7 +69,10 @@
           </div>
         </div>
 
-        <div class="board-columns-container">
+        <div class="board-columns-container"
+              id="todo"
+              ondrop="moveTo('todo')"
+              ondragover="allowDrop(event)">
           <!-- To do -->
           <div class="board-column">
             <div class="column-header">
@@ -78,17 +81,15 @@
                 <img src="../assets/imgs/plus button.png" alt="Add" />
               </button>
             </div>
-            <div
-              class="tasks-container"
-              id="todo"
-              ondrop="moveTo('todo')"
-              ondragover="allowDrop(event)"
-            >
+            <div class="tasks-container" id="taskTodo">
               <div class="no-tasks">No tasks To do</div>
             </div>
           </div>
 
-          <div class="board-column">
+          <div class="board-column"
+                id="inProgress"
+                ondrop="moveTo('inProgress')"
+                ondragover="allowDrop(event)">
             <div class="column-header">
               <h2>In progress</h2>
               <button class="plus-btn">
@@ -97,15 +98,16 @@
             </div>
             <div
               class="tasks-container"
-              id="inProgress"
-              ondrop="moveTo('inProgress')"
-              ondragover="allowDrop(event)"
+              id="taskInProgress"
             >
               <div class="no-tasks">No tasks in progress</div>
             </div>
           </div>
 
-          <div class="board-column">
+          <div class="board-column"
+                id="awaitingFeedback"
+                ondrop="moveTo('awaitingFeedback')"
+                ondragover="allowDrop(event)">
             <div class="column-header">
               <h2>Await feedback</h2>
               <button class="plus-btn">
@@ -114,24 +116,21 @@
             </div>
             <div
               class="tasks-container"
-              id="awaitingFeedback"
-              ondrop="moveTo('awaitingFeedback')"
-              ondragover="allowDrop(event)"
-            >
+              id="taskAwaitingFeedback">
               <div class="no-tasks">No tasks awaiting feedback</div>
             </div>
           </div>
 
-          <div class="board-column">
+          <div class="board-column"
+                id="done"
+                ondrop="moveTo('done')"
+                ondragover="allowDrop(event)">
             <div class="column-header">
               <h2>Done</h2>
             </div>
             <div
               class="tasks-container"
-              id="done"
-              ondrop="moveTo('done')"
-              ondragover="allowDrop(event)"
-            >
+              id="taskDone">
               <div class="no-tasks">No tasks done</div>
             </div>
           </div>

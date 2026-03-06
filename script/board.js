@@ -23,10 +23,10 @@ async function loadTasks() {
 
 function renderTasks(tasks) {
   const columns = {
-    todo: document.getElementById("todo"),
-    inProgress: document.getElementById("inProgress"),
-    awaitingFeedback: document.getElementById("awaitingFeedback"),
-    done: document.getElementById("done"),
+    todo: document.getElementById("taskTodo"),
+    inProgress: document.getElementById("taskInProgress"),
+    awaitingFeedback: document.getElementById("taskAwaitingFeedback"),
+    done: document.getElementById("taskDone")
   };
 
   Object.values(columns).forEach((col) => {
