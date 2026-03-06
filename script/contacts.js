@@ -5,21 +5,21 @@ let leftSide = document.getElementById('leftSideModal');
 const contactWindow = document.getElementById("contactModal")
 const contactModal = document.getElementById("dialogModal")
 
-// zum laden des aktuellen Nutzers aus der Session Storage
+//load current user from session storage
 function getCurrentUser() {
   let currentUser = JSON.parse(sessionStorage.getItem("current_user"));
   console.log("current User:", currentUser )
   return currentUser;
 }
 
-// zum sortieren der Kontakte nach dem Vornamen
+// sort contacts by firstname
 function sortContactsByFirstname(contacts) {
   return [...contacts].sort((a, b) =>
     a.firstname.localeCompare(b.firstname, "de", { sensitivity: "base" })
   );
 }
 
-// zum gruppieren der Kontakte nach dem Anfangsbuchstaben des Vornamens
+// group contacts by the first letter of the firstname
 function groupContactsByLetter(contacts) {
   const groups = {};
 
@@ -35,7 +35,7 @@ function groupContactsByLetter(contacts) {
   return groups;
 }
 
-// zum laden der Kontakte eines Nutzers
+// load contacts of a user
 async function loadContacts() {
   currentUser = getCurrentUser()?.id;
   userId = currentUser || "guest";
@@ -48,7 +48,7 @@ async function loadContacts() {
   renderContactList(contacts);
 }
 
-// zum rendern der Kontaktliste mit den Kontakten eines Nutzers
+// render contact list with currentuser contacts
 function renderContactList(contacts) {
   const container = document.getElementById("contactListContent");
   const sorted = sortContactsByFirstname(contacts);
@@ -111,7 +111,7 @@ function getColorFromName(name) {
   return contactColors[index];
 }
 
-// zum öffnen des Modals zum Erstellen eines neuen Kontakts
+// open the modal to create a new contact
 function openModal() {
   contactModal.showModal();
   const modalInitials = document.getElementById("modalInitials");
@@ -123,12 +123,12 @@ function openModal() {
   contactWindow.innerHTML = openModalRightSide();
 };
 
-// zum schließen des Modals
+// close the modal
 function closeModal() {
   contactModal.close();
 };
-  
-// zum hinzufügen eines neuen Kontakts
+
+// add a new contact
 async function addContact(contactData) {
     const res = await fetch(url);
     const contacts = await res.json();
@@ -159,7 +159,7 @@ async function addContact(contactData) {
   }
 };
 
-// zum speichern eines neuen Kontakts in der Datenbank
+// save a new contact to the database
 async function putContactInBackend(newId, contactWithId) {
   await fetch(`${BASE_URL}/contacts/${userId}/${newId}.json`, {
           method: "PUT",
@@ -168,7 +168,7 @@ async function putContactInBackend(newId, contactWithId) {
       });
 }
 
-// zum anzeigen einer Erfolgsmeldung nach dem Erstellen eines neuen Kontakts
+// show a success message after creating a new contact
 function showSuccessMessage() {
     let successMessage = document.getElementById('successMessage');
     successMessage.classList.remove('displayNone');
@@ -191,7 +191,7 @@ async function showContactDetails(contactId) {
 };
 
 
-// zum rendern der Kontaktkarte mit den Details eines Kontakts
+// render contact card with the details of a contact
 function renderContactCard(contact) {
   const card = document.getElementById("contactCardContent");
   if (window.innerWidth <= 850){
@@ -219,7 +219,7 @@ function renderContactCard(contact) {
 }
 
 
-// zum laden der Initalien von Vor- und Nachnamen
+// load initials from first and last name
 function showInitials(contact) {
   const cardInitials = document.getElementById("contactInitials");
   const modalInitials = document.getElementById('modalInitials');
@@ -241,7 +241,7 @@ function showInitials(contact) {
 }
 
 
-// zum schließen der Kontaktkarte auf mobilen Geräten
+// close the contact card on mobile devices
 function closeContactCard() {
   const card = document.getElementById("contactCardContent");
   if (window.innerWidth <= 850){
@@ -257,7 +257,7 @@ function closeContactCard() {
   }
 }
 
-// zum öffnen des Modals zum Bearbeiten eines Kontakts
+// open the modal to edit a contact
 function renderEditForm(contact) {
   openModal();
   leftSide.innerHTML = editFormleftSide();
@@ -268,7 +268,7 @@ function renderEditForm(contact) {
   showInitials(contact);
 }
 
-// zum öffnen des dropdown menus auf mobilen Geräten
+// open the dropdown menu on mobile devices
 function mobileEditMenu(contact, event) {
   event.stopPropagation();
   let menu = document.getElementById('mobileMenu');
@@ -283,7 +283,7 @@ function mobileEditMenu(contact, event) {
   });
 }
 
-// zum bearbeiten eines Kontakts
+// edit a contact
 async function editContact(contactId) {
   const firstname = document.getElementById('firstname').value;
   const lastname = document.getElementById('lastname').value;
@@ -306,7 +306,7 @@ async function editContact(contactId) {
   await showContactDetails(contactId);
 }
 
-// zum löschen eines Kontakts
+// delete a contact
 async function deleteContact(contactId) {
   const contactImg = document.getElementById("modalInitials");
   contactImg.classList.remove("contact-initials")
@@ -319,8 +319,8 @@ async function deleteContact(contactId) {
   card.innerHTML = '';
 }
 
-// zum leeren der Eingabefelder im Modal 
-function cancelContac() {
+// clear the input fields in the modal
+function cancelContact() {
   let firstname = document.getElementById('firstname');
   let lastname = document.getElementById('lastname');
   let email = document.getElementById('email');

@@ -156,7 +156,7 @@ function getInitials(name) {
 
 function createContactElement(name, colorClass, elements) {
   const initials = getInitials(name);
-
+  
   const item = document.createElement("div");
   item.className = "contact-item";
   item.innerHTML = renderContactsTemplate(initials, colorClass, name, false);  // Hier habe das HTML ausgelagert! 
@@ -406,6 +406,7 @@ function clearCompleteForm() {
   clearForm();
   document.getElementById("subTaskInput").value = "";
 }
+
 
 async function saveTaskToFirebase() {
   try {

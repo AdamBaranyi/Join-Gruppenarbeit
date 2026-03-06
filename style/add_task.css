@@ -365,7 +365,6 @@ input:focus, textarea:focus {
 
 .clear-subtask-btn:hover {
     background: #f0f0f0;
-    color: #ff3d00;
 }
 
 .add-subtask-btn:hover {
@@ -402,19 +401,22 @@ input:focus, textarea:focus {
     border: none;
     background: transparent;
     height: auto;
-    padding: 16px;
+    padding: 4px 40px;
     font-size: 16px;    
 }
 
 .subtask-item input:not(:disabled) {
     background: var(--color-bg);
-    padding: 4px 8px;
-    border: 1px solid var(--color-secondary);
+    padding: 4px 40px;
+    /* border: 1px solid var(--color-secondary); */
     border-radius: 4px;
     height: 100%;
 }
 
 .subtask-item button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -426,6 +428,7 @@ input:focus, textarea:focus {
 
 .subtask-item button:hover {
     background: #e0e0e0;
+    
 }
 
 .edit-btn {
@@ -444,6 +447,14 @@ input:focus, textarea:focus {
 
 .edit-btn.editing .save-icon {
     display: block;
+}
+
+.subtask-item::before {
+    position: absolute;
+    left: 16px;
+    content: "•";
+    font-size: 20px;
+    color: var(--color-primary);
 }
 
 .overlay {
@@ -596,34 +607,6 @@ input:focus, textarea:focus {
   font-weight: bold;
   border: 2px solid var(--color-white);
 }
-/* ------------------------------------ Board Task beginn! */
-
-/* .overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-}
-
-.popup {
-    background: white;
-    width: 90%;
-    max-width: 1200px;
-    border-radius: 20px;
-    padding: 32px;
-    max-height: 90vh;
-    overflow-y: auto;
-}
-
-.d-none {
-    display: none;
-} */
-
-
-/* ----------------------------------------------ende */
 
 @media (max-width: 1400px) {
     .main-container {
