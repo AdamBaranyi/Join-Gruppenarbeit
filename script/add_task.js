@@ -118,13 +118,16 @@ function getDropdownElements(dropdown) {
 
 async function renderAllContacts(elements) {
   const contacts = await getContactsList();
-  const colors = ["bg-orange", "bg-teal", "bg-purple", "bg-blue"];
 
   elements.dropdownList.innerHTML = "";
 
-  contacts.forEach((contact, index) => {
+  contacts.forEach((contact) => {
     const fullName = `${contact.firstname} ${contact.lastname}`;
-    createContactElement(fullName, colors[index % colors.length], elements);
+    const bgColor =
+      typeof getColorFromName === "function"
+        ? getColorFromName(fullName)
+        : "#FF7A00";
+    createContactElement(fullName, bgColor, elements);
   });
 
   updateSelectedUsersDisplay(elements);
@@ -148,12 +151,19 @@ function getInitials(name) {
     .toUpperCase();
 }
 
-function createContactElement(name, colorClass, elements) {
+function createContactElement(name, bgColor, elements) {
   const initials = getInitials(name);
+
+  // Note: we can't reliably pass just a hex color class if the template expects a class.
+  // Wait, I need to check renderContactsTemplate in add_task_template.js
 
   const item = document.createElement("div");
   item.className = "contact-item";
-  item.innerHTML = renderContactsTemplate(initials, colorClass, name, false); // Hier habe das HTML ausgelagert!
+  // To avoid breaking the existing add_task_template without looking at it,
+  // I will pass the color as a Hex value string instead of a class,
+  // but if the template assumes a CSS class instead of 'style="background-color: ..."'
+  // I might need to update the template first. Let's look at the template next.
+  item.innerHTML = renderContactsTemplate(initials, bgColor, name, false);
   setupContactCheckbox(item, name, false, elements);
   elements.dropdownList.appendChild(item);
 }
@@ -179,10 +189,13 @@ function updateSelectedContacts(name, isChecked) {
 
 function updateSelectedUsersDisplay(elements) {
   elements.selectedContainer.innerHTML = "";
-  const colors = ["bg-orange", "bg-teal", "bg-purple", "bg-blue"];
 
-  selectedContacts.slice(0, 5).forEach((name, index) => {
-    const circle = createUserCircle(name, colors[index % colors.length]);
+  selectedContacts.slice(0, 5).forEach((name) => {
+    const bgColor =
+      typeof getColorFromName === "function"
+        ? getColorFromName(name)
+        : "#FF7A00";
+    const circle = createUserCircle(name, bgColor);
     elements.selectedContainer.appendChild(circle);
   });
 
@@ -190,9 +203,11 @@ function updateSelectedUsersDisplay(elements) {
     selectedContacts.length === 0 ? "inline" : "none";
 }
 
-function createUserCircle(name, colorClass) {
+function createUserCircle(name, bgColor) {
   const circle = document.createElement("div");
-  circle.className = `user-circle ${colorClass}`;
+  // We apply the exact background-color inline since it's a dynamic hex value
+  circle.className = `user-circle`;
+  circle.style.backgroundColor = bgColor;
   circle.innerText = getInitials(name);
   circle.title = name;
   return circle;

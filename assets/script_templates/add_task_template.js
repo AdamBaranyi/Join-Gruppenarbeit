@@ -1,7 +1,7 @@
-function renderContactsTemplate(initials, colorClass, name, isYou) {
+function renderContactsTemplate(initials, bgColor, name, isYou) {
   return `
         <div class="contact-left">
-          <div class="contact-circle ${colorClass}">${initials}</div>
+          <div class="contact-circle" style="background-color: ${bgColor};">${initials}</div>
           <span>${name}</span>
         </div>
         <input type="checkbox" value="${name}" ${isYou ? "checked" : ""}>

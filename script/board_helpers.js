@@ -9,16 +9,22 @@ function renderEditAssignees() {
   let container = document.getElementById("editModalAssignees");
   if (!container) return;
   container.innerHTML = "";
-  const colors = ["bg-orange", "bg-teal", "bg-purple", "bg-blue"];
-  editSelectedContacts.forEach((name, index) => {
+
+  editSelectedContacts.forEach((name) => {
     const initials = name
       .split(" ")
       .map((n) => n[0])
       .join("")
       .toUpperCase()
       .substring(0, 2);
-    const colorClass = colors[index % colors.length];
-    container.innerHTML += `<div class="user-circle ${colorClass}">${initials}</div>`;
+
+    // In contexts where a full contact logic is handled, use dynamic color
+    const bgColor =
+      typeof getColorFromName === "function"
+        ? getColorFromName(name)
+        : "#FF7A00";
+
+    container.innerHTML += `<div class="user-circle" style="background-color: ${bgColor};">${initials}</div>`;
   });
 }
 
@@ -37,19 +43,23 @@ async function renderEditAssigneesDropdown() {
   let list = document.getElementById("editDropdownList");
   if (!list) return;
   list.innerHTML = "";
-  const colors = ["bg-orange", "bg-teal", "bg-purple", "bg-blue"];
+
   const contacts = await getContactsList();
 
-  contacts.forEach((contact, index) => {
+  contacts.forEach((contact) => {
     const name = `${contact.firstname} ${contact.lastname}`;
     const initials = getInitials(name);
-    const colorClass = colors[index % colors.length];
+
+    const bgColor =
+      typeof getColorFromName === "function"
+        ? getColorFromName(name)
+        : "#FF7A00";
     const isChecked = editSelectedContacts.includes(name) ? "checked" : "";
 
     list.innerHTML += `
             <div class="contact-item">
                 <div class="contact-left">
-                  <div class="contact-circle ${colorClass}">${initials}</div>
+                  <div class="contact-circle" style="background-color: ${bgColor};">${initials}</div>
                   <span>${name}</span>
                 </div>
                 <input type="checkbox" value="${name}" ${isChecked} onchange="toggleEditContact('${name}', this.checked)">
@@ -193,19 +203,22 @@ function renderModalAssignees(assignedTo) {
 
   if (!assignedTo || assignedTo.length === 0) return;
 
-  const colors = ["bg-orange", "bg-teal", "bg-purple", "bg-blue"];
-
-  assignedTo.forEach((name, index) => {
+  assignedTo.forEach((name) => {
     const initials = name
       .split(" ")
       .map((n) => n[0])
       .join("")
-      .toUpperCase();
-    const colorClass = colors[index % colors.length];
+      .toUpperCase()
+      .substring(0, 2);
+
+    const bgColor =
+      typeof getColorFromName === "function"
+        ? getColorFromName(name)
+        : "#FF7A00";
 
     container.innerHTML += `
             <div class="assignee-row">
-                <div class="assignee-badge ${colorClass}">${initials}</div>
+                <div class="assignee-badge" style="background-color: ${bgColor};">${initials}</div>
                 <span class="assignee-name">${name}</span>
             </div>
         `;
