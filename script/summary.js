@@ -3,20 +3,23 @@
 /**
  * Initializes the summary page by loading templates,
  * setting the active navigation item, greeting the user,
- * and triggering the mobile splash screen only after login.
+ * triggering the mobile splash screen only after login,
+ * and loading task metrics.
  */
 async function init() {
-    await includeHTML();
-    setActiveNavItem();
-    greetUser();
-    let shouldSplash = sessionStorage.getItem('showSplash') === 'true';
-    if (window.innerWidth <= 850 && shouldSplash) {
-        sessionStorage.removeItem('showSplash');
-        handleMobileSplash();
-    } else {
-        ensureDashboardVisible();
-    }
-    window.addEventListener('resize', handleResize);
+  await includeHTML();
+  setActiveNavItem();
+  greetUser();
+  await loadSummaryMetrics();
+
+  let shouldSplash = sessionStorage.getItem("showSplash") === "true";
+  if (window.innerWidth <= 850 && shouldSplash) {
+    sessionStorage.removeItem("showSplash");
+    handleMobileSplash();
+  } else {
+    ensureDashboardVisible();
+  }
+  window.addEventListener("resize", handleResize);
 }
 
 /**
@@ -25,7 +28,7 @@ async function init() {
  * desktop and mobile views (e.g., Chrome DevTools responsive mode).
  */
 function handleResize() {
-    ensureDashboardVisible();
+  ensureDashboardVisible();
 }
 
 /**
@@ -33,10 +36,10 @@ function handleResize() {
  * so they remain visible after a viewport change.
  */
 function ensureDashboardVisible() {
-    const metricsContainer = document.querySelector('.metrics-container');
-    const headerContainer = document.querySelector('.summary-header-container');
-    if (metricsContainer) metricsContainer.classList.add('dashboard-ready');
-    if (headerContainer) headerContainer.classList.add('dashboard-ready');
+  const metricsContainer = document.querySelector(".metrics-container");
+  const headerContainer = document.querySelector(".summary-header-container");
+  if (metricsContainer) metricsContainer.classList.add("dashboard-ready");
+  if (headerContainer) headerContainer.classList.add("dashboard-ready");
 }
 
 /* Mobile Splash Screen */
@@ -47,16 +50,22 @@ function ensureDashboardVisible() {
  * and reveals the dashboard content (metrics, header, sidebar).
  */
 function handleMobileSplash() {
-    const mobileSidebar = document.querySelector('.mobile-sidebar');
-    const summaryContent = document.querySelector('.summary-content');
-    const metricsContainer = document.querySelector('.metrics-container');
-    const headerContainer = document.querySelector('.summary-header-container');
-    const greetingContainer = document.querySelector('.greeting-container');
+  const mobileSidebar = document.querySelector(".mobile-sidebar");
+  const summaryContent = document.querySelector(".summary-content");
+  const metricsContainer = document.querySelector(".metrics-container");
+  const headerContainer = document.querySelector(".summary-header-container");
+  const greetingContainer = document.querySelector(".greeting-container");
 
-    if (summaryContent) summaryContent.classList.add('splash-active');
-    showGreetingForSplash(greetingContainer);
-    hideDashboardElements(mobileSidebar, metricsContainer, headerContainer);
-    startSplashTransition(greetingContainer, summaryContent, mobileSidebar, metricsContainer, headerContainer);
+  if (summaryContent) summaryContent.classList.add("splash-active");
+  showGreetingForSplash(greetingContainer);
+  hideDashboardElements(mobileSidebar, metricsContainer, headerContainer);
+  startSplashTransition(
+    greetingContainer,
+    summaryContent,
+    mobileSidebar,
+    metricsContainer,
+    headerContainer,
+  );
 }
 
 /**
@@ -66,10 +75,10 @@ function handleMobileSplash() {
  * @param {HTMLElement|null} greetingContainer - The greeting section element.
  */
 function showGreetingForSplash(greetingContainer) {
-    if (greetingContainer) {
-        greetingContainer.style.display = 'flex';
-        greetingContainer.style.opacity = '1';
-    }
+  if (greetingContainer) {
+    greetingContainer.style.display = "flex";
+    greetingContainer.style.opacity = "1";
+  }
 }
 
 /**
@@ -79,10 +88,14 @@ function showGreetingForSplash(greetingContainer) {
  * @param {HTMLElement|null} metricsContainer - The metrics cards section.
  * @param {HTMLElement|null} headerContainer - The "Join 360" header section.
  */
-function hideDashboardElements(mobileSidebar, metricsContainer, headerContainer) {
-    if (mobileSidebar) mobileSidebar.classList.add('splash-hidden');
-    if (metricsContainer) metricsContainer.classList.add('splash-hidden');
-    if (headerContainer) headerContainer.classList.add('splash-hidden');
+function hideDashboardElements(
+  mobileSidebar,
+  metricsContainer,
+  headerContainer,
+) {
+  if (mobileSidebar) mobileSidebar.classList.add("splash-hidden");
+  if (metricsContainer) metricsContainer.classList.add("splash-hidden");
+  if (headerContainer) headerContainer.classList.add("splash-hidden");
 }
 
 /**
@@ -95,12 +108,23 @@ function hideDashboardElements(mobileSidebar, metricsContainer, headerContainer)
  * @param {HTMLElement|null} metricsContainer - The metrics cards section.
  * @param {HTMLElement|null} headerContainer - The "Join 360" header section.
  */
-function startSplashTransition(greetingContainer, summaryContent, mobileSidebar, metricsContainer, headerContainer) {
-    setTimeout(() => {
-        fadeOutGreeting(greetingContainer, () => {
-            showDashboard(summaryContent, mobileSidebar, metricsContainer, headerContainer);
-        });
-    }, 2000);
+function startSplashTransition(
+  greetingContainer,
+  summaryContent,
+  mobileSidebar,
+  metricsContainer,
+  headerContainer,
+) {
+  setTimeout(() => {
+    fadeOutGreeting(greetingContainer, () => {
+      showDashboard(
+        summaryContent,
+        mobileSidebar,
+        metricsContainer,
+        headerContainer,
+      );
+    });
+  }, 2000);
 }
 
 /**
@@ -110,13 +134,13 @@ function startSplashTransition(greetingContainer, summaryContent, mobileSidebar,
  * @param {Function} onComplete - Callback to run after the fade completes.
  */
 function fadeOutGreeting(greetingContainer, onComplete) {
-    if (!greetingContainer) return;
-    greetingContainer.style.opacity = '0';
-    greetingContainer.style.transition = 'opacity 0.5s ease-out';
-    setTimeout(() => {
-        greetingContainer.classList.add('splash-hidden');
-        onComplete();
-    }, 500);
+  if (!greetingContainer) return;
+  greetingContainer.style.opacity = "0";
+  greetingContainer.style.transition = "opacity 0.5s ease-out";
+  setTimeout(() => {
+    greetingContainer.classList.add("splash-hidden");
+    onComplete();
+  }, 500);
 }
 
 /**
@@ -127,11 +151,16 @@ function fadeOutGreeting(greetingContainer, onComplete) {
  * @param {HTMLElement|null} metricsContainer - The metrics cards section.
  * @param {HTMLElement|null} headerContainer - The "Join 360" header section.
  */
-function showDashboard(summaryContent, mobileSidebar, metricsContainer, headerContainer) {
-    if (summaryContent) summaryContent.classList.remove('splash-active');
-    if (mobileSidebar) mobileSidebar.classList.remove('splash-hidden');
-    if (metricsContainer) metricsContainer.classList.add('dashboard-ready');
-    if (headerContainer) headerContainer.classList.add('dashboard-ready');
+function showDashboard(
+  summaryContent,
+  mobileSidebar,
+  metricsContainer,
+  headerContainer,
+) {
+  if (summaryContent) summaryContent.classList.remove("splash-active");
+  if (mobileSidebar) mobileSidebar.classList.remove("splash-hidden");
+  if (metricsContainer) metricsContainer.classList.add("dashboard-ready");
+  if (headerContainer) headerContainer.classList.add("dashboard-ready");
 }
 
 /* Greeting Logic */
@@ -142,30 +171,30 @@ function showDashboard(summaryContent, mobileSidebar, metricsContainer, headerCo
  * the greeting text, user name, and profile initials.
  */
 function greetUser() {
-    const timeElement = document.getElementById('greeting-time');
-    const nameElement = document.getElementById('greeting-name');
-    const userInitialsElement = document.querySelector('.user-profile-initials');
+  const timeElement = document.getElementById("greeting-time");
+  const nameElement = document.getElementById("greeting-name");
+  const userInitialsElement = document.querySelector(".user-profile-initials");
 
-    let user = JSON.parse(sessionStorage.getItem('current_user'));
-    let userName = 'Guest';
-    let userInitials = 'G';
+  let user = JSON.parse(sessionStorage.getItem("current_user"));
+  let userName = "Guest";
+  let userInitials = "G";
 
-    if (user && user.name) {
-        userName = user.name;
-        userInitials = getInitials(userName);
-    }
+  if (user && user.name) {
+    userName = user.name;
+    userInitials = getInitials(userName);
+  }
 
-    let greetingText = getGreetingByTime();
+  let greetingText = getGreetingByTime();
 
-    if (userName === 'Guest') {
-        greetingText = greetingText.slice(0, -1) + '!';
-        if (nameElement) nameElement.innerText = '';
-    } else {
-        if (nameElement) nameElement.innerText = userName;
-    }
+  if (userName === "Guest") {
+    greetingText = greetingText.slice(0, -1) + "!";
+    if (nameElement) nameElement.innerText = "";
+  } else {
+    if (nameElement) nameElement.innerText = userName;
+  }
 
-    if (timeElement) timeElement.innerText = greetingText;
-    if (userInitialsElement) userInitialsElement.innerText = userInitials;
+  if (timeElement) timeElement.innerText = greetingText;
+  if (userInitialsElement) userInitialsElement.innerText = userInitials;
 }
 
 /**
@@ -174,10 +203,10 @@ function greetUser() {
  * @returns {string} "Good morning,", "Good afternoon,", or "Good evening,"
  */
 function getGreetingByTime() {
-    const hour = new Date().getHours();
-    if (hour >= 18) return 'Good evening,';
-    if (hour >= 12) return 'Good afternoon,';
-    return 'Good morning,';
+  const hour = new Date().getHours();
+  if (hour >= 18) return "Good evening,";
+  if (hour >= 12) return "Good afternoon,";
+  return "Good morning,";
 }
 
 /* Utility Functions */
@@ -190,13 +219,90 @@ function getGreetingByTime() {
  * @returns {string} Uppercase initials (e.g., "AB" for "Adam Baranyi").
  */
 function getInitials(name) {
-    let parts = name.split(' ');
-    let initials = '';
-    if (parts.length > 0) {
-        initials += parts[0].charAt(0);
-    }
-    if (parts.length > 1) {
-        initials += parts[parts.length - 1].charAt(0);
-    }
-    return initials.toUpperCase();
+  let parts = name.split(" ");
+  let initials = "";
+  if (parts.length > 0) {
+    initials += parts[0].charAt(0);
+  }
+  if (parts.length > 1) {
+    initials += parts[parts.length - 1].charAt(0);
+  }
+  return initials.toUpperCase();
+}
+
+/* Firebase Metrics Integration */
+
+/**
+ * Fetches all tasks from Firebase and calculates the totals
+ * for various statuses and priorities, as well as the
+ * upcoming deadline for urgent tasks, to update the UI.
+ */
+async function loadSummaryMetrics() {
+  try {
+    const response = await fetch(BASE_URL + "tasks.json");
+    const data = await response.json();
+    const tasks = data ? Object.values(data) : [];
+
+    let metrics = {
+      total: tasks.length,
+      todo: 0,
+      inProgress: 0,
+      awaitingFeedback: 0,
+      done: 0,
+      urgent: 0,
+    };
+
+    let earliestUrgentDate = null;
+
+    tasks.forEach((task) => {
+      // Count Status
+      if (task.status === "todo") metrics.todo++;
+      else if (task.status === "inProgress") metrics.inProgress++;
+      else if (task.status === "awaitingFeedback") metrics.awaitingFeedback++;
+      else if (task.status === "done") metrics.done++;
+
+      // Count Priority
+      if (task.priority === "Urgent") {
+        metrics.urgent++;
+        // Find earliest date
+        if (task.dueDate) {
+          const taskDate = new Date(task.dueDate);
+          if (!earliestUrgentDate || taskDate < earliestUrgentDate) {
+            earliestUrgentDate = taskDate;
+          }
+        }
+      }
+    });
+
+    updateSummaryUI(metrics, earliestUrgentDate);
+  } catch (e) {
+    console.error("Error loading summary metrics:", e);
+  }
+}
+
+/**
+ * Updates the summary HTML numbers and the urgent deadline text.
+ *
+ * @param {Object} metrics - Object mapping statuses to numbers.
+ * @param {Date|null} earliestUrgentDate - The earliest Date object among urgent tasks.
+ */
+function updateSummaryUI(metrics, earliestUrgentDate) {
+  document.getElementById("metric-board").innerText = metrics.total;
+  document.getElementById("metric-progress").innerText = metrics.inProgress;
+  document.getElementById("metric-feedback").innerText =
+    metrics.awaitingFeedback;
+  document.getElementById("metric-urgent").innerText = metrics.urgent;
+  document.getElementById("metric-todo").innerText = metrics.todo;
+  document.getElementById("metric-done").innerText = metrics.done;
+
+  const dateDisplay = document.getElementById("urgent-date-display");
+  if (earliestUrgentDate) {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    dateDisplay.innerText = earliestUrgentDate.toLocaleDateString(
+      "en-US",
+      options,
+    );
+  } else {
+    dateDisplay.innerText = "No upcoming deadline";
+  }
 }
