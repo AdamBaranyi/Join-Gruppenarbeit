@@ -200,7 +200,7 @@ function generateEditFormHTML(task) {
                         </button>
                         <span class="divider"></span>
                         <button type="button" class="add-subtask-btn" onclick="addEditSubtask()"> 
-                            <img src="../assets/imgs/add.png" class="subtask-icons" alt="Add Subtask">
+                            <img src="../assets/imgs/check.svg" class="subtask-icons" alt="Add Subtask">
                         </button>
                     </div>
                 </div>
