@@ -56,10 +56,7 @@ function renderContactList(contacts) {
 
   document.querySelectorAll(".contactRow").forEach(row =>
   row.classList.remove("active")
-
 );
-
-
   container.innerHTML = "";
   Object.keys(groups).sort().forEach(letter => {
 
@@ -70,11 +67,8 @@ function renderContactList(contacts) {
   const initials =
     contact.firstname.charAt(0) +
     contact.lastname.charAt(0);
-
   const bgColor = getColorFromName(contact.firstname + contact.lastname);
-
   container.innerHTML += renderContactListItem(contact, initials, bgColor);
-
   const cardWrapper = document.getElementById("contactCard");
 cardWrapper.classList.remove("show");
 

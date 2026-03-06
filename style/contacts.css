@@ -4,7 +4,7 @@
 }
 
 :root {
-    --button-bg: #2A3647;
+    --primary-color: #2A3647;
     --email-color: #007CEE;
 }
 
@@ -269,7 +269,7 @@ dialog:open {
     align-items: flex-start;
     justify-content: center;
     color: white;
-    background-color: var(--button-bg);
+    background-color: var(--primary-color);
     min-width: 467px;
     height: 100%;
     opacity: 1;
@@ -417,7 +417,7 @@ button {
 
 
 .checkBtn {
-    background-color: var(--button-bg);
+    background-color: var(--primary-color);
     color: white;
     width: 214px;
     height: 57px;
@@ -464,12 +464,12 @@ button {
     display: none;
 }
 
-.success-message {
+.success-message.show {
+    bottom: 50%;
+    transform: translate(-50%, 50%);
     position: fixed;
-    bottom: -100px;
     left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--color-primary);
+    background-color: var(--primary-color);
     color: white;
     padding: 20px 40px;
     border-radius: 20px;
@@ -479,11 +479,6 @@ button {
     z-index: 1000;
     transition: bottom 0.5s ease-in-out;
     text-align: center;
-}
-
-.success-message.show {
-    bottom: 50%;
-    transform: translate(-50%, 50%);
 }
 
 @media (max-width: 1200px) {
