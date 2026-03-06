@@ -1,5 +1,5 @@
-function renderContactsTemplate(initials, colorClass, name, isYou){
-    return `
+function renderContactsTemplate(initials, colorClass, name, isYou) {
+  return `
         <div class="contact-left">
           <div class="contact-circle ${colorClass}">${initials}</div>
           <span>${name}</span>
@@ -8,40 +8,157 @@ function renderContactsTemplate(initials, colorClass, name, isYou){
         `;
 }
 
-function addSubtaskItemTemplate(value){
-     return `
+function addSubtaskItemTemplate(value) {
+  return `
     <input type="text" value="${value}" disabled>
 
     <div class="subtask-actions">
       <button type="button" class="edit-btn">
-        <!-- Edit Icon -->
-        <svg class="edit-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
-          <mask id="a" width="24" height="24" x="0" y="0" maskUnits="userSpaceOnUse" style="mask-type:alpha">
-            <path fill="#2a3647" d="M0 0h24v24H0z"/>
-          </mask>
-          <g mask="url(#a)">
-            <path fill="#2a3647" d="M5 19h1.4l8.625-8.625-1.4-1.4L5 17.6zM19.3 8.925l-4.25-4.2 1.4-1.4a1.92 1.92 0 0 1 1.413-.575q.837 0 1.412.575l1.4 1.4q.574.575.6 1.388a1.8 1.8 0 0 1-.55 1.387zM17.85 10.4 7.25 21H3v-4.25l10.6-10.6z"/>
-          </g>
-        </svg>
+        <img src="../assets/imgs/edit.svg" class="edit-icon" alt="Edit">
 
-        <!-- Save Icon -->
-        <svg class="save-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-          <mask id="a" width="24" height="24" x="0" y="0" maskUnits="userSpaceOnUse" style="mask-type:alpha">
-            <path fill="#d9d9d9" d="M0 0h24v24H0z"/>
-          </mask>
-          <g mask="url(#a)">
-            <path fill="#2a3647" d="m9.55 15.15 8.476-8.475q.3-.3.712-.3.413 0 .713.3t.3.713q0 .411-.3.712l-9.2 9.2q-.3.3-.7.3a.96.96 0 0 1-.7-.3L4.55 13a.93.93 0 0 1-.288-.713 1.02 1.02 0 0 1 .313-.712q.3-.3.712-.3.413 0 .713.3z"/>
-          </g>
-        </svg>
+        <img src="../assets/imgs/check.svg" class="save-icon" alt="Save">
       </button>
 
       <span class="divider"></span>
 
       <button type="button" class="delete-btn">
-        <svg class="subtask-icons" xmlns="http://www.w3.org/2000/svg" width="16" height="17" fill="none" viewBox="0 0 17 18">
-          <path fill="#2a3647" d="M3.145 18q-.825 0-1.413-.587A1.93 1.93 0 0 1 1.145 16V3a.97.97 0 0 1-.713-.288A.97.97 0 0 1 .145 2q0-.424.287-.712A.97.97 0 0 1 1.145 1h4q0-.424.287-.712A.97.97 0 0 1 6.145 0h4q.424 0 .712.288.288.287.288.712h4q.424 0 .712.288.288.287.288.712 0 .424-.288.712a.97.97 0 0 1-.712.288v13q0 .824-.588 1.413a1.93 1.93 0 0 1-1.412.587zm0-15v13h10V3zm2 10q0 .424.287.713.288.287.713.287.424 0 .712-.287A.97.97 0 0 0 7.145 13V6a.97.97 0 0 0-.288-.713A.97.97 0 0 0 6.145 5a.97.97 0 0 0-.713.287.97.97 0 0 0-.287.713zm4 0q0 .424.287.713.288.287.713.287.424 0 .712-.287a.97.97 0 0 0 .288-.713V6a.97.97 0 0 0-.288-.713.97.97 0 0 0-.712-.287.97.97 0 0 0-.713.287.97.97 0 0 0-.287.713z"/>
-        </svg>
+        <img src="../assets/imgs/delete.svg" class="subtask-icons" alt="Delete">
       </button>
     </div>
   `;
+}
+
+function getTaskPopupTemplate() {
+  return `
+    <div class="popup-page-header">
+         <h1>Add Task</h1>
+     </div>
+     <div class="popup-main-container">
+
+         <form id="taskForm">
+             <div class="form-grid">
+                 <div class="left-column">
+                     <div class="form-group">
+                         <label>Title <span class="required">*</span></label>
+                         <input type="text" id="task-title" placeholder="Enter a title">
+                         <div class="error-msg" id="error-task-title"></div>
+                     </div>
+
+                     <div class="form-group">
+                         <label>Description</label>
+                         <textarea id="taskDsc" placeholder="Enter a Description"></textarea>
+                     </div>
+
+                     <div class="form-group">
+                         <label>Due date <span class="required">*</span></label>
+                         <input type="date" id="due-date">
+                         <div class="error-msg" id="error-due-date"></div>
+                     </div>
+                 </div>
+
+                 <div class="column-separator">
+                     <img src="../assets/imgs/Vector 4.png" alt="Vertical separator">
+                 </div>
+
+                 <div class="right-column">
+                     <div class="form-group">
+                         <label>Priority</label>
+                         <div class="priority-buttons">
+                             <button type="button" class="trigger urgent" data-priority="Urgent">
+                                 <span class="btn-text">Urgent</span>
+                                 <span class="btn-icon urgent-icon">
+                                     <img src="../assets/imgs/urgent-priority-board.svg" alt="Urgent Priority">
+                                 </span>
+                             </button>
+                             <button type="button" class="trigger medium active" data-priority="Medium">
+                                 <span class="btn-text">Medium</span>
+                                 <span class="btn-icon medium-icon">
+                                     <img src="../assets/imgs/priority_medium.svg" alt="Medium Priority">
+                                 </span>
+                             </button>
+                             <button type="button" class="trigger low" data-priority="Low">
+                                 <span class="btn-text">Low</span>
+                                 <span class="btn-icon low-icon">
+                                     <img src="../assets/imgs/low-priority-board.svg" alt="Low Priority">
+                                 </span>
+                             </button>
+                         </div>
+                     </div>
+
+                     <div class="form-group">
+                         <label>Assigned to</label>
+                         <div class="custom-dropdown" id="assignedDropdown">
+                             <div class="dropdown-header">
+                                 <span class="placeholder">Select contacts to assign</span>
+                                 <span class="arrow">
+                                     <img src="../assets/imgs/arrow_drop_downaa.png" alt="DropDwon-icon">
+                                 </span>
+                             </div>
+                             <div class="dropdown-list" id="dropdownList"></div>
+                         </div>
+                         <div id="selectedUsers" class="selected-users"></div>
+                     </div>
+
+                     <div class="form-group">
+                         <label>Category <span class="required">*</span></label>
+                         <div class="custom-dropdown category-dropdown" id="categoryDropdown">
+                             <div class="dropdown-header">
+                                 <span class="placeholder">Select task category</span>
+                                 <span class="arrow">
+                                     <img src="../assets/imgs/arrow_drop_downaa.png" alt="DropDwon-icon">
+                                 </span>
+                             </div>
+                             <div class="dropdown-list" id="categoryDropdownList">
+                                 <div class="category-item" data-value="Technical Task">Technical Task</div>
+                                 <div class="category-item" data-value="User Story">User Story</div>
+                             </div>
+                         </div>
+                         <div class="error-msg" id="error-categoryDropdown"></div>
+                     </div>
+
+                     <div class="form-group subtask-group">
+                         <label>Subtasks</label>
+                         <div class="subtask-input-wrapper">
+                             <input type="text" id="subTaskInput" placeholder="Add new subtask">
+                             <div class="subtask-input-actions">
+                                 <button type="button" class="clear-subtask-btn" id="clearSubtaskBtn">
+                                     <img src="../assets/imgs/iconoir_cancel.svg" alt="">
+                                 </button>
+                                 <span class="divider"></span>
+                                 <button type="button" id="addSubtaskBtn" class="add-subtask-btn">
+                                     <img src="../assets/imgs/add.png" class="subtask-icons" alt="Add Subtask">
+                                 </button>
+                             </div>
+                         </div>
+                         <div id="subtaskList" class="subtask-list"></div>
+                     </div>
+
+                 </div>
+             </div>
+         </form>
+
+         <div id="successOverlay" class="overlay" style="display: none;">
+             <div class="overlay-content">
+                 <p>Task added to Board </p>
+                 <img src="../assets/imgs/Board.svg" alt="">
+             </div>
+         </div>
+
+        <div class="popup-footer-section">
+         <div class="popup-footer-container">
+             <p><span class="required">*</span> This field is required</p>
+             <div class="button-group">
+                 <button type="button" class="clear-btn" onclick="clearForm(); closeAddTaskPopup();">
+                     <span class="btn-text">Cancel</span>
+                     <img src="../assets/imgs/iconoir_cancel.svg" class="btn-icon close-icon" alt="Cancel">
+                 </button>
+                 <button type="submit" class="create-btn" form="taskForm">
+                     <span class="btn-text">Create Task</span>
+                     <img src="../assets/imgs/check.svg" class="btn-icon create-icon" alt="Create">
+                 </button>
+             </div>
+         </div>
+     </div>
+
+     </div>`;
 }

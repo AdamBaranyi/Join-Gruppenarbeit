@@ -1,150 +1,197 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Board</title>
-    <link rel="icon" type="image/svg+xml" href="../assets/imgs/logo.svg">
+    <link rel="icon" type="image/svg+xml" href="../assets/imgs/logo.svg" />
 
-    <link rel="stylesheet" href="../style/board.css">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../style/sidebar.css">
-    <link rel="stylesheet" href="../style/mobile_sidebar.css">
-    <!-- <link rel="stylesheet" href="../style/add_task.css"> -->
-
+    <link rel="stylesheet" href="../style/board.css" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../style/sidebar.css" />
+    <link rel="stylesheet" href="../style/mobile_sidebar.css" />
+    <link rel="stylesheet" href="../style/mobile_sidebar.css" />
+    <link rel="stylesheet" href="../style/add_task.css" />
+    <link rel="stylesheet" href="../style/popup_add_task.css" />
     <script defer src="../script/board_templates.js"></script>
     <script defer src="../script/board_helpers.js"></script>
     <script defer src="../script/board.js"></script>
     <script defer src="../script.js"></script>
-    <!-- <script src="../script/add_task.js" defer></script> -->
-    <!-- <script src="../script/popup_add_task.js" defer></script> -->
-</head>
+    <script
+      defer
+      src="../assets/script_templates/add_task_template.js"
+    ></script>
+    <script defer src="../script/add_task.js"></script>
+    <script defer src="../script/popup_add_task.js"></script>
+  </head>
 
-<body onload="init()">
+  <body onload="init()">
     <main>
-        <div w3-include-html="../assets/templates/header.html"></div>
-        <div w3-include-html="../assets/templates/sidebar.html"></div>
-        <div w3-include-html="../assets/templates/mobile_sidebar.html"></div>
+      <div w3-include-html="../assets/templates/header.html"></div>
+      <div w3-include-html="../assets/templates/sidebar.html"></div>
+      <div w3-include-html="../assets/templates/mobile_sidebar.html"></div>
 
-        <div class="content-container board-container">
+      <div class="content-container board-container">
+        <div class="board-header">
+          <div class="header-left">
+            <h1>Board</h1>
+            <button
+              class="add-task-btn add-btn-mobile"
+              onclick="openAddTaskPopup()"
+            >
+              <img src="../assets/imgs/add.png" alt="Add Icon" />
+            </button>
+          </div>
 
-            <div class="board-header">
-                <div class="header-left">
-                    <h1>Board</h1>
-                    <button class="add-task-btn add-btn-mobile">
-                        <img src="../assets/imgs/add.png" alt="Add Icon">
-                    </button>
-                </div>
-
-                <div class="board-header-right">
-                    <div class="search-container">
-                        <input type="text" placeholder="Find Task" id="searchTaskInput" onkeyup="filterTasks()">
-                        <div class="search-divider"></div>
-                        <img class="search-icon" src="../assets/imgs/search.svg" alt="Search icon">
-                    </div>
-
-                    <button class="add-task-btn add-btn-desktop">
-                        Add task
-                        <img src="../assets/imgs/add.png" alt="Add Icon">
-                    </button>
-                </div>
+          <div class="board-header-right">
+            <div class="search-container">
+              <input
+                type="text"
+                placeholder="Find Task"
+                id="searchTaskInput"
+                onkeyup="filterTasks()"
+              />
+              <div class="search-divider"></div>
+              <img
+                class="search-icon"
+                src="../assets/imgs/search.svg"
+                alt="Search icon"
+              />
             </div>
 
-            <div class="board-columns-container">
-
-                <!-- To do -->
-                <div class="board-column">
-                    <div class="column-header">
-                        <h2>To do</h2>
-                        <button class="plus-btn">
-                            <img src="../assets/imgs/plus button.png" alt="Add">
-                        </button>
-                    </div>
-                    <div class="tasks-container" id="todo" ondrop="moveTo('todo')" ondragover="allowDrop(event)">
-                        <div class="no-tasks">No tasks To do</div>
-                    </div>
-                </div>
-
-                <div class="board-column">
-                    <div class="column-header">
-                        <h2>In progress</h2>
-                        <button class="plus-btn">
-                            <img src="../assets/imgs/plus button.png" alt="Add">
-                        </button>
-                    </div>
-                    <div class="tasks-container" id="inProgress" ondrop="moveTo('inProgress')" ondragover="allowDrop(event)">
-                        <div class="no-tasks">No tasks in progress</div>
-                    </div>
-                </div>
-
-                <div class="board-column">
-                    <div class="column-header">
-                        <h2>Await feedback</h2>
-                        <button class="plus-btn">
-                            <img src="../assets/imgs/plus button.png" alt="Add">
-                        </button>
-                    </div>
-                    <div class="tasks-container" id="awaitingFeedback" ondrop="moveTo('awaitingFeedback')" ondragover="allowDrop(event)">
-                        <div class="no-tasks">No tasks awaiting feedback</div>
-                    </div>
-                </div>
-
-                <div class="board-column">
-                    <div class="column-header">
-                        <h2>Done</h2>
-                    </div>
-                    <div class="tasks-container" id="done" ondrop="moveTo('done')" ondragover="allowDrop(event)">
-                        <div class="no-tasks">No tasks done</div>
-                    </div>
-                </div>
-
-            </div>
+            <button
+              class="add-task-btn add-btn-desktop"
+              onclick="openAddTaskPopup()"
+            >
+              Add task
+              <img src="../assets/imgs/add.png" alt="Add Icon" />
+            </button>
+          </div>
         </div>
-        
-        <!-- Verstecktes Modal Overlay -->
-        <div id="taskModal" class="d-none task-modal-overlay" onclick="closeTaskPopup()">
-            <div class="task-modal-content" onclick="event.stopPropagation()">
-                <!-- READ-ONLY VIEW -->
-                <div id="taskModalView">
-                    <div class="modal-header-row">
-                        <div id="modalCategory" class="task-category"></div>
-                        <button class="modal-close-btn" onclick="closeTaskPopup()">
-                            <img src="../assets/imgs/close.png" alt="Close">
-                        </button>
-                    </div>
-                    <h1 id="modalTitle"></h1>
-                    <p id="modalDescription"></p>
-                    <div class="modal-details-row">
-                        <span class="detail-label">Due date:</span>
-                        <span id="modalDate" class="detail-value"></span>
-                    </div>
-                    <div class="modal-details-row">
-                        <span class="detail-label">Priority:</span>
-                        <span id="modalPriority" class="detail-value"></span>
-                    </div>
-                    <div class="modal-assignees-container">
-                        <span class="detail-label">Assigned To:</span>
-                        <div id="modalAssignees" class="modal-assignees-list"></div>
-                    </div>
-                    <div class="modal-subtasks-container">
-                        <span class="detail-label">Subtasks:</span>
-                        <div id="modalSubtasks" class="modal-subtasks-list"></div>
-                    </div>
-                    
-                    <div class="modal-footer-actions">
-                        <button class="action-btn" onclick="deleteTask()"><img src="../assets/imgs/delete.svg"> Delete</button>
-                        <div class="action-divider"></div>
-                        <button class="action-btn" onclick="editTask()"><img src="../assets/imgs/edit.svg"> Edit</button>
-                    </div>
-                </div>
 
-                <!-- EDIT VIEW (Hidden by default) -->
-                <div id="taskModalEdit" class="d-none"></div>
+        <div class="board-columns-container">
+          <!-- To do -->
+          <div class="board-column">
+            <div class="column-header">
+              <h2>To do</h2>
+              <button class="plus-btn">
+                <img src="../assets/imgs/plus button.png" alt="Add" />
+              </button>
             </div>
+            <div
+              class="tasks-container"
+              id="todo"
+              ondrop="moveTo('todo')"
+              ondragover="allowDrop(event)"
+            >
+              <div class="no-tasks">No tasks To do</div>
+            </div>
+          </div>
+
+          <div class="board-column">
+            <div class="column-header">
+              <h2>In progress</h2>
+              <button class="plus-btn">
+                <img src="../assets/imgs/plus button.png" alt="Add" />
+              </button>
+            </div>
+            <div
+              class="tasks-container"
+              id="inProgress"
+              ondrop="moveTo('inProgress')"
+              ondragover="allowDrop(event)"
+            >
+              <div class="no-tasks">No tasks in progress</div>
+            </div>
+          </div>
+
+          <div class="board-column">
+            <div class="column-header">
+              <h2>Await feedback</h2>
+              <button class="plus-btn">
+                <img src="../assets/imgs/plus button.png" alt="Add" />
+              </button>
+            </div>
+            <div
+              class="tasks-container"
+              id="awaitingFeedback"
+              ondrop="moveTo('awaitingFeedback')"
+              ondragover="allowDrop(event)"
+            >
+              <div class="no-tasks">No tasks awaiting feedback</div>
+            </div>
+          </div>
+
+          <div class="board-column">
+            <div class="column-header">
+              <h2>Done</h2>
+            </div>
+            <div
+              class="tasks-container"
+              id="done"
+              ondrop="moveTo('done')"
+              ondragover="allowDrop(event)"
+            >
+              <div class="no-tasks">No tasks done</div>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <!-- Add Task Overlay Container -->
+      <div id="addTaskOverlay" class="d-none overlay">
+        <div id="popupContainer" class="popup-content"></div>
+      </div>
+
+      <!-- Verstecktes Modal Overlay -->
+      <div
+        id="taskModal"
+        class="d-none task-modal-overlay"
+        onclick="closeTaskPopup()"
+      >
+        <div class="task-modal-content" onclick="event.stopPropagation()">
+          <!-- READ-ONLY VIEW -->
+          <div id="taskModalView">
+            <div class="modal-header-row">
+              <div id="modalCategory" class="task-category"></div>
+              <button class="modal-close-btn" onclick="closeTaskPopup()">
+                <img src="../assets/imgs/close.png" alt="Close" />
+              </button>
+            </div>
+            <h1 id="modalTitle"></h1>
+            <p id="modalDescription"></p>
+            <div class="modal-details-row">
+              <span class="detail-label">Due date:</span>
+              <span id="modalDate" class="detail-value"></span>
+            </div>
+            <div class="modal-details-row">
+              <span class="detail-label">Priority:</span>
+              <span id="modalPriority" class="detail-value"></span>
+            </div>
+            <div class="modal-assignees-container">
+              <span class="detail-label">Assigned To:</span>
+              <div id="modalAssignees" class="modal-assignees-list"></div>
+            </div>
+            <div class="modal-subtasks-container">
+              <span class="detail-label">Subtasks:</span>
+              <div id="modalSubtasks" class="modal-subtasks-list"></div>
+            </div>
+
+            <div class="modal-footer-actions">
+              <button class="action-btn" onclick="deleteTask()">
+                <img src="../assets/imgs/delete.svg" alt="Delete" /> Delete
+              </button>
+              <div class="action-divider"></div>
+              <button class="action-btn" onclick="editTask()">
+                <img src="../assets/imgs/edit.svg" alt="Edit" /> Edit
+              </button>
+            </div>
+          </div>
+
+          <!-- EDIT VIEW (Hidden by default) -->
+          <div id="taskModalEdit" class="d-none"></div>
+        </div>
+      </div>
     </main>
-
-</body>
-
+  </body>
 </html>

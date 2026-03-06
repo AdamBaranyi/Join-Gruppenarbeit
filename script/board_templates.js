@@ -40,10 +40,12 @@ function generateTaskHTML(task, id) {
  */
 function generateAssignedHTML(assignedTo) {
   if (!assignedTo) return "";
-  
+
   // Firebase might return an object instead of an array depending on how it was saved
-  let assigneesArray = Array.isArray(assignedTo) ? assignedTo : Object.values(assignedTo);
-  
+  let assigneesArray = Array.isArray(assignedTo)
+    ? assignedTo
+    : Object.values(assignedTo);
+
   if (assigneesArray.length === 0) return "";
 
   const colors = ["bg-orange", "bg-teal", "bg-purple", "bg-blue"];
@@ -117,12 +119,12 @@ function getCategoryClass(category) {
  * @returns {string} The HTML string for the edit form.
  */
 function generateEditFormHTML(task) {
-    // Determine priority button states
-    const isUrgent = task.priority === 'Urgent' ? 'active' : '';
-    const isMedium = task.priority === 'Medium' ? 'active' : '';
-    const isLow = task.priority === 'Low' ? 'active' : '';
+  // Determine priority button states
+  const isUrgent = task.priority === "Urgent" ? "active" : "";
+  const isMedium = task.priority === "Medium" ? "active" : "";
+  const isLow = task.priority === "Low" ? "active" : "";
 
-    return `
+  return `
         <div class="edit-task-form">
             <div class="modal-close-container">
                 <button class="modal-close-btn" onclick="closeTaskPopup()">
@@ -132,17 +134,17 @@ function generateEditFormHTML(task) {
             
             <div class="form-group">
                 <label>Title</label>
-                <input type="text" id="editTaskTitle" value="${task.title || ''}" class="edit-input">
+                <input type="text" id="editTaskTitle" value="${task.title || ""}" class="edit-input">
             </div>
             
             <div class="form-group">
                 <label>Description</label>
-                <textarea id="editTaskDescription" class="edit-textarea">${task.description || ''}</textarea>
+                <textarea id="editTaskDescription" class="edit-textarea">${task.description || ""}</textarea>
             </div>
             
             <div class="form-group">
                 <label>Due date</label>
-                <input type="date" id="editTaskDueDate" value="${task.dueDate || ''}" class="edit-input">
+                <input type="date" id="editTaskDueDate" value="${task.dueDate || ""}" class="edit-input">
             </div>
             
             <div class="form-group">
@@ -167,7 +169,7 @@ function generateEditFormHTML(task) {
                         </span>
                     </button>
                 </div>
-                <input type="hidden" id="editTaskPriority" value="${task.priority || 'Medium'}">
+                <input type="hidden" id="editTaskPriority" value="${task.priority || "Medium"}">
             </div>
             
             <div class="form-group">
@@ -198,14 +200,7 @@ function generateEditFormHTML(task) {
                         </button>
                         <span class="divider"></span>
                         <button type="button" class="add-subtask-btn" onclick="addEditSubtask()"> 
-                            <svg class="subtask-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <mask id="editMask" width="24" height="24" x="0" y="0" maskUnits="userSpaceOnUse" style="mask-type:alpha">
-                                    <path fill="#d9d9d9" d="M0 0h24v24H0z" />
-                                </mask>
-                                <g mask="url(#editMask)">
-                                    <path fill="#2a3647" d="m9.55 15.15 8.476-8.475q.3-.3.712-.3.413 0 .713.3t.3.713q0 .411-.3.712l-9.2 9.2q-.3.3-.7.3a.96.96 0 0 1-.7-.3L4.55 13a.93.93 0 0 1-.288-.713 1.02 1.02 0 0 1 .313-.712q.3-.3.712-.3.413 0 .713.3z" />
-                                </g>
-                            </svg>
+                            <img src="../assets/imgs/add.png" class="subtask-icons" alt="Add Subtask">
                         </button>
                     </div>
                 </div>
