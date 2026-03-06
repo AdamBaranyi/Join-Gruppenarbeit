@@ -128,7 +128,7 @@ input:focus, textarea:focus {
   color: var(--color-white);
 }
 
-.trigger.active svg {
+.trigger.active svg, .trigger.active img {
   filter: brightness(0) invert(1);
 }
 
@@ -467,8 +467,10 @@ input:focus, textarea:focus {
   display: none;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 1001;
 }
+
+
 
 .overlay-content {
   display: flex;

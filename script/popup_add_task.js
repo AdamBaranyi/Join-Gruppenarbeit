@@ -1,92 +1,110 @@
-// const overlay = document.getElementById('addTaskOverlay');
-// const popupContainer = document.getElementById('popupContainer');
+const overlay = document.getElementById("addTaskOverlay");
+const popupContainer = document.getElementById("popupContainer");
 
-// async function openAddTaskPopup() {
-//     // Template nur laden, wenn noch leer
-//     if (!popupContainer.innerHTML.trim()) {
-//         try {
-//             const res = await fetch('../assets/templates/task_popup.html');
-//             let html = await res.text();
-            
-//             // Entferne den main-container und passe das HTML für das Popup an
-//             html = html.replace('<main class="main-container">', '<div class="popup-main-container">');
-//             html = html.replace('</main>', '</div>');
-            
-//             popupContainer.innerHTML = html;
-            
-//             // Warte kurz, bis das DOM aktualisiert ist
-//             setTimeout(() => {
-//                 initializePopupComponents();
-//             }, 100);
-            
-//         } catch (err) {
-//             console.error("Popup konnte nicht geladen werden:", err);
-//             return;
-//         }
-//     }
+/**
+ * Opens "Add Task" popup with slide-in animation, shows overlay,
+ * and initializes its components.
+ */
+async function openAddTaskPopup() {
+  try {
+    const html = getTaskPopupTemplate();
+    const cleanHtml = html;
 
-//     overlay.classList.remove('d-none');
-// }
-// function initializePopupComponents() {
-//     // Initialisiere alle benötigten Komponenten für das Popup
-//     setTimeout(() => {
-//         if (typeof initializePriorityButtons === 'function') {
-//             initializePriorityButtons();
-//         }
-        
-//         if (typeof initializeCategoryDropdown === 'function') {
-//             initializeCategoryDropdown();
-//         }
-        
-//         if (typeof initializeAssignedDropdown === 'function') {
-//             initializeAssignedDropdown();
-//         }
-        
-//         if (typeof initializeSubtasks === 'function') {
-//             initializeSubtasks();
-//         }
-        
-//         // Form-Submit Handling für das Popup
-//         const taskForm = document.getElementById('taskForm');
-//         if (taskForm) {
-//             const newForm = taskForm.cloneNode(true);
-//             taskForm.parentNode.replaceChild(newForm, taskForm);
-            
-//             newForm.addEventListener('submit', async function(e) {
-//                 e.preventDefault();
-//                 await handlePopupFormSubmit(e);
-//             });
-//         }
-//     }, 100); // Kurze Verzögerung um DOM-Rendering abzuwarten
-// }
+    const closeButton = `<button class="popup-close-btn" onclick="closeAddTaskPopup()">
+            <img src="../assets/imgs/close.png" alt="Close">
+        </button>`;
 
-// async function handlePopupFormSubmit(event) {
-//     // Hier deine existierende Logik zum Erstellen einer Task
-//     if (typeof createTask === 'function') {
-//         const success = await createTask(event);
-//         if (success) {
-//             closeAddTaskPopup();
-//             // Aktualisiere das Board
-//             if (typeof updateBoard === 'function') {
-//                 await updateBoard();
-//             }
-//         }
-//     }
-// }
+    popupContainer.innerHTML = closeButton + cleanHtml;
 
-// function closeAddTaskPopup() {
-//     overlay.classList.add('d-none');
-    
-//     // Optional: Formular zurücksetzen beim Schließen
-//     const taskForm = document.getElementById('taskForm');
-//     if (taskForm && typeof clearForm === 'function') {
-//         clearForm();
-//     }
-// }
+    popupContainer.classList.remove("slide-out-right");
+    popupContainer.classList.add("slide-in-right");
 
-// // Close popup with Escape key
-// document.addEventListener('keydown', function(e) {
-//     if (e.key === 'Escape' && !overlay.classList.contains('d-none')) {
-//         closeAddTaskPopup();
-//     }
-// });
+    overlay.classList.remove("d-none");
+    overlay.style.display = "flex";
+
+    setTimeout(() => {
+      initializePopupComponents();
+    }, 150);
+  } catch (err) {
+    console.error("Popup konnte nicht geladen werden:", err);
+  }
+}
+
+/**
+ * Initializes components within the popup by calling their setup functions.
+ * Also adds an event listener for handling form submission.
+ */
+function initializePopupComponents() {
+  if (typeof initializePriorityButtons === "function") {
+    initializePriorityButtons();
+  }
+
+  if (typeof initializeCategoryDropdown === "function") {
+    initializeCategoryDropdown();
+  }
+
+  if (typeof initializeAssignedDropdown === "function") {
+    initializeAssignedDropdown();
+  }
+
+  if (typeof initializeSubtasks === "function") {
+    initializeSubtasks();
+  }
+
+  const taskForm = document.getElementById("taskForm");
+  if (taskForm) {
+    taskForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      if (validateForm()) {
+        await saveTaskToFirebase();
+        closeAddTaskPopup();
+        if (typeof loadTasks === "function") {
+          await loadTasks();
+        }
+      }
+    });
+  }
+}
+
+/**
+ * Handles the popup form submission.
+ * It creates a task and updates the board array if successful.
+ *
+ * @param {Event} event - The submit event from the form.
+ */
+async function handlePopupFormSubmit(event) {
+  if (typeof createTask === "function") {
+    const success = await createTask(event);
+    if (success) {
+      closeAddTaskPopup();
+      if (typeof updateBoard === "function") {
+        await updateBoard();
+      }
+    }
+  }
+}
+
+/**
+ * Closes "Add Task" popup, applying a slide-out animation,
+ * hiding the overlay, and then optionally clearing the form.
+ */
+function closeAddTaskPopup() {
+  popupContainer.classList.remove("slide-in-right");
+  popupContainer.classList.add("slide-out-right");
+
+  setTimeout(() => {
+    overlay.classList.add("d-none");
+    overlay.style.display = "none";
+
+    const taskForm = document.getElementById("taskForm");
+    if (taskForm && typeof clearForm === "function") {
+      clearForm();
+    }
+  }, 400);
+}
+
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape" && !overlay.classList.contains("d-none")) {
+    closeAddTaskPopup();
+  }
+});
