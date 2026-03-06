@@ -1,174 +1,163 @@
+<div class="popup-page-header">
+  <h1>Add Task</h1>
+</div>
+<div class="popup-main-container">
+  <form id="taskForm">
+    <div class="form-grid">
+      <div class="left-column">
+        <div class="form-group">
+          <label>Title <span class="required">*</span></label>
+          <input type="text" id="task-title" placeholder="Enter a title" />
+          <div class="error-msg" id="error-task-title"></div>
+        </div>
 
-<div class="page-header">
-         <h1>Add Task</h1>
-     </div>
-     <main class="main-container">
+        <div class="form-group">
+          <label>Description</label>
+          <textarea id="taskDsc" placeholder="Enter a Description"></textarea>
+        </div>
 
-         <form id="taskForm">
-             <div class="form-grid">
-                 <div class="left-column">
-                     <div class="form-group">
-                         <label>Title <span class="required">*</span></label>
-                         <input type="text" id="task-title" placeholder="Enter a title">
-                         <div class="error-msg" id="error-task-title"></div>
-                     </div>
+        <div class="form-group">
+          <label>Due date <span class="required">*</span></label>
+          <input type="date" id="due-date" />
+          <div class="error-msg" id="error-due-date"></div>
+        </div>
+      </div>
 
-                     <div class="form-group">
-                         <label>Description</label>
-                         <textarea id="taskDsc" placeholder="Enter a Description"></textarea>
-                     </div>
+      <div class="column-separator">
+        <img src="../assets/imgs/Vector 4.png" alt="Vertical separator" />
+      </div>
 
-                     <div class="form-group">
-                         <label>Due date <span class="required">*</span></label>
-                         <input type="date" id="due-date">
-                         <div class="error-msg" id="error-due-date"></div>
-                     </div>
-                 </div>
+      <div class="right-column">
+        <div class="form-group">
+          <label>Priority</label>
+          <div class="priority-buttons">
+            <button type="button" class="trigger urgent" data-priority="Urgent">
+              <span class="btn-text">Urgent</span>
+              <span class="btn-icon urgent-icon">
+                <img
+                  src="../assets/imgs/urgent-priority-board.svg"
+                  alt="Urgent Priority"
+                />
+              </span>
+            </button>
+            <button
+              type="button"
+              class="trigger medium active"
+              data-priority="Medium"
+            >
+              <span class="btn-text">Medium</span>
+              <span class="btn-icon medium-icon">
+                <img
+                  src="../assets/imgs/priority_medium.svg"
+                  alt="Medium Priority"
+                />
+              </span>
+            </button>
+            <button type="button" class="trigger low" data-priority="Low">
+              <span class="btn-text">Low</span>
+              <span class="btn-icon low-icon">
+                <img
+                  src="../assets/imgs/low-priority-board.svg"
+                  alt="Low Priority"
+                />
+              </span>
+            </button>
+          </div>
+        </div>
 
-                 <div class="column-separator">
-                     <img src="../assets/imgs/Vector 4.png" alt="Vertical separator">
-                 </div>
+        <div class="form-group">
+          <label>Assigned to</label>
+          <div class="custom-dropdown" id="assignedDropdown">
+            <div class="dropdown-header">
+              <span class="placeholder">Select contacts to assign</span>
+              <span class="arrow">
+                <img
+                  src="../assets/imgs/arrow_drop_downaa.png"
+                  alt="DropDwon-icon"
+                />
+              </span>
+            </div>
+            <div class="dropdown-list" id="dropdownList"></div>
+          </div>
+          <div id="selectedUsers" class="selected-users"></div>
+        </div>
 
-                 <div class="right-column">
-                     <div class="form-group">
-                         <label>Priority</label>
-                         <div class="priority-buttons">
-                             <button type="button" class="trigger urgent" data-priority="Urgent">
-                                 <span class="btn-text">Urgent</span>
-                                 <span class="btn-icon urgent-icon">
-                                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="12" fill="none"
-                                         viewBox="0 0 17 12">
-                                         <g fill="#ff3d00" clip-path="url(#a)">
-                                             <path
-                                                 d="M8.5 4.755c.2 0 .394.061.555.176l7.568 5.434a.92.92 0 0 1 .368.595.89.89 0 0 1-.172.673.952.952 0 0 1-1.304.19L8.5 6.793l-7.014 5.03a.95.95 0 0 1-.693.168.95.95 0 0 1-.611-.358.9.9 0 0 1-.172-.673.9.9 0 0 1 .368-.595l7.568-5.434a.95.95 0 0 1 .554-.176" />
-                                             <path
-                                                 d="M8.5 0c.2 0 .394.061.554.176l7.569 5.434a.888.888 0 0 1 .196 1.268.953.953 0 0 1-1.304.19L8.5 2.039l-7.014 5.03a.953.953 0 0 1-1.304-.19.89.89 0 0 1 .195-1.268L7.946.176A.95.95 0 0 1 8.5 0" />
-                                         </g>
-                                         <defs>
-                                             <clipPath id="a">
-                                                 <path fill="#fff" d="M17 12H0V0h17z" />
-                                             </clipPath>
-                                         </defs>
-                                     </svg>
-                                 </span>
-                             </button>
-                             <button type="button" class="trigger medium active" data-priority="Medium">
-                                 <span class="btn-text">Medium</span>
-                                 <span class="btn-icon medium-icon">
-                                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="7" fill="none"
-                                         viewBox="0 0 17 7">
-                                         <g fill="#ffa800" clip-path="url(#a)">
-                                             <path
-                                                 d="M16.069 6.333H.931a.93.93 0 0 1-.66-.274.94.94 0 0 1 0-1.327.93.93 0 0 1 .66-.275h15.137c.247 0 .483.099.658.275a.94.94 0 0 1 0 1.327.93.93 0 0 1-.659.274M16.069 1.877H.931a.93.93 0 0 1-.66-.275.94.94 0 0 1 0-1.327A.93.93 0 0 1 .933 0h15.137c.247 0 .483.099.658.275a.94.94 0 0 1 0 1.327.93.93 0 0 1-.659.275" />
-                                         </g>
-                                         <defs>
-                                             <clipPath id="a">
-                                                 <path fill="#fff" d="M0 0h17v6.333H0z" />
-                                             </clipPath>
-                                         </defs>
-                                     </svg>
-                                 </span>
-                             </button>
-                             <button type="button" class="trigger low" data-priority="Low">
-                                 <span class="btn-text">Low</span>
-                                 <span class="btn-icon low-icon">
-                                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="12" fill="none"
-                                         viewBox="0 0 17 12">
-                                         <path fill="#7ae229"
-                                             d="M8.5 7.245a.95.95 0 0 1-.555-.176L.377 1.635a.92.92 0 0 1-.368-.595.89.89 0 0 1 .172-.673.953.953 0 0 1 1.304-.19L8.5 5.207l7.014-5.03a.95.95 0 0 1 .693-.168.95.95 0 0 1 .611.358.9.9 0 0 1 .172.673.9.9 0 0 1-.367.595L9.054 7.069a.95.95 0 0 1-.554.176" />
-                                         <path fill="#7ae229"
-                                             d="M8.5 12a.95.95 0 0 1-.554-.177L.377 6.39a.888.888 0 0 1-.196-1.268.953.953 0 0 1 1.304-.19L8.5 9.961l7.014-5.03a.953.953 0 0 1 1.304.19.89.89 0 0 1-.195 1.268l-7.569 5.434A.95.95 0 0 1 8.5 12" />
-                                     </svg>
-                                 </span>
-                             </button>
-                         </div>
-                     </div>
+        <div class="form-group">
+          <label>Category <span class="required">*</span></label>
+          <div class="custom-dropdown category-dropdown" id="categoryDropdown">
+            <div class="dropdown-header">
+              <span class="placeholder">Select task category</span>
+              <span class="arrow">
+                <img
+                  src="../assets/imgs/arrow_drop_downaa.png"
+                  alt="DropDwon-icon"
+                />
+              </span>
+            </div>
+            <div class="dropdown-list" id="categoryDropdownList">
+              <div class="category-item" data-value="Technical Task">
+                Technical Task
+              </div>
+              <div class="category-item" data-value="User Story">
+                User Story
+              </div>
+            </div>
+          </div>
+          <div class="error-msg" id="error-categoryDropdown"></div>
+        </div>
 
-                     <div class="form-group">
-                         <label>Assigned to</label>
-                         <div class="custom-dropdown" id="assignedDropdown">
-                             <div class="dropdown-header">
-                                 <span class="placeholder">Select contacts to assign</span>
-                                 <span class="arrow">
-                                     <img src="../assets/imgs/arrow_drop_downaa.png" alt="DropDwon-icon">
-                                 </span>
-                             </div>
-                             <div class="dropdown-list" id="dropdownList"></div>
-                         </div>
-                         <div id="selectedUsers" class="selected-users"></div>
-                     </div>
+        <div class="form-group subtask-group">
+          <label>Subtasks</label>
+          <div class="subtask-input-wrapper">
+            <input
+              type="text"
+              id="subTaskInput"
+              placeholder="Add new subtask"
+            />
+            <div class="subtask-input-actions">
+              <button
+                type="button"
+                class="clear-subtask-btn"
+                id="clearSubtaskBtn"
+              >
+                <img src="../assets/imgs/iconoir_cancel.svg" alt="" />
+              </button>
+              <span class="divider"></span>
+              <button type="button" id="addSubtaskBtn" class="add-subtask-btn">
+                <img
+                  src="../assets/imgs/add.png"
+                  class="subtask-icons"
+                  alt="Add Subtask"
+                />
+              </button>
+            </div>
+          </div>
+          <div id="subtaskList" class="subtask-list"></div>
+        </div>
+      </div>
+    </div>
+  </form>
 
-                     <div class="form-group">
-                         <label>Category <span class="required">*</span></label>
-                         <div class="custom-dropdown category-dropdown" id="categoryDropdown">
-                             <div class="dropdown-header">
-                                 <span class="placeholder">Select task category</span>
-                                 <span class="arrow">
-                                     <img src="../assets/imgs/arrow_drop_downaa.png" alt="DropDwon-icon">
-                                 </span>
-                             </div>
-                             <div class="dropdown-list" id="categoryDropdownList">
-                                 <div class="category-item" data-value="Technical Task">Technical Task</div>
-                                 <div class="category-item" data-value="User Story">User Story</div>
-                             </div>
-                         </div>
-                         <div class="error-msg" id="error-categoryDropdown"></div>
-                     </div>
+  <div id="successOverlay" class="overlay" style="display: none">
+    <div class="overlay-content">
+      <p>Task added to Board</p>
+      <img src="../assets/imgs/Board.svg" alt="" />
+    </div>
+  </div>
 
-                     <div class="form-group subtask-group">
-                         <label>Subtasks</label>
-                         <div class="subtask-input-wrapper">
-                             <input type="text" id="subTaskInput" placeholder="Add new subtask">
-                             <div class="subtask-input-actions">
-                                 <button type="button" class="clear-subtask-btn" id="clearSubtaskBtn">
-                                     <img src="../assets/imgs/iconoir_cancel.svg" alt="">
-                                 </button>
-                                 <span class="divider"></span>
-                                 <button type="button" id="addSubtaskBtn" class="add-subtask-btn"> <svg
-                                         class="subtask-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                         fill="none" viewBox="0 0 24 24">
-                                         <mask id="a" width="24" height="24" x="0" y="0" maskUnits="userSpaceOnUse"
-                                             style="mask-type:alpha">
-                                             <path fill="#d9d9d9" d="M0 0h24v24H0z" />
-                                         </mask>
-                                         <g mask="url(#a)">
-                                             <path fill="#2a3647"
-                                                 d="m9.55 15.15 8.476-8.475q.3-.3.712-.3.413 0 .713.3t.3.713q0 .411-.3.712l-9.2 9.2q-.3.3-.7.3a.96.96 0 0 1-.7-.3L4.55 13a.93.93 0 0 1-.288-.713 1.02 1.02 0 0 1 .313-.712q.3-.3.712-.3.413 0 .713.3z" />
-                                         </g>
-                                     </svg>
-                                 </button>
-                             </div>
-                         </div>
-                         <div id="subtaskList" class="subtask-list"></div>
-                     </div>
-
-                 </div>
-             </div>
-         </form>
-
-         <div id="successOverlay" class="overlay" style="display: none;">
-             <div class="overlay-content">
-                 <p>Task added to Board </p>
-                 <img src="../assets/imgs/Board.svg" alt="">
-             </div>
-         </div>
-
-        <div class="footer-section">
-         <div class="footer-container">
-             <p><span class="required">*</span> This field is required</p>
-             <div class="button-group">
-                 <button type="button" class="clear-btn" onclick="clearForm()">
-                     <span class="btn-text">Clear</span>
-                     <span class="btn-icon close-icon">✖</span>
-                 </button>
-                 <button type="submit" class="create-btn" form="taskForm">
-                     <span class="btn-text">Create Task</span>
-                     <span class="btn-icon create-icon">✓</span>
-                 </button>
-             </div>
-         </div>
-     </div>
-
-     </main>
-
-   
+  <div class="popup-footer-section">
+    <div class="popup-footer-container">
+      <p><span class="required">*</span> This field is required</p>
+      <div class="button-group">
+        <button type="button" class="clear-btn" onclick="clearForm()">
+          <span class="btn-text">Clear</span>
+          <span class="btn-icon close-icon">✖</span>
+        </button>
+        <button type="submit" class="create-btn" form="taskForm">
+          <span class="btn-text">Create Task</span>
+          <span class="btn-icon create-icon">✓</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
