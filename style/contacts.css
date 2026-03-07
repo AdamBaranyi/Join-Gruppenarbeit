@@ -299,11 +299,6 @@ dialog span {
     font-size: 27px;
     line-height: 120%;
     letter-spacing: 0%;
-
-}
-
-#modalInitials {
-    top: 10%;
 }
 
 .logoWhite {
@@ -719,15 +714,12 @@ button {
 
     .profileImg {
         position: absolute;
-        
-    }
-
-    #contactInitials {
-        position: relative;
-    }
-
-    #modalInitials {
         top: 25%;
+    }
+
+    .contact-initials {
+        position: absolute;
+        top: 20;
     }
 
     form {
@@ -780,13 +772,9 @@ button {
 
     .profileImg {
         position: absolute;
-        top: 35%;
-        margin-top: 80px;
     }
-    
     .contact-initials {
         position: absolute;
-        top: 40%;
+        top: 55%;
     }
-
 }
