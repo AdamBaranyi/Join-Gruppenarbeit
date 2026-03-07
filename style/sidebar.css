@@ -148,6 +148,10 @@ body {
     cursor: pointer;
 }
 
+.help-icon img:hover {
+    transform: scale(1.25, 1.25);
+}
+
 /* User Profile Badge */
 
 .user-profile-initials {
@@ -163,6 +167,10 @@ body {
     font-weight: 700;
     font-size: 22px;
     cursor: pointer;
+}
+
+.user-profile-initials:hover {
+    background-color: rgba(158, 158, 158, 0.2);
 }
 
 .user-profile-container {

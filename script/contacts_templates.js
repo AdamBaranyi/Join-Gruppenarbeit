@@ -61,11 +61,13 @@ function contactCard(contact) {
             <div class="contact-header">
             <div id="contactInitials" class="contact-initials">
             </div>
-            <strong>${contact.firstname} ${contact.lastname}</strong><br>
+            <div class="btnAndName-container">
+                <strong>${contact.firstname} ${contact.lastname}</strong><br>
+                <div class="editAndDeleteBtnContainer">
+                    <button class="editBtn">Edit <img src="../assets/imgs/edit (1).png" alt=""></button>
+                    <button class="deleteBtn">Delete <img src="../assets/imgs/delete.svg" alt=""></button>
+                </div>
             </div>
-            <div class="editAndDeleteBtnContainer">
-            <button class="editBtn">Edit <img src="../assets/imgs/edit (1).png" alt=""></button>
-            <button class="deleteBtn">Delete <img src="../assets/imgs/delete.svg" alt=""></button>
             </div>
             <span>Contact Information:</span><br>
             <div class="contact-info">

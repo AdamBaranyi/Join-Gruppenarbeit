@@ -158,16 +158,18 @@ ul {
     opacity: 0;
     transform: translateX(40px);
     transition: all 250ms ease-in-out;
-    background: white;
     border-radius: 20px;
     padding: 32px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
 }
+
 #contactCard.show {
     opacity: 1;
     transform: translateX(0);
 }
 
+.editAndDeleteBtnContainer {
+    display: flex;
+}
 
 .contact-header {
     display: flex;
@@ -436,6 +438,10 @@ button {
     cursor: pointer;
 }
 
+button:hover {
+    background-color: transparent;
+}
+
 .btnContainer {
     display: flex;
     justify-content: center;
@@ -530,10 +536,9 @@ button {
     text-align: center;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1300px) {
     dialog:open {
-        left: 80px;
-        max-width: 1000px;
+        left: 0;
     }
 }
 
@@ -597,6 +602,11 @@ button {
         position: relative;
         top: 0;
         left: 0;
+    }
+
+    .btnAndName-container {
+        display: flex;
+        flex-direction: column;
     }
 
     .content-slogan {
