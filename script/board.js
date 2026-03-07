@@ -1,5 +1,3 @@
-
-
 let currentTaskId = null;
 let currentTaskData = null;
 let currentDraggedElement;
@@ -9,6 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
   loadTasks();
 });
 
+/**
+ * Loads tasks from Firebase and renders them in the board.
+ */
 async function loadTasks() {
   try {
     const response = await fetch(BASE_URL + "tasks.json");
@@ -21,12 +22,16 @@ async function loadTasks() {
   }
 }
 
+/**
+ * Renders the provided tasks into their respective columns on the board.
+ * @param {Object} tasks - An object containing tasks fetched from the database.
+ */
 function renderTasks(tasks) {
   const columns = {
     todo: document.getElementById("taskTodo"),
     inProgress: document.getElementById("taskInProgress"),
     awaitingFeedback: document.getElementById("taskAwaitingFeedback"),
-    done: document.getElementById("taskDone")
+    done: document.getElementById("taskDone"),
   };
 
   Object.values(columns).forEach((col) => {
@@ -42,19 +47,24 @@ function renderTasks(tasks) {
     column.innerHTML += generateTaskHTML(task, id);
   }
 
-  if (columns.todo && columns.todo.innerHTML === "") columns.todo.innerHTML = '<div class="no-tasks">No tasks To do</div>';
-  if (columns.inProgress && columns.inProgress.innerHTML === "") columns.inProgress.innerHTML = '<div class="no-tasks">No tasks in progress</div>';
-  if (columns.awaitingFeedback && columns.awaitingFeedback.innerHTML === "") columns.awaitingFeedback.innerHTML = '<div class="no-tasks">No tasks awaiting feedback</div>';
-  if (columns.done && columns.done.innerHTML === "") columns.done.innerHTML = '<div class="no-tasks">No tasks done</div>';
+  if (columns.todo && columns.todo.innerHTML === "")
+    columns.todo.innerHTML = '<div class="no-tasks">No tasks To do</div>';
+  if (columns.inProgress && columns.inProgress.innerHTML === "")
+    columns.inProgress.innerHTML =
+      '<div class="no-tasks">No tasks in progress</div>';
+  if (columns.awaitingFeedback && columns.awaitingFeedback.innerHTML === "")
+    columns.awaitingFeedback.innerHTML =
+      '<div class="no-tasks">No tasks awaiting feedback</div>';
+  if (columns.done && columns.done.innerHTML === "")
+    columns.done.innerHTML = '<div class="no-tasks">No tasks done</div>';
 }
-
 
 /**
  * Sets the ID of the task that is currently being dragged.
  * @param {string} id - The unique identifier of the dragged task.
  */
 function startDragging(id) {
-    currentDraggedElement = id;
+  currentDraggedElement = id;
 }
 
 /**
@@ -62,7 +72,7 @@ function startDragging(id) {
  * @param {DragEvent} ev - The drag event.
  */
 function allowDrop(ev) {
-    ev.preventDefault();
+  ev.preventDefault();
 }
 
 /**
@@ -71,19 +81,19 @@ function allowDrop(ev) {
  * @param {string} newStatus - The new status to assign to the task (e.g., 'todo', 'inProgress').
  */
 async function moveTo(newStatus) {
-    try {
-        await fetch(BASE_URL + `tasks/${currentDraggedElement}/status.json`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newStatus)
-        });
-        
-        loadTasks();
-    } catch (error) {
-        console.error("Fehler beim Verschieben des Tasks:", error);
-    }
+  try {
+    await fetch(BASE_URL + `tasks/${currentDraggedElement}/status.json`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newStatus),
+    });
+
+    loadTasks();
+  } catch (error) {
+    console.error("Fehler beim Verschieben des Tasks:", error);
+  }
 }
 
 /**
@@ -92,21 +102,25 @@ async function moveTo(newStatus) {
  * Re-renders the board with the filtered tasks.
  */
 function filterTasks() {
-    let searchInput = document.getElementById('searchTaskInput').value.toLowerCase();
-    
-    let filteredTasks = {};
-    
-    for (let id in allLoadedTasks) {
-        let task = allLoadedTasks[id];
-        let titleMatch = task.title && task.title.toLowerCase().includes(searchInput);
-        let descMatch = task.description && task.description.toLowerCase().includes(searchInput);
-        
-        if (titleMatch || descMatch) {
-            filteredTasks[id] = task;
-        }
+  let searchInput = document
+    .getElementById("searchTaskInput")
+    .value.toLowerCase();
+
+  let filteredTasks = {};
+
+  for (let id in allLoadedTasks) {
+    let task = allLoadedTasks[id];
+    let titleMatch =
+      task.title && task.title.toLowerCase().includes(searchInput);
+    let descMatch =
+      task.description && task.description.toLowerCase().includes(searchInput);
+
+    if (titleMatch || descMatch) {
+      filteredTasks[id] = task;
     }
-    
-    renderTasks(filteredTasks);
+  }
+
+  renderTasks(filteredTasks);
 }
 
 /**
@@ -114,82 +128,80 @@ function filterTasks() {
  * @param {string} id - The unique identifier of the task to display.
  */
 function openTaskPopup(id) {
-    currentTaskId = id;
-    let task = allLoadedTasks[id];
-    
-    if (task) {
-        document.getElementById('taskModal').classList.remove('d-none');
-        document.getElementById('taskModalView').classList.remove('d-none');
-        document.getElementById('taskModalEdit').classList.add('d-none');
-        
-        document.getElementById('modalTitle').innerHTML = task.title || "";
-        document.getElementById('modalDescription').innerHTML = task.description || "";
-        document.getElementById('modalDate').innerHTML = task.dueDate || "";
-        
-        let priorityIconStr = getPriorityIcon(task.priority);
-        document.getElementById('modalPriority').innerHTML = `
+  currentTaskId = id;
+  let task = allLoadedTasks[id];
+
+  if (task) {
+    document.getElementById("taskModal").classList.remove("d-none");
+    document.getElementById("taskModalView").classList.remove("d-none");
+    document.getElementById("taskModalEdit").classList.add("d-none");
+
+    document.getElementById("modalTitle").innerHTML = task.title || "";
+    document.getElementById("modalDescription").innerHTML =
+      task.description || "";
+    document.getElementById("modalDate").innerHTML = task.dueDate || "";
+
+    let priorityIconStr = getPriorityIcon(task.priority);
+    document.getElementById("modalPriority").innerHTML = `
             ${task.priority || ""} <img src="${priorityIconStr}" alt="${task.priority}">
         `;
-        
-        let modalCategory = document.getElementById('modalCategory');
-        modalCategory.innerHTML = task.category || "";
-        modalCategory.className = `task-category ${getCategoryClass(task.category)}`; 
-        
-        renderModalAssignees(task.assignedTo);
-        renderModalSubtasks(task.subtasks);
-    }
-}
 
+    let modalCategory = document.getElementById("modalCategory");
+    modalCategory.innerHTML = task.category || "";
+    modalCategory.className = `task-category ${getCategoryClass(task.category)}`;
+
+    renderModalAssignees(task.assignedTo);
+    renderModalSubtasks(task.subtasks);
+  }
+}
 
 /**
  * Saves the edited task back to Firebase and refreshes the UI.
  */
 async function saveTask() {
-    if (!currentTaskId) return;
+  if (!currentTaskId) return;
 
-    // 1. Gather data from inputs
-    let title = document.getElementById('editTaskTitle').value.trim();
-    let description = document.getElementById('editTaskDescription').value.trim();
-    let dueDate = document.getElementById('editTaskDueDate').value;
-    let priority = document.getElementById('editTaskPriority').value;
+  // 1. Gather data from inputs
+  let title = document.getElementById("editTaskTitle").value.trim();
+  let description = document.getElementById("editTaskDescription").value.trim();
+  let dueDate = document.getElementById("editTaskDueDate").value;
+  let priority = document.getElementById("editTaskPriority").value;
 
-    if (!title || !dueDate) {
-        alert("Title and Due Date are required.");
-        return;
-    }
+  if (!title || !dueDate) {
+    alert("Title and Due Date are required.");
+    return;
+  }
 
-    // 2. Prepare payload
-    let updatedData = {
-        title: title,
-        description: description,
-        dueDate: dueDate,
-        priority: priority,
-        assignedTo: editSelectedContacts,
-        subtasks: editCurrentSubtasks
-    };
+  // 2. Prepare payload
+  let updatedData = {
+    title: title,
+    description: description,
+    dueDate: dueDate,
+    priority: priority,
+    assignedTo: editSelectedContacts,
+    subtasks: editCurrentSubtasks,
+  };
 
-    // 3. Send to Firebase
-    try {
-        await fetch(BASE_URL + `tasks/${currentTaskId}.json`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(updatedData)
-        });
+  // 3. Send to Firebase
+  try {
+    await fetch(BASE_URL + `tasks/${currentTaskId}.json`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    });
 
-        // 4. Update local cache
-        Object.assign(allLoadedTasks[currentTaskId], updatedData);
+    // 4. Update local cache
+    Object.assign(allLoadedTasks[currentTaskId], updatedData);
 
-        // 5. Update UI
-        loadTasks(); // refreshes the columns
-        
-        // 6. Return back to View mode within the opened modal
-        openTaskPopup(currentTaskId); // Re-initializes view mode with new data
+    // 5. Update UI
+    loadTasks(); // refreshes the columns
 
-    } catch (error) {
-        console.error("Error saving task:", error);
-        alert("Could not save task.");
-    }
+    // 6. Return back to View mode within the opened modal
+    openTaskPopup(currentTaskId); // Re-initializes view mode with new data
+  } catch (error) {
+    console.error("Error saving task:", error);
+    alert("Could not save task.");
+  }
 }
-

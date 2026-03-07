@@ -1,5 +1,3 @@
-
-
 let selectedContacts = [];
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -39,17 +37,17 @@ function initializeFormValidation() {
 
 function validateForm() {
   clearErrors();
-  
+
   const isTitleValid = validateTaskTitle();
   const isDateValid = validateTaskDate();
   const isCategoryValid = validateTaskCategory();
-  
+
   return isTitleValid && isDateValid && isCategoryValid;
 }
 
 function validateTaskTitle() {
   const tasktitle = document.getElementById("task-title");
-  
+
   if (!tasktitle.value.trim()) {
     setError("task-title", "* This field is required");
     return false;
@@ -59,7 +57,7 @@ function validateTaskTitle() {
 
 function validateTaskDate() {
   const taskdate = document.getElementById("due-date");
-  
+
   if (!taskdate.value) {
     setError("due-date", "* This field is required");
     return false;
@@ -68,8 +66,10 @@ function validateTaskDate() {
 }
 
 function validateTaskCategory() {
-  const categoryDropdown = document.querySelector(".category-dropdown .placeholder");
-  
+  const categoryDropdown = document.querySelector(
+    ".category-dropdown .placeholder",
+  );
+
   if (categoryDropdown.textContent === "Select task category") {
     setError("categoryDropdown", "* This field is required");
     document.getElementById("categoryDropdown").classList.add("input-error");
@@ -112,19 +112,22 @@ function getDropdownElements(dropdown) {
     header: dropdown.querySelector(".dropdown-header"),
     dropdownList: document.getElementById("dropdownList"),
     selectedContainer: document.getElementById("selectedUsers"),
-    placeholder: dropdown.querySelector(".placeholder")
+    placeholder: dropdown.querySelector(".placeholder"),
   };
 }
 
 async function renderAllContacts(elements) {
   const contacts = await getContactsList();
-  const colors = ["bg-orange", "bg-teal", "bg-purple", "bg-blue"];
 
   elements.dropdownList.innerHTML = "";
 
-  contacts.forEach((contact, index) => {
+  contacts.forEach((contact) => {
     const fullName = `${contact.firstname} ${contact.lastname}`;
-    createContactElement(fullName, colors[index % colors.length], elements);
+    const bgColor =
+      typeof getColorFromName === "function"
+        ? getColorFromName(fullName)
+        : "#FF7A00";
+    createContactElement(fullName, bgColor, elements);
   });
 
   updateSelectedUsersDisplay(elements);
@@ -136,39 +139,40 @@ async function getContactsList() {
 
   if (!data) return [];
 
-  let allContacts = [];
-  Object.values(data).forEach(group => {
-    if (group){
-      allContacts.push(...Object.values(group));
-    }
-  });
-  return allContacts;
+  return Object.values(data);
 }
 
 function getInitials(name) {
   return name
     .split(" ")
-    .map(n => n[0])
+    .map((n) => n[0])
     .join("")
     .substring(0, 2)
     .toUpperCase();
 }
 
-function createContactElement(name, colorClass, elements) {
+function createContactElement(name, bgColor, elements) {
   const initials = getInitials(name);
-  
+
+  // Note: we can't reliably pass just a hex color class if the template expects a class.
+  // Wait, I need to check renderContactsTemplate in add_task_template.js
+
   const item = document.createElement("div");
   item.className = "contact-item";
-  item.innerHTML = renderContactsTemplate(initials, colorClass, name, false);  // Hier habe das HTML ausgelagert! 
+  // To avoid breaking the existing add_task_template without looking at it,
+  // I will pass the color as a Hex value string instead of a class,
+  // but if the template assumes a CSS class instead of 'style="background-color: ..."'
+  // I might need to update the template first. Let's look at the template next.
+  item.innerHTML = renderContactsTemplate(initials, bgColor, name, false);
   setupContactCheckbox(item, name, false, elements);
   elements.dropdownList.appendChild(item);
 }
 
 function setupContactCheckbox(item, name, isYou, elements) {
   const checkbox = item.querySelector("input");
-  
+
   if (isYou) selectedContacts.push(name);
-  
+
   checkbox.addEventListener("change", () => {
     updateSelectedContacts(name, checkbox.checked);
     updateSelectedUsersDisplay(elements);
@@ -179,25 +183,31 @@ function updateSelectedContacts(name, isChecked) {
   if (isChecked && !selectedContacts.includes(name)) {
     selectedContacts.push(name);
   } else if (!isChecked) {
-    selectedContacts = selectedContacts.filter(c => c !== name);
+    selectedContacts = selectedContacts.filter((c) => c !== name);
   }
 }
 
 function updateSelectedUsersDisplay(elements) {
   elements.selectedContainer.innerHTML = "";
-  const colors = ["bg-orange", "bg-teal", "bg-purple", "bg-blue"];
-  
-  selectedContacts.slice(0, 5).forEach((name, index) => {
-    const circle = createUserCircle(name, colors[index % colors.length]);
+
+  selectedContacts.slice(0, 5).forEach((name) => {
+    const bgColor =
+      typeof getColorFromName === "function"
+        ? getColorFromName(name)
+        : "#FF7A00";
+    const circle = createUserCircle(name, bgColor);
     elements.selectedContainer.appendChild(circle);
   });
-  
-  elements.placeholder.style.display = selectedContacts.length === 0 ? "inline" : "none";
+
+  elements.placeholder.style.display =
+    selectedContacts.length === 0 ? "inline" : "none";
 }
 
-function createUserCircle(name, colorClass) {
+function createUserCircle(name, bgColor) {
   const circle = document.createElement("div");
-  circle.className = `user-circle ${colorClass}`;
+  // We apply the exact background-color inline since it's a dynamic hex value
+  circle.className = `user-circle`;
+  circle.style.backgroundColor = bgColor;
   circle.innerText = getInitials(name);
   circle.title = name;
   return circle;
@@ -219,10 +229,10 @@ function setupDropdownEventListeners(dropdown, elements) {
 function initializeCategoryDropdown() {
   const dropdown = document.querySelector(".category-dropdown");
   if (!dropdown) return;
-  
+
   const elements = getCategoryDropdownElements(dropdown);
   if (!elements.header) return;
-  
+
   setupDropdownHeaderListener(dropdown, elements);
   setupCategoryItemsListeners(elements);
   setupOutsideClickListener(dropdown);
@@ -232,7 +242,7 @@ function getCategoryDropdownElements(dropdown) {
   return {
     header: dropdown.querySelector(".dropdown-header"),
     placeholder: dropdown.querySelector(".placeholder"),
-    categoryItems: dropdown.querySelectorAll(".category-item")
+    categoryItems: dropdown.querySelectorAll(".category-item"),
   };
 }
 
@@ -270,7 +280,7 @@ function updatePlaceholderWithSelectedCategory(selectedItem, elements) {
 function removeCategoryDropdownError() {
   const dropdown = document.querySelector(".category-dropdown");
   dropdown.classList.remove("input-error");
-  
+
   const errorElement = document.getElementById("error-categoryDropdown");
   if (errorElement) {
     errorElement.innerText = "";
@@ -296,8 +306,15 @@ function closeDropdownIfClickOutside(event, dropdown) {
 
 function initializeSubtasks() {
   const elements = getSubtaskElements();
-  if (!elements || !elements.addButton || !elements.input || !elements.list || !elements.clearButton) return;
-  
+  if (
+    !elements ||
+    !elements.addButton ||
+    !elements.input ||
+    !elements.list ||
+    !elements.clearButton
+  )
+    return;
+
   addSubtaskButtonListeners(elements);
   addSubtaskInputListeners(elements);
   addSubtaskListListener(elements);
@@ -308,7 +325,7 @@ function getSubtaskElements() {
     input: document.getElementById("subTaskInput"),
     addButton: document.getElementById("addSubtaskBtn"),
     clearButton: document.getElementById("clearSubtaskBtn"),
-    list: document.getElementById("subtaskList")
+    list: document.getElementById("subtaskList"),
   };
 }
 
@@ -341,7 +358,7 @@ function addSubtaskListListener(elements) {
   elements.list.addEventListener("click", (event) => {
     const subtaskItem = event.target.closest(".subtask-item");
     if (!subtaskItem) return;
-    
+
     handleDeleteButtonClick(event, subtaskItem);
     handleEditButtonClick(event, subtaskItem);
   });
@@ -357,7 +374,7 @@ function handleDeleteButtonClick(event, subtaskItem) {
 function handleEditButtonClick(event, subtaskItem) {
   const editButton = event.target.closest(".edit-btn");
   if (!editButton) return;
-  
+
   const subtaskInput = subtaskItem.querySelector("input");
 
   subtaskInput.disabled = !subtaskInput.disabled;
@@ -377,7 +394,7 @@ function addSubtaskItem(value) {
   const subtaskItem = document.createElement("div");
   subtaskItem.className = "subtask-item";
 
-  subtaskItem.innerHTML = addSubtaskItemTemplate(value); // Hier habe das HTML ausgelagert! 
+  subtaskItem.innerHTML = addSubtaskItemTemplate(value); // Hier habe das HTML ausgelagert!
 
   subtaskList.appendChild(subtaskItem);
 }
@@ -399,7 +416,8 @@ function clearForm() {
   clearErrors();
 
   document.getElementById("selectedUsers").innerHTML = "";
-  document.querySelector("#assignedDropdown .placeholder").style.display = "inline";
+  document.querySelector("#assignedDropdown .placeholder").style.display =
+    "inline";
 
   const categoryPlaceholder = document.querySelector(
     ".category-dropdown .placeholder",
@@ -410,7 +428,8 @@ function clearForm() {
   }
 
   document.getElementById("subtaskList").innerHTML = "";
-  document.querySelectorAll('#dropdownList input[type="checkbox"]')
+  document
+    .querySelectorAll('#dropdownList input[type="checkbox"]')
     .forEach((cb) => {
       cb.checked = false;
     });
@@ -423,13 +442,12 @@ function clearCompleteForm() {
   document.getElementById("subTaskInput").value = "";
 }
 
-
 async function saveTaskToFirebase() {
   try {
     const taskData = collectFormData();
     const taskId = await generateTaskId();
     const completeTask = buildTaskObject(taskId, taskData);
-    
+
     await uploadTaskToDatabase(taskId, completeTask);
     showSuccessAndRedirect();
   } catch (error) {
@@ -442,10 +460,11 @@ function collectFormData() {
     title: document.getElementById("task-title").value.trim(),
     description: document.getElementById("taskDsc").value.trim(),
     dueDate: document.getElementById("due-date").value,
-    category: document.querySelector(".category-dropdown .placeholder").textContent,
+    category: document.querySelector(".category-dropdown .placeholder")
+      .textContent,
     priority: getPriorityValue(),
     assignedTo: selectedContacts || [],
-    subtasks: getSubtasksFromDom()
+    subtasks: getSubtasksFromDom(),
   };
 }
 
@@ -456,7 +475,7 @@ function getPriorityValue() {
 
 function getSubtasksFromDom() {
   const subtasks = [];
-  document.querySelectorAll(".subtask-item input").forEach(input => {
+  document.querySelectorAll(".subtask-item input").forEach((input) => {
     const value = input.value.trim();
     if (value) subtasks.push({ title: value, completed: false });
   });
@@ -466,12 +485,12 @@ function getSubtasksFromDom() {
 async function generateTaskId() {
   const response = await fetch(BASE_URL + "tasks.json");
   const tasks = await response.json();
-  
+
   let nextNumber = 1;
   if (tasks) {
     const numbers = Object.keys(tasks)
-      .filter(key => key.startsWith("t"))
-      .map(key => parseInt(key.replace("t", "")));
+      .filter((key) => key.startsWith("t"))
+      .map((key) => parseInt(key.replace("t", "")));
     if (numbers.length) nextNumber = Math.max(...numbers) + 1;
   }
   return "t" + nextNumber;
@@ -488,7 +507,7 @@ function buildTaskObject(taskId, data) {
     assignedTo: data.assignedTo,
     subtasks: data.subtasks,
     status: "todo",
-    createdAt: Date.now()
+    createdAt: Date.now(),
   };
 }
 
@@ -496,11 +515,11 @@ async function uploadTaskToDatabase(taskId, task) {
   await fetch(BASE_URL + `tasks/${taskId}.json`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(task)
+    body: JSON.stringify(task),
   });
 }
 
 function showSuccessAndRedirect() {
   document.getElementById("successOverlay").style.display = "flex";
-  setTimeout(() => window.location.href = "../html/board.html", 1200);
+  setTimeout(() => (window.location.href = "../html/board.html"), 1200);
 }
