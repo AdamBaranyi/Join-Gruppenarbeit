@@ -161,13 +161,26 @@ function isValidEmail(email) {
  * @async
  * @returns {Promise<void>}
  */
-async function addUser() {
+ function addUser() {
   if (!validateForm()) return;
+  collectUserFormData();
+}
 
-  const userData = collectUserFormData();
-
+/**
+ * Collects form data for a new user
+ * @returns {UserData} The collected user data
+ */
+async function collectUserFormData() {
+  const userId = generateUserId();
+  console.log(userId);
+  let newUser = {
+    id: userId,
+    name: username.value.trim(),
+    email: email.value.trim(),
+    password: password.value.trim()
+  };
   try {
-    await saveUserToDatabase(userData);
+    await saveUserToDatabase(newUser, userId);
     showSuccessMessageAndRedirectToLogin();
   } catch (error) {
     handleUserSaveError(error);
@@ -175,26 +188,25 @@ async function addUser() {
 }
 
 /**
- * Collects form data for a new user
- * @returns {UserData} The collected user data
- */
-function collectUserFormData() {
-  const userId = generateUserId();
-
-  return {
-    id: userId,
-    name: username.value.trim(),
-    email: email.value.trim(),
-    password: password.value.trim()
-  };
-}
-
-/**
  * Generates a unique user ID
  * @returns {number} The generated ID (current timestamp)
  */
-function generateUserId() {
-  return Date.now();
+async function generateUserId() {
+  const response = await fetch(`${BASE_URL}/users.json`);
+  const users = await response.json();
+
+  let nextIdNumber = 1;
+  const ids = Object.keys(users)
+      .filter(id => id.startsWith("u"))
+      .map(id => parseInt(id.substring(1)))
+              .filter(num => !isNaN(num));
+
+  if (ids.length > 0) {
+              nextIdNumber = Math.max(...ids) + 1;
+          }
+      
+      const newId = `u${nextIdNumber}`;
+      return newId;
 }
 
 /**
@@ -204,8 +216,10 @@ function generateUserId() {
  * @returns {Promise<Response>} The fetch response
  * @throws {Error} If registration fails
  */
-async function saveUserToDatabase(userData) {
-  const response = await fetch(`${BASE_URL}/${userData.id}.json`, {
+async function saveUserToDatabase(userData, userId) {
+  console.log(userData);
+  const response = await fetch(`${BASE_URL}/users/${userId}.json`, 
+    {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(userData)
