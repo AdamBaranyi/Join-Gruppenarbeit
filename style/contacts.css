@@ -170,6 +170,8 @@ ul {
 
 
 .contact-header {
+    display: flex;
+    align-items: center;
     margin-top: 40px;
     max-width: 500px;
 }
@@ -297,11 +299,6 @@ dialog span {
     font-size: 27px;
     line-height: 120%;
     letter-spacing: 0%;
-
-}
-
-#modalInitials {
-    top: 10%;
 }
 
 .logoWhite {
@@ -349,7 +346,7 @@ dialog span {
     padding: 30px;
 }
 
-.imgAndForm img {
+.profileImg {
     width: 120px;
     height: 120px;
     opacity: 1;
@@ -373,6 +370,58 @@ form input {
     opacity: 1;
     gap: 8px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.input-group {
+  position: relative;
+  width: 100%;
+}
+
+.input-group input {
+  width: 100%;
+  height: 48px;
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  padding: 0 45px 0 15px;
+  font-size: 16px;
+}
+
+.input-icon {
+  position: absolute;
+  right: 15px;
+  bottom: 10%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.input-group input:focus {
+  border: 1px solid var(--color-secondary);
+  outline: none;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid var(--color-secondary);
+}
+
+.inputs {
+  position: relative;
+  width: 420px;
+}
+
+.inputs input {
+  width: 100%;
+  height: 45px;
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  padding: 0 45px 0 15px;
+  font-size: 16px;
 }
 
 .mailStyle {
@@ -665,15 +714,12 @@ button {
 
     .profileImg {
         position: absolute;
-        
-    }
-
-    #contactInitials {
-        position: relative;
-    }
-
-    #modalInitials {
         top: 25%;
+    }
+
+    .contact-initials {
+        position: absolute;
+        top: 20;
     }
 
     form {
@@ -726,13 +772,9 @@ button {
 
     .profileImg {
         position: absolute;
-        top: 35%;
-        margin-top: 80px;
     }
-    
     .contact-initials {
         position: absolute;
-        top: 40%;
+        top: 55%;
     }
-
 }

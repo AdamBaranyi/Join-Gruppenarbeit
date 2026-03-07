@@ -25,19 +25,31 @@ function openModalLeftSide() {
 
 function openModalRightSide() {
     return `
-        <form method="dialog" id="contactForm">
-        <input type="text" id="firstname" autocomplete="given-name" placeholder="First Name" required>
-        <input type="text" id="lastname" autocomplete="family-name" placeholder="Last Name" required>
-        <input type="email" id="email" autocomplete="email" placeholder="Email" required>
-        <input type="text" id="phonenumber" autocomplete="tel" placeholder="Phone Number">
-        <div class="btnContainer">
-            <button onclick="cancelContac()" class="cancelBtn">Cancel X</button>
-            <button onclick="addContact({ 
+        <form method="dialog" id="contactForm" onsubmit="addContact({ 
             firstname: document.getElementById('firstname').value,
             lastname: document.getElementById('lastname').value,
             email: document.getElementById('email').value,
             phonenumber: document.getElementById('phonenumber').value
-            })" class="checkBtn">Create contact <img src="../assets/imgs/check.svg" alt=""> </button>
+            })">
+        <div class="input-group" data-type="text">
+            <input type="text" id="firstname" autocomplete="given-name" placeholder="First Name" required>
+            <img class="input-icon" src="..//assets/imgs/person.svg" alt="PrsonIcon">
+        </div>
+        <div class="input-group" data-type="text">
+            <input type="text" id="lastname" autocomplete="family-name" placeholder="Last Name" required>
+            <img class="input-icon" src="..//assets/imgs/person.svg" alt="PrsonIcon">
+        </div>
+        <div class="input-group" data-type="email">
+            <input type="email" id="email" autocomplete="email" placeholder="Email" required>
+            <img class="input-icon" src="..//assets/imgs/mail.svg" alt="mailIcon">
+        </div>
+        <div class="input-group" data-type="tel">
+            <input type="text" id="phonenumber" autocomplete="tel" placeholder="Phone Number">
+            <img class="input-icon" src="..//assets/imgs/phone.svg" alt="phoneIcon">
+        </div>
+            <div class="btnContainer">
+            <button onclick="cancelContac()" class="cancelBtn">Cancel X</button>
+            <input type="submit" class="checkBtn" value="Create contact">
         </div>
         </form>
     `;
@@ -93,7 +105,7 @@ function editFormRightSide(contact) {
 function menuTempl(contact) {
     return `
       <div class="mobileMenu">
-          <button onclick="editContact('${contact.id}')" class="mobileEditBtn">Edit</button>
+          <button onclick="renderEditForm('${contact}')" class="mobileEditBtn">Edit</button>
           <button onclick="deleteContact('${contact.id}')" class="mobileDeleteBtn">Delete</button>
       </div>
     `;
