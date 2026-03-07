@@ -376,13 +376,17 @@ function handleEditButtonClick(event, subtaskItem) {
   if (!editButton) return;
 
   const subtaskInput = subtaskItem.querySelector("input");
+
   subtaskInput.disabled = !subtaskInput.disabled;
+
+  subtaskItem.classList.toggle("editing"); // ⭐ WICHTIG
   editButton.classList.toggle("editing");
 
   if (!subtaskInput.disabled) {
     subtaskInput.focus();
   }
 }
+
 
 function addSubtaskItem(value) {
   const subtaskList = document.getElementById("subtaskList");
@@ -394,6 +398,18 @@ function addSubtaskItem(value) {
 
   subtaskList.appendChild(subtaskItem);
 }
+
+function toggleEdit(btn) {
+  const item = btn.closest(".subtask-item");
+
+  item.classList.toggle("editing");
+
+  const input = item.querySelector("input");
+  input.disabled = !input.disabled;
+
+  btn.classList.toggle("editing");
+}
+
 
 function clearForm() {
   document.getElementById("taskForm").reset();
