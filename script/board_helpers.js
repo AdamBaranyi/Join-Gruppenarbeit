@@ -274,7 +274,7 @@ async function toggleSubtask(subtaskIndex) {
 
   // Update the subtasks array in Firebase
   try {
-    await fetch(BASE_URL + `tasks/${currentTaskId}/subtasks.json`, {
+    await fetch(BASE_URL + `/tasks/${currentTaskId}/subtasks.json`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -313,7 +313,7 @@ async function deleteTask() {
   if (!currentTaskId) return;
 
   try {
-    await fetch(BASE_URL + `tasks/${currentTaskId}.json`, {
+    await fetch(BASE_URL + `/tasks/${currentTaskId}.json`, {
       method: "DELETE",
     });
 
