@@ -111,6 +111,7 @@ function openModal() {
   modalInitials.style.backgroundColor = "transparent";
   modalInitials.classList.remove("contact-initials");
   modalInitials.classList.add('profileImg');
+  modalInitials.classList.remove("contact-initials-edit")
   modalInitials.textContent = '';
   leftSide.innerHTML = openModalLeftSide();
   contactWindow.innerHTML = openModalRightSide();
@@ -256,7 +257,8 @@ function renderEditForm(contact) {
   leftSide.innerHTML = editFormleftSide();
   contactWindow.innerHTML = editFormRightSide(contact);
   const contactImg = document.getElementById("modalInitials");
-  contactImg.classList.add("contact-initials")
+  contactImg.classList.add("contact-initials-edit")
+  contactImg.classList.remove("contact-initials")
   contactImg.classList.remove("profileImg")
   showInitials(contact);
 }
