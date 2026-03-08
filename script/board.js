@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
  */
 async function loadTasks() {
   try {
-    const response = await fetch(BASE_URL + "tasks.json");
+    const response = await fetch(BASE_URL + "/tasks.json");
     const tasks = await response.json();
 
     allLoadedTasks = tasks || {};
@@ -82,7 +82,7 @@ function allowDrop(ev) {
  */
 async function moveTo(newStatus) {
   try {
-    await fetch(BASE_URL + `tasks/${currentDraggedElement}/status.json`, {
+    await fetch(BASE_URL + `/tasks/${currentDraggedElement}/status.json`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -184,7 +184,7 @@ async function saveTask() {
 
   // 3. Send to Firebase
   try {
-    await fetch(BASE_URL + `tasks/${currentTaskId}.json`, {
+    await fetch(BASE_URL + `/tasks/${currentTaskId}.json`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

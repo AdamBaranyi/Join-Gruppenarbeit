@@ -1,4 +1,5 @@
-const BASE_URL = "https://join-backend-afae8-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL = "https://join-backend-afae8-default-rtdb.europe-west1.firebasedatabase.app";
+
 
 /**
  * Includes HTML templates into the current page.

@@ -134,7 +134,7 @@ async function renderAllContacts(elements) {
 }
 
 async function getContactsList() {
-  const response = await fetch(BASE_URL + "contacts.json");
+  const response = await fetch(BASE_URL + "/contacts.json");
   const data = await response.json();
 
   if (!data) return [];
@@ -379,7 +379,7 @@ function handleEditButtonClick(event, subtaskItem) {
 
   subtaskInput.disabled = !subtaskInput.disabled;
 
-  subtaskItem.classList.toggle("editing"); // ⭐ WICHTIG
+  subtaskItem.classList.toggle("editing");
   editButton.classList.toggle("editing");
 
   if (!subtaskInput.disabled) {
@@ -483,8 +483,9 @@ function getSubtasksFromDom() {
 }
 
 async function generateTaskId() {
-  const response = await fetch(BASE_URL + "tasks.json");
-  const tasks = await response.json();
+  const response = await fetch(BASE_URL + "/tasks.json");
+  
+  const tasks = (await response.json()) || {};
 
   let nextNumber = 1;
   if (tasks) {
@@ -512,7 +513,7 @@ function buildTaskObject(taskId, data) {
 }
 
 async function uploadTaskToDatabase(taskId, task) {
-  await fetch(BASE_URL + `tasks/${taskId}.json`, {
+  await fetch(BASE_URL + `/tasks/${taskId}.json`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(task),
