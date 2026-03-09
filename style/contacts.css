@@ -87,6 +87,7 @@ ul::-webkit-scrollbar-thumb:hover {
     margin-bottom: 32px;
     transition: background 0.2s ease;
     margin-left: 20px;
+    z-index: 1000;
 }
 
 .addContactBtn:hover {
