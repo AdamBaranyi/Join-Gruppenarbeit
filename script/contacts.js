@@ -118,6 +118,8 @@ function openModal() {
   const closeBtn = document.getElementById('closeBtnImg');
   if (window.innerWidth <= 850) {
     closeBtn.src = '../assets/imgs/Close_white.png'
+  } else {
+    closeBtn.src = '../assets/imgs/Close.png'
   }
 };
 
