@@ -29,7 +29,7 @@ async function handleLogin(event) {
   }
 
   try {
-    let response = await fetch(BASE_URL + ".json");
+    let response = await fetch(BASE_URL + "/users.json");
     let users = await response.json();
 
     let userFound = false;

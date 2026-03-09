@@ -1,3 +1,11 @@
+/**
+ * Renders the HTML template for a contact item in the assigned-to dropdown.
+ * @param {string} initials - The initials of the contact.
+ * @param {string} bgColor - The background color for the contact circle (hex code).
+ * @param {string} name - The full name of the contact.
+ * @param {boolean} isYou - Whether this contact represents the current user.
+ * @returns {string} The HTML string for the contact item.
+ */
 function renderContactsTemplate(initials, bgColor, name, isYou) {
   return `
         <div class="contact-left">
@@ -8,6 +16,11 @@ function renderContactsTemplate(initials, bgColor, name, isYou) {
         `;
 }
 
+/**
+ * Renders the HTML template for a subtask item.
+ * @param {string} value - The text content of the subtask.
+ * @returns {string} The HTML string for the subtask item with edit and delete buttons.
+ */
 function addSubtaskItemTemplate(value) {
   return `
     <input type="text" value="${value}" disabled>
@@ -28,6 +41,11 @@ function addSubtaskItemTemplate(value) {
   `;
 }
 
+/**
+ * Renders the complete HTML template for the task popup/form.
+ * @returns {string} The HTML string for the entire add task popup including form,
+ * priority buttons, dropdowns, subtasks section, and footer buttons.
+ */
 function getTaskPopupTemplate() {
   return `
     <div class="popup-page-header">

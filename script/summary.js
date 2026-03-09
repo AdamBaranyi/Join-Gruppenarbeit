@@ -239,9 +239,9 @@ function getInitials(name) {
  */
 async function loadSummaryMetrics() {
   try {
-    const response = await fetch(BASE_URL + "tasks.json");
-    const data = await response.json();
-    const tasks = data ? Object.values(data) : [];
+    const response = await fetch(BASE_URL + "/tasks.json");
+    const data = (await response.json()) || {};
+    const tasks = Object.values(data);
 
     let metrics = {
       total: tasks.length,
@@ -255,16 +255,14 @@ async function loadSummaryMetrics() {
     let earliestUrgentDate = null;
 
     tasks.forEach((task) => {
-      // Count Status
       if (task.status === "todo") metrics.todo++;
       else if (task.status === "inProgress") metrics.inProgress++;
       else if (task.status === "awaitingFeedback") metrics.awaitingFeedback++;
       else if (task.status === "done") metrics.done++;
 
-      // Count Priority
       if (task.priority === "Urgent") {
         metrics.urgent++;
-        // Find earliest date
+
         if (task.dueDate) {
           const taskDate = new Date(task.dueDate);
           if (!earliestUrgentDate || taskDate < earliestUrgentDate) {
@@ -279,6 +277,8 @@ async function loadSummaryMetrics() {
     console.error("Error loading summary metrics:", e);
   }
 }
+
+
 
 /**
  * Updates the summary HTML numbers and the urgent deadline text.

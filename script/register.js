@@ -161,7 +161,7 @@ function isValidEmail(email) {
  * @async
  * @returns {Promise<void>}
  */
- function addUser() {
+ async function addUser() {
   if (!validateForm()) return;
   collectUserFormData();
 }
@@ -171,7 +171,7 @@ function isValidEmail(email) {
  * @returns {UserData} The collected user data
  */
 async function collectUserFormData() {
-  const userId = generateUserId();
+  const userId =  await generateUserId();
   console.log(userId);
   let newUser = {
     id: userId,
@@ -193,21 +193,22 @@ async function collectUserFormData() {
  */
 async function generateUserId() {
   const response = await fetch(`${BASE_URL}/users.json`);
-  const users = await response.json();
+  const users = (await response.json()) || {};
 
   let nextIdNumber = 1;
+
   const ids = Object.keys(users)
-      .filter(id => id.startsWith("u"))
-      .map(id => parseInt(id.substring(1)))
-              .filter(num => !isNaN(num));
+    .filter(id => id.startsWith("u"))
+    .map(id => parseInt(id.substring(1)))
+    .filter(num => !isNaN(num));
 
   if (ids.length > 0) {
-              nextIdNumber = Math.max(...ids) + 1;
-          }
-      
-      const newId = `u${nextIdNumber}`;
-      return newId;
+    nextIdNumber = Math.max(...ids) + 1;
+  }
+
+  return `u${nextIdNumber}`;
 }
+
 
 /**
  * Saves user data to the database
