@@ -45,7 +45,7 @@ function openModalRightSide() {
         </div>
         <div class="input-group" data-type="tel">
             <input type="text" id="phonenumber" autocomplete="tel" placeholder="Phone Number">
-            <img class="input-icon" src="..//assets/imgs/phone.svg" alt="phoneIcon">
+            <img class="input-icon" src="..//assets/imgs/call.png" alt="phoneIcon">
         </div>
             <div class="btnContainer">
             <button onclick="cancelContac()" class="cancelBtn">Cancel X</button>
@@ -90,15 +90,26 @@ function editFormleftSide() {
 
 function editFormRightSide(contact) {
     return `
-        <form method="dialog" id="contactForm">
-            <input type="text" id="firstname" autocomplete="given-name" placeholder="First Name" value="${contact.firstname}" required>
-            <input type="text" id="lastname" autocomplete="family-name" placeholder="Last Name" value="${contact.lastname}" required>
-            <input type="email" id="email" autocomplete="email" placeholder="Email" value="${contact.email}" required>
-            <input type="text" id="phonenumber" autocomplete="tel" placeholder="Phone Number" value="${contact.phone}">
-
+        <form method="dialog" id="contactForm" onsubmit="editContact('${contact.id}')">
+            <div class="input-group" data-type="text">
+                <input type="text" id="firstname" autocomplete="given-name" placeholder="First Name" value="${contact.firstname}" required>
+                <img class="input-icon" src="..//assets/imgs/person.svg" alt="PrsonIcon">
+            </div>
+            <div class="input-group" data-type="text">
+                <input type="text" id="lastname" autocomplete="family-name" placeholder="Last Name" value="${contact.lastname}" required>
+                <img class="input-icon" src="..//assets/imgs/person.svg" alt="PrsonIcon">
+            </div>
+            <div class="input-group" data-type="email">
+                <input type="email" id="email" autocomplete="email" placeholder="Email" value="${contact.email}" required>
+                <img class="input-icon" src="..//assets/imgs/mail.svg" alt="mailIcon">
+            </div>
+            <div class="input-group" data-type="tel">
+                <input type="text" id="phonenumber" autocomplete="tel" placeholder="Phone Number" value="${contact.phone}">
+                <img class="input-icon" src="..//assets/imgs/call.png" alt="phoneIcon">
+            </div>
             <div class="btnContainer">
                 <button onclick="deleteContact('${contact.id}')" class="deleteBtn">Delete X</button>
-                <button onclick="editContact('${contact.id}')" class="checkBtn">Save changes <img src="../assets/imgs/check.svg" alt="check symbol"> </button>
+                <input type="submit" class="checkBtn" value="Save changes">
             </div>
         </form>
   `;

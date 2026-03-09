@@ -115,6 +115,10 @@ function openModal() {
   modalInitials.textContent = '';
   leftSide.innerHTML = openModalLeftSide();
   contactWindow.innerHTML = openModalRightSide();
+  const closeBtn = document.getElementById('closeBtnImg');
+  if (window.innerWidth <= 850) {
+    closeBtn.src = '../assets/imgs/Close_white.png'
+  }
 };
 
 // close the modal
@@ -257,6 +261,7 @@ function renderEditForm(contact) {
   leftSide.innerHTML = editFormleftSide();
   contactWindow.innerHTML = editFormRightSide(contact);
   const contactImg = document.getElementById("modalInitials");
+
   contactImg.classList.add("contact-initials-edit")
   contactImg.classList.remove("contact-initials")
   contactImg.classList.remove("profileImg")
