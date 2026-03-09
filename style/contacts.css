@@ -135,6 +135,7 @@ ul::-webkit-scrollbar-thumb:hover {
 
 #contactCardContent {
     animation: fadeIn 200ms ease-in-out;
+    padding-bottom: 100px
 }
 
 @keyframes fadeIn {
@@ -616,6 +617,7 @@ button:hover {
         left: 0;
         width: 100dvw;
         height: calc(100dvh - 180px);
+        padding-top: 0;
     }
     
     #contactCard {
@@ -664,8 +666,8 @@ button:hover {
         cursor: pointer;
         height: 56px;
         width: 56px;
-        top: 74%;
-        right: 10%;
+        top: 65%;
+        right: 8%;
     }
 
     .mobileMenu {
@@ -673,10 +675,25 @@ button:hover {
         display: flex;
         flex-direction: column;
         cursor: pointer;
-        height: 56px;
-        width: 56px;
         top: 80%;
         right: 10%;
+        background-color: white;
+        width: 116;
+        height: 100;
+        opacity: 1;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        padding: 10px;
+    }
+
+    .mobileMenu button {
+        border: none;
+        background-color: white;
+    }
+
+    .mobileMenu button:hover {
+        background-color: transparent;
     }
 
     dialog:open {
