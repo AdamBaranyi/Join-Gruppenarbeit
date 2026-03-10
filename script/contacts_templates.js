@@ -1,13 +1,13 @@
 function renderContactListItem(contact, initials, bgColor) {
     return `
-    <div class="contactRow" onclick='renderContactCard(${JSON.stringify(contact)}); this.parentElement.querySelectorAll(".contactRow").forEach(row => row.classList.remove("active")); this.classList.add("active");'>
-      <div class="contactItem">
-        <div class="contactCircle" style="background:${bgColor}">
+    <div class="contact-row" onclick='renderContactCard(${JSON.stringify(contact)}); this.parentElement.querySelectorAll(".contact-row").forEach(row => row.classList.remove("active")); this.classList.add("active");'>
+      <div class="contact-item">
+        <div class="contact-circle" style="background:${bgColor}">
           ${initials.toUpperCase()}
         </div>
         <div>
           ${contact.firstname} ${contact.lastname}<br>
-          <span class="mailStyle">${contact.email}</span>
+          <span class="mail-style">${contact.email}</span>
         </div>
       </div>
     </div>
@@ -49,7 +49,7 @@ function openModalRightSide() {
         </div>
             <div class="btnContainer">
             <button onclick="cancelContac()" class="cancelBtn">Cancel X</button>
-            <input type="submit" class="checkBtn" value="Create contact">
+            <input type="submit" class="check-btn" value="Create contact">
         </div>
         </form>
     `;
@@ -63,19 +63,19 @@ function contactCard(contact) {
             </div>
             <div class="btnAndName-container">
                 <strong>${contact.firstname} ${contact.lastname}</strong><br>
-                <div class="editAndDeleteBtnContainer">
-                    <button class="editBtn">Edit <img src="../assets/imgs/edit (1).png" alt=""></button>
-                    <button class="deleteBtn">Delete <img src="../assets/imgs/delete.svg" alt=""></button>
+                <div class="edit-and-delte-btn-container">
+                    <button class="edit-btn">Edit <img src="../assets/imgs/edit (1).png" alt=""></button>
+                    <button class="delete-btn">Delete <img src="../assets/imgs/delete.svg" alt=""></button>
                 </div>
             </div>
             </div>
             <span>Contact Information:</span><br>
             <div class="contact-info">
-            <strong>Email:</strong> <br> <span class="mailStyle">${contact.email}</span><br>
+            <strong>Email:</strong> <br> <span class="mail-style">${contact.email}</span><br>
             <strong>Phone Number:</strong> <span>${contact.phone}</span>
             </div>
-            <img onclick='mobileEditMenu(${JSON.stringify(contact)}, event)' id="mobileOptionMenu" class="mobileEditMenu" src="../assets/imgs/Menu Contact options.png" alt="contact options menu">
-            <div class="displayNone" id="mobileMenu"></div>
+            <img onclick='mobileEditMenu(${JSON.stringify(contact)}, event)' id="mobileOptionMenu" class="mobile-edit-menu" src="../assets/imgs/Menu Contact options.png" alt="contact options menu">
+            <div class="display-none" id="mobileMenu"></div>
         </div>
     `;
 }
@@ -108,8 +108,8 @@ function editFormRightSide(contact) {
                 <img class="input-icon" src="..//assets/imgs/call.png" alt="phoneIcon">
             </div>
             <div class="btnContainer">
-                <button onclick="deleteContact('${contact.id}')" class="deleteBtn">Delete X</button>
-                <input type="submit" class="checkBtn" value="Save changes">
+                <button onclick="deleteContact('${contact.id}')" class="delete-btn">Delete X</button>
+                <input type="submit" class="check-btn" value="Save changes">
             </div>
         </form>
   `;
