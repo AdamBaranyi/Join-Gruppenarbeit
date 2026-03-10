@@ -30,7 +30,6 @@
     gap: 24px;
     max-height: 90vh;
     overflow-y: auto;
-    /* Animation definition */
     transform: translateX(100vw);
     animation: slideInRight 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
 }
@@ -521,7 +520,7 @@
 
 .edit-task-form .subtask-input-wrapper input {
     width: 100%;
-    padding-right: 100px; /* Make space for buttons */
+    padding-right: 100px;
 }
 
 .edit-task-form .subtask-input-actions {

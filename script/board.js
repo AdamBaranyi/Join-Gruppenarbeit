@@ -161,7 +161,6 @@ function openTaskPopup(id) {
 async function saveTask() {
   if (!currentTaskId) return;
 
-  // 1. Gather data from inputs
   let title = document.getElementById("editTaskTitle").value.trim();
   let description = document.getElementById("editTaskDescription").value.trim();
   let dueDate = document.getElementById("editTaskDueDate").value;
@@ -172,7 +171,6 @@ async function saveTask() {
     return;
   }
 
-  // 2. Prepare payload
   let updatedData = {
     title: title,
     description: description,
@@ -182,7 +180,6 @@ async function saveTask() {
     subtasks: editCurrentSubtasks,
   };
 
-  // 3. Send to Firebase
   try {
     await fetch(BASE_URL + `/tasks/${currentTaskId}.json`, {
       method: "PATCH",
@@ -192,21 +189,16 @@ async function saveTask() {
       body: JSON.stringify(updatedData),
     });
 
-    // 4. Update local cache
     Object.assign(allLoadedTasks[currentTaskId], updatedData);
 
-    // 5. Update UI
-    loadTasks(); // refreshes the columns
+    loadTasks();
 
-    // 6. Return back to View mode within the opened modal
-    openTaskPopup(currentTaskId); // Re-initializes view mode with new data
+    openTaskPopup(currentTaskId);
   } catch (error) {
     console.error("Error saving task:", error);
     alert("Could not save task.");
   }
 }
-
-
 
 /**
  * Opens a context menu to move a task to another column on mobile.
@@ -241,9 +233,8 @@ function openMoveMenu(event, taskId) {
   const btnRect = event.currentTarget.getBoundingClientRect();
   document.body.appendChild(menu);
 
-  // Position the menu slightly below and aligned to the right edge of the button
-  const top = btnRect.bottom + window.scrollY + 8; // 8px below the button
-  const left = btnRect.right + window.scrollX - 140; // The max-width of the menu is approx 140px. This aligns the 0 border-radius flush with the button.
+  const top = btnRect.bottom + window.scrollY + 8;
+  const left = btnRect.right + window.scrollX - 140;
   
   menu.style.top = `${top}px`;
   menu.style.left = `${left}px`;
