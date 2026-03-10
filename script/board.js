@@ -161,7 +161,6 @@ function openTaskPopup(id) {
 async function saveTask() {
   if (!currentTaskId) return;
 
-  // 1. Gather data from inputs
   let title = document.getElementById("editTaskTitle").value.trim();
   let description = document.getElementById("editTaskDescription").value.trim();
   let dueDate = document.getElementById("editTaskDueDate").value;
@@ -172,7 +171,6 @@ async function saveTask() {
     return;
   }
 
-  // 2. Prepare payload
   let updatedData = {
     title: title,
     description: description,
@@ -182,7 +180,6 @@ async function saveTask() {
     subtasks: editCurrentSubtasks,
   };
 
-  // 3. Send to Firebase
   try {
     await fetch(BASE_URL + `/tasks/${currentTaskId}.json`, {
       method: "PATCH",
@@ -192,16 +189,93 @@ async function saveTask() {
       body: JSON.stringify(updatedData),
     });
 
-    // 4. Update local cache
     Object.assign(allLoadedTasks[currentTaskId], updatedData);
 
-    // 5. Update UI
-    loadTasks(); // refreshes the columns
+    loadTasks();
 
-    // 6. Return back to View mode within the opened modal
-    openTaskPopup(currentTaskId); // Re-initializes view mode with new data
+    openTaskPopup(currentTaskId);
   } catch (error) {
     console.error("Error saving task:", error);
     alert("Could not save task.");
   }
+}
+
+/**
+ * Opens a context menu to move a task to another column on mobile.
+ * @param {Event} event - The click event.
+ * @param {string} taskId - The ID of the task.
+ */
+function openMoveMenu(event, taskId) {
+  event.stopPropagation();
+  
+  closeMoveMenu();
+
+  const task = allLoadedTasks[taskId];
+  if (!task) return;
+
+  const statuses = [
+      { id: 'todo', label: 'To-do' },
+      { id: 'inProgress', label: 'In progress' },
+      { id: 'awaitingFeedback', label: 'Awaiting feedback' },
+      { id: 'done', label: 'Done' }
+  ];
+
+  const currentIndex = statuses.findIndex(s => s.id === task.status);
+  if (currentIndex === -1) return;
+
+  const menuContent = generateMobileMoveMenuHTML(taskId, statuses, currentIndex);
+
+  const menu = document.createElement('div');
+  menu.className = 'mobile-move-menu';
+  menu.id = 'mobileMoveMenu';
+  menu.innerHTML = menuContent;
+
+  const btnRect = event.currentTarget.getBoundingClientRect();
+  document.body.appendChild(menu);
+
+  const top = btnRect.bottom + window.scrollY + 8;
+  const left = btnRect.right + window.scrollX - 140;
+  
+  menu.style.top = `${top}px`;
+  menu.style.left = `${left}px`;
+
+  setTimeout(() => {
+      document.addEventListener('click', closeMoveMenuHandler);
+  }, 0);
+}
+
+/**
+ * Closes the mobile context menu if it is open.
+ */
+function closeMoveMenu() {
+  const existingMenu = document.getElementById('mobileMoveMenu');
+  if (existingMenu) {
+      existingMenu.remove();
+  }
+  document.removeEventListener('click', closeMoveMenuHandler);
+}
+
+/**
+ * Event handler to close the move menu when clicking outside of it.
+ * @param {Event} event - The click event.
+ */
+function closeMoveMenuHandler(event) {
+  const menu = document.getElementById('mobileMoveMenu');
+  if (menu && !menu.contains(event.target)) {
+      closeMoveMenu();
+  }
+}
+
+/**
+ * Moves a task to a specific status via the mobile context menu.
+ * @param {Event} event - The click event.
+ * @param {string} taskId - The ID of the task.
+ * @param {string} newStatus - The new status to move the task to.
+ */
+async function moveTaskToStatus(event, taskId, newStatus) {
+  event.stopPropagation();
+  closeMoveMenu();
+  
+  currentDraggedElement = taskId;
+  await moveTo(newStatus);
 }

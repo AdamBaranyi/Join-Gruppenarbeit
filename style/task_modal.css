@@ -1,0 +1,626 @@
+/* Task Modal Pop-up */
+
+.task-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeInBackground 0.2s ease-out forwards;
+}
+
+@keyframes fadeInBackground {
+    from { background-color: rgba(0, 0, 0, 0); }
+    to { background-color: rgba(0, 0, 0, 0.4); }
+}
+
+.task-modal-content {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    padding: 48px 40px;
+    width: 525px;
+    max-width: 90%;
+    position: relative;
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: translateX(100vw);
+    animation: slideInRight 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100vw);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.task-modal-overlay.fade-out {
+    animation: fadeOutBackground 0.2s ease-in forwards;
+}
+
+@keyframes fadeOutBackground {
+    from { background-color: rgba(0, 0, 0, 0.4); }
+    to { background-color: rgba(0, 0, 0, 0); }
+}
+
+.task-modal-content.slide-out {
+    animation: slideOutRight 0.2s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100vw);
+        opacity: 0;
+    }
+}
+
+.modal-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-close-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+    position: absolute;
+    top: 40px;
+    right: 40px;
+}
+
+.modal-close-btn:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.modal-close-btn img {
+    width: 24px;
+    height: 24px;
+}
+
+#modalTitle {
+    font-size: 61px;
+    font-weight: 700;
+    margin: 0;
+    color: #000000;
+}
+
+#modalDescription {
+    font-size: 20px;
+    font-weight: 400;
+    color: #000000;
+    margin: 0;
+}
+
+.modal-details-row {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.modal-details-row:has(#modalPriority) {
+    display: flex;
+    align-items: center;
+}
+
+#modalPriority {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#modalPriority img {
+    width: 20px;
+    height: 15px;
+    object-fit: contain;
+}
+
+.detail-label {
+    font-size: 20px;
+    color: #42526E;
+    width: 100px;
+}
+
+.detail-value {
+    font-size: 20px;
+    color: #000000;
+}
+
+.modal-assignees-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.modal-assignees-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.assignee-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.assignee-row .assignee-badge {
+    margin-left: 0;
+    width: 42px;
+    height: 42px;
+    font-size: 15px;
+}
+
+.assignee-name {
+    font-size: 19px;
+    color: #000000;
+}
+
+.modal-subtasks-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.subtask-row {
+    padding: 6px 16px;
+    border-radius: 10px;
+    transition: background-color 0.1s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+}
+
+.subtask-row:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.subtask-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.modal-footer-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.action-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #2A3647;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.1s;
+}
+
+.action-btn:hover {
+    color: #29ABE2;
+    font-weight: 700;
+}
+
+.action-btn img {
+    width: 16px;
+    height: 16px;
+}
+
+.action-btn:hover img {
+    filter: invert(53%) sepia(80%) saturate(2400%) hue-rotate(166deg) brightness(98%) contrast(85%);
+}
+
+.action-divider {
+    height: 24px;
+    width: 1px;
+    background-color: #D1D1D1;
+}
+
+@media (max-width: 550px) {
+    #modalTitle {
+        font-size: 36px;
+    }
+}
+
+/* Edit Task Form within Modal */
+
+.edit-task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.modal-close-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: -10px;
+}
+
+.edit-task-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.edit-task-form label {
+    font-size: 20px;
+    color: #2a3647;
+    font-weight: 400;
+}
+
+.edit-input, .edit-textarea {
+    width: 100%;
+    height: 48px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid #d1d1d1;
+    background: white;
+    font-size: 20px;
+    font-family: inherit;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    outline: none;
+}
+
+.edit-textarea {
+    resize: vertical;
+    min-height: 120px;
+    height: 120px;
+}
+
+.edit-input:focus, .edit-textarea:focus {
+    border-color: #29abe2;
+}
+
+/* Priority Buttons in Edit Modal */
+.edit-task-form .priority-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-task-form .trigger {
+    flex: 1;
+    height: 56px;
+    border-radius: 10px;
+    border: 1px solid #d1d1d1;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.edit-task-form .trigger:not(.active):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+.edit-task-form .trigger.active {
+    color: white;
+    transform: none;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.edit-task-form .trigger.active img {
+    filter: brightness(0) invert(1);
+}
+
+.edit-task-form .trigger.urgent.active { background-color: #ff3d00; font-weight: 700; }
+.edit-task-form .trigger.medium.active { background-color: #ffa800; font-weight: 700; }
+.edit-task-form .trigger.low.active { background-color: #7ae229; font-weight: 700; }
+
+/* Ok Button */
+.edit-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 32px;
+}
+
+.edit-ok-btn {
+    background-color: #2a3647;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 16px 24px;
+    font-size: 21px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.edit-ok-btn:hover {
+    background: #29abe2;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Edit Form Dropdown & Assignees */
+.edit-task-form .custom-dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.edit-task-form .dropdown-header {
+    height: 48px;
+    border: 1px solid #d1d1d1;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    background: white;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.edit-task-form .dropdown-header .arrow {
+    display: flex;
+    align-items: center;
+}
+
+.edit-task-form .dropdown-list {
+    display: none;
+    position: absolute;
+    width: 100%;
+    border: 1px solid #d1d1d1;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    max-height: 240px;
+    overflow-y: auto;
+    background: white;
+    z-index: 100;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    top: 48px;
+}
+
+.edit-task-form .custom-dropdown.open .dropdown-list {
+    display: block;
+}
+
+.edit-task-form .custom-dropdown.open .dropdown-header {
+    border-radius: 10px 10px 0 0;
+    border-bottom: 1px solid #d1d1d1;
+}
+
+.edit-task-form .contact-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.edit-task-form .contact-item:hover {
+    background: #f0f0f0;
+}
+
+.edit-task-form .contact-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.edit-task-form .contact-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #2a3647;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.edit-task-form .contact-item input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #2a3647;
+    border-radius: 3px;
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+    margin: 0;
+}
+
+.edit-task-form .contact-item input[type="checkbox"]:hover {
+    border-color: #29abe2;
+}
+
+.edit-task-form .contact-item input[type="checkbox"]:checked {
+    background-color: #2a3647;
+    border-color: #2a3647;
+}
+
+.edit-task-form .contact-item input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 5px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.edit-task-form .selected-users {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap; 
+    margin-top: 8px;
+}
+
+.edit-task-form .user-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    border: 2px solid white;
+}
+
+/* Edit Form Subtasks */
+.edit-task-form .subtask-group {
+    position: relative;
+}
+
+.edit-task-form .subtask-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.edit-task-form .subtask-input-wrapper input {
+    width: 100%;
+    padding-right: 100px;
+}
+
+.edit-task-form .subtask-input-actions {
+    position: absolute;
+    right: 8px;
+    display: none;
+    align-items: center;
+    gap: 4px;
+}
+
+.edit-task-form .subtask-input-wrapper.typing .subtask-input-actions {
+    display: flex;
+}
+
+.edit-task-form .clear-subtask-btn, 
+.edit-task-form .add-subtask-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.edit-task-form .clear-subtask-btn:hover, 
+.edit-task-form .add-subtask-btn:hover {
+    background: #f0f0f0;
+    border-radius: 50%;
+}
+
+.edit-task-form .divider {
+    width: 1px;
+    height: 24px;
+    background: #d1d1d1;
+}
+
+.edit-task-form .subtask-list {
+    margin-top: 8px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.edit-task-form .subtask-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: transparent;
+    border-radius: 10px;
+    transition: background-color 0.2s;
+}
+
+.edit-task-form .subtask-list li:hover {
+    background-color: #f0f0f0;
+}
+
+.edit-task-form .subtask-list li .subtask-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #000;
+}
+
+.edit-task-form .subtask-list li .subtask-text::before {
+    content: "•";
+    color: #000;
+    font-size: 20px;
+}
+
+.edit-task-form .subtask-actions {
+    display: none;
+    align-items: center;
+    gap: 8px;
+}
+
+.edit-task-form .subtask-list li:hover .subtask-actions {
+    display: flex;
+}
+
+.edit-task-form .subtask-actions img {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    padding: 2px;
+}
+
+.edit-task-form .subtask-actions img:hover {
+    background-color: #e0e0e0;
+    border-radius: 4px;
+}
+
+.edit-task-form .subtask-actions .divider {
+    width: 1px;
+    height: 16px;
+    background: #d1d1d1;
+}
+
