@@ -30,7 +30,7 @@
     font-weight: 700;
 }
 
-.sloganSpan {
+.slogan-span {
     font-size: 27px;
     color: #2A3647;
 }
@@ -41,7 +41,7 @@
 }
 
 
-.sloganAndCard-Container {
+.slogan-and-card-container {
     flex: 1;
     padding: 80px 80px 80px 80px;
 }
@@ -71,7 +71,7 @@ ul::-webkit-scrollbar-thumb:hover {
 }
 
 
-.addContactBtn {
+.add-contact-btn {
     width: 354px;
     height: 56px;
     background: #2A3647;
@@ -90,16 +90,16 @@ ul::-webkit-scrollbar-thumb:hover {
     z-index: 1000;
 }
 
-.addContactBtn:hover {
+.add-contact-btn:hover {
     background: #29ABE2;
 }
 
-.addContactBtn:hover {
+.add-contact-btn:hover {
     background-color: #344762;
     color: white;
 }
 
-.contactListStyle {
+.contact-list-style {
     background: white;
     box-shadow: 0 0 20px rgba(0,0,0,0.04);
     display: flex;
@@ -107,18 +107,18 @@ ul::-webkit-scrollbar-thumb:hover {
     padding: 32px 24px;
 }
 
-.contactRow {
+.contact-row {
     padding: 15px 12px;
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
-.contactRow:hover {
+.contact-row:hover {
     background: #F0F0F0;
 }
 
-.letterHeader {
+.letter-header {
     font-weight: 600;
     font-size: 20px;
     padding: 16px 0 21px 20px;
@@ -126,14 +126,14 @@ ul::-webkit-scrollbar-thumb:hover {
     margin-top: 16px;
 }
 
-#contactListContent {
+#contact-list-content {
     display: flex;
     flex-direction: column;
     width: 354px;
     padding-left: 20px;
 }
 
-#contactCardContent {
+#contact-card-content {
     animation: fadeIn 200ms ease-in-out;
     padding-bottom: 100px
 }
@@ -152,7 +152,7 @@ ul {
     overflow-y: auto;
 }
 
-#contactCard {
+#contact-card {
     margin-top: 50px;
     max-width: 500px;
     margin-top: 50px;
@@ -164,12 +164,12 @@ ul {
     padding: 32px;
 }
 
-#contactCard.show {
+#contact-card.show {
     opacity: 1;
     transform: translateX(0);
 }
 
-.editAndDeleteBtnContainer {
+.edit-and-delte-btn-container {
     display: flex;
 }
 
@@ -190,7 +190,7 @@ ul {
     flex-direction: column;
 }
 
-.profileImg {
+.profile-img {
     position: relative;
     background-image: url('../assets/imgs/Group 13.png');
     background-size: cover;
@@ -201,13 +201,13 @@ ul {
 }
 
 
-.contactItem {
+.contact-item {
     display: flex;
     align-items: center;
     gap: 16px;
 }
 
-.contactCircle {
+.contact-circle {
     width: 42px;
     height: 42px;
     border-radius: 50%;
@@ -260,7 +260,7 @@ ul {
     letter-spacing: 0%;
 }
 
-.contactRow.active {
+.contact-row.active {
     background: #2A3647;
     color: white;
     transform: scale(1.02);
@@ -268,7 +268,7 @@ ul {
 }
 
 
-.contactRow.active .mailStyle {
+.contact-row.active .mail-style {
     color: #29ABE2;
 }
 
@@ -289,7 +289,7 @@ dialog:open {
     border: none;
 }
 
-.leftSideModal {
+.left-side-modal {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -325,7 +325,7 @@ dialog span {
     letter-spacing: 0%;
 }
 
-.logoWhite {
+.logo-white {
     width: 55.599586486816406px;
     height: 66.48291015625px;
     opacity: 1;
@@ -339,7 +339,7 @@ dialog span {
     
 }
 
-.rightSideModal {
+.right-side-modal {
     width: 100%;
     height: 100%;
     display: flex;
@@ -348,32 +348,38 @@ dialog span {
     align-items: center;
 }
 
-.closeBtnContainer {
+.close-btn-container {
     width: 100%;
     display: flex;
     justify-content: flex-end;
     padding-right: 32px;
 }
 
-.closeBtn {
+.close-btn {
     border: none;
+    border-radius: 50%;
+    background-color: white;
+}
+.close-btn:hover {
     background-color: transparent;
+    background-color: rgba(219, 211, 211, 0.247);
+
 }
 
-.closeBtn img {
+.close-btn img {
     width: 24px;
     height: 24px;
     opacity: 1;
 }
 
-.imgAndForm {
+.img-and-form {
     display: flex;
     justify-content: space-evenly;
     min-width: 100%;
     padding: 30px;
 }
 
-.profileImg {
+.profile-img {
     width: 120px;
     height: 120px;
     opacity: 1;
@@ -448,11 +454,11 @@ input:focus {
   font-size: 16px;
 }
 
-.mailStyle {
+.mail-style {
     color: var(--email-color);
 }
 
-.displayNone {
+.display-none {
     display: none;
 }
 
@@ -464,13 +470,13 @@ button:hover {
     background-color: transparent;
 }
 
-.btnContainer {
+.btn-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.cancelBtn {
+.cancel-btn {
     width: 126px;
     height: 56px;
     opacity: 1;
@@ -481,7 +487,7 @@ button:hover {
 
 }
 
-.deleteBtn {
+.delete-btn {
     width: 126px;
     height: 56px;
     opacity: 1;
@@ -493,7 +499,7 @@ button:hover {
 }
 
 
-.checkBtn {
+.check-btn {
     background-color: var(--primary-color);
     color: white;
     width: 214px;
@@ -505,18 +511,18 @@ button:hover {
     cursor: pointer;
 }
 
-.checkBtn:hover {
+.check-btn:hover {
     background-color: #344762;
     color: white;
 }
 
-.checkBtn img {
+.check-btn img {
     width: 24;
     height: 24;
     opacity: 1;
 }
 
-.editBtn {
+.edit-btn {
     width: 126px;
     height: 56px;
     opacity: 1;
@@ -526,15 +532,15 @@ button:hover {
     border: none;
 }
 
-#closeCardBtn {
+#close-card-btn {
     display: none;
 }
 
-.mobileEditMenu {
+.mobile-edit-menu {
     display: none;
 }
 
-.mobileMenu {
+.mobile-menu {
     display: none;
 }
 
@@ -573,7 +579,7 @@ button:hover {
         bottom: 80px;
     }
 
-    .addContactBtn {
+    .add-contact-btn {
         position: absolute;
         width: 56px;
         height: 56px;
@@ -586,11 +592,11 @@ button:hover {
         right: 10%;
 
     }
-    .addContactBtn span {
+    .add-contact-btn span {
         display: none;
     }
 
-    .contactListStyle {
+    .contact-list-style{
         position: absolute;
         left: 0;
         width: 100dvw;
@@ -606,11 +612,12 @@ button:hover {
         cursor: unset;
     }
 
-    #contactListContent {
+    #contact-list-content {
         position: relative;
         left: 0;
     }
-    .sloganAndCard-Container {
+
+    .slogan-and-card-container {
         display: none;
         flex-direction: column;
         position: absolute;
@@ -620,7 +627,7 @@ button:hover {
         padding-top: 0;
     }
     
-    #contactCard {
+    #contact-card {
         width: 100%;
         height: 100%;
         position: relative;
@@ -650,7 +657,7 @@ button:hover {
 
    
 
-    #closeCardBtn {
+    #close-card-btn {
         position: absolute;
         display: flex;
         cursor: pointer;
@@ -660,7 +667,7 @@ button:hover {
         right: 5%;
     }
 
-    .mobileEditMenu {
+    .mobile-edit-menu {
         position: absolute;
         display: flex;
         cursor: pointer;
@@ -670,7 +677,7 @@ button:hover {
         right: 8%;
     }
 
-    .mobileMenu {
+    .mobile-menu {
         position: absolute;
         display: flex;
         flex-direction: column;
@@ -687,12 +694,12 @@ button:hover {
         padding: 10px;
     }
 
-    .mobileMenu button {
+    .mobile-menu button {
         border: none;
         background-color: white;
     }
 
-    .mobileMenu button:hover {
+    .mobile-menu button:hover {
         background-color: transparent;
     }
 
@@ -724,13 +731,13 @@ button:hover {
         letter-spacing: 0%;
     }
 
-    .closeBtnContainer {
+    .close-btn-container {
         position: absolute;
         top: 0;
         padding-top: 20px;
     }
 
-    .leftSideModal {
+    .left-side-modal  {
         justify-content: center;
         align-items: flex-start;
         width: 100%;
@@ -738,7 +745,7 @@ button:hover {
         overflow: hidden;
     }
 
-    .rightSideModal {
+    .right-side-modal {
         width: 100%;
         justify-content: center;
         align-items: center;;
@@ -746,7 +753,7 @@ button:hover {
         overflow: hidden;
     }
 
-    .imgAndForm {
+    .img-and-form {
         width: 100%;
         height: fit-content;
         display: flex;
@@ -755,11 +762,11 @@ button:hover {
         flex-direction: column;
     }
 
-    .mobileMenu {
+    .mobile-menu {
         position: fixed;
     }
 
-    .profileImg {
+    .profile-img {
         position: absolute;
         top: 25%;
     }
@@ -780,22 +787,22 @@ button:hover {
         padding-bottom: 30px;
     }
 
-    .btnContainer {
+    .btn-container {
         width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    .logoWhite {
+    .logo-white {
         display: none;
     }
 
-    .cancelBtn {
+    .cancel-btn {
         display: none;
     }
 
-    .deleteBtn {
+    .delete-btn {
         display: none;
     }
 
@@ -807,7 +814,7 @@ button:hover {
         display: none;
     }
 
-    .editAndDeleteBtnContainer {
+    .edit-and-delte-btn-container {
         display: none;
     }
 }
@@ -822,7 +829,7 @@ button:hover {
         left: 0;
     }
 
-    .profileImg {
+    .profile-img {
         position: absolute;
         top: 38%;
     }
