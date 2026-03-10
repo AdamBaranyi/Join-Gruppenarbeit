@@ -11,8 +11,13 @@ function generateTaskHTML(task, id) {
 
   return `
     <div draggable="true" ondragstart="startDragging('${id}')" onclick="openTaskPopup('${id}')" class="task-card">
-      <div class="task-category ${getCategoryClass(task.category)}">
-        ${task.category || ""}
+      <div class="task-header-row">
+        <div class="task-category ${getCategoryClass(task.category)}">
+          ${task.category || ""}
+        </div>
+        <button type="button" class="mobile-move-btn" onclick="openMoveMenu(event, '${id}')">
+          <img src="../assets/imgs/swap_horiz.svg" alt="Move">
+        </button>
       </div>
 
       <h3 class="task-title">${task.title || ""}</h3>
@@ -216,4 +221,35 @@ function generateEditFormHTML(task) {
             </div>
         </div>
     `;
+}
+
+/**
+ * Generates the HTML string for the mobile move context menu.
+ * @param {string} taskId - The ID of the task.
+ * @param {Array<Object>} statuses - The list of available status columns.
+ * @param {number} currentIndex - The index of the task's current status in the array.
+ * @returns {string} The HTML string for the mobile move menu.
+ */
+function generateMobileMoveMenuHTML(taskId, statuses, currentIndex) {
+  let menuContent = `<div class="mobile-move-menu-header">Move to</div>`;
+
+  if (currentIndex > 0) {
+      const prev = statuses[currentIndex - 1];
+      menuContent += `
+          <div class="mobile-move-menu-item" onclick="moveTaskToStatus(event, '${taskId}', '${prev.id}')">
+              <img src="../assets/imgs/arrow_upward.svg" alt="Up"> <span>${prev.label}</span>
+          </div>
+      `;
+  }
+
+  if (currentIndex < statuses.length - 1) {
+      const next = statuses[currentIndex + 1];
+      menuContent += `
+          <div class="mobile-move-menu-item" onclick="moveTaskToStatus(event, '${taskId}', '${next.id}')">
+              <img src="../assets/imgs/arrow_downward.svg" alt="Down"> <span>${next.label}</span>
+          </div>
+      `;
+  }
+
+  return menuContent;
 }

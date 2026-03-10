@@ -205,3 +205,86 @@ async function saveTask() {
     alert("Could not save task.");
   }
 }
+
+
+
+/**
+ * Opens a context menu to move a task to another column on mobile.
+ * @param {Event} event - The click event.
+ * @param {string} taskId - The ID of the task.
+ */
+function openMoveMenu(event, taskId) {
+  event.stopPropagation();
+  
+  closeMoveMenu();
+
+  const task = allLoadedTasks[taskId];
+  if (!task) return;
+
+  const statuses = [
+      { id: 'todo', label: 'To-do' },
+      { id: 'inProgress', label: 'In progress' },
+      { id: 'awaitingFeedback', label: 'Awaiting feedback' },
+      { id: 'done', label: 'Done' }
+  ];
+
+  const currentIndex = statuses.findIndex(s => s.id === task.status);
+  if (currentIndex === -1) return;
+
+  const menuContent = generateMobileMoveMenuHTML(taskId, statuses, currentIndex);
+
+  const menu = document.createElement('div');
+  menu.className = 'mobile-move-menu';
+  menu.id = 'mobileMoveMenu';
+  menu.innerHTML = menuContent;
+
+  const btnRect = event.currentTarget.getBoundingClientRect();
+  document.body.appendChild(menu);
+
+  // Position the menu slightly below and aligned to the right edge of the button
+  const top = btnRect.bottom + window.scrollY + 8; // 8px below the button
+  const left = btnRect.right + window.scrollX - 140; // The max-width of the menu is approx 140px. This aligns the 0 border-radius flush with the button.
+  
+  menu.style.top = `${top}px`;
+  menu.style.left = `${left}px`;
+
+  setTimeout(() => {
+      document.addEventListener('click', closeMoveMenuHandler);
+  }, 0);
+}
+
+/**
+ * Closes the mobile context menu if it is open.
+ */
+function closeMoveMenu() {
+  const existingMenu = document.getElementById('mobileMoveMenu');
+  if (existingMenu) {
+      existingMenu.remove();
+  }
+  document.removeEventListener('click', closeMoveMenuHandler);
+}
+
+/**
+ * Event handler to close the move menu when clicking outside of it.
+ * @param {Event} event - The click event.
+ */
+function closeMoveMenuHandler(event) {
+  const menu = document.getElementById('mobileMoveMenu');
+  if (menu && !menu.contains(event.target)) {
+      closeMoveMenu();
+  }
+}
+
+/**
+ * Moves a task to a specific status via the mobile context menu.
+ * @param {Event} event - The click event.
+ * @param {string} taskId - The ID of the task.
+ * @param {string} newStatus - The new status to move the task to.
+ */
+async function moveTaskToStatus(event, taskId, newStatus) {
+  event.stopPropagation();
+  closeMoveMenu();
+  
+  currentDraggedElement = taskId;
+  await moveTo(newStatus);
+}
