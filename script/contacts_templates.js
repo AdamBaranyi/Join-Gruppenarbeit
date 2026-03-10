@@ -16,16 +16,16 @@ function renderContactListItem(contact, initials, bgColor) {
 
 function openModalLeftSide() {
     return `
-        <img class="logoWhite" src="../assets/imgs/logo_white.svg" alt="">
+        <img class="logo-white" src="../assets/imgs/logo_white.svg" alt="">
         <h3>Add contact</h3>
         <span>Tasks are better with a team!</span>
-        <img class="vectorHorizontel" src="../assets/imgs/Vector horizontel.png" alt="">
+        <img class="vector-horizontel" src="../assets/imgs/Vector horizontel.png" alt="">
     `;
 }
 
 function openModalRightSide() {
     return `
-        <form method="dialog" id="contactForm" onsubmit="addContact({ 
+        <form method="dialog" id="contact-form" onsubmit="addContact({ 
             firstname: document.getElementById('firstname').value,
             lastname: document.getElementById('lastname').value,
             email: document.getElementById('email').value,
@@ -47,8 +47,8 @@ function openModalRightSide() {
             <input type="text" id="phonenumber" autocomplete="tel" placeholder="Phone Number">
             <img class="input-icon" src="..//assets/imgs/call.png" alt="phoneIcon">
         </div>
-            <div class="btnContainer">
-            <button onclick="cancelContac()" class="cancelBtn">Cancel X</button>
+            <div class="btn-container">
+            <button onclick="cancelContac()" class="cancel-btn">Cancel X</button>
             <input type="submit" class="check-btn" value="Create contact">
         </div>
         </form>
@@ -59,9 +59,9 @@ function contactCard(contact) {
     return `
         <div class="contact-item">
             <div class="contact-header">
-            <div id="contactInitials" class="contact-initials">
+            <div id="contact-initials" class="contact-initials">
             </div>
-            <div class="btnAndName-container">
+            <div class="btn-and-name-container">
                 <strong>${contact.firstname} ${contact.lastname}</strong><br>
                 <div class="edit-and-delte-btn-container">
                     <button class="edit-btn">Edit <img src="../assets/imgs/edit (1).png" alt=""></button>
@@ -74,23 +74,23 @@ function contactCard(contact) {
             <strong>Email:</strong> <br> <span class="mail-style">${contact.email}</span><br>
             <strong>Phone Number:</strong> <span>${contact.phone}</span>
             </div>
-            <img onclick='mobileEditMenu(${JSON.stringify(contact)}, event)' id="mobileOptionMenu" class="mobile-edit-menu" src="../assets/imgs/Menu Contact options.png" alt="contact options menu">
-            <div class="display-none" id="mobileMenu"></div>
+            <img onclick='mobileEditMenu(${JSON.stringify(contact)}, event)' id="mobile-option-menu" class="mobile-edit-menu" src="../assets/imgs/Menu Contact options.png" alt="contact options menu">
+            <div class="display-none" id="mobile-menu"></div>
         </div>
     `;
 }
 
 function editFormleftSide() {
     return `
-        <img class="logoWhite" src="../assets/imgs/logo_white.svg" alt="Logo White">
+        <img class="logo-white" src="../assets/imgs/logo_white.svg" alt="Logo White">
         <h3>Edit contact</h3>
-        <img class="vectorHorizontel" src="../assets/imgs/Vector horizontel.png" alt="">
+        <img class="vector-horizontel" src="../assets/imgs/Vector horizontel.png" alt="">
   `;
 }
 
 function editFormRightSide(contact) {
     return `
-        <form method="dialog" id="contactForm" onsubmit="editContact('${contact.id}')">
+        <form method="dialog" id="contact-form" onsubmit="editContact('${contact.id}')">
             <div class="input-group" data-type="text">
                 <input type="text" id="firstname" autocomplete="given-name" placeholder="First Name" value="${contact.firstname}" required>
                 <img class="input-icon" src="..//assets/imgs/person.svg" alt="PrsonIcon">
@@ -107,7 +107,7 @@ function editFormRightSide(contact) {
                 <input type="text" id="phonenumber" autocomplete="tel" placeholder="Phone Number" value="${contact.phone}">
                 <img class="input-icon" src="..//assets/imgs/call.png" alt="phoneIcon">
             </div>
-            <div class="btnContainer">
+            <div class="btn-container">
                 <button onclick="deleteContact('${contact.id}')" class="delete-btn">Delete X</button>
                 <input type="submit" class="check-btn" value="Save changes">
             </div>
@@ -117,9 +117,9 @@ function editFormRightSide(contact) {
 
 function menuTempl(contact) {
     return `
-      <div class="mobileMenu">
-          <button onclick="renderEditForm('${contact}')" class="mobileEditBtn"><img class="mobileEditIcon" src="../assets/imgs/edit.png" alt="edit icon">Edit</button>
-          <button onclick="deleteContact('${contact.id}')" class="mobileDeleteBtn"><img class="mobileEditIcon" src="../assets/imgs/delete.png" alt="delete icon"> Delete</button>
+      <div class="mobile-menu">
+          <button onclick="renderEditForm('${contact}')" class="mobile-edit-btn"><img class="mobile-edit-icon" src="../assets/imgs/edit.png" alt="edit icon">Edit</button>
+          <button onclick="deleteContact('${contact.id}')" class="mobile-delete-btn"><img class="mobile-edit-icon" src="../assets/imgs/delete.png" alt="delete icon"> Delete</button>
       </div>
     `;
 }

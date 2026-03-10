@@ -42,8 +42,9 @@
 
 
 .slogan-and-card-container {
-    flex: 1;
+    display: flex;
     padding: 80px 80px 80px 80px;
+    flex-direction: column;
 }
 
 
@@ -203,7 +204,8 @@ ul {
 
 .contact-item {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 16px;
 }
 
@@ -331,7 +333,7 @@ dialog span {
     opacity: 1;
 }
 
-.vectorHorizontel {
+.vector-horizontel {
     width: 90px;
     height: 0px;
     opacity: 1;
@@ -358,13 +360,9 @@ dialog span {
 .close-btn {
     border: none;
     border-radius: 50%;
-    background-color: white;
 }
-.close-btn:hover {
-    background-color: transparent;
-    background-color: rgba(219, 211, 211, 0.247);
 
-}
+
 
 .close-btn img {
     width: 24px;
@@ -532,9 +530,6 @@ button:hover {
     border: none;
 }
 
-#close-card-btn {
-    display: none;
-}
 
 .mobile-edit-menu {
     display: none;
@@ -576,7 +571,8 @@ button:hover {
     .main-content {
         width: 100dvw;
         height: calc(100dvh - 96px - 80px);
-        bottom: 80px;
+        position: relative;
+        margin-left: 0;
     }
 
     .add-contact-btn {
@@ -618,8 +614,6 @@ button:hover {
     }
 
     .slogan-and-card-container {
-        display: none;
-        flex-direction: column;
         position: absolute;
         left: 0;
         width: 100dvw;
@@ -635,7 +629,7 @@ button:hover {
         left: 0;
     }
 
-    .btnAndName-container {
+    .btn-and-name-container {
         display: flex;
         flex-direction: column;
     }
@@ -659,7 +653,6 @@ button:hover {
 
     #close-card-btn {
         position: absolute;
-        display: flex;
         cursor: pointer;
         width: 32px;
         height: 32px;
@@ -678,15 +671,15 @@ button:hover {
     }
 
     .mobile-menu {
-        position: absolute;
+        position: fixed;
         display: flex;
         flex-direction: column;
         cursor: pointer;
-        top: 80%;
+        top: 70%;
         right: 10%;
         background-color: white;
-        width: 116;
-        height: 100;
+        width: 116px;
+        height: 100px;
         opacity: 1;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;

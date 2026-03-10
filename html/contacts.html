@@ -20,20 +20,20 @@
         <div w3-include-html="../assets/templates/mobile_sidebar.html"></div>
             
             <div class="main-content">
-                <div class="contact-list-style" id="contactListContainer">
+                <div class="contact-list-style" id="contact-list-container">
                     <button class="add-contact-btn" onclick="openModal()"> <span>Add new contact</span> <img src="../assets/imgs/person_add.svg" alt="add person icon"></button>
                     <ul>
-                        <li id="contactListContent">
+                        <li id="contact-list-content">
                         </li>
                     </ul>
                 </div>
-            <div class=".slogan-and-card-container" id="sloganAndCardContainer">
+            <div class="slogan-and-card-container" id="slogan-and-card-container">
                     <div class="slogan" id="slogan">
                             <h2>Contacts</h2>
                             <img src="../assets/imgs/Vector 5.png" alt="Vector imgage">
                             <span class="slogan-span">Better with a team</span>
                     </div>
-                    <div class="content-slogan display-none" id="mobileSlogan">
+                    <div class="content-slogan display-none" id="mobile-slogan">
                         <h2>Contacts</h2>
                         <span class="slogan-span">Better with a team</span>
                         <img src="../assets/imgs/Vector horizontel.png" alt="Vector imgage">
@@ -44,26 +44,26 @@
             <img id="close-card-btn" class="display-none" src="../assets/imgs/vector.svg" alt="close card icon" onclick="closeContactCard()">
             </div>
             </div>
-            <dialog id="dialogModal">
+            <dialog id="dialog-modal">
                     <div class="left-side-modal " id="left-side-modal ">
-                        <img class="logoWhite" src="../assets/imgs/logo_white.svg" alt="">
+                        <img class="logo-white" src="../assets/imgs/logo_white.svg" alt="">
                         <h3>Add contact</h3>
                         <span>Tasks are better with a team!</span>
-                            <img class="vectorHorizontel" src="../assets/imgs/Vector horizontel.png" alt="">
+                            <img class="vector-horizontel" src="../assets/imgs/Vector horizontel.png" alt="">
                     </div>
                     <div class="right-side-modal">
                         <div class="close-btn-container">
-                                <button onclick="closeModal()" class="close-btn"><img id="closeBtnImg" src="../assets/imgs/Close.png" alt="close Icon"></button>
+                                <button onclick="closeModal()" class="close-btn"><img id="close-btn-img" src="../assets/imgs/Close.png" alt="close Icon"></button>
                         </div>
-                        <div class="imgAndForm">
-                                <div id="modalInitials" class="profile-img" alt="profile image"></div>
-                                <div id="contactModal"></div>
+                        <div class="img-and-form">
+                                <div id="modal-initials" class="profile-img" alt="profile image"></div>
+                                <div id="contact-modal"></div>
                         </div>    
                     </div>
                     
                 </dialog>
 
-                <div id="successMessage" class="success-message display-none">
+                <div id="success-message" class="success-message display-none">
                     <span>Contact successfully created</span>
                 </div>
                 
