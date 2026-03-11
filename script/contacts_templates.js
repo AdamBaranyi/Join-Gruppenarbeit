@@ -1,7 +1,7 @@
 function renderContactListItem(contact, initials, bgColor) {
     return `
     <div class="contact-row" onclick='renderContactCard(${JSON.stringify(contact)}); this.parentElement.querySelectorAll(".contact-row").forEach(row => row.classList.remove("active")); this.classList.add("active");'>
-      <div class="contact-item">
+      <div class="contact-list-item">
         <div class="contact-circle" style="background:${bgColor}">
           ${initials.toUpperCase()}
         </div>

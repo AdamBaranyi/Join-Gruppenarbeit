@@ -109,6 +109,7 @@ ul::-webkit-scrollbar-thumb:hover {
 }
 
 .contact-row {
+    display: flex;
     padding: 15px 12px;
     border-radius: 10px;
     cursor: pointer;
@@ -205,6 +206,12 @@ ul {
 .contact-item {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.contact-list-item {
+    display: flex;
     align-items: flex-start;
     gap: 16px;
 }
@@ -474,6 +481,10 @@ button:hover {
     align-items: center;
 }
 
+#close-card-btn {
+    display: none;
+}
+
 .cancel-btn {
     width: 126px;
     height: 56px;
@@ -603,7 +614,6 @@ button:hover {
     ul {
         height: 100%;
         display: flex;
-        flex-direction: column;
         gap: 12px;
         cursor: unset;
     }
@@ -614,6 +624,7 @@ button:hover {
     }
 
     .slogan-and-card-container {
+        display: none;
         position: absolute;
         left: 0;
         width: 100dvw;
@@ -646,12 +657,12 @@ button:hover {
         display: flex;
         justify-content: flex-start;
         align-items: flex-start;
-        flex-direction: column;
     }
 
    
 
     #close-card-btn {
+        display: flex;
         position: absolute;
         cursor: pointer;
         width: 32px;
