@@ -202,13 +202,13 @@ function renderContactCard(contact) {
   mobileSlogan.classList.remove("display-none");
   card.classList.remove("display-none");
   closeCardBtn.classList.remove("display-none");
-  contactListContainer.classList.add("display-none");
-  sloganAndCardContainer.classList.remove("display-none");
+  contactListContainer.style.display ="none";
+  sloganAndCardContainer.style.display ="flex";
   }  else {
     mobileSlogan.classList.add("display-none");
     card.classList.remove("display-none");
     closeCardBtn.classList.add("display-none");
-    contactListContainer.classList.remove("display-none");
+    contactListContainer.style.display ="flex";
   }
   card.innerHTML = contactCard(contact);
   card.querySelector(".edit-btn").addEventListener("click", () => {
@@ -256,8 +256,8 @@ function closeContactCard() {
   card.innerHTML = '';
   card.classList.add("display-none");
   closeCardBtn.classList.add("display-none");
-  contactListContainer.classList.remove("display-none");
-  sloganAndCardContainer.classList.add("display-none");
+  contactListContainer.style.display ="flex";
+  sloganAndCardContainer.style.display ="none";
   }
 }
 
