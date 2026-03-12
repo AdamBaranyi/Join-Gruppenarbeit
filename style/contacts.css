@@ -580,10 +580,12 @@ button:hover {
 @media(max-width: 850px) {
 
     .main-content {
-        width: 100dvw;
+        width: 100%;
         height: calc(100dvh - 96px - 80px);
         position: relative;
         margin-left: 0;
+        box-sizing: border-box;
+        overflow: hidden;
     }
 
     .add-contact-btn {
@@ -606,30 +608,57 @@ button:hover {
     .contact-list-style{
         position: absolute;
         left: 0;
-        width: 100dvw;
+        width: 100%;
         height: calc(100dvh - 180px);
-
+        box-sizing: border-box;
     }
 
     ul {
         height: 100%;
+        width: 100%;
         display: flex;
         gap: 12px;
         cursor: unset;
+        box-sizing: border-box;
     }
 
     #contact-list-content {
         position: relative;
         left: 0;
+        width: 100%;
+        padding-left: 0;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+
+    .contact-row {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .contact-row span {
+        word-break: break-all;
+        white-space: normal;
     }
 
     .slogan-and-card-container {
         display: none;
         position: absolute;
         left: 0;
-        width: 100dvw;
+        width: 100%;
         height: calc(100dvh - 180px);
-        padding-top: 0;
+        padding: 30px 15px;
+        box-sizing: border-box;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .main-content.show-contact-card .contact-list-style {
+        display: none;
+    }
+
+    .main-content.show-contact-card .slogan-and-card-container {
+        display: flex;
     }
     
     #contact-card {
@@ -648,7 +677,9 @@ button:hover {
     .content-slogan {
         display: flex;
         flex-direction: column;
+        width: 100%;
         max-width: 432px;
+        box-sizing: border-box;
     }
 
     .contact-item {
@@ -709,12 +740,14 @@ button:hover {
 
     dialog:open {
         position: relative;
-        width: 396px;
+        width: 90%;
+        max-width: 396px;
         min-height: 760px;
-        top: 20%;
-        left: 20%;
+        top: 10%;
+        left: 5%;
         display: flex;
         flex-direction: column;
+        box-sizing: border-box;
     }
 
     dialog h3 {
