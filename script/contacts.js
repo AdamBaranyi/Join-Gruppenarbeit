@@ -194,22 +194,7 @@ async function showContactDetails(contactId) {
 // render contact card with the details of a contact
 function renderContactCard(contact) {
   const card = document.getElementById("contact-card-content");
-  const sloganAndCardContainer = document.getElementById("slogan-and-card-container");
-  const contactListContainer = document.getElementById("contact-list-container");
-  const closeCardBtn = document.getElementById("close-card-btn");
-  const mobileSlogan = document.getElementById("mobile-slogan");
-  if (window.innerWidth <= 850){
-  mobileSlogan.classList.remove("display-none");
-  card.classList.remove("display-none");
-  closeCardBtn.classList.remove("display-none");
-  contactListContainer.style.display ="none";
-  sloganAndCardContainer.style.display ="flex";
-  }  else {
-    mobileSlogan.classList.add("display-none");
-    card.classList.remove("display-none");
-    closeCardBtn.classList.add("display-none");
-    contactListContainer.style.display ="flex";
-  }
+  
   card.innerHTML = contactCard(contact);
   card.querySelector(".edit-btn").addEventListener("click", () => {
     renderEditForm(contact);
@@ -222,6 +207,27 @@ function renderContactCard(contact) {
   showInitials(contact);
 }
 
+// check for mobile render card
+function checkForMobileRenderCard() {
+  const card = document.getElementById("contact-card-content");
+  const sloganAndCardContainer = document.getElementById("slogan-and-card-container");
+  const contactListContainer = document.getElementById("contact-list-container");
+  const closeCardBtn = document.getElementById("close-card-btn");
+  const mobileSlogan = document.getElementById("mobile-slogan");
+    
+  if (window.innerWidth <= 850){
+    mobileSlogan.classList.remove("display-none");
+    card.classList.remove("display-none");
+    closeCardBtn.classList.remove("display-none");
+    contactListContainer.style.display ="none";
+    sloganAndCardContainer.style.display ="flex";
+  } else {
+      mobileSlogan.classList.add("display-none");
+      card.classList.remove("display-none");
+      closeCardBtn.classList.add("display-none");
+      contactListContainer.style.display ="flex";
+    }
+  }
 
 // load initials from first and last name
 function showInitials(contact) {
