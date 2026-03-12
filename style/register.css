@@ -175,7 +175,7 @@ input:focus {
 
 
 .privacy a {
-  color: #29abe2;
+  color: var(--color-secondary);
   text-decoration: none;
 }
 

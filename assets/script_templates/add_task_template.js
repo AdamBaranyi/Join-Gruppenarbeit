@@ -144,7 +144,7 @@ function getTaskPopupTemplate() {
                                  </button>
                                  <span class="divider"></span>
                                  <button type="button" id="addSubtaskBtn" class="add-subtask-btn">
-                                     <img src="../assets/imgs/add.png" class="subtask-icons" alt="Add Subtask">
+                                     <img src="../assets/imgs/check.svg" class="subtask-icons" alt="Add Subtask">
                                  </button>
                              </div>
                          </div>
