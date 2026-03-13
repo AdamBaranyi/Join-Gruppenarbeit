@@ -221,8 +221,6 @@ button:hover {
 }
 
 .delete-btn {
-    width: 126px;
-    height: 56px;
     opacity: 1;
     gap: 4px;
     border-radius: 10px;
@@ -255,8 +253,6 @@ button:hover {
 }
 
 .edit-btn {
-    width: 126px;
-    height: 56px;
     opacity: 1;
     gap: 4px;
     border-radius: 10px;

@@ -1,0 +1,8 @@
+# Firebase Configuration (contains API credentials)
+config.js
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/

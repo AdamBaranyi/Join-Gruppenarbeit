@@ -142,9 +142,8 @@ ul {
 /* Contact Card */
 #contact-card {
     margin-top: 50px;
-    max-width: 500px;
-    margin-top: 50px;
-    width: 500px;
+    width: fit-content;
+    min-width: 600px;
     opacity: 0;
     transform: translateX(40px);
     transition: all 250ms ease-in-out;
@@ -157,20 +156,83 @@ ul {
     transform: translateX(0);
 }
 
-.edit-and-delte-btn-container {
+.btn-and-name-container {
     display: flex;
+    flex-direction: column;
+    gap: 4px; 
+}
+
+.contact-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 47px;
+    line-height: 120%;
+    color: #000000;
+    white-space: nowrap;
+}
+
+.edit-and-delete-btn-container {
+    display: flex;
+    align-items: center;
+    gap: 20px; 
+}
+
+.action-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: 16px;
+    color: #2A3647;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.1s;
+}
+
+.action-btn:hover {
+    color: #29ABE2;
+    font-weight: 700;
+    background-color: transparent;
+}
+
+.action-btn img {
+    width: 16px;
+    height: 16px;
+}
+
+.action-btn:hover img {
+    filter: invert(53%) sepia(80%) saturate(2400%) hue-rotate(166deg) brightness(98%) contrast(85%);
+}
+
+.action-divider {
+    height: 24px;
+    width: 1px;
+    background-color: #D1D1D1;
 }
 
 .contact-header {
     display: flex;
     align-items: center;
+    gap: 54px;
     margin-top: 40px;
-    max-width: 500px;
+}
+
+.contact-info-header {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 120%;
+    color: #000000;
+    margin-top: 50px;
 }
 
 .contact-info {
     position: relative;
-    padding-top: 16px;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
 }
 
 .contact-info span {
