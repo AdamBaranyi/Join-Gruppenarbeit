@@ -13,7 +13,7 @@ function generateTaskHTML(task, id) {
     <div draggable="true" ondragstart="startDragging('${id}')" onclick="openTaskPopup('${id}')" class="task-card">
       <div class="task-header-row">
         <div class="task-category ${getCategoryClass(task.category)}">
-          ${task.category || ""}
+          ${(task.category || "").trim()}
         </div>
         <button type="button" class="mobile-move-btn" onclick="openMoveMenu(event, '${id}')">
           <img src="../assets/imgs/swap_horiz.svg" alt="Move">
@@ -111,9 +111,10 @@ function getPriorityIcon(priority) {
  * @returns {string} The CSS class name.
  */
 function getCategoryClass(category) {
-  if (category === "Technical Task") return "category-technical-task";
+  const trimmedCategory = (category || "").trim();
+  if (trimmedCategory === "Technical Task") return "category-technical-task";
 
-  if (category === "User Story") return "category-user-story";
+  if (trimmedCategory === "User Story") return "category-user-story";
 
   return "";
 }
