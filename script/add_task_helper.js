@@ -225,7 +225,7 @@ function handleCategorySelection(selectedItem, elements) {
  * @param {Object} elements - Category dropdown elements.
  */
 function updatePlaceholderWithSelectedCategory(selectedItem, elements) {
-  const categoryValue = selectedItem.textContent;
+  const categoryValue = selectedItem.textContent.trim();
   elements.placeholder.textContent = categoryValue;
   elements.placeholder.style.color = "#000";
 }

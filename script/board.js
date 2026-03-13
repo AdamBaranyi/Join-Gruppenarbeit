@@ -146,9 +146,10 @@ function openTaskPopup(id) {
             ${task.priority || ""} <img src="${priorityIconStr}" alt="${task.priority}">
         `;
 
+    let trimmedCategory = (task.category || "").trim();
     let modalCategory = document.getElementById("modalCategory");
-    modalCategory.innerHTML = task.category || "";
-    modalCategory.className = `task-category ${getCategoryClass(task.category)}`;
+    modalCategory.innerHTML = trimmedCategory;
+    modalCategory.className = `task-category ${getCategoryClass(trimmedCategory)}`;
 
     renderModalAssignees(task.assignedTo);
     renderModalSubtasks(task.subtasks);
