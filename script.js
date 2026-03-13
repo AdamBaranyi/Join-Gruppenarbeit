@@ -1,6 +1,3 @@
-const BASE_URL = "https://join-backend-afae8-default-rtdb.europe-west1.firebasedatabase.app";
-
-
 /**
  * Includes HTML templates into the current page.
  * Searches for elements with 'w3-include-html' attribute and loads the corresponding file.
