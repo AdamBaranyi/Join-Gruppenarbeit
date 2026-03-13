@@ -139,15 +139,29 @@
         right: 5%;
     }
 
+    .mobile-edit-container {
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        background-color: var(--color-primary);
+        border-radius: 56%;
+        height: 50px;
+        width: 50px;
+        top: 65%;
+        right: 8%;
+    }
+
     /* Mobile Menu */
     .mobile-edit-menu {
         position: absolute;
         display: flex;
         cursor: pointer;
-        height: 56px;
-        width: 56px;
-        top: 65%;
-        right: 8%;
+        color: var(--color-white);
+        height: 20px;
+        width: 5px;
+
     }
 
     .mobile-menu {

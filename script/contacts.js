@@ -322,9 +322,22 @@ async function editContact(contactId) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(updatedContact)
   });
-
+  await mobileSucessfulEdited();
   await loadContacts();
   await showContactDetails(contactId);
+}
+
+function mobileSucessfulEdited() {
+  if (window.innerWidth <= 850) {
+    let mobileMenuBtn = document.getElementById('mobile-option-menu');
+    setTimeout(() => {
+        mobileMenuBtn.style.backgroundColor = "var(--color-secondary)"
+    }, 10);
+    setTimeout(() => {
+        mobileMenuBtn.style.backgroundColor = "var(--color--primary)"
+    }, 3000);
+  } else {return}
+  
 }
 
 // delete a contact
