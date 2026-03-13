@@ -1,21 +1,21 @@
 let currentUser;
 let userId;
 let url;
-let leftSide = document.getElementById('left-side-modal ');
-const contactWindow = document.getElementById("contact-modal")
-const contactModal = document.getElementById("dialog-modal")
+let leftSide = document.getElementById("left-side-modal ");
+const contactWindow = document.getElementById("contact-modal");
+const contactModal = document.getElementById("dialog-modal");
 
 //load current user from session storage
 function getCurrentUser() {
   let currentUser = JSON.parse(sessionStorage.getItem("current_user"));
-  console.log("current User:", currentUser )
+  console.log("current User:", currentUser);
   return currentUser;
 }
 
 // sort contacts by firstname
 function sortContactsByFirstname(contacts) {
   return [...contacts].sort((a, b) =>
-    a.firstname.localeCompare(b.firstname, "de", { sensitivity: "base" })
+    a.firstname.localeCompare(b.firstname, "de", { sensitivity: "base" }),
   );
 }
 
@@ -23,12 +23,12 @@ function sortContactsByFirstname(contacts) {
 function groupContactsByLetter(contacts) {
   const groups = {};
 
-  contacts.forEach(contact => {
+  contacts.forEach((contact) => {
     const letter = contact.firstname.charAt(0).toUpperCase();
 
     if (!groups[letter]) {
       groups[letter] = [];
-    };
+    }
     groups[letter].push(contact);
   });
 
@@ -38,11 +38,18 @@ function groupContactsByLetter(contacts) {
 // load contacts of a user
 async function loadContacts() {
   url = `${BASE_URL}/contacts/.json`;
-  
+
   const response = await fetch(url);
   const data = await response.json();
 
-  const contacts = data ? Object.values(data) : [];
+  const contacts = [];
+  if (data) {
+    Object.keys(data).forEach((key) => {
+      const contact = data[key];
+      contact.id = key;
+      contacts.push(contact);
+    });
+  }
   console.log("contacts:", contacts);
   renderContactList(contacts);
 }
@@ -53,31 +60,33 @@ function renderContactList(contacts) {
   const sorted = sortContactsByFirstname(contacts);
   const groups = groupContactsByLetter(sorted);
 
-  document.querySelectorAll(".contact-row").forEach(row =>
-  row.classList.remove("active")
-);
+  document
+    .querySelectorAll(".contact-row")
+    .forEach((row) => row.classList.remove("active"));
   container.innerHTML = "";
-  Object.keys(groups).sort().forEach(letter => {
-
-    container.innerHTML += `
+  Object.keys(groups)
+    .sort()
+    .forEach((letter) => {
+      container.innerHTML += `
       <div class="letter-header">${letter}</div>
     `;
-    groups[letter].forEach(contact => {
-  const initials =
-    contact.firstname.charAt(0) +
-    contact.lastname.charAt(0);
-  const bgColor = getColorFromName(contact.firstname + contact.lastname);
-  container.innerHTML += renderContactListItem(contact, initials, bgColor);
-  const cardWrapper = document.getElementById("contact-card");
-cardWrapper.classList.remove("show");
+      groups[letter].forEach((contact) => {
+        const initials =
+          contact.firstname.charAt(0) + contact.lastname.charAt(0);
+        const bgColor = getColorFromName(contact.firstname + contact.lastname);
+        container.innerHTML += renderContactListItem(
+          contact,
+          initials,
+          bgColor,
+        );
+        const cardWrapper = document.getElementById("contact-card");
+        cardWrapper.classList.remove("show");
 
-setTimeout(() => {
-  cardWrapper.classList.add("show");
-}, 10);
-
-});
-
-  });
+        setTimeout(() => {
+          cardWrapper.classList.add("show");
+        }, 10);
+      });
+    });
 }
 
 const contactColors = [
@@ -90,7 +99,7 @@ const contactColors = [
   "#462F8A",
   "#FF4646",
   "#00BEE8",
-  "#FF745E"
+  "#FF745E",
 ];
 
 function getColorFromName(name) {
@@ -110,74 +119,78 @@ function openModal() {
   const modalInitials = document.getElementById("modal-initials");
   modalInitials.style.backgroundColor = "transparent";
   modalInitials.classList.remove("contact-initials");
-  modalInitials.classList.add('profile-img');
-  modalInitials.classList.remove("contact-initials-edit")
-  modalInitials.textContent = '';
+  modalInitials.classList.add("profile-img");
+  modalInitials.classList.remove("contact-initials-edit");
+  modalInitials.textContent = "";
   leftSide.innerHTML = openModalLeftSide();
   contactWindow.innerHTML = openModalRightSide();
-  const closeBtn = document.getElementById('close-btn-img');
+  const closeBtn = document.getElementById("close-btn-img");
   if (window.innerWidth <= 850) {
-    closeBtn.src = '../assets/imgs/Close_white.png'
+    closeBtn.src = "../assets/imgs/Close_white.png";
   } else {
-    closeBtn.src = '../assets/imgs/Close.png'
+    closeBtn.src = "../assets/imgs/Close.png";
   }
-};
+}
 
 // close the modal
 function closeModal() {
   contactModal.close();
-};
+}
 
 // add a new contact
 async function addContact(contactData) {
-    const res = await fetch(url);
-    const contacts = await res.json();
-  if (contactData.firstname !== "" && contactData.lastname !== "" && contactData.email !== "") {
+  const res = await fetch(url);
+  const contacts = await res.json();
+  if (
+    contactData.firstname !== "" &&
+    contactData.lastname !== "" &&
+    contactData.email !== ""
+  ) {
     let nextIdNumber = 1;
 
-      if (contacts) {
-          const ids = Object.keys(contacts)
-              .filter(id => id.startsWith("c"))
-              .map(id => parseInt(id.substring(1)))
-              .filter(num => !isNaN(num));
+    if (contacts) {
+      const ids = Object.keys(contacts)
+        .filter((id) => id.startsWith("c"))
+        .map((id) => parseInt(id.substring(1)))
+        .filter((num) => !isNaN(num));
 
-          if (ids.length > 0) {
-              nextIdNumber = Math.max(...ids) + 1;
-          }
+      if (ids.length > 0) {
+        nextIdNumber = Math.max(...ids) + 1;
       }
-      const newId = `c${nextIdNumber}`;
-      const contactWithId = {
-          id: newId,
-          ...contactData
-      };
-      await putContactInBackend(newId, contactWithId);
-      await loadContacts();
-      showSuccessMessage();
-      return newId;
-  }else {
+    }
+    const newId = `c${nextIdNumber}`;
+    const contactWithId = {
+      id: newId,
+      ...contactData,
+    };
+    await putContactInBackend(newId, contactWithId);
+    await loadContacts();
+    showSuccessMessage();
+    return newId;
+  } else {
     return;
   }
-};
+}
 
 // save a new contact to the database
 async function putContactInBackend(newId, contactWithId) {
   await fetch(`${BASE_URL}/contacts/${newId}.json`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(contactWithId)
-      });
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(contactWithId),
+  });
 }
 
 // show a success message after creating a new contact
 function showSuccessMessage() {
-    let successMessage = document.getElementById('success-message');
-    successMessage.classList.remove('display-none');
-    setTimeout(() => {
-        successMessage.classList.add('show');
-    }, 10);
-    setTimeout(() => {
-        successMessage.classList.add('display-none');
-    }, 3000);
+  let successMessage = document.getElementById("success-message");
+  successMessage.classList.remove("display-none");
+  setTimeout(() => {
+    successMessage.classList.add("show");
+  }, 10);
+  setTimeout(() => {
+    successMessage.classList.add("display-none");
+  }, 3000);
 }
 
 async function showContactDetails(contactId) {
@@ -188,21 +201,24 @@ async function showContactDetails(contactId) {
 
   const contact = data[contactId];
   renderContactCard(contact);
-};
-
+}
 
 // render contact card with the details of a contact
 function renderContactCard(contact) {
   const card = document.getElementById("contact-card-content");
-  const sloganAndCardContainer = document.getElementById("slogan-and-card-container");
-  const contactListContainer = document.getElementById("contact-list-container");
+  const sloganAndCardContainer = document.getElementById(
+    "slogan-and-card-container",
+  );
+  const contactListContainer = document.getElementById(
+    "contact-list-container",
+  );
   const closeCardBtn = document.getElementById("close-card-btn");
   const mainContent = document.querySelector(".main-content");
 
   // Remove legacy inline styles if present
   if (contactListContainer) contactListContainer.style.display = "";
   if (sloganAndCardContainer) sloganAndCardContainer.style.display = "";
-  
+
   card.classList.remove("display-none");
   mainContent.classList.add("show-contact-card");
   card.innerHTML = contactCard(contact);
@@ -220,29 +236,33 @@ function renderContactCard(contact) {
 // check for mobile render card
 function checkForMobileRenderCard() {
   const card = document.getElementById("contact-card-content");
-  const sloganAndCardContainer = document.getElementById("slogan-and-card-container");
-  const contactListContainer = document.getElementById("contact-list-container");
+  const sloganAndCardContainer = document.getElementById(
+    "slogan-and-card-container",
+  );
+  const contactListContainer = document.getElementById(
+    "contact-list-container",
+  );
   const closeCardBtn = document.getElementById("close-card-btn");
   const mobileSlogan = document.getElementById("mobile-slogan");
-    
-  if (window.innerWidth <= 850){
+
+  if (window.innerWidth <= 850) {
     mobileSlogan.classList.remove("display-none");
     card.classList.remove("display-none");
     closeCardBtn.classList.remove("display-none");
-    contactListContainer.style.display ="none";
-    sloganAndCardContainer.style.display ="flex";
+    contactListContainer.style.display = "none";
+    sloganAndCardContainer.style.display = "flex";
   } else {
-      mobileSlogan.classList.add("display-none");
-      card.classList.remove("display-none");
-      closeCardBtn.classList.add("display-none");
-      contactListContainer.style.display ="flex";
-    }
+    mobileSlogan.classList.add("display-none");
+    card.classList.remove("display-none");
+    closeCardBtn.classList.add("display-none");
+    contactListContainer.style.display = "flex";
   }
+}
 
 // load initials from first and last name
 function showInitials(contact) {
   const cardInitials = document.getElementById("contact-initials");
-  const modalInitials = document.getElementById('modal-initials');
+  const modalInitials = document.getElementById("modal-initials");
 
   if (!modalInitials && !cardInitials) return;
 
@@ -250,27 +270,28 @@ function showInitials(contact) {
 
   cardInitials.style.backgroundColor = getColorFromName(fullName);
   modalInitials.style.backgroundColor = getColorFromName(fullName);
-      if (cardInitials && modalInitials) { 
-        console.log("contact name:", contact.firstname + contact.lastname);
-        let initials =
-        contact.firstname.charAt(0) +
-        contact.lastname.charAt(0);
-        cardInitials.textContent = initials.toUpperCase();
-        modalInitials.textContent= initials.toUpperCase();
-    }
+  if (cardInitials && modalInitials) {
+    console.log("contact name:", contact.firstname + contact.lastname);
+    let initials = contact.firstname.charAt(0) + contact.lastname.charAt(0);
+    cardInitials.textContent = initials.toUpperCase();
+    modalInitials.textContent = initials.toUpperCase();
+  }
 }
-
 
 // close the contact card on mobile devices
 function closeContactCard() {
   const card = document.getElementById("contact-card-content");
   const mainContent = document.querySelector(".main-content");
-  const contactListContainer = document.getElementById("contact-list-container");
-  const sloganAndCardContainer = document.getElementById("slogan-and-card-container");
-  
-  card.innerHTML = '';
+  const contactListContainer = document.getElementById(
+    "contact-list-container",
+  );
+  const sloganAndCardContainer = document.getElementById(
+    "slogan-and-card-container",
+  );
+
+  card.innerHTML = "";
   mainContent.classList.remove("show-contact-card");
-  
+
   // Remove legacy inline styles if present
   if (contactListContainer) contactListContainer.style.display = "";
   if (sloganAndCardContainer) sloganAndCardContainer.style.display = "";
@@ -283,18 +304,18 @@ function renderEditForm(contact) {
   contactWindow.innerHTML = editFormRightSide(contact);
   const contactImg = document.getElementById("modal-initials");
 
-  contactImg.classList.add("contact-initials-edit")
-  contactImg.classList.remove("contact-initials")
-  contactImg.classList.remove("profile-img")
+  contactImg.classList.add("contact-initials-edit");
+  contactImg.classList.remove("contact-initials");
+  contactImg.classList.remove("profile-img");
   showInitials(contact);
 }
 
 // open the dropdown menu on mobile devices
 function mobileEditMenu(contact, event) {
   event.stopPropagation();
-  let menu = document.getElementById('mobile-menu');
+  let menu = document.getElementById("mobile-menu");
   menu.innerHTML = menuTempl(contact);
-  menu.classList.toggle('mobile-menu');
+  menu.classList.toggle("mobile-menu");
   menu.classList.toggle("display-none");
   menu.querySelector(".mobile-edit-btn").addEventListener("click", () => {
     renderEditForm(contact);
@@ -306,21 +327,23 @@ function mobileEditMenu(contact, event) {
 
 // edit a contact
 async function editContact(contactId) {
-  const firstname = document.getElementById('firstname').value;
-  const lastname = document.getElementById('lastname').value;
-  const email = document.getElementById('email').value;
+  const firstname = document.getElementById("firstname").value;
+  const lastname = document.getElementById("lastname").value;
+  const email = document.getElementById("email").value;
+  const phonenumber = document.getElementById("phonenumber").value;
   const contactImg = document.getElementById("modal-initials");
   contactImg.classList.add("contact-initials");
   contactImg.classList.remove("profile-img");
   const updatedContact = {
     firstname,
     lastname,
-    email
+    email,
+    phonenumber,
   };
   await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(updatedContact)
+    body: JSON.stringify(updatedContact),
   });
 
   await loadContacts();
@@ -330,23 +353,27 @@ async function editContact(contactId) {
 // delete a contact
 async function deleteContact(contactId) {
   const contactImg = document.getElementById("modal-initials");
-  contactImg.classList.remove("contact-initials")
+  if (contactImg) {
+    contactImg.classList.remove("contact-initials");
+  }
   await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
-    method: "DELETE"
+    method: "DELETE",
   });
 
   await loadContacts();
   const card = document.getElementById("contact-card-content");
-  card.innerHTML = '';
+  if (card) {
+    card.innerHTML = "";
+  }
 }
 
 // clear the input fields in the modal
 function cancelContact() {
-  let firstname = document.getElementById('firstname');
-  let lastname = document.getElementById('lastname');
-  let email = document.getElementById('email');
+  let firstname = document.getElementById("firstname");
+  let lastname = document.getElementById("lastname");
+  let email = document.getElementById("email");
 
-  firstname.value ='';
-  lastname.value ='';
-  email.value ='';
-};
+  firstname.value = "";
+  lastname.value = "";
+  email.value = "";
+}
