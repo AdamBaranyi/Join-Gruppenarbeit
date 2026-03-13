@@ -118,7 +118,7 @@ function editFormRightSide(contact) {
 function menuTempl(contact) {
     return `
       <div class="mobile-menu">
-          <button onclick="renderEditForm('${contact}')" class="mobile-edit-btn"><img class="mobile-edit-icon" src="../assets/imgs/edit.png" alt="edit icon">Edit</button>
+          <button class="mobile-edit-btn"><img class="mobile-edit-icon" src="../assets/imgs/edit.png" alt="edit icon">Edit</button>
           <button onclick="deleteContact('${contact.id}')" class="mobile-delete-btn"><img class="mobile-edit-icon" src="../assets/imgs/delete.png" alt="delete icon"> Delete</button>
       </div>
     `;

@@ -194,7 +194,17 @@ async function showContactDetails(contactId) {
 // render contact card with the details of a contact
 function renderContactCard(contact) {
   const card = document.getElementById("contact-card-content");
+  const sloganAndCardContainer = document.getElementById("slogan-and-card-container");
+  const contactListContainer = document.getElementById("contact-list-container");
+  const closeCardBtn = document.getElementById("close-card-btn");
+  const mainContent = document.querySelector(".main-content");
+
+  // Remove legacy inline styles if present
+  if (contactListContainer) contactListContainer.style.display = "";
+  if (sloganAndCardContainer) sloganAndCardContainer.style.display = "";
   
+  card.classList.remove("display-none");
+  mainContent.classList.add("show-contact-card");
   card.innerHTML = contactCard(contact);
   card.querySelector(".edit-btn").addEventListener("click", () => {
     renderEditForm(contact);
@@ -254,17 +264,16 @@ function showInitials(contact) {
 // close the contact card on mobile devices
 function closeContactCard() {
   const card = document.getElementById("contact-card-content");
-  if (window.innerWidth <= 850){
-  const sloganAndCardContainer = document.getElementById("slogan-and-card-container");
+  const mainContent = document.querySelector(".main-content");
   const contactListContainer = document.getElementById("contact-list-container");
-  const closeCardBtn = document.getElementById("close-card-btn");
+  const sloganAndCardContainer = document.getElementById("slogan-and-card-container");
   
   card.innerHTML = '';
-  card.classList.add("display-none");
-  closeCardBtn.classList.add("display-none");
-  contactListContainer.style.display ="flex";
-  sloganAndCardContainer.style.display ="none";
-  }
+  mainContent.classList.remove("show-contact-card");
+  
+  // Remove legacy inline styles if present
+  if (contactListContainer) contactListContainer.style.display = "";
+  if (sloganAndCardContainer) sloganAndCardContainer.style.display = "";
 }
 
 // open the modal to edit a contact
