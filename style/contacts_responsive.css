@@ -1,8 +1,13 @@
 /* Desktop Adjustments (Max Width: 1300px) */
-@media (max-width: 1300px) {
+@media (max-width: 1350px) {
     dialog:open {
         left: 0;
     }
+
+    .main-content {
+        overflow: scroll;
+    }
+    
 }
 
 /* Tablet/Mobile Adjustments (Max Width: 850px) */
