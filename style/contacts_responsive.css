@@ -11,7 +11,7 @@
 }
 
 /* Tablet/Mobile Adjustments (Max Width: 850px) */
-@media(max-width: 850px) {
+@media(max-width: 950px) {
     
     /* Layout Adjustments */
     .main-content {

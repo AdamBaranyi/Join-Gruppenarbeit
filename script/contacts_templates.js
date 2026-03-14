@@ -119,7 +119,7 @@ function editFormRightSide(contact) {
             </div>
             <div class="btn-container">
                 <button onclick="deleteContact('${contact.id}')" class="delete-btn">Delete X</button>
-                <input type="submit" class="check-btn" value="Save changes">
+                <input type="submit" class="check-btn" value="Save">
             </div>
         </form>
   `;

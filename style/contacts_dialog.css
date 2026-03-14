@@ -200,21 +200,14 @@ button:hover {
     background-color: transparent;
 }
 
-.btn-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 #close-card-btn {
     display: none;
 }
 /* ---------------------Add new Contact Dialog Buttons beginn--------*/
-.btn-container{
-    min-width: 364px;
-    max-height: 57px;
+.btn-container {
     display: flex;
     justify-content: flex-start;
+    align-items: flex-start;
     gap: 16px;
 }
 
@@ -304,4 +297,26 @@ button:hover {
     z-index: 1000;
     transition: bottom 0.5s ease-in-out;
     text-align: center;
+}
+
+.check-btn {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    width: 113px;
+    height: 55px;
+}
+
+.check-btn:hover {
+    background-color: transparent;
+}
+
+.delete-btn {
+    background-color: var(--color-white);
+    width: 113px;
+    height: 55px;
+    border: solid, 1px, var(--color-primary);
+}
+
+.delete-btn:hover {
+
 }
