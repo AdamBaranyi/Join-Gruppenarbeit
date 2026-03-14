@@ -13,6 +13,9 @@
         overflow: scroll;
     }
     
+    .check-icon {
+    right: 13%;
+    }
 }
 
 /* Tablet/Mobile Adjustments (Max Width: 850px) */
@@ -257,6 +260,11 @@
         flex-direction: column;
     }
 
+    .check-icon {
+        top: 94%;
+        right: 22%;
+    }
+
     .mobile-menu {
         position: fixed;
     }
@@ -320,7 +328,6 @@
     dialog:open {
         width: 100%;
         height: 90%;
-        top: 0;
         left: 0;
     }
 
@@ -336,5 +343,10 @@
     .contact-initials-edit {
         position: absolute;
         top: 45%;
+    }
+
+    .check-icon {
+        top: 90.5%;
+        right: 18%;
     }
 }

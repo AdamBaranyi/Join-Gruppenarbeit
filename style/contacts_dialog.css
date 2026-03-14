@@ -311,6 +311,12 @@ button:hover {
     background-color: var(--color-secondary);
 }
 
+.check-icon {
+    position: absolute;
+    right: 25%;
+    top: 81%;
+}
+
 .delete-btn {
     background-color: transparent;
     width: 113px;
