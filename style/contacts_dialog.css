@@ -209,48 +209,64 @@ button:hover {
 #close-card-btn {
     display: none;
 }
-
-.cancel-btn {
-    width: 126px;
-    height: 56px;
-    opacity: 1;
-    gap: 4px;
-    border-radius: 10px;
-    border-width: 1px;
-    padding: 16px;
+/* ---------------------Add new Contact Dialog Buttons beginn--------*/
+.btn-container{
+    min-width: 364px;
+    max-height: 57px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 16px;
 }
 
-.delete-btn {
-    opacity: 1;
-    gap: 4px;
-    border-radius: 10px;
-    border-width: 1px;
-    padding: 16px;
-    border: none;
+.clear-btn, .create-btn {
+  height: 56px;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.check-btn {
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    width: 214px;
-    height: 57px;
-    opacity: 1;
-    gap: 4px;
-    border-radius: 10px;
-    padding: 16px;
-    cursor: pointer;
+.clear-btn {
+  background-color: var(--color-white);
+  color: var(--color-text);
+  border: 1px solid var(--color-text);
+  font-size: 20px;
+  font-weight: 400;
+  transition: all 0.2s;
+  width: 126px;
+  gap: 4px;
 }
 
-.check-btn:hover {
-    background-color: var(--color-primary);
-    color: var(--color-white);
+.clear-btn:hover{
+  border-color: var(--color-secondary);
+  color: var(--color-secondary);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+  border: 2px solid var(--color-secondary);
 }
 
-.check-btn img {
-    width: 24;
-    height: 24;
-    opacity: 1;
+.clear-btn:hover .close-icon{
+  filter: brightness(0) saturate(100%) invert(55%) sepia(98%) saturate(455%) hue-rotate(165deg);
 }
+
+.create-btn {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 8px;
+  font-size: 21px;
+  font-weight: 700;
+  transition: background-color 0.2s;
+  width: 215px;
+  gap: 4px;
+}
+
+.create-btn:hover {
+  background: var(--color-secondary);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+}
+/* ---------------------Add new Contact Dialog Buttons ende--------*/
 
 .edit-btn {
     opacity: 1;

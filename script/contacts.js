@@ -380,13 +380,8 @@ async function deleteContact(contactId) {
   }
 }
 
-// clear the input fields in the modal
 function cancelContact() {
-  let firstname = document.getElementById("firstname");
-  let lastname = document.getElementById("lastname");
-  let email = document.getElementById("email");
-
-  firstname.value = "";
-  lastname.value = "";
-  email.value = "";
+  document.getElementById("contact-form").reset();
+  closeModal();
 }
+

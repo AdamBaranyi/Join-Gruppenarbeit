@@ -47,9 +47,17 @@ function openModalRightSide() {
             <input type="text" id="phonenumber" autocomplete="tel" placeholder="Phone Number">
             <img class="input-icon" src="..//assets/imgs/call.png" alt="phoneIcon">
         </div>
-            <div class="btn-container">
-            <button onclick="cancelContact()" class="cancel-btn">Cancel X</button>
-            <input type="submit" class="check-btn" value="Create contact">
+
+        <div class="btn-container">
+            <button type="button" onclick="cancelContact()" class="clear-btn">      
+            <p class="btn-text">Cancel</p>
+            <img src="../assets/imgs/iconoir_cancel.svg" class="btn-icon close-icon" alt="Cancel"></button>
+
+            <button type="submit" class="create-btn">      
+            <p class="btn-text">Create Contact</p>
+            <img src="../assets/imgs/check.svg" class="btn-icon create-icon" alt="Check" />
+            </button>
+
         </div>
         </form>
     `;
