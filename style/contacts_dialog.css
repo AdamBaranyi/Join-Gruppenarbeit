@@ -302,6 +302,7 @@ button:hover {
 .check-btn {
     background-color: var(--color-primary);
     color: var(--color-white);
+    font-size: 21px;
     width: 113px;
     height: 55px;
     border: none;
@@ -313,6 +314,8 @@ button:hover {
 
 .check-icon {
     position: absolute;
+    width: 24px;
+    height: 24px;
     right: 25%;
     top: 81%;
 }
@@ -327,8 +330,11 @@ button:hover {
 .delete-btn:hover {
     color: var(--color-secondary);
 }
+
 .delete-btn-modal {
     background-color: var(--color-white);
+    border: solid, 1px, var(--color-primary);
+    font-size: 21px;
     width: 113px;
     height: 55px;
     border: none
