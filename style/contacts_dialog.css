@@ -304,19 +304,31 @@ button:hover {
     color: var(--color-white);
     width: 113px;
     height: 55px;
+    border: none;
 }
 
 .check-btn:hover {
-    background-color: transparent;
+    background-color: var(--color-secondary);
 }
 
 .delete-btn {
-    background-color: var(--color-white);
+    background-color: transparent;
     width: 113px;
     height: 55px;
-    border: solid, 1px, var(--color-primary);
+    border: none
 }
 
 .delete-btn:hover {
+    color: var(--color-secondary);
+}
+.delete-btn-modal {
+    background-color: var(--color-white);
+    width: 113px;
+    height: 55px;
+    border: none
+}
 
+.delete-btn-modal:hover {
+    color: var(--color-secondary);
+    border: solid, 1px, var(--color-secondary);
 }

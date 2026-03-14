@@ -123,7 +123,7 @@ function openModal() {
   leftSide.innerHTML = openModalLeftSide();
   contactWindow.innerHTML = openModalRightSide();
   const closeBtn = document.getElementById("close-btn-img");
-  if (window.innerWidth <= 950) {
+  if (window.innerWidth <= 850) {
     closeBtn.src = "../assets/imgs/Close_white.png";
   } else {
     closeBtn.src = "../assets/imgs/Close.png";
@@ -241,7 +241,7 @@ function checkForMobileRenderCard() {
   const closeCardBtn = document.getElementById("close-card-btn");
   const mobileSlogan = document.getElementById("mobile-slogan");
 
-  if (window.innerWidth <= 950) {
+  if (window.innerWidth <= 850) {
     mobileSlogan.classList.remove("display-none");
     card.classList.remove("display-none");
     closeCardBtn.classList.remove("display-none");
@@ -346,7 +346,7 @@ async function editContact(contactId) {
 }
 
 function mobileSucessfulEdited() {
-  if (window.innerWidth <= 950) {
+  if (window.innerWidth <= 850) {
     let mobileMenuBtn = document.getElementById("mobile-option-menu");
     if (!mobileMenuBtn) return;
     setTimeout(() => {
