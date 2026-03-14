@@ -8,7 +8,6 @@ const contactModal = document.getElementById("dialog-modal");
 //load current user from session storage
 function getCurrentUser() {
   let currentUser = JSON.parse(sessionStorage.getItem("current_user"));
-  console.log("current User:", currentUser);
   return currentUser;
 }
 
@@ -50,7 +49,6 @@ async function loadContacts() {
       contacts.push(contact);
     });
   }
-  console.log("contacts:", contacts);
   renderContactList(contacts);
 }
 
@@ -226,9 +224,7 @@ function renderContactCard(contact) {
     renderEditForm(contact);
   });
   card.querySelector(".delete-btn").addEventListener("click", () => {
-    if (confirm("Are you sure you want to delete this contact?")) {
-      deleteContact(contact.id);
-    }
+    deleteContact(contact.id);
   });
   showInitials(contact);
 }
@@ -271,7 +267,6 @@ function showInitials(contact) {
   cardInitials.style.backgroundColor = getColorFromName(fullName);
   modalInitials.style.backgroundColor = getColorFromName(fullName);
   if (cardInitials && modalInitials) {
-    console.log("contact name:", contact.firstname + contact.lastname);
     let initials = contact.firstname.charAt(0) + contact.lastname.charAt(0);
     cardInitials.textContent = initials.toUpperCase();
     modalInitials.textContent = initials.toUpperCase();
