@@ -347,15 +347,15 @@ async function editContact(contactId) {
 
 function mobileSucessfulEdited() {
   if (window.innerWidth <= 850) {
-    let mobileMenuBtn = document.getElementById('mobile-option-menu');
+    let mobileMenuBtn = document.getElementById("mobile-option-menu");
+    if (!mobileMenuBtn) return;
     setTimeout(() => {
-        mobileMenuBtn.style.backgroundColor = "var(--color-secondary)"
+      mobileMenuBtn.style.backgroundColor = "var(--color-secondary)";
     }, 10);
     setTimeout(() => {
-        mobileMenuBtn.style.backgroundColor = "var(--color--primary)"
+      mobileMenuBtn.style.backgroundColor = "var(--color-primary)";
     }, 3000);
-  } else {return}
-  
+  }
 }
 
 // delete a contact
