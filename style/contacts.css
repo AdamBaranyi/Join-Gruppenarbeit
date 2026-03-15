@@ -6,7 +6,7 @@
 
 .main-content {
     display: flex;
-    height: calc(100vh - 96px);
+    height: calc(100dvh - 96px);
     width: calc(100dvw - 232px);
     margin-left: 232px; 
     margin-top: 96px;   
@@ -61,7 +61,7 @@ ul::-webkit-scrollbar-thumb:hover {
 
 /* Buttons */
 .add-contact-btn {
-    width: 354px;
+    max-width: 354px;
     height: 56px;
     background: #2A3647;
     color: var(--color-white);
@@ -90,7 +90,6 @@ ul::-webkit-scrollbar-thumb:hover {
     box-shadow: 0 0 20px rgba(0,0,0,0.04);
     display: flex;
     flex-direction: column;
-    padding: 32px 24px;
 }
 
 .contact-row {
@@ -116,7 +115,7 @@ ul::-webkit-scrollbar-thumb:hover {
 #contact-list-content {
     display: flex;
     flex-direction: column;
-    width: 354px;
+    max-width: 354px;
     padding-left: 20px;
 }
 
@@ -143,7 +142,6 @@ ul {
 #contact-card {
     margin-top: 50px;
     width: fit-content;
-    min-width: 600px;
     opacity: 0;
     transform: translateX(40px);
     transition: all 250ms ease-in-out;
@@ -216,6 +214,7 @@ ul {
     align-items: center;
     gap: 54px;
     margin-top: 40px;
+    
 }
 
 .contact-info-header {
