@@ -122,12 +122,6 @@ function openModal() {
   modalInitials.textContent = "";
   leftSide.innerHTML = openModalLeftSide();
   contactWindow.innerHTML = openModalRightSide();
-  const closeBtn = document.getElementById("close-btn-img");
-  if (window.innerWidth <= 850) {
-    closeBtn.src = "../assets/imgs/Close_white.png";
-  } else {
-    closeBtn.src = "../assets/imgs/Close.png";
-  }
 }
 
 // close the modal

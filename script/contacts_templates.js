@@ -119,7 +119,7 @@ function editFormRightSide(contact) {
             </div>
             <div class="btn-container">
                 <button onclick="deleteContact('${contact.id}')" class="delete-btn-modal">Delete X</button>
-              <div>
+              <div class="safe-btn-container">
                 <input type="submit" class="check-btn" value="Save">
                 <img class="check-icon" src="..//assets/imgs/check.svg"
               </div>
@@ -131,8 +131,8 @@ function editFormRightSide(contact) {
 function menuTempl(contact) {
   return `
       <div class="mobile-menu">
-          <button class="mobile-edit-btn"><img class="mobile-edit-icon" src="../assets/imgs/edit.png" alt="edit icon">Edit</button>
-          <button onclick="deleteContact('${contact.id}')" class="mobile-delete-btn"><img class="mobile-edit-icon" src="../assets/imgs/delete.png" alt="delete icon"> Delete</button>
+          <button  class="mobile-edit-btn"><img class="mobile-edit-icon" src="../assets/imgs/edit.png" alt="edit icon">Edit</button>
+          <button  class="mobile-delete-btn"><img class="mobile-edit-icon" src="../assets/imgs/delete.png" alt="delete icon"> Delete</button>
       </div>
     `;
 }

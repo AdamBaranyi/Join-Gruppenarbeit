@@ -89,23 +89,22 @@ dialog span {
     border: none;
     border-radius: 50%;
     background-color: var(--clolor-bg);
+    width: 24px;
+    height: 24px;
+    opacity: 1;
+    color: var(--color-primary);
 }
 
 .close-btn:hover {
     background-color: var(--color-bg-hover );
 }
 
-.close-btn img {
-    width: 24px;
-    height: 24px;
-    opacity: 1;
-}
-
 .img-and-form {
     display: flex;
     justify-content: space-evenly;
-    min-width: 100%;
+    max-width: 100%;
     padding: 30px;
+    gap: 50px;
 }
 
 .profile-img {
@@ -300,6 +299,7 @@ button:hover {
 }
 
 .check-btn {
+    cursor: pointer;
     background-color: var(--color-primary);
     color: var(--color-white);
     font-size: 21px;
@@ -313,11 +313,15 @@ button:hover {
 }
 
 .check-icon {
-    position: absolute;
     width: 24px;
     height: 24px;
-    right: 25%;
-    top: 81%;
+    position: absolute;
+    margin-left: 10%;
+    margin-top: 2%;
+}
+
+.safe-btn-container {
+    display: flex;
 }
 
 .delete-btn {

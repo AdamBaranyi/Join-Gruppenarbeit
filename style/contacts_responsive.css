@@ -13,9 +13,7 @@
         overflow: scroll;
     }
     
-    .check-icon {
-    right: 13%;
-    }
+    
 }
 
 /* Tablet/Mobile Adjustments (Max Width: 850px) */
@@ -159,6 +157,7 @@
         width: 50px;
         top: 65%;
         right: 8%;
+        z-index: 1000;
     }
 
     /* Mobile Menu */
@@ -229,10 +228,29 @@
         letter-spacing: 0%;
     }
 
+    .check-btn:hover {
+        background-color: var(--color-primary);
+    }
+
+    .delete-btn-modal:hover {
+        background-color: var(--color-white);
+        border: none;
+        color: var(--color-primary);
+    }
+
     .close-btn-container {
         position: absolute;
         top: 0;
         padding-top: 20px;
+        max-width: 400px;
+    }
+
+    .close-btn {
+        color: var(--color-white);
+    }
+
+    .close-btn:hover {
+        color: var(--color-primary);
     }
 
     .left-side-modal  {
@@ -260,10 +278,6 @@
         flex-direction: column;
     }
 
-    .check-icon {
-        top: 94%;
-        right: 22%;
-    }
 
     .mobile-menu {
         position: fixed;
@@ -300,6 +314,12 @@
 
     .logo-white {
         display: none;
+    }
+
+    .check-icon {
+        position: absolute;
+        margin-left: 21%;
+        margin-top: 4%;
     }
 
     .cancel-btn {
@@ -346,7 +366,23 @@
     }
 
     .check-icon {
-        top: 90.5%;
-        right: 18%;
+        margin-left: 24%;
+    }
+}
+
+@media (max-height: 1080px) {
+    @media (max-width: 850px) {
+        dialog:open {
+            max-height: 40%;
+        }
+
+        .profile-img {
+            top: 26%;
+        }
+
+        .contact-initials-edit {
+            top: 34%;
+        }
+
     }
 }
