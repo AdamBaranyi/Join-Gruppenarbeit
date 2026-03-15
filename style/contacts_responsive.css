@@ -1,27 +1,10 @@
-/* Desktop Adjustments (Max Width: 1300px) */
-@media (max-width: 1350px) {
-    dialog:open {
-        left: 0;
-        max-width: 850px;
-    }
 
-    dialog form {
-        max-width: 300px;
-    }
-
-    .main-content {
-        overflow: scroll;
-    }
-    
-    
-}
 
 /* Tablet/Mobile Adjustments (Max Width: 850px) */
 @media(max-width: 850px) {
     
     /* Layout Adjustments */
     .main-content {
-        width: 100%;
         height: calc(100dvh - 96px - 80px);
         position: relative;
         margin-left: 0;
@@ -51,7 +34,6 @@
     .contact-list-style{
         position: absolute;
         left: 0;
-        width: 100%;
         height: calc(100dvh - 180px);
         box-sizing: border-box;
     }
@@ -75,7 +57,6 @@
     }
 
     .contact-row {
-        width: 100%;
         box-sizing: border-box;
     }
 
@@ -89,7 +70,6 @@
         display: none;
         position: absolute;
         left: 0;
-        width: 100%;
         height: calc(100dvh - 180px);
         padding: 30px 15px;
         box-sizing: border-box;
@@ -106,7 +86,6 @@
     }
     
     #contact-card {
-        width: 100%;
         height: 100%;
         position: relative;
         top: 0;
@@ -121,13 +100,11 @@
     .content-slogan {
         display: flex;
         flex-direction: column;
-        width: 100%;
         max-width: 432px;
         box-sizing: border-box;
     }
 
     .contact-item {
-        width: 100%;
         height: 100%;
         display: flex;
         justify-content: flex-start;
@@ -256,13 +233,11 @@
     .left-side-modal  {
         justify-content: center;
         align-items: flex-start;
-        width: 100%;
         height: 50%;
         overflow: hidden;
     }
 
     .right-side-modal {
-        width: 100%;
         justify-content: center;
         align-items: center;;
         height: fit-content;
@@ -270,7 +245,6 @@
     }
 
     .img-and-form {
-        width: 100%;
         height: fit-content;
         display: flex;
         justify-content: center;
@@ -300,7 +274,6 @@
     }
 
     form {
-        width: 100%;
         padding-top: 70px;
         padding-bottom: 30px;
     }
@@ -322,7 +295,7 @@
         margin-top: 4%;
     }
 
-    .cancel-btn {
+    .clear-btn {
         display: none;
     }
 
@@ -343,13 +316,17 @@
     }
 }
 
+
+
+
 /* Small Mobile Adjustments (Max Width: 550px) */
-@media (max-width: 550px) {
+@media (max-width: 600px) {
     dialog:open {
-        width: 100%;
         height: 90%;
         left: 0;
     }
+
+
 
     .profile-img {
         position: absolute;
