@@ -25,42 +25,36 @@ function openModalLeftSide() {
 
 function openModalRightSide() {
   return `
-        <form method="dialog" id="contact-form" onsubmit="addContact({ 
-            firstname: document.getElementById('firstname').value,
-            lastname: document.getElementById('lastname').value,
-            email: document.getElementById('email').value,
-            phonenumber: document.getElementById('phonenumber').value
-            })">
-        <div class="input-group" data-type="text">
-            <input type="text" id="firstname" autocomplete="given-name" placeholder="First Name" required>
-            <img class="input-icon" src="..//assets/imgs/person.svg" alt="PrsonIcon">
-        </div>
-        <div class="input-group" data-type="text">
-            <input type="text" id="lastname" autocomplete="family-name" placeholder="Last Name" required>
-            <img class="input-icon" src="..//assets/imgs/person.svg" alt="PrsonIcon">
-        </div>
-        <div class="input-group" data-type="email">
-            <input type="email" id="email" autocomplete="email" placeholder="Email" required>
-            <img class="input-icon" src="..//assets/imgs/mail.svg" alt="mailIcon">
-        </div>
-        <div class="input-group" data-type="tel">
-            <input type="text" id="phonenumber" autocomplete="tel" placeholder="Phone Number">
-            <img class="input-icon" src="..//assets/imgs/call.png" alt="phoneIcon">
-        </div>
+    <form id="add-contact-form" class="contact-form">
+      <div class="input-group">
+        <input type="text" id="add-firstname" placeholder="First Name">
+        <img class="input-icon" src="../assets/imgs/person.svg">
+        <!-- Error message will be inserted here dynamically -->
+      </div>
 
-        <div class="btn-container">
-            <button type="button" onclick="cancelContact()" class="clear-btn">      
-            <p class="btn-text">Cancel</p>
-            <img src="../assets/imgs/iconoir_cancel.svg" class="btn-icon close-icon" alt="Cancel"></button>
+      <div class="input-group">
+        <input type="text" id="add-lastname" placeholder="Last Name">
+        <img class="input-icon" src="../assets/imgs/person.svg">
+      </div>
 
-            <button type="submit" class="create-btn">      
-            <p class="btn-text">Create Contact</p>
-            <img src="../assets/imgs/check.svg" class="btn-icon create-icon" alt="Check" />
-            </button>
+      <div class="input-group">
+        <input type="text" id="add-email" placeholder="Email">
+        <img class="input-icon" src="../assets/imgs/mail.svg">
+      </div>
 
-        </div>
-        </form>
-    `;
+      <div class="input-group">
+        <input type="text" id="add-phone" placeholder="Phone Number">
+        <img class="input-icon" src="../assets/imgs/call.png">
+      </div>
+
+      <div class="btn-container">
+        <button type="button" id="cancel-add" class="clear-btn">Cancel</button>
+        <button type="submit" class="create-btn">Create Contact
+        <img src="../assets/imgs/check.svg" alt="Add Subtask" /></button>
+        
+      </div>
+    </form>
+  `;
 }
 
 function contactCard(contact) {
@@ -97,34 +91,34 @@ function editFormleftSide() {
         <img class="vector-horizontel" src="../assets/imgs/Vector horizontel.png" alt="">
   `;
 }
-
 function editFormRightSide(contact) {
   return `
-        <form method="dialog" id="contact-form" onsubmit="editContact('${contact.id}')">
-            <div class="input-group" data-type="text">
-                <input type="text" id="firstname" autocomplete="given-name" placeholder="First Name" value="${contact.firstname}" required>
-                <img class="input-icon" src="..//assets/imgs/person.svg" alt="PrsonIcon">
-            </div>
-            <div class="input-group" data-type="text">
-                <input type="text" id="lastname" autocomplete="family-name" placeholder="Last Name" value="${contact.lastname}" required>
-                <img class="input-icon" src="..//assets/imgs/person.svg" alt="PrsonIcon">
-            </div>
-            <div class="input-group" data-type="email">
-                <input type="email" id="email" autocomplete="email" placeholder="Email" value="${contact.email}" required>
-                <img class="input-icon" src="..//assets/imgs/mail.svg" alt="mailIcon">
-            </div>
-            <div class="input-group" data-type="tel">
-                <input type="text" id="phonenumber" autocomplete="tel" placeholder="Phone Number" value="${contact.phonenumber}">
-                <img class="input-icon" src="..//assets/imgs/call.png" alt="phoneIcon">
-            </div>
-            <div class="btn-container">
-                <button onclick="deleteContact('${contact.id}')" class="delete-btn-modal">Delete X</button>
-              <div class="safe-btn-container">
-                <input type="submit" class="check-btn" value="Save">
-                <img class="check-icon" src="..//assets/imgs/check.svg"
-              </div>
-            </div>
-        </form>
+    <form id="edit-contact-form" class="contact-form">
+      <div class="input-group">
+        <input type="text" id="edit-firstname" placeholder="First Name">
+        <img class="input-icon" src="../assets/imgs/person.svg">
+      </div>
+
+      <div class="input-group">
+        <input type="text" id="edit-lastname" placeholder="Last Name">
+        <img class="input-icon" src="../assets/imgs/person.svg">
+      </div>
+
+      <div class="input-group">
+        <input type="text" id="edit-email" placeholder="Email">
+        <img class="input-icon" src="../assets/imgs/mail.svg">
+      </div>
+
+      <div class="input-group">
+        <input type="text" id="edit-phone" placeholder="Phone Number">
+        <img class="input-icon" src="../assets/imgs/call.png">
+      </div>
+
+      <div class="btn-container">
+        <button type="button" id="delete-contact" class="delete-btn-modal">Delete</button>
+        <button type="submit" class="check-btn">Save</button>
+      </div>
+    </form>
   `;
 }
 
