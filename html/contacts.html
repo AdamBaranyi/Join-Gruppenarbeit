@@ -18,11 +18,12 @@
     <script defer src="../script/contacts_templates.js"></script>
 </head>
 <body onload="init(), loadContacts()">
+    <div class="main-content">
         <div w3-include-html="../assets/templates/header.html"></div>
         <div w3-include-html="../assets/templates/sidebar.html"></div>
         <div w3-include-html="../assets/templates/mobile_sidebar.html"></div>
             
-            <div class="main-content">
+            
                 <div class="contact-list-style" id="contact-list-container">
                     <button class="add-contact-btn" onclick="openModal()"> <span>Add new contact</span> <img src="../assets/imgs/person_add.svg" alt="add person icon"></button>
                     <ul>

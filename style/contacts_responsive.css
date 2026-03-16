@@ -1,4 +1,74 @@
+@media (max-width: 1400px) {
 
+    dialog:open {
+        left: 5%;
+    }
+
+    .slogan-and-card-container {
+        padding: 0;
+        width: 100%;
+    }
+
+    .slogan {
+        padding: 10px;
+    }
+
+    .img-and-form {
+        margin-left: 0;
+        padding: 0;
+    }
+    
+    form {
+        width: 300px;
+    }
+
+    .input-group input {
+        height: 48px;
+        border-radius: 10px;
+        border: 1px solid var(--color-text-secondary);
+        /* padding: 0 60px 0 140px; */
+        font-size: 16px;
+        width: 300px;
+        padding-left:10px;
+}
+}
+
+@media (max-width: 1200px) {
+    .contact-list-style {
+        width: 250px;
+    }
+
+    .slogan h2 {
+        font-size: 32px;
+    }
+    .contact-header{
+        gap: 5px;
+    }
+
+    #contact-card.show {
+        padding: 10px;
+    }
+
+    .contact-name {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 910px) {
+
+
+    .slogan {
+        padding: 0;
+    }
+
+    .contact-name {
+        font-size: 22px;
+    }
+
+    #contact-card.show {
+        padding: 0;
+    }
+}
 
 /* Tablet/Mobile Adjustments (Max Width: 850px) */
 @media(max-width: 850px) {
@@ -6,6 +76,7 @@
     /* Layout Adjustments */
     .main-content {
         height: calc(100dvh - 96px - 80px);
+        width: 100%;
         position: relative;
         margin-left: 0;
         box-sizing: border-box;
@@ -34,13 +105,12 @@
     .contact-list-style{
         position: absolute;
         left: 0;
+        width: 100%;
         height: calc(100dvh - 180px);
         box-sizing: border-box;
     }
 
     ul {
-        height: 100%;
-        width: 100%;
         display: flex;
         gap: 12px;
         cursor: unset;
@@ -48,15 +118,16 @@
     }
 
     #contact-list-content {
+        width: 100%;
         position: relative;
         left: 0;
-        width: 100%;
         padding-left: 0;
         box-sizing: border-box;
         overflow-x: hidden;
     }
 
     .contact-row {
+        width: 100%;
         box-sizing: border-box;
     }
 
@@ -71,6 +142,7 @@
         position: absolute;
         left: 0;
         height: calc(100dvh - 180px);
+        width: 100%;
         padding: 30px 15px;
         box-sizing: border-box;
         overflow-y: auto;
@@ -84,13 +156,14 @@
     .main-content.show-contact-card .slogan-and-card-container {
         display: flex;
     }
-    
+
     #contact-card {
-        height: 100%;
-        position: relative;
-        top: 0;
-        left: 0;
+        padding: 0;
     }
+
+    #contact-card.show {
+    width: 100%;
+}
 
     .btn-and-name-container {
         display: flex;
@@ -105,11 +178,12 @@
     }
 
     .contact-item {
-        height: 100%;
         display: flex;
         justify-content: flex-start;
         align-items: flex-start;
     }
+
+    
 
     /* Mobile Action Buttons */
     #close-card-btn {
@@ -177,7 +251,7 @@
     /* Dialog Modal */
     dialog:open {
         position: relative;
-        width: 90%;
+        width: 100%;
         max-width: 396px;
         min-height: 760px;
         top: 10%;
@@ -215,15 +289,10 @@
         color: var(--color-primary);
     }
 
-    .close-btn-container {
-        position: absolute;
-        top: 0;
-        padding-top: 20px;
-        max-width: 400px;
-    }
-
     .close-btn {
         color: var(--color-white);
+        right: 25px;
+        top: 25px;
     }
 
     .close-btn:hover {
@@ -235,11 +304,12 @@
         align-items: flex-start;
         height: 50%;
         overflow: hidden;
+
     }
 
     .right-side-modal {
         justify-content: center;
-        align-items: center;;
+        align-items: flex-start;;
         height: fit-content;
         overflow: hidden;
     }
@@ -250,8 +320,19 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        margin-left: 0;
+        width: 100%;
+        
     }
 
+    .contact-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 120%;
+    color: #000000;
+    white-space: nowrap;
+}
 
     .mobile-menu {
         position: fixed;
@@ -276,10 +357,14 @@
     form {
         padding-top: 70px;
         padding-bottom: 30px;
+        width: 100%;
+    }
+
+     .input-group input {
+        max-width: 320px;
     }
 
     .btn-container {
-        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -326,7 +411,24 @@
         left: 0;
     }
 
+    .left-side-modal  {
+        justify-content: center;
+        align-items: flex-start;
+        justify-content: center;
+        height: 50%;
+        overflow: hidden;
+        width: 100%;
+        
+    }
 
+    .img-and-form {
+        padding: 0;
+    }
+
+    .contact-header {
+        gap: 0;
+        max-width: 420px;
+    }
 
     .profile-img {
         position: absolute;
