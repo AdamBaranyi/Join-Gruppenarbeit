@@ -32,16 +32,19 @@ function openModalRightSide() {
             phonenumber: document.getElementById('phonenumber').value
             })">
         <div class="input-group" data-type="text">
-            <input type="text" id="firstname" autocomplete="given-name" placeholder="First Name" required>
+            <input type="text"  id="firstname" autocomplete="given-name" placeholder="First Name" >
             <img class="input-icon" src="..//assets/imgs/person.svg" alt="PrsonIcon">
+            <div class="error-msg display-none" id="error-firstname">* This field is </div>
         </div>
         <div class="input-group" data-type="text">
-            <input type="text" id="lastname" autocomplete="family-name" placeholder="Last Name" required>
+            <input type="text" id="lastname" autocomplete="family-name" placeholder="Last Name" >
             <img class="input-icon" src="..//assets/imgs/person.svg" alt="PrsonIcon">
+            <div class="error-msg display-none" id="error-lastname">* This field is </div>
         </div>
         <div class="input-group" data-type="email">
-            <input type="email" id="email" autocomplete="email" placeholder="Email" required>
+            <input type="email" id="email" autocomplete="email" placeholder="Email" >
             <img class="input-icon" src="..//assets/imgs/mail.svg" alt="mailIcon">
+            <div class="error-msg display-none" id="error-mail-adress">* This field is </div>
         </div>
         <div class="input-group" data-type="tel">
             <input type="text" id="phonenumber" autocomplete="tel" placeholder="Phone Number">

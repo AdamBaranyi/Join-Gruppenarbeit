@@ -160,7 +160,7 @@ async function addContact(contactData) {
     showSuccessMessage();
     return newId;
   } else {
-    return;
+    markAsError();
   }
 }
 
@@ -350,6 +350,26 @@ function mobileSucessfulEdited() {
       mobileMenuBtn.style.backgroundColor = "var(--color-primary)";
     }, 3000);
   }
+}
+
+function markAsError() {
+  const firstnameError = document.getElementById('fristname')
+  const lastnameError = document.getElementById('lastname')
+  const mailError = document.getElementById('email')
+  const firstnameErrorMsg = document.getElementById('error-fristname')
+  const lastnameErrorMsg = document.getElementById('error-lastname')
+  const mailErrorMsg = document.getElementById('error-mail-adress')
+
+    firstnameError.classList.add('error')
+    firstnameErrorMsg.classList.remove('display-none')
+
+    lastnameError.classList.add('error')
+    lastnameErrorMsg.classList.remove('display-none')
+
+    mailError.classList.add('error')
+    mailErrorMsg.classList.remove('display-none')
+
+    return
 }
 
 // delete a contact
