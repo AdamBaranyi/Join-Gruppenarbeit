@@ -1,4 +1,55 @@
+@media (max-width: 1400px) {
 
+    dialog:open {
+        left: 5%;
+    }
+
+    .slogan-and-card-container {
+        padding: 0;
+        width: 100%;
+    }
+
+    .slogan {
+        padding: 10px;
+    }
+
+    .img-and-form {
+        margin-left: 0;
+        padding: 0;
+    }
+    
+    form {
+        width: 300px;
+    }
+
+    .input-group input {
+        height: 48px;
+        border-radius: 10px;
+        border: 1px solid var(--color-text-secondary);
+        /* padding: 0 60px 0 140px; */
+        font-size: 16px;
+        width: 300px;
+        padding-left:10px;
+}
+}
+
+@media (max-width: 1050px) {
+
+    .slogan h2 {
+        font-size: 32px;
+    }
+    .contact-header{
+        gap: 5px;
+    }
+
+    #contact-card.show {
+        padding: 10px;
+    }
+
+    .contact-name {
+        font-size: 26px;
+    }
+}
 
 /* Tablet/Mobile Adjustments (Max Width: 850px) */
 @media(max-width: 850px) {
@@ -89,6 +140,10 @@
     #contact-card {
         padding: 0;
     }
+
+    #contact-card.show {
+    width: 100%;
+}
 
     .btn-and-name-container {
         display: flex;
@@ -229,6 +284,7 @@
         align-items: flex-start;
         height: 50%;
         overflow: hidden;
+
     }
 
     .right-side-modal {
@@ -245,6 +301,7 @@
         align-items: center;
         flex-direction: column;
         margin-left: 0;
+        width: 100%;
         
     }
 
@@ -280,7 +337,7 @@
     form {
         padding-top: 70px;
         padding-bottom: 30px;
-        max-width: 320px;
+        width: 100%;
     }
 
      .input-group input {
@@ -332,6 +389,20 @@
     dialog:open {
         height: 90%;
         left: 0;
+    }
+
+    .left-side-modal  {
+        justify-content: center;
+        align-items: flex-start;
+        justify-content: center;
+        height: 50%;
+        overflow: hidden;
+        width: 100%;
+        
+    }
+
+    .img-and-form {
+        padding: 0;
     }
 
     .contact-header {
