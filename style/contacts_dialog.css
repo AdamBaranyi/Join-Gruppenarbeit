@@ -183,9 +183,9 @@ input:focus {
     font-size: 16px;
 }
 
-.error {
+/* .error {
     border: solid, 1px, red;
-}
+} */
 
 .mail-style {
     color: var(--color-secondary);
