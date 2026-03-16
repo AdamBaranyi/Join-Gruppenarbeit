@@ -33,7 +33,7 @@
 }
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1200px) {
 
     .slogan h2 {
         font-size: 32px;
@@ -48,6 +48,22 @@
 
     .contact-name {
         font-size: 26px;
+    }
+}
+
+@media (max-width: 910px) {
+
+
+    .slogan {
+        padding: 0;
+    }
+
+    .contact-name {
+        font-size: 22px;
+    }
+
+    #contact-card.show {
+        padding: 0;
     }
 }
 
