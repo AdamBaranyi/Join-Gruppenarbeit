@@ -1,4 +1,3 @@
-/* Dialog Modal */
 dialog {
     overflow: hidden;
     position: relative;
@@ -8,14 +7,14 @@ dialog {
 
 dialog:open {
     display: flex;
-    width: 1212px;
-    height: 592px;
-    opacity: 1;
+    width: 90%;
+    max-width: 1100px;
+    height: 550px;
+    min-height: 500px;
     border-radius: 30px;
     border: none;
 }
 
-/* Modal Left Side */
 .left-side-modal {
     display: flex;
     flex-direction: column;
@@ -66,8 +65,8 @@ dialog span {
     border: solid, 3px, var(--color-secondary);
 }
 
-/* Modal Right Side */
 .right-side-modal {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -99,9 +98,9 @@ dialog span {
 .img-and-form {
     display: flex;
     justify-content: space-evenly;
+    align-items: flex-start;
     padding: 30px;
     gap: 50px;
-    margin-left: 74px;
 }
 
 .profile-img {
@@ -112,13 +111,14 @@ dialog span {
     border-width: 3px;
 }
 
-/* Modal Form */
 form {
     display: flex;
     flex-direction: column;
     opacity: 1;
-    gap: 32px;
+    gap: 22px;
     width: 422px;
+    margin: 0;
+    padding: 0;
 }
 
 form input {
@@ -131,51 +131,61 @@ form input {
 }
 
 .input-group {
-  position: relative;
+    position: relative;
+    margin: 0;
+    padding: 0;
 }
 
 .input-group input {
-  height: 48px;
-  border-radius: 10px;
-  border: 1px solid var(--color-text-secondary);
-  /* padding: 0 60px 0 140px; */
-  font-size: 16px;
-  width: 422px;
-  padding-left:10px;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid var(--color-text-secondary);
+    font-size: 16px;
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 40px;
+    box-sizing: border-box;
+    margin: 0;
 }
 
 .input-icon {
-  position: absolute;
-  right: 15px;
-  bottom: 10%;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
+    position: absolute;
+    right: 12px;
+    top: 24px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 2;
+    pointer-events: none;
 }
 
 .input-group input:focus {
-  border: 1px solid var(--color-secondary);
-  outline: none;
+    border: 1px solid var(--color-secondary);
+    outline: none;
 }
 
 input:focus {
-  outline: none;
-  border: 1px solid var(--color-secondary);
+    outline: none;
+    border: 1px solid var(--color-secondary);
 }
 
 .inputs {
-  position: relative;
-  width: 420px;
+    position: relative;
+    width: 420px;
 }
 
 .inputs input {
-  height: 45px;
-  border-radius: 10px;
-  border: 1px solid var(--color-text-secondary);
-  padding: 0 45px 0 15px;
-  font-size: 16px;
+    height: 45px;
+    border-radius: 10px;
+    border: 1px solid var(--color-text-secondary);
+    padding: 0 45px 0 15px;
+    font-size: 16px;
 }
+
+/* .error {
+    border: solid, 1px, red;
+} */
 
 .mail-style {
     color: var(--color-secondary);
@@ -185,7 +195,6 @@ input:focus {
     display: none;
 }
 
-/* Modal Buttons */
 button {
     cursor: pointer;
 }
@@ -197,56 +206,58 @@ button:hover {
 #close-card-btn {
     display: none;
 }
+
 /* ---------------------Add new Contact Dialog Buttons beginn--------*/
 .btn-container {
     display: flex;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
     gap: 16px;
+    margin-top: 16px;
 }
 
 .clear-btn, .create-btn {
-  height: 56px;
-  padding: 16px;
-  border-radius: 10px;
-  border: 1px solid #d1d1d1;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    height: 56px;
+    padding: 16px;
+    border-radius: 10px;
+    border: 1px solid #d1d1d1;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .clear-btn {
-  background-color: var(--color-white);
-  color: var(--color-text);
-  border: 1px solid var(--color-text);
-  font-size: 20px;
-  font-weight: 400;
-  transition: all 0.2s;
-  width: 126px;
-  gap: 4px;
+    background-color: var(--color-white);
+    color: var(--color-text);
+    border: 1px solid var(--color-text);
+    font-size: 20px;
+    font-weight: 400;
+    transition: all 0.2s;
+    width: 126px;
+    gap: 4px;
 }
 
-.clear-btn:hover{
-  border-color: var(--color-secondary);
-  color: var(--color-secondary);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
-  border: 2px solid var(--color-secondary);
+.clear-btn:hover {
+    border-color: var(--color-secondary);
+    color: var(--color-secondary);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+    border: 2px solid var(--color-secondary);
 }
 
-.clear-btn:hover .close-icon{
-  filter: brightness(0) saturate(100%) invert(55%) sepia(98%) saturate(455%) hue-rotate(165deg);
+.clear-btn:hover .close-icon {
+    filter: brightness(0) saturate(100%) invert(55%) sepia(98%) saturate(455%) hue-rotate(165deg);
 }
 
 .create-btn {
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  border-radius: 8px;
-  font-size: 21px;
-  font-weight: 700;
-  transition: background-color 0.2s;
-  width: 202px;
-  gap: 4px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: 8px;
+    font-size: 21px;
+    font-weight: 700;
+    transition: background-color 0.2s;
+    width: 220px;
+    gap: 4px;
 }
 
 .create-btn p {
@@ -254,8 +265,8 @@ button:hover {
 }
 
 .create-btn:hover {
-  background: var(--color-secondary);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+    background: var(--color-secondary);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
 }
 /* ---------------------Add new Contact Dialog Buttons ende--------*/
 
@@ -279,7 +290,6 @@ button:hover {
     display: none;
 }
 
-/* Success Notifications */
 .success-message.show {
     bottom: 50%;
     transform: translate(-50%, 50%);
@@ -298,13 +308,18 @@ button:hover {
 }
 
 .check-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
     background-color: var(--color-primary);
     color: var(--color-white);
     font-size: 21px;
     width: 113px;
-    height: 55px;
+    height: 56px;
+    border-radius: 10px;
     border: none;
+    gap: 4px;
 }
 
 .check-btn:hover {
@@ -325,9 +340,10 @@ button:hover {
 
 .delete-btn {
     background-color: transparent;
+    border: solid, 1px, var(--color-primary);
     width: 113px;
-    height: 55px;
-    border: none
+    height: 56px;
+    border: none;
 }
 
 .delete-btn:hover {
@@ -339,11 +355,105 @@ button:hover {
     border: solid, 1px, var(--color-primary);
     font-size: 21px;
     width: 113px;
-    height: 55px;
-    border: none
+    height: 56px;
+    border-radius: 10px;
 }
 
 .delete-btn-modal:hover {
     color: var(--color-secondary);
     border: solid, 1px, var(--color-secondary);
+}
+
+.error-message {
+    color: var(--color-error);
+    font-size: 12px;
+    margin-top: 4px;
+    margin-left: 4px;
+    display: block;
+    position: relative;
+    z-index: 1;
+    line-height: 1.2;
+}
+
+.input-group.error input {
+    border: 1px solid var(--color-error) !important;
+}
+
+.input-group.error .input-icon {
+    top: 24px;
+}
+
+@media (max-width: 900px) {
+    dialog:open {
+        flex-direction: column;
+        width: 95%;
+        height: auto;
+    }
+
+    .left-side-modal {
+        width: 100%;
+        height: auto;
+    }
+
+    .right-side-modal {
+        width: 100%;
+    }
+
+    .img-and-form {
+        flex-direction: column;
+        align-items: center;
+        margin-left: 0;
+    }
+
+    form {
+        width: 100%;
+        gap: 8px;
+    }
+
+    .input-group input {
+        width: 100%;
+    }
+
+    .input-icon {
+        top: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    dialog {
+        top: 5%;
+        left: 2.5%;
+    }
+
+    dialog:open {
+        width: 95%;
+    }
+
+    .left-side-modal h3 {
+        font-size: 36px;
+    }
+
+    .left-side-modal span {
+        font-size: 18px;
+    }
+
+    .profile-img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .btn-container {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 16px;
+    }
+
+    .delete-btn-modal,
+    .check-btn {
+        width: 100%;
+    }
+
+    .input-icon {
+        top: 24px;
+    }
 }

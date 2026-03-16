@@ -1,7 +1,7 @@
 let currentUser;
 let userId;
 let url;
-let leftSide = document.getElementById("left-side-modal ");
+let leftSide = document.getElementById("left-side-modal");
 const contactWindow = document.getElementById("contact-modal");
 const contactModal = document.getElementById("dialog-modal");
 
@@ -158,9 +158,11 @@ async function addContact(contactData) {
     await putContactInBackend(newId, contactWithId);
     await loadContacts();
     showSuccessMessage();
+    closeModal();
+
     return newId;
   } else {
-    return;
+    markAsError();
   }
 }
 
@@ -207,20 +209,41 @@ function renderContactCard(contact) {
   const closeCardBtn = document.getElementById("close-card-btn");
   const mainContent = document.querySelector(".main-content");
 
-  // Remove legacy inline styles if present
   if (contactListContainer) contactListContainer.style.display = "";
   if (sloganAndCardContainer) sloganAndCardContainer.style.display = "";
 
   card.classList.remove("display-none");
   mainContent.classList.add("show-contact-card");
   card.innerHTML = contactCard(contact);
+  showInitials(contact);
+  
   card.querySelector(".edit-btn").addEventListener("click", () => {
     renderEditForm(contact);
   });
   card.querySelector(".delete-btn").addEventListener("click", () => {
     deleteContact(contact.id);
   });
-  showInitials(contact);
+}
+
+function showInitials(contact) {
+    if (!contact) return;
+
+    const cardInitials = document.getElementById("contact-initials");
+    const modalInitials = document.getElementById("modal-initials");
+
+    const fullName = contact.firstname + contact.lastname;
+    const initials = contact.firstname.charAt(0) + contact.lastname.charAt(0);
+    const color = getColorFromName(fullName);
+
+    if (cardInitials) {
+        cardInitials.style.backgroundColor = color;
+        cardInitials.textContent = initials.toUpperCase();
+    }
+
+    if (modalInitials) {
+        modalInitials.style.backgroundColor = color;
+        modalInitials.textContent = initials.toUpperCase();
+    }
 }
 
 // check for mobile render card
@@ -249,24 +272,6 @@ function checkForMobileRenderCard() {
   }
 }
 
-// load initials from first and last name
-function showInitials(contact) {
-  const cardInitials = document.getElementById("contact-initials");
-  const modalInitials = document.getElementById("modal-initials");
-
-  if (!modalInitials && !cardInitials) return;
-
-  const fullName = contact.firstname + contact.lastname;
-
-  cardInitials.style.backgroundColor = getColorFromName(fullName);
-  modalInitials.style.backgroundColor = getColorFromName(fullName);
-  if (cardInitials && modalInitials) {
-    let initials = contact.firstname.charAt(0) + contact.lastname.charAt(0);
-    cardInitials.textContent = initials.toUpperCase();
-    modalInitials.textContent = initials.toUpperCase();
-  }
-}
-
 // close the contact card on mobile devices
 function closeContactCard() {
   const card = document.getElementById("contact-card-content");
@@ -281,22 +286,8 @@ function closeContactCard() {
   card.innerHTML = "";
   mainContent.classList.remove("show-contact-card");
 
-  // Remove legacy inline styles if present
   if (contactListContainer) contactListContainer.style.display = "";
   if (sloganAndCardContainer) sloganAndCardContainer.style.display = "";
-}
-
-// open the modal to edit a contact
-function renderEditForm(contact) {
-  openModal();
-  leftSide.innerHTML = editFormleftSide();
-  contactWindow.innerHTML = editFormRightSide(contact);
-  const contactImg = document.getElementById("modal-initials");
-
-  contactImg.classList.add("contact-initials-edit");
-  contactImg.classList.remove("contact-initials");
-  contactImg.classList.remove("profile-img");
-  showInitials(contact);
 }
 
 // open the dropdown menu on mobile devices
@@ -314,42 +305,51 @@ function mobileEditMenu(contact, event) {
   });
 }
 
-// edit a contact
-async function editContact(contactId) {
-  const firstname = document.getElementById("firstname").value;
-  const lastname = document.getElementById("lastname").value;
-  const email = document.getElementById("email").value;
-  const phonenumber = document.getElementById("phonenumber").value;
-  const contactImg = document.getElementById("modal-initials");
-  contactImg.classList.add("contact-initials");
-  contactImg.classList.remove("profile-img");
-  const updatedContact = {
-    firstname,
-    lastname,
-    email,
-    phonenumber,
-  };
+async function editContact(contactId, data) {
+
   await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(updatedContact),
+    body: JSON.stringify(data),
   });
+
   await mobileSucessfulEdited();
   await loadContacts();
   await showContactDetails(contactId);
+
+  closeModal();
 }
 
 function mobileSucessfulEdited() {
   if (window.innerWidth <= 850) {
     let mobileMenuBtn = document.getElementById("mobile-option-menu");
     if (!mobileMenuBtn) return;
-    setTimeout(() => {
-      mobileMenuBtn.style.backgroundColor = "var(--color-secondary)";
-    }, 10);
-    setTimeout(() => {
-      mobileMenuBtn.style.backgroundColor = "var(--color-primary)";
-    }, 3000);
+  setTimeout(() => {
+  successMessage.classList.remove("show");
+  successMessage.classList.add("display-none");
+}, 3000);
+
   }
+}
+
+function markAsError() {
+  const firstnameError = document.getElementById('firstname')
+  const lastnameError = document.getElementById('lastname')
+  const mailError = document.getElementById('email')
+  const firstnameErrorMsg = document.getElementById('error-firstname')
+  const lastnameErrorMsg = document.getElementById('error-lastname')
+  const mailErrorMsg = document.getElementById('error-mail-adress')
+
+    firstnameError.classList.add('error')
+    firstnameErrorMsg.classList.remove('display-none')
+
+    lastnameError.classList.add('error')
+    lastnameErrorMsg.classList.remove('display-none')
+
+    mailError.classList.add('error')
+    mailErrorMsg.classList.remove('display-none')
+
+    return
 }
 
 // delete a contact
@@ -369,8 +369,243 @@ async function deleteContact(contactId) {
   }
 }
 
-function cancelContact() {
-  document.getElementById("contact-form").reset();
-  closeModal();
+function getAddFormData(){
+
+    return {
+        firstname: document.getElementById("add-firstname").value.trim(),
+        lastname: document.getElementById("add-lastname").value.trim(),
+        email: document.getElementById("add-email").value.trim(),
+        phonenumber: document.getElementById("add-phone").value.trim()
+    };
+
 }
 
+function getEditFormData(){
+
+    return {
+        firstname: document.getElementById("edit-firstname").value.trim(),
+        lastname: document.getElementById("edit-lastname").value.trim(),
+        email: document.getElementById("edit-email").value.trim(),
+        phonenumber: document.getElementById("edit-phone").value.trim()
+    };
+
+}
+
+// Function to set error message
+function setError(inputId, message) {
+    const inputGroup = document.getElementById(inputId).closest('.input-group');
+    
+    const existingError = inputGroup.querySelector('.error-message');
+    if (existingError) {
+        existingError.remove();
+    }
+    
+    inputGroup.classList.add('error');
+    
+    const errorSpan = document.createElement('span');
+    errorSpan.className = 'error-message';
+    errorSpan.textContent = message;
+    inputGroup.appendChild(errorSpan);
+}
+
+// Function to clear error from a specific field
+function clearError(inputId) {
+    const input = document.getElementById(inputId);
+    if (!input) return; 
+
+    const inputGroup = input.closest('.input-group');
+    if (!inputGroup) return; 
+    
+    inputGroup.classList.remove('error');
+    
+    const existingError = inputGroup.querySelector('.error-message');
+    if (existingError) {
+        existingError.remove();
+    }
+}
+
+// Function to clear all errors
+function clearAllErrors(formType) {
+    const fields = formType === 'add' 
+        ? ['add-firstname', 'add-lastname', 'add-email']
+        : ['edit-firstname', 'edit-lastname', 'edit-email'];
+    
+    fields.forEach(id => {
+        if (document.getElementById(id)) {
+            clearError(id);
+        }
+    });
+}
+
+function validateContact(data, formType) {
+    let isValid = true;
+
+    clearAllErrors(formType);
+    
+    if (!data.firstname) {
+        setError(formType === 'add' ? 'add-firstname' : 'edit-firstname', '* First name is required');
+        isValid = false;
+    } else if (data.firstname.length < 2) {
+        setError(formType === 'add' ? 'add-firstname' : 'edit-firstname', '* First name must be at least 2 characters');
+        isValid = false;
+    }
+
+    if (!data.lastname) {
+        setError(formType === 'add' ? 'add-lastname' : 'edit-lastname', '* Last name is required');
+        isValid = false;
+    } else if (data.lastname.length < 2) {
+        setError(formType === 'add' ? 'add-lastname' : 'edit-lastname', '* Last name must be at least 2 characters');
+        isValid = false;
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!data.email) {
+        setError(formType === 'add' ? 'add-email' : 'edit-email', '* Email is required');
+        isValid = false;
+    } else if (!emailRegex.test(data.email)) {
+        setError(formType === 'add' ? 'add-email' : 'edit-email', '* Please enter a valid email address');
+        isValid = false;
+    }
+    
+    return isValid;
+}
+
+function addInputValidationListeners() {
+
+    const addInputs = ['add-firstname', 'add-lastname', 'add-email'];
+    addInputs.forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+
+            input.removeEventListener('input', handleInputValidation);
+            input.addEventListener('input', handleInputValidation);
+        }
+    });
+
+    // For edit form inputs
+    const editInputs = ['edit-firstname', 'edit-lastname', 'edit-email'];
+    editInputs.forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+            input.removeEventListener('input', handleInputValidation);
+            input.addEventListener('input', handleInputValidation);
+        }
+    });
+}
+
+// Handle input validation in real-time
+function handleInputValidation(e) {
+    const input = e.target;
+    const inputId = input.id;
+    const formType = inputId.startsWith('add-') ? 'add' : 'edit';
+    
+    clearError(inputId);
+    const value = input.value.trim();
+    if (inputId.includes('firstname') && value.length === 1) {
+        return;
+    }
+    
+    if (inputId.includes('lastname') && value.length === 1) {
+        return;
+    }
+    
+    if (inputId.includes('email') && value.length > 0) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value) && value.length > 5) {
+            setError(inputId, '* Please enter a valid email address');
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    addInputValidationListeners();
+});
+
+function openModal() {
+    contactModal.showModal();
+    const modalInitials = document.getElementById("modal-initials");
+    modalInitials.style.backgroundColor = "transparent";
+    modalInitials.classList.remove("contact-initials");
+    modalInitials.classList.add("profile-img");
+    modalInitials.classList.remove("contact-initials-edit");
+    modalInitials.textContent = "";
+    leftSide.innerHTML = openModalLeftSide();
+    contactWindow.innerHTML = openModalRightSide();
+
+    setTimeout(() => {
+        clearAllErrors('add');
+        addInputValidationListeners();
+    }, 100);
+}
+
+// Update renderEditForm function (keep this one)
+function renderEditForm(contact) {
+    openModal();
+    leftSide.innerHTML = editFormleftSide();
+    contactWindow.innerHTML = editFormRightSide(contact);
+    const form = document.getElementById("edit-contact-form");
+    form.dataset.id = contact.id;
+    fillEditForm(contact);
+    const contactImg = document.getElementById("modal-initials");
+    contactImg.classList.add("contact-initials-edit");
+    contactImg.classList.remove("contact-initials");
+    contactImg.classList.remove("profile-img");
+    showInitials(contact);
+    
+    setTimeout(() => {
+        clearAllErrors('edit');
+        addInputValidationListeners();
+    }, 100);
+}
+
+// Initialize validation listeners when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    addInputValidationListeners();
+});
+
+document.addEventListener("submit", function(e) {
+    if (e.target.id === "add-contact-form") {
+        e.preventDefault();
+        const data = getAddFormData();
+        
+        if (!validateContact(data, 'add')) return;
+        
+        addContact(data);
+    }
+});
+
+document.addEventListener("submit", function(e) {
+    if (e.target.id === "edit-contact-form") {
+        e.preventDefault();
+        const id = e.target.dataset.id;
+        const data = getEditFormData();
+        
+        if (!validateContact(data, 'edit')) return;
+        
+        editContact(id, data);
+    }
+});
+
+document.addEventListener("click", function(e) {
+    if (e.target.id === "delete-contact") {
+        const form = document.getElementById("edit-contact-form");
+        const id = form.dataset.id;
+        deleteContact(id);
+    }
+});
+
+function fillEditForm(contact) {
+    const form = document.getElementById("edit-contact-form");
+    form.dataset.id = contact.id;
+    document.getElementById("edit-firstname").value = contact.firstname;
+    document.getElementById("edit-lastname").value = contact.lastname;
+    document.getElementById("edit-email").value = contact.email;
+    document.getElementById("edit-phone").value = contact.phonenumber;
+}
+
+document.addEventListener("click", function(e) {
+    if (e.target.id === "cancel-add") {
+        e.preventDefault();
+        closeModal();
+    }
+});
