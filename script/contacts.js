@@ -353,10 +353,10 @@ function mobileSucessfulEdited() {
 }
 
 function markAsError() {
-  const firstnameError = document.getElementById('fristname')
+  const firstnameError = document.getElementById('firstname')
   const lastnameError = document.getElementById('lastname')
   const mailError = document.getElementById('email')
-  const firstnameErrorMsg = document.getElementById('error-fristname')
+  const firstnameErrorMsg = document.getElementById('error-firstname')
   const lastnameErrorMsg = document.getElementById('error-lastname')
   const mailErrorMsg = document.getElementById('error-mail-adress')
 
