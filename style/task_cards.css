@@ -147,7 +147,7 @@
 }
 
 .progress-text {
-    font-size: 12px;
+    font-size: 16px;
     color: #000000;
 }
 
@@ -175,7 +175,7 @@
     justify-content: center;
     align-items: center;
     color: white;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 400;
     margin-left: -8px;
 }
