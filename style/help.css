@@ -1,7 +1,10 @@
 /* Layout */
-.help-content {
+.help-container {
     background-color: #F6F7F8;
     min-height: calc(100vh - 96px);
+    max-width: 1270px;
+    margin-left: 230px;
+    padding-top: 120px;
 }
 
 /* Header */

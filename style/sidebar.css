@@ -240,12 +240,17 @@ main {
     margin-left: var(--sidebar-width);
     margin-top: var(--header-height);
     padding: 80px; 
+    padding-left: 110px;
     box-sizing: border-box;
     width: calc(100% - var(--sidebar-width));
+    max-width: 1440px;
 }
 
 /* Responsive: Mobile (max-width: 850px) */
-
+/* .content-container{
+    padding-right: 180px;
+    padding-left: 1px;
+} */
 @media(max-width: 850px) {
 
     /* Sidebar */
