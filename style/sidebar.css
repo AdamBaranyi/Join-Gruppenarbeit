@@ -263,6 +263,10 @@ main {
         box-sizing: border-box;
     }
     
+    .content-limitation {
+        padding: 0;
+    }
+    
     .header-title {
         display: none; 
     }
