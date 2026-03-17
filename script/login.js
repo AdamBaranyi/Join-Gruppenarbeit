@@ -17,8 +17,8 @@ async function init() {
 
 /**
  * Handles the login form submission.
- * Validates inputs, fetches users from Firebase, checks credentials,
- * and redirects on success or shows error on failure.
+ * Validates email and password inputs dynamically, fetches users from Firebase,
+ * checks credentials, and redirects on success or shows specific error messages on failure.
  * 
  * @async
  * @param {Event} event - The form submission event.
@@ -30,8 +30,14 @@ async function handleLogin(event) {
   let email = document.getElementById("loginEmail").value.trim();
   let password = document.getElementById("loginPassword").value;
 
-  if (!email || !password) {
-    showLoginError();
+  if (!email && !password) {
+    showLoginError("Please enter your email and password.");
+    return;
+  } else if (!email) {
+    showLoginError("Please enter your email.");
+    return;
+  } else if (!password) {
+    showLoginError("Please enter your password.");
     return;
   }
 
@@ -58,33 +64,43 @@ async function handleLogin(event) {
       sessionStorage.setItem("current_user", JSON.stringify(loggedInUser));
       showSuccessMessage();
     } else {
-      showLoginError();
+      showLoginError("Check your email and password. Please try again.");
     }
 
   } catch (error) {
     console.error("Fehler beim Login:", error);
-    showLoginError();
+    showLoginError("An error occurred during login. Please try again.");
   }
 }
 
 /**
  * Visualizes the login error state by adding error styling to input fields
- * and displaying the error message text.
+ * and making the error message visible. If a message is provided, it updates the text dynamically.
+ * 
+ * @param {string} [msg] - The dynamic validation error message to display.
  */
-function showLoginError() {
+function showLoginError(msg) {
   document.getElementById('emailGroup').classList.add('input-error');
   document.getElementById('passwordGroup').classList.add('input-error');
-  document.getElementById('loginError').classList.remove('d-none');
+  
+  let errorElement = document.getElementById('loginError');
+  if (msg) {
+    errorElement.textContent = msg;
+  }
+  errorElement.style.visibility = 'visible';
 }
 
 /**
- * Clears the login error state by removing error styling from input fields
- * and hiding the error message text.
+ * Clears the login error state by removing error styling from input fields,
+ * hiding the error message, and resetting its text content.
  */
 function clearLoginError() {
   document.getElementById('emailGroup').classList.remove('input-error');
   document.getElementById('passwordGroup').classList.remove('input-error');
-  document.getElementById('loginError').classList.add('d-none');
+  
+  let errorElement = document.getElementById('loginError');
+  errorElement.style.visibility = 'hidden';
+  errorElement.textContent = "";
 }
 
 /**
