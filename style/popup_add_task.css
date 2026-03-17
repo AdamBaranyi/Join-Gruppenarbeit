@@ -237,7 +237,7 @@
   .clear-btn,
   .create-btn {
     height: 50px;
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 
@@ -248,9 +248,9 @@
   .priority-buttons button {
     width: 90px;
     height: 36px;
-    font-size: 14px;
+    font-size: 16px;
   }
   .popup-footer-container p {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
