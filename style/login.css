@@ -430,7 +430,7 @@ img.login-password-icon {
     .login-card {
         padding: 30px 16px;
         width: min(400px, 90%); 
-        margin-top: 80px; 
+        margin-top: 100px; 
         order: 1; 
     }
 
@@ -674,6 +674,44 @@ img.login-password-icon {
     @keyframes moveLogoMobile {
         0% { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; }
         100% { top: 20px; left: 20px; transform: translate(0, 0); width: 60px; }
+    }
+}
+
+/* 700px - 480px overlap */
+@media(max-width: 700px) and (min-width: 481px) {
+    .logo-anim, .no-anim .logo-anim {
+        width: 60px !important;
+    }
+    
+    .no-anim .logo-container {
+        top: 20px !important;
+        left: 20px !important;
+    }
+
+    .login-card {
+        margin-top: 130px !important;
+    }
+    
+    @keyframes moveLogoMobile {
+        0% { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100px; }
+        100% { top: 20px; left: 20px; transform: translate(0, 0); width: 60px; }
+    }
+}
+
+/* 1100px - 850px overlap */
+@media(max-width: 1100px) and (min-width: 851px) {
+    .no-anim .logo-container {
+        top: 30px !important;
+        left: 30px !important;
+    }
+    
+    .no-anim .logo-anim {
+        width: 80px !important;
+    }
+
+    @keyframes moveLogo {
+        0% { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 250px; }
+        100% { top: 30px; left: 30px; transform: translate(0, 0); width: 80px; }
     }
 }
 
