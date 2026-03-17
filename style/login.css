@@ -175,9 +175,10 @@ body {
 
 .login-error-msg {
     color: #FF8190;
-    font-size: 12px;
+    font-size: 16px;
     text-align: center;
-    min-height: 16px;
+    height: 20px;
+    visibility: hidden;
 }
 
 .input-group img, .password-toggle {
@@ -214,7 +215,7 @@ img.login-password-icon {
 .login-buttons {
     display: flex;
     gap: 20px;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 .login-buttons .btn-dark {
@@ -646,11 +647,6 @@ img.login-password-icon {
         font-size: 16px !important; 
         white-space: normal;
         color: #000;
-    }
-
-    /* Error Message */
-    .login-error-msg {
-        font-size: 16px !important;
     }
 
     /* Footer & Legal Links */
