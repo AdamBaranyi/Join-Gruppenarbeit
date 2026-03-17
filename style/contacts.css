@@ -7,7 +7,7 @@
 .main-content {
     display: flex;
     height: calc(100dvh - 96px);
-    width: calc(100dvw - 232px);
+    width: 1440px;
     margin-left: 232px; 
     margin-top: 96px;   
     background: var(--clolor-bg);

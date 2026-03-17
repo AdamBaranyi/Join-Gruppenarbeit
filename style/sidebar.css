@@ -132,8 +132,7 @@ main {
     height: var(--header-height);
     width: calc(100dvw - var(--sidebar-width));
     background-color: white;
-    padding-left: 116px;
-    padding-right: 50px;
+
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.04);
     z-index: 900;
     
@@ -143,8 +142,10 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 1440px;
+    max-width: calc(1440px - var(--sidebar-width));
     height: var(--header-height);
+    padding-left: 116px;
+    padding-right: 50px;
 }
 
 .header-title {
@@ -260,6 +261,10 @@ main {
         justify-content: space-between;
         width: 100%;
         box-sizing: border-box;
+    }
+    
+    .content-limitation {
+        padding: 0;
     }
     
     .header-title {

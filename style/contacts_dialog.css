@@ -384,6 +384,12 @@ button:hover {
 }
 
 @media (max-width: 900px) {
+    .img-and-form {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 850px) {
     dialog:open {
         flex-direction: column;
         width: 95%;
