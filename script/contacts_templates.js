@@ -76,8 +76,8 @@ function contactCard(contact) {
             <strong>Email:</strong> <span class="mail-style">${contact.email}</span>
             <strong>Phone Number:</strong> <span>${contact.phonenumber}</span>
             </div>
-            <div class="mobile-edit-container">
-                <img onclick='mobileEditMenu(${JSON.stringify(contact)}, event)' id="mobile-option-menu" class="mobile-edit-menu" src="../assets/imgs/Menu Contact options.png" alt="contact options menu">
+            <div class="mobile-edit-container" onclick='mobileEditMenu(${JSON.stringify(contact)}, event)'>
+                <img id="mobile-option-menu" class="mobile-edit-menu" src="../assets/imgs/Menu Contact options.png" alt="contact options menu">
                 <div class="display-none" id="mobile-menu"></div>
             </div>
         </div>
