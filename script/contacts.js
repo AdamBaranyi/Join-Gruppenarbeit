@@ -320,6 +320,10 @@ async function editContact(contactId, data) {
   closeModal();
 }
 
+/**
+ * Provides visual feedback for a successful contact edit on mobile devices.
+ * Changes the background color of the mobile option menu temporarily.
+ */
 function mobileSucessfulEdited() {
   if (window.innerWidth <= 850) {
     let mobileMenuBtn = document.getElementById("mobile-option-menu");

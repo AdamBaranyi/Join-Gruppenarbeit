@@ -1,11 +1,18 @@
 
 /**
  * Initializes the login page.
- * Currently serves as a placeholder for potential early data fetching.
+ * Checks if the logo animation has already been played in this browser 
+ * and applies the 'no-anim' class to skip it if necessary.
  * @async
  */
 async function init() {
-    // Optionally fetch users early if needed, but for now we fetch on login button click to ensure fresh data
+    let animationPlayed = localStorage.getItem('animationPlayed');
+    
+    if (animationPlayed) {
+        document.body.classList.add('no-anim');
+    } else {
+        localStorage.setItem('animationPlayed', 'true');
+    }
 }
 
 /**
