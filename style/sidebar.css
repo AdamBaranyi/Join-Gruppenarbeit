@@ -142,7 +142,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: calc(1440px - var(--sidebar-width));
+    max-width: 1440px;
     height: var(--header-height);
     padding-left: 116px;
     padding-right: 50px;

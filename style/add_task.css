@@ -13,7 +13,7 @@
 }
 
 .main-container {
-    width: 1440px;
+    width: calc(1440px + var(--sidebar-width));
     max-width: 100%;
     padding-left: 328px;
     padding-right: 80px;
@@ -510,13 +510,13 @@ input:focus, textarea:focus {
     position: fixed;
     bottom: 0;
     left: var(--sidebar-width);
-    width: 100%;
+    width: calc(100% - var(--sidebar-width));
     padding: 0 0 40px;
     z-index: 100;
 }
 
 .footer-container {
-    max-width: calc(1440px - var(--sidebar-width));
+    max-width: 1440px;
     padding-left: 96px;
     padding-right: 80px;
     display: flex;
