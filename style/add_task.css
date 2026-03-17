@@ -16,7 +16,7 @@
     width: 1440px;
     max-width: 100%;
     padding-left: 328px;
-    padding-right: 50px;
+    padding-right: 80px;
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -516,9 +516,9 @@ input:focus, textarea:focus {
 }
 
 .footer-container {
-    max-width: 1440px;
+    /* max-width: 1440px; */
     padding-left: 328px;
-    padding-right: 50px;
+    padding-right: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
