@@ -341,7 +341,7 @@
     /* Modal Profile & Initials */
     .profile-img {
         position: absolute;
-        top: 25%;
+        top: 38%;
     }
 
     .contact-initials {
@@ -430,10 +430,6 @@
         max-width: 420px;
     }
 
-    .profile-img {
-        position: absolute;
-        top: 38%;
-    }
     .contact-initials {
         position: relative;
         top: 0;
@@ -441,11 +437,15 @@
 
     .contact-initials-edit {
         position: absolute;
-        top: 45%;
+        top: 43%;
     }
 
     .check-icon {
         margin-left: 24%;
+    }
+
+    .profile-img {
+            top: 40%;
     }
 }
 
@@ -456,12 +456,23 @@
         }
 
         .profile-img {
-            top: 26%;
+            top: 32%;
         }
 
         .contact-initials-edit {
-            top: 34%;
+            top: 38%;
         }
 
+    }
+
+    @media (max-width: 500px) {
+
+        .profile-img {
+            top: 36%;
+        }
+
+        .contact-initials-edit {
+            top: 36%;
+        }
     }
 }
