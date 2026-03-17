@@ -73,7 +73,7 @@
 
 @media (max-width: 1080px) {
     .trigger{
-        font-size: 15px;
+        font-size: 16px;
     }
     .trigger.urgent.active {
         font-weight: 200;
@@ -317,7 +317,7 @@
     height: 60px;
   }
   .overlay-content p {
-    font-size: 15px;
+    font-size: 16px;
   }
   page-header h1{
         font-size: 26px;
