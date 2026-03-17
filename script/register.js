@@ -113,11 +113,13 @@ function validatePasswordConfirmation() {
  */
 function validatePrivacyPolicy() {
   if (!checkbox.checked) {
-    document.getElementById("error-privacy");
+    document.getElementById("error-privacy").innerText =
+      "* Please accept the privacy policy.";
     return false;
   }
   return true;
 }
+
 
 /**
  * Sets an error message for a specific field
@@ -155,6 +157,8 @@ function clearErrors() {
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
+
+
 
 /**
  * Adds a new user to the system
