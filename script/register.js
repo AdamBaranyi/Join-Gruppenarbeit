@@ -266,7 +266,6 @@ function handleUserSaveError(error) {
 }
 
 initInputs();
-
 /**
  * Initializes all input fields with event listeners
  */
@@ -283,10 +282,54 @@ function initInputs() {
     const type = group.dataset.type;
 
     if (input && icon) {
+      // Bestehende Event-Listener
       input.addEventListener("input", () => handleInput(input, icon, type));
       icon.addEventListener("click", () => handleIconClick(input, icon, type));
+      
+      // NEU: Fehler zurücksetzen bei Eingabe
+      input.addEventListener("input", () => clearFieldError(input));
     }
   });
+
+  // NEU: Speziell für Checkbox
+  if (checkbox) {
+    checkbox.addEventListener("change", () => {
+      document.getElementById("error-privacy").innerText = "";
+    });
+  }
+}
+
+/**
+ * Clears error for a specific input field
+ * @param {HTMLInputElement} input - The input field to clear error from
+ */
+function clearFieldError(input) {
+  // Entferne die error-Klasse
+  input.classList.remove("input-error");
+  
+  // Finde die zugehörige error-message
+  const fieldId = input.id;
+  const errorDiv = document.getElementById("error-" + fieldId);
+  
+  // Leere die error-message
+  if (errorDiv) {
+    errorDiv.innerText = "";
+  }
+}
+
+/**
+ * Sets an error message for a specific field
+ * @param {string} fieldId - The ID of the input field
+ * @param {string} message - The error message to display
+ */
+function setError(fieldId, message) {
+  /** @type {HTMLInputElement} */
+  let input = document.getElementById(fieldId);
+  /** @type {HTMLElement} */
+  let errorDiv = document.getElementById("error-" + fieldId);
+
+  if (input) input.classList.add("input-error");
+  if (errorDiv) errorDiv.innerText = message;
 }
 
 /**
