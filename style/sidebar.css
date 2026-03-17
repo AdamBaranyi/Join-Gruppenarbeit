@@ -130,16 +130,21 @@ main {
     left: var(--sidebar-width);
     right: 0;
     height: var(--header-height);
+    width: calc(100dvw - var(--sidebar-width));
     background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     padding-left: 116px;
     padding-right: 50px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.04);
     z-index: 900;
-    max-width: 1440px;
     
+}
+
+.content-limitation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1440px;
+    height: var(--header-height);
 }
 
 .header-title {
