@@ -120,7 +120,6 @@ function validatePrivacyPolicy() {
   return true;
 }
 
-
 /**
  * Sets an error message for a specific field
  * @param {string} fieldId - The ID of the input field
@@ -157,8 +156,6 @@ function clearErrors() {
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
-
-
 
 /**
  * Adds a new user to the system
@@ -213,7 +210,6 @@ async function generateUserId() {
   return `u${nextIdNumber}`;
 }
 
-
 /**
  * Saves user data to the database
  * @async
@@ -233,7 +229,6 @@ async function saveUserToDatabase(userData, userId) {
   if (!response.ok) {
     throw new Error("Registration failed");
   }
-
   return response;
 }
 
