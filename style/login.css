@@ -533,9 +533,8 @@ img.login-password-icon {
 
     /* Layout */
     html, body {
-        overflow-x: hidden;
         width: 100%;
-        padding-top: 0 !important;
+        padding-top: 0 ;
     }
 
     .login-container {

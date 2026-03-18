@@ -68,7 +68,6 @@
     .tasks-container {
         min-height: 130px;
         flex-direction: row;
-        overflow-x: auto;
         padding-bottom: 20px;
     }
     

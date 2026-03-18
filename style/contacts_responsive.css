@@ -80,7 +80,6 @@
         position: relative;
         margin-left: 0;
         box-sizing: border-box;
-        overflow: hidden;
     }
 
     /* Add Contact Button */
@@ -123,7 +122,6 @@
         left: 0;
         padding-left: 0;
         box-sizing: border-box;
-        overflow-x: hidden;
     }
 
     .contact-row {
@@ -146,7 +144,7 @@
         padding: 30px 15px;
         box-sizing: border-box;
         overflow-y: auto;
-        overflow-x: hidden;
+
     }
 
     .main-content.show-contact-card .contact-list-style {
@@ -303,7 +301,6 @@
         justify-content: center;
         align-items: flex-start;
         height: 50%;
-        overflow: hidden;
 
     }
 
@@ -311,7 +308,6 @@
         justify-content: center;
         align-items: flex-start;;
         height: fit-content;
-        overflow: hidden;
     }
 
     .img-and-form {
@@ -416,7 +412,6 @@
         align-items: flex-start;
         justify-content: center;
         height: 50%;
-        overflow: hidden;
         width: 100%;
         
     }
@@ -472,7 +467,7 @@
         }
 
         .contact-initials-edit {
-            top: 36%;
+            top: 30%;
         }
     }
 }
