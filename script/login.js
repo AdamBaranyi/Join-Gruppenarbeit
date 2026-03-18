@@ -8,9 +8,7 @@
 async function init() {
     let animationPlayed = localStorage.getItem('animationPlayed');
     
-    if (animationPlayed) {
-        document.body.classList.add('no-anim');
-    } else {
+    if (!animationPlayed) {
         localStorage.setItem('animationPlayed', 'true');
     }
 }

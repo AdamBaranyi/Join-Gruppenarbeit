@@ -14,6 +14,11 @@
   </head>
 
   <body onload="init()">
+    <script>
+      if (localStorage.getItem('animationPlayed')) {
+        document.body.classList.add('no-anim');
+      }
+    </script>
     <div class="page-wrapper">
     <div class="login-container">
       <div class="logo-container">
