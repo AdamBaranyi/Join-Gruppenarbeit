@@ -170,11 +170,11 @@ body {
 }
 
 .input-group.input-error input {
-    border-color: #FF8190;
+    border-color: var(--color-error);
 }
 
 .login-error-msg {
-    color: #FF8190;
+    color: var(--color-error);
     font-size: 16px;
     text-align: center;
     height: 20px;
