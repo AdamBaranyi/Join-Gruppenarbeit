@@ -154,7 +154,7 @@ function clearErrors() {
  * @returns {boolean} True if email is valid, false otherwise
  */
 function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  return /^[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)*\.[a-zA-Z]{2,}$/.test(email);
 }
 
 /**

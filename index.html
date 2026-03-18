@@ -44,7 +44,7 @@
 
         <form onsubmit="handleLogin(event)" novalidate>
           <div class="input-group" id="emailGroup">
-            <input type="email" id="loginEmail" placeholder="Email" />
+            <input type="email" id="loginEmail" placeholder="Email" autocomplete="email"/>
             <img src="./assets/imgs/mail.svg" alt="Email" />
           </div>
 
@@ -53,6 +53,7 @@
               type="password"
               id="loginPassword"
               placeholder="Password"
+              autocomplete="current-password"
               oninput="handleLoginPasswordInput()"
             />
             <img 

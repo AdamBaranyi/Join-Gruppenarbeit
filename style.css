@@ -32,7 +32,7 @@
   --color-bg-hover: #F0F0F0;
   --color-placeholder-primary: #666;
   --color-white: #ffffff;
-  --color-error: #FF8897;
+  --color-error: rgb(230, 0, 38);
   --color-success: #7ae229; /* Green for "Done" or success */
   --color-btn-medium:#ffa800;
   --color-btn-urgent:#ff3d00;
