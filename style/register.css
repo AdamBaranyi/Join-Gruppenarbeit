@@ -41,7 +41,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 6px;
 }
 
 .card {
@@ -275,7 +275,7 @@ footer a:hover {
 
 @media (max-width: 480px) {
   .card {
-    padding: 30px 20px;
+    padding: 30px 10px;
     border-radius: 20px;
   }
 
@@ -284,7 +284,7 @@ footer a:hover {
   }
 
   .back-arrow {
-    left: -5px;
+    left: 2px;
   }
 
   button {
