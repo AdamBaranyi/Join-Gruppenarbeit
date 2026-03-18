@@ -4,7 +4,7 @@
     background-color: #F6F7F8;
     height: calc(100vh - 96px);
     overflow-y: auto;
-    padding: 110px 30px 127px 114px !important;
+    padding: 110px 30px 127px 114px ;
     max-width: 1440px;
 }
 
@@ -262,18 +262,28 @@
     color: #29ABE2;
 }
 
+@media (max-width: 1400px) {
+    .summary-content {
+        padding-left: 30px;
+    }
+
+    .metrics-container {
+        margin-right: 0;
+    }
+}
+
 /* Greeting Desktop Override */
 
 @media(min-width: 851px) {
     .greeting-container {
-        display: flex !important;
-        opacity: 1 !important;
+        display: flex ;
+        opacity: 1 ;
     }
 }
 
 /* Responsive: Tablet (max-width: 1250px) */
 
-@media(max-width: 1250px) {
+@media(max-width: 1260px) {
 
     /* Header */
     .summary-header-container {
@@ -291,7 +301,7 @@
 
     /* Greeting */
     .greeting-container {
-        margin: 30px 0 0 0;
+        margin: 0;
         align-items: center;
         text-align: center;
         order: -1;
@@ -302,6 +312,13 @@
         width: 100%;
         max-width: 560px;
         margin-right: 0;
+    }
+}
+
+@media (max-width: 1150px) {
+
+    .summary-content {
+        padding: 0;
     }
 }
 
@@ -362,8 +379,8 @@
 
     /* Layout */
     .summary-content {
-        padding-top: 10px !important;
-        padding-bottom: 10px !important;
+        padding-top: 10px;
+        padding-bottom: 10px; 
     }
 
     /* Header */
@@ -418,7 +435,7 @@
 
     /* Layout */
     .summary-content {
-        padding: 10px 16px 85px 16px !important;
+        padding: 10px 16px 85px 16px ;
         display: block;
         height: auto;
         min-height: 0;
@@ -433,7 +450,7 @@
 
     /* Splash Screen */
     .summary-content.splash-active {
-        padding: 0 !important;
+        padding: 0 ;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -448,7 +465,7 @@
     }
 
     .splash-hidden {
-        display: none !important;
+        display: none ;
     }
 
     /* Dashboard Visibility */
@@ -461,7 +478,7 @@
 
     .metrics-container.dashboard-ready,
     .summary-header-container.dashboard-ready {
-        display: flex !important;
+        display: flex ;
     }
 
     /* Greeting */
@@ -571,7 +588,7 @@
     }
 
     .metric-label {
-         font-size: 16px !important; 
+         font-size: 16px ; 
          line-height: 110%;
          text-align: center;
          white-space: normal; 
@@ -611,7 +628,7 @@
     }
 
     .urgent-right span {
-        font-size: 16px !important;
+        font-size: 16px ;
     }
 
     /* Bottom Row Cards */
