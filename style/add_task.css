@@ -103,6 +103,18 @@ input:focus, textarea:focus {
     border-color: var(--color-secondary);
 }
 
+#due-date {
+  cursor: pointer;
+}
+
+#due-date::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+
+#due-date:hover {
+  border-color: var(--color-secondary);
+}
+
 .priority-buttons {
     display: flex;
     gap: 10px;
