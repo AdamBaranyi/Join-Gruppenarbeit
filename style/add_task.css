@@ -70,7 +70,7 @@ label {
 }
 
 .required {
-    color: var( --color-error);
+    color: var(--color-error);
 }
 
 input, textarea {
@@ -78,7 +78,7 @@ input, textarea {
     padding: 12px 16px;
     border-radius: 10px;
     border: 1px solid #d1d1d1;
-    background: var(--color-bg);
+    background: var(--color-white);
     font-size: 20px;
     width: 100%;
     transition: border-color 0.2s;
@@ -112,9 +112,9 @@ input:focus, textarea:focus {
     flex: 1;
     height: 56px;
     border-radius: 10px;
-    border: 1px solid #d1d1d1;
-    background: var(--color-bg);
-    border: none;
+    border: 0.3px solid #d1d1d1;
+    background: var(--color-white);
+    /* border: none; */
     cursor: pointer;
     font-size: 20px;
     font-weight: 400;
@@ -153,12 +153,12 @@ input:focus, textarea:focus {
 
 .trigger:not(.active):hover {
   transform: translateY(-3px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
 }
 
 .trigger.active {
   transform: none;
-  box-shadow: 0 8px 0px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.35);
 }
 
 .form-group label {
@@ -182,7 +182,7 @@ input:focus, textarea:focus {
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
-    background: var(--color-bg);
+    background: var(--color-white);
     cursor: pointer;
     transition: border-color 0.2s;
 }
@@ -212,7 +212,7 @@ input:focus, textarea:focus {
     position: relative;
     width: 100%;
     border: 1px solid #d1d1d1;
-   border: none;
+    border: none;
     border-radius: 10px;
     max-height: 240px;
     overflow-y: auto;
@@ -232,6 +232,7 @@ input:focus, textarea:focus {
     padding: 10px 16px;
     cursor: pointer;
     transition: background 0.2s;
+    border-radius: 10px;
 }
 
 .contact-item:last-child, .category-item:last-child {
@@ -305,6 +306,22 @@ input:focus, textarea:focus {
     flex-wrap: wrap; 
 }
 
+.contact-item.selected {
+  background-color: var(--color-primary-contact);
+  color: var(--color-white); 
+  margin: 1px;
+  border-radius: 10px;
+}
+
+.contact-item.selected input[type="checkbox"]:checked {
+    background-color: var(--color-primary);
+    border-color: var(--color-white);
+}
+
+.contact-item.selected:hover {
+    background-color: var(--color-secondary-contact);
+}
+
 .user-circle {
     width: 36px;
     height: 36px;
@@ -333,7 +350,7 @@ input:focus, textarea:focus {
 .subtask-input-wrapper input {
     width: 100%;
     padding-right: 100px;
-    color: var(--color-text-secondary);
+    color: var(--color-text);
 }
 
 .subtask-input-actions {
@@ -473,6 +490,23 @@ input:focus, textarea:focus {
     cursor: pointer;
 }
 
+#subtaskList {
+  max-height: 160px; 
+  overflow-y: auto;
+}
+#subtaskList::-webkit-scrollbar {
+  width: 6px;
+}
+
+#subtaskList::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.subtask-item.error {
+  border-bottom: 1px solid var(--color-error);
+}
+
 .overlay {
   position: fixed;
   top: 0;
@@ -511,7 +545,7 @@ input:focus, textarea:focus {
     bottom: 0;
     left: var(--sidebar-width);
     width: calc(100% - var(--sidebar-width));
-    padding: 0 0 40px;
+    padding: 0 0 300px;
     z-index: 100;
 }
 
@@ -629,6 +663,11 @@ input:focus, textarea:focus {
   border: 2px solid var(--color-white);
 }
 
+.user-circle.more {
+  background-color: #e0e0e0;
+  color: #333;
+  font-weight: 600;
+}
 
 
 

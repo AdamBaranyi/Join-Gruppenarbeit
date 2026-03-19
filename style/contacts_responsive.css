@@ -1,17 +1,12 @@
 @media (max-width: 1400px) {
 
-
-
-    .main-content {
-        width: calc(100% - 232px);
-        justify-content: flex-start;
+    dialog:open {
+        left: 5%;
     }
 
     .slogan-and-card-container {
-        padding: 40px 20px;
-        flex: 1;
-        box-sizing: border-box;
-        overflow-y: auto;
+        padding: 0;
+        width: 100%;
     }
 
     .slogan {
@@ -40,35 +35,22 @@
 
 @media (max-width: 1250px) {
     .contact-list-style {
-        width: 350px;
-    }
-
-    .slogan-and-card-container {
-        padding: 20px;
+        width: 250px;
     }
 
     .slogan h2 {
         font-size: 32px;
     }
-
-    .slogan-span {
-        font-size: 16px;
-    }
-
-    .slogan img {
-        height: 30px;
-    }
-
-    .contact-header {
+    .contact-header{
         gap: 5px;
     }
 
-    #contact-card {
-        margin-top: 10px;
+    #contact-card.show {
+        padding: 10px;
     }
 
     .contact-name {
-        font-size: 24px;
+        font-size: 26px;
     }
 }
 
@@ -77,23 +59,10 @@
 
     .slogan {
         padding: 0;
-        gap: 15px;
-    }
-
-    .slogan h2 {
-        font-size: 32px;
-    }
-
-    .slogan-span {
-        font-size: 18px;
     }
 
     .contact-name {
         font-size: 22px;
-    }
-
-    #contact-card {
-        margin-top: 20px;
     }
 
     #contact-card.show {
@@ -221,7 +190,7 @@
         cursor: pointer;
         width: 32px;
         height: 32px;
-        top: 5%;
+        top: 0;
         right: 5%;
     }
 
@@ -235,7 +204,7 @@
         border-radius: 56%;
         height: 50px;
         width: 50px;
-        top: 65%;
+        top: 100%;
         right: 8%;
         z-index: 1000;
     }
@@ -279,37 +248,33 @@
 
     /* Dialog Modal */
     dialog:open {
-        position: fixed;
-        width: 95%;
+        position: relative;
+        width: 100%;
         max-width: 396px;
-        min-height: unset;
-        max-height: calc(100dvh - 96px - 80px - 20px);
-        top: 96px;
-        margin: 10px auto;
+        min-height: 760px;
+        top: 10%;
+        left: 5%;
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
-        overflow-y: auto;
-    }
-
-    dialog::backdrop {
-        background: rgba(0, 0, 0, 0.3);
     }
 
     dialog h3 {
         font-family: Inter;
         font-weight: 700;
-        font-size: 28px;
-        line-height: 100%;
-        margin: 0;
+        font-style: Bold;
+        font-size: 47px;
+        line-height: 120%;
+        letter-spacing: 0%;
     }
 
     dialog span {
-        display: none;
-    }
-
-    .vector-horizontel {
-        display: none;
+        font-family: Inter;
+        font-weight: 400;
+        font-style: Regular;
+        font-size: 20px;
+        line-height: 120%;
+        letter-spacing: 0%;
     }
 
     .check-btn:hover {
@@ -335,9 +300,8 @@
     .left-side-modal  {
         justify-content: center;
         align-items: flex-start;
-        height: auto;
-        min-height: unset;
-        padding: 12px 24px;
+        height: 50%;
+
     }
 
     .right-side-modal {
@@ -354,8 +318,7 @@
         flex-direction: column;
         margin-left: 0;
         width: 100%;
-        padding: 4px 16px;
-        gap: 0;
+        
     }
 
     .contact-name {
@@ -373,7 +336,8 @@
 
     /* Modal Profile & Initials */
     .profile-img {
-        display: none;
+        position: absolute;
+        top: 38%;
     }
 
     .contact-initials {
@@ -382,37 +346,24 @@
     }
 
     .contact-initials-edit {
-        display: none;
+        position: absolute;
+        top: 44%;
     }
 
     form {
-        padding-top: 0;
-        padding-bottom: 4px;
+        padding-top: 70px;
+        padding-bottom: 30px;
         width: 100%;
-        gap: 4px;
     }
 
-    .input-group input {
-        height: 36px;
+     .input-group input {
+        max-width: 320px;
     }
 
     .btn-container {
         display: flex;
-        flex-direction: row;
         justify-content: center;
         align-items: center;
-        width: 100%;
-        gap: 8px;
-        margin-top: 4px;
-    }
-
-    .delete-btn-modal,
-    .check-btn,
-    .create-btn,
-    .clear-btn {
-        width: 100%;
-        height: 36px;
-        font-size: 14px;
     }
 
     .logo-white {
@@ -452,37 +403,42 @@
 /* Small Mobile Adjustments (Max Width: 550px) */
 @media (max-width: 600px) {
     dialog:open {
-        height: auto;
-        max-height: calc(100dvh - 96px - 80px - 20px);
+        height: 90%;
+        left: 0;
+    }
+
+    .slogan-and-card-container {
+        padding: 5px;
     }
 
     .left-side-modal  {
         justify-content: center;
         align-items: flex-start;
-        height: auto;
-        min-height: unset;
+        justify-content: center;
+        height: 50%;
         width: 100%;
-        padding: 12px 20px;
+        
     }
 
     .img-and-form {
-        padding: 8px;
+        padding: 0;
     }
 
     .contact-header {
         gap: 0;
-        max-width: 100%;
+        max-width: 420px;
     }
 
     .contact-initials {
         position: relative;
         top: 0;
+        width: 100px;
+        height: 100px;
     }
 
     .contact-initials-edit {
-        position: relative;
-        top: auto;
-        margin: 0 auto;
+        position: absolute;
+        top: 43%;
     }
 
     .check-icon {
@@ -490,24 +446,38 @@
     }
 
     .profile-img {
-        position: relative;
-        top: auto;
-        margin: 0 auto;
+            top: 38%;
     }
 }
 
-@media (max-height: 1080px) and (max-width: 850px) {
-    dialog:open {
-        max-height: calc(100dvh - 96px - 80px - 20px);
+@media (max-height: 1080px) {
+    @media (max-width: 850px) {
+        dialog:open {
+            max-height: 40%;
+        }
+
+        .profile-img {
+            top: 32%;
+        }
+
+        .contact-initials-edit {
+            top: 38%;
+        }
+
+        .mobile-edit-container {
+            top: 70%;
+        }
+
     }
 
-    .profile-img {
-        position: relative;
-        top: auto;
-    }
+    @media (max-width: 500px) {
 
-    .contact-initials-edit {
-        position: relative;
-        top: auto;
+        .profile-img {
+            top: 33%;
+        }
+
+        .contact-initials-edit {
+            top: 30%;
+        }
     }
 }

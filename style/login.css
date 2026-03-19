@@ -366,7 +366,7 @@ img.login-password-icon {
 
     /* Layout */
     body {
-        padding-top: 0 !important;
+        padding-top: 0;
         height: auto; 
         min-height: 100vh;
     }
@@ -457,9 +457,9 @@ img.login-password-icon {
     }
 
     .top-signup-link .btn-dark {
-        width: auto !important;
-        padding: 8px 16px !important;
-        font-size: 16px !important;
+        width: auto ;
+        padding: 8px 16px ;
+        font-size: 16px ;
         background-color: var(--color-primary);
         color: white;
         border-radius: 8px;
@@ -506,7 +506,7 @@ img.login-password-icon {
     }
     
     .legal-links a {
-        font-size: 16px !important;
+        font-size: 16px ;
         padding: 8px;
     }
 
@@ -579,14 +579,14 @@ img.login-password-icon {
 
     /* Form Inputs */
     .input-group {
-        width: 100% !important; 
+        width: 100%; 
         margin-bottom: 16px; 
         max-width: none;
     }
     
     .input-group input {
         padding: 10px 40px 10px 14px; 
-        font-size: 16px !important; 
+        font-size: 16px; 
         height: 44px;
         line-height: normal;
     }
@@ -604,7 +604,7 @@ img.login-password-icon {
 
     .checkbox-group label, 
     .checkbox-group span {
-        font-size: 16px !important;
+        font-size: 16px;
     }
 
     /* Buttons */
@@ -617,7 +617,7 @@ img.login-password-icon {
     .login-buttons .btn-light {
         padding: 0; 
         height: 44px; 
-        font-size: 16px !important; 
+        font-size: 16px; 
         min-height: unset; 
         display: flex;
         align-items: center;
@@ -626,7 +626,7 @@ img.login-password-icon {
 
     .btn-primary-small {
         padding: 8px 16px;
-        font-size: 16px !important;
+        font-size: 16px;
         height: auto;
     }
 
@@ -643,7 +643,7 @@ img.login-password-icon {
     }
     
     .top-signup-link span {
-        font-size: 16px !important; 
+        font-size: 16px ; 
         white-space: normal;
         color: #000;
     }
@@ -661,7 +661,7 @@ img.login-password-icon {
     }
     
     .legal-links a {
-        font-size: 16px !important;
+        font-size: 16px ;
         padding: 8px;
     }
 
@@ -675,16 +675,16 @@ img.login-password-icon {
 /* 700px - 480px overlap */
 @media(max-width: 700px) and (min-width: 481px) {
     .logo-anim, .no-anim .logo-anim {
-        width: 60px !important;
+        width: 60px;
     }
     
     .no-anim .logo-container {
-        top: 20px !important;
-        left: 20px !important;
+        top: 20px;
+        left: 20px;
     }
 
     .login-card {
-        margin-top: 130px !important;
+        margin-top: 130px;
     }
     
     @keyframes moveLogoMobile {
@@ -696,12 +696,12 @@ img.login-password-icon {
 /* 1100px - 850px overlap */
 @media(max-width: 1100px) and (min-width: 851px) {
     .no-anim .logo-container {
-        top: 30px !important;
-        left: 30px !important;
+        top: 30px;
+        left: 30px;
     }
     
     .no-anim .logo-anim {
-        width: 80px !important;
+        width: 80px;
     }
 
     @keyframes moveLogo {

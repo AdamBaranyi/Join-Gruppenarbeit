@@ -26,6 +26,8 @@
 :root {
   --color-bg: #f6f7f8;
   --color-primary: #2a3647; /* Dark Blue Sidebar */
+  --color-primary-contact: rgb(42, 54, 71); /* hel Blue */
+  --color-secondary-contact: rgb(9, 25, 49); /* Dark Blue */
   --color-secondary: #29abe2; /* Light Blue Accent */
   --color-text: #000000;
   --color-text-secondary: #a8a8a8;

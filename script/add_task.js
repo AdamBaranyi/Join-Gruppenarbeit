@@ -15,6 +15,12 @@ let selectedContacts = [];
  * @listens document#DOMContentLoaded
  */
 document.addEventListener("DOMContentLoaded", function () {
+  const input = document.getElementById("due-date");
+  if (input) {
+    input.addEventListener("keydown", e => e.preventDefault());
+    input.min = new Date().toISOString().split("T")[0]; // verhindert Vergangenheit
+  }
+
   initializePriorityButtons();
   initializeFormValidation();
   initializeAssignedDropdown();
@@ -85,11 +91,28 @@ function validateTaskTitle() {
  * @returns {boolean} True if a date has been selected.
  */
 function validateTaskDate() {
-  const taskdate = document.getElementById("due-date");
-  if (!taskdate.value) {
+  const input = document.getElementById("due-date");
+  const value = input.value;
+
+  if (!value) {
     setError("due-date", "* This field is required");
     return false;
   }
+
+  const date = new Date(value);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  if (isNaN(date.getTime())) {
+    setError("due-date", "* Invalid date");
+    return false;
+  }
+
+  if (date < today) {
+    setError("due-date", "* Date cannot be in the past");
+    return false;
+  }
+
   return true;
 }
 

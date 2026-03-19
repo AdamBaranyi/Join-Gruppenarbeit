@@ -10,11 +10,11 @@
     justify-content: space-around;
     align-items: center;
     z-index: 1000;
-    display: none !important;
+    display: none ;
 }
 
 .mobile-only {
-    display: none !important;
+    display: none ;
 }
 
 .header-logo-mobile {
@@ -70,7 +70,7 @@
 
     /* Visibility */
     .mobile-sidebar {
-        display: flex !important;
+        display: flex;
     }
     
     .header-logo-mobile {
@@ -82,7 +82,7 @@
     }
 
     .mobile-only {
-        display: block !important;
+        display: block;
     }
 
     /* Dropdown */
