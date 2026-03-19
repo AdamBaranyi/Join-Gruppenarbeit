@@ -1,12 +1,17 @@
 @media (max-width: 1400px) {
 
-    dialog:open {
-        left: 5%;
+
+
+    .main-content {
+        width: calc(100% - 232px);
+        justify-content: flex-start;
     }
 
     .slogan-and-card-container {
-        padding: 0;
-        width: 100%;
+        padding: 40px 20px;
+        flex: 1;
+        box-sizing: border-box;
+        overflow-y: auto;
     }
 
     .slogan {
@@ -35,22 +40,35 @@
 
 @media (max-width: 1250px) {
     .contact-list-style {
-        width: 250px;
+        width: 350px;
+    }
+
+    .slogan-and-card-container {
+        padding: 20px;
     }
 
     .slogan h2 {
         font-size: 32px;
     }
-    .contact-header{
+
+    .slogan-span {
+        font-size: 16px;
+    }
+
+    .slogan img {
+        height: 30px;
+    }
+
+    .contact-header {
         gap: 5px;
     }
 
-    #contact-card.show {
-        padding: 10px;
+    #contact-card {
+        margin-top: 10px;
     }
 
     .contact-name {
-        font-size: 26px;
+        font-size: 24px;
     }
 }
 
@@ -59,10 +77,23 @@
 
     .slogan {
         padding: 0;
+        gap: 15px;
+    }
+
+    .slogan h2 {
+        font-size: 32px;
+    }
+
+    .slogan-span {
+        font-size: 18px;
     }
 
     .contact-name {
         font-size: 22px;
+    }
+
+    #contact-card {
+        margin-top: 20px;
     }
 
     #contact-card.show {
@@ -248,33 +279,37 @@
 
     /* Dialog Modal */
     dialog:open {
-        position: relative;
-        width: 100%;
+        position: fixed;
+        width: 95%;
         max-width: 396px;
-        min-height: 760px;
-        top: 10%;
-        left: 5%;
+        min-height: unset;
+        max-height: calc(100dvh - 96px - 80px - 20px);
+        top: 96px;
+        margin: 10px auto;
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
+        overflow-y: auto;
+    }
+
+    dialog::backdrop {
+        background: rgba(0, 0, 0, 0.3);
     }
 
     dialog h3 {
         font-family: Inter;
         font-weight: 700;
-        font-style: Bold;
-        font-size: 47px;
-        line-height: 120%;
-        letter-spacing: 0%;
+        font-size: 28px;
+        line-height: 100%;
+        margin: 0;
     }
 
     dialog span {
-        font-family: Inter;
-        font-weight: 400;
-        font-style: Regular;
-        font-size: 20px;
-        line-height: 120%;
-        letter-spacing: 0%;
+        display: none;
+    }
+
+    .vector-horizontel {
+        display: none;
     }
 
     .check-btn:hover {
@@ -300,8 +335,9 @@
     .left-side-modal  {
         justify-content: center;
         align-items: flex-start;
-        height: 50%;
-
+        height: auto;
+        min-height: unset;
+        padding: 12px 24px;
     }
 
     .right-side-modal {
@@ -318,7 +354,8 @@
         flex-direction: column;
         margin-left: 0;
         width: 100%;
-        
+        padding: 4px 16px;
+        gap: 0;
     }
 
     .contact-name {
@@ -336,8 +373,7 @@
 
     /* Modal Profile & Initials */
     .profile-img {
-        position: absolute;
-        top: 38%;
+        display: none;
     }
 
     .contact-initials {
@@ -346,24 +382,37 @@
     }
 
     .contact-initials-edit {
-        position: absolute;
-        top: 32%;
+        display: none;
     }
 
     form {
-        padding-top: 70px;
-        padding-bottom: 30px;
+        padding-top: 0;
+        padding-bottom: 4px;
         width: 100%;
+        gap: 4px;
     }
 
-     .input-group input {
-        max-width: 320px;
+    .input-group input {
+        height: 36px;
     }
 
     .btn-container {
         display: flex;
+        flex-direction: row;
         justify-content: center;
         align-items: center;
+        width: 100%;
+        gap: 8px;
+        margin-top: 4px;
+    }
+
+    .delete-btn-modal,
+    .check-btn,
+    .create-btn,
+    .clear-btn {
+        width: 100%;
+        height: 36px;
+        font-size: 14px;
     }
 
     .logo-white {
@@ -403,26 +452,26 @@
 /* Small Mobile Adjustments (Max Width: 550px) */
 @media (max-width: 600px) {
     dialog:open {
-        height: 90%;
-        left: 0;
+        height: auto;
+        max-height: calc(100dvh - 96px - 80px - 20px);
     }
 
     .left-side-modal  {
         justify-content: center;
         align-items: flex-start;
-        justify-content: center;
-        height: 50%;
+        height: auto;
+        min-height: unset;
         width: 100%;
-        
+        padding: 12px 20px;
     }
 
     .img-and-form {
-        padding: 0;
+        padding: 8px;
     }
 
     .contact-header {
         gap: 0;
-        max-width: 420px;
+        max-width: 100%;
     }
 
     .contact-initials {
@@ -431,8 +480,9 @@
     }
 
     .contact-initials-edit {
-        position: absolute;
-        top: 43%;
+        position: relative;
+        top: auto;
+        margin: 0 auto;
     }
 
     .check-icon {
@@ -440,34 +490,24 @@
     }
 
     .profile-img {
-            top: 40%;
+        position: relative;
+        top: auto;
+        margin: 0 auto;
     }
 }
 
-@media (max-height: 1080px) {
-    @media (max-width: 850px) {
-        dialog:open {
-            max-height: 40%;
-        }
-
-        .profile-img {
-            top: 32%;
-        }
-
-        .contact-initials-edit {
-            top: 38%;
-        }
-
+@media (max-height: 1080px) and (max-width: 850px) {
+    dialog:open {
+        max-height: calc(100dvh - 96px - 80px - 20px);
     }
 
-    @media (max-width: 500px) {
+    .profile-img {
+        position: relative;
+        top: auto;
+    }
 
-        .profile-img {
-            top: 36%;
-        }
-
-        .contact-initials-edit {
-            top: 30%;
-        }
+    .contact-initials-edit {
+        position: relative;
+        top: auto;
     }
 }

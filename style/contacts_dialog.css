@@ -1,17 +1,40 @@
 dialog {
-    position: relative;
-    top: 15%;
-    left: 15%;
+    padding: 0;
+    margin: auto;
+    border: none;
+    background-color: var(--color-white);
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.3);
 }
 
 dialog:open {
     display: flex;
     width: 90%;
     max-width: 1100px;
-    height: 550px;
-    min-height: 500px;
+    height: auto;
+    max-height: 90vh;
+    min-height: unset;
     border-radius: 30px;
     border: none;
+    background-color: var(--color-white);
+    overflow: hidden;
+    animation: slideInFromRight 0.4s ease-out forwards;
+}
+
+dialog.slide-out {
+    animation: slideOutToRight 0.4s ease-in forwards !important;
+}
+
+@keyframes slideInFromRight {
+    0% { transform: translateX(100vw); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes slideOutToRight {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100vw); }
 }
 
 .left-side-modal {
@@ -426,31 +449,49 @@ button:hover {
 
 @media (max-width: 480px) {
     dialog {
-        top: 5%;
-        left: 2.5%;
+        margin: auto;
     }
 
     dialog:open {
         width: 95%;
+        max-height: calc(100dvh - 96px - 80px - 20px);
+        min-height: unset;
+    }
+
+    .left-side-modal {
+        min-height: unset;
+        padding: 10px 16px;
     }
 
     .left-side-modal h3 {
-        font-size: 36px;
+        font-size: 24px;
     }
 
     .left-side-modal span {
-        font-size: 18px;
+        font-size: 12px;
     }
 
     .profile-img {
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
+        position: relative;
+        top: auto;
+        margin: 0 auto;
+    }
+
+    .contact-initials-edit {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+        position: relative;
+        top: auto;
+        margin: 0 auto;
     }
 
     .btn-container {
         flex-direction: column;
         width: 100%;
-        margin-top: 16px;
+        margin-top: 8px;
     }
 
     .delete-btn-modal,
@@ -458,7 +499,22 @@ button:hover {
         width: 100%;
     }
 
+    .create-btn {
+        width: 100%;
+    }
+
     .input-icon {
         top: 24px;
+    }
+
+    .img-and-form {
+        padding: 8px;
+        gap: 8px;
+    }
+
+    form {
+        gap: 6px;
+        padding-top: 8px;
+        padding-bottom: 8px;
     }
 }
