@@ -233,7 +233,10 @@
 }
 
 @media (max-width: 360px){
-  .clear-btn,
+  .clear-btn{
+    min-width: 100px;
+    height: 50px;
+  }
   .create-btn {
     height: 50px;
     font-size: 16px;
