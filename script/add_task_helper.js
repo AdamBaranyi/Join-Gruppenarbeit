@@ -91,7 +91,16 @@ function setupContactCheckbox(item, name, isYou, elements) {
   const checkbox = item.querySelector("input");
   if (isYou) selectedContacts.push(name);
 
-  checkbox.addEventListener("change", () => {
+    checkbox.addEventListener("change", () => {
+    updateSelectedContacts(name, checkbox.checked);
+    updateSelectedUsersDisplay(elements);
+    item.classList.toggle("selected", checkbox.checked);
+  });
+
+  item.addEventListener("click", (e) => {
+    if (e.target.tagName.toLowerCase() === "input") return;
+    checkbox.checked = !checkbox.checked;
+    item.classList.toggle("selected", checkbox.checked);
     updateSelectedContacts(name, checkbox.checked);
     updateSelectedUsersDisplay(elements);
   });
@@ -115,18 +124,28 @@ function updateSelectedContacts(name, isChecked) {
  * @param {Object} elements - Dropdown elements.
  */
 function updateSelectedUsersDisplay(elements) {
-  elements.selectedContainer.innerHTML = "";
-  selectedContacts.slice(0, 5).forEach((name) => {
-    const bgColor =
-      typeof getColorFromName === "function"
-        ? getColorFromName(name)
-        : "#FF7A00";
-    const circle = createUserCircle(name, bgColor);
-    elements.selectedContainer.appendChild(circle);
-  });
-  elements.placeholder.style.display =
-    selectedContacts.length === 0 ? "inline" : "none";
+  const c = elements.selectedContainer;
+  c.innerHTML = "";
+
+  const max = 6, total = selectedContacts.length;
+  const visible = total > max ? max - 1 : total;
+
+  selectedContacts.slice(0, visible).forEach(name =>
+    c.appendChild(createUserCircle(name,
+      typeof getColorFromName === "function" ? getColorFromName(name) : "#FF7A00"
+    ))
+  );
+
+  if (total > max) {
+    const more = document.createElement("div");
+    more.className = "user-circle more";
+    more.innerText = `+${total - visible}`;
+    c.appendChild(more);
+  }
+
+  elements.placeholder.style.display = total ? "none" : "inline";
 }
+
 
 /**
  * Creates a user circle (div) with initials and background colour.
@@ -158,7 +177,7 @@ function setupDropdownEventListeners(dropdown, elements) {
     if (!dropdown.contains(e.target)) {
       dropdown.classList.remove("open");
     }
-  });
+  }); 
 }
 
 // ---------- Category Dropdown Helper Functions ----------
@@ -353,13 +372,28 @@ function handleEditButtonClick(event, subtaskItem) {
   const editButton = event.target.closest(".edit-btn");
   if (!editButton) return;
 
-  const subtaskInput = subtaskItem.querySelector("input");
-  subtaskInput.disabled = !subtaskInput.disabled;
+  const input = subtaskItem.querySelector("input");
+
+  if (!input.disabled && !input.value.trim()) {
+    subtaskItem.classList.add("error");
+    input.focus();
+    return;
+  }
+
+  subtaskItem.classList.remove("error");
+  input.disabled = !input.disabled;
   subtaskItem.classList.toggle("editing");
   editButton.classList.toggle("editing");
 
-  if (!subtaskInput.disabled) {
-    subtaskInput.focus();
+  if (!input.disabled) {
+    input.focus();
+    input.addEventListener("input", () => {
+      if (input.value.trim()) {
+        subtaskItem.classList.remove("error"); 
+      } else {
+        subtaskItem.classList.add("error");
+      }
+    });
   }
 }
 
