@@ -545,12 +545,13 @@ input:focus, textarea:focus {
     left: 0;
     width: 100%;
     z-index: 100;
+    margin-bottom: 30px;
 }
 
 .footer-container {
     max-width: 1440px;
-    padding-left: 96px;
-    padding-right: 80px;
+    /* padding-left: 96px;
+    padding-right: 80px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -608,7 +609,7 @@ input:focus, textarea:focus {
   font-size: 21px;
   font-weight: 700;
   transition: background-color 0.2s;
-  width: 183px;
+  width: 186px;
   gap: 4px;
 }
 
