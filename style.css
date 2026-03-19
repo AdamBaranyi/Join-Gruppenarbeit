@@ -20,9 +20,6 @@
     src: url('assets/fonts/Inter_18pt-Bold.ttf') format('truetype');
 }
 
-
-
-
 :root {
   --color-bg: #f6f7f8;
   --color-primary: #2a3647; /* Dark Blue Sidebar */
@@ -41,8 +38,6 @@
   --color-contact-iocn1:#1FD7C1;
   --color-contact-iocn2:#9747FF;
   --color-contact-iocn3:#0038FF;
-  
-
   --font-primary: "Inter", sans-serif;
 }
 
