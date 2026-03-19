@@ -541,10 +541,9 @@ input:focus, textarea:focus {
 }
 
 .footer-section {
-    position: fixed;
-    bottom: 0;
-    left: var(--sidebar-width);
-    width: calc(100% - var(--sidebar-width));
+    position: relative;
+    left: 0;
+    width: 100%;
     padding: 0 0 300px;
     z-index: 100;
 }
