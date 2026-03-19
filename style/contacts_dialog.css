@@ -442,10 +442,6 @@ button:hover {
         font-size: 18px;
     }
 
-    .profile-img {
-        width: 80px;
-        height: 80px;
-    }
 
     .btn-container {
         flex-direction: column;

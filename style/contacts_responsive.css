@@ -347,7 +347,7 @@
 
     .contact-initials-edit {
         position: absolute;
-        top: 32%;
+        top: 44%;
     }
 
     form {
@@ -440,7 +440,7 @@
     }
 
     .profile-img {
-            top: 40%;
+            top: 38%;
     }
 }
 
@@ -463,7 +463,7 @@
     @media (max-width: 500px) {
 
         .profile-img {
-            top: 36%;
+            top: 33%;
         }
 
         .contact-initials-edit {

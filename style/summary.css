@@ -558,7 +558,7 @@
         flex-direction: row;
         align-items: center;
         text-align: left;
-        padding: 12px 10px;
+        padding: 22px 10px;
         min-width: 120px;
         min-height: 80px;
     }
@@ -606,7 +606,7 @@
     .urgent-card {
         flex-direction: row; 
         width: 100%;
-        padding: 10px 15px;
+        padding: 14px 15px;
         flex-wrap: nowrap;
         gap: 10px;
         justify-content: space-between;
@@ -634,7 +634,7 @@
 
     /* Bottom Row Cards */
     .small-cards .metric-card {
-        padding: 5px 2px;
+        padding: 15px 8px;
         min-height: 80px;
         height: auto;
         justify-content: center;
