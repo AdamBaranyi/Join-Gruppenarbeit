@@ -10,7 +10,7 @@ async function includeHTML() {
         const element = includeElements[i];
         let file = element.getAttribute("w3-include-html");
         
-        // Dynamic sidebar loading (skip mobile_sidebar which should always load as-is)
+        // Dynamic sidebar loading based on login status
         if (!file.includes('mobile_sidebar.html') && 
             (file.includes('sidebar_guest.html') || file.includes('sidebar.html'))) {
             let user = sessionStorage.getItem('current_user');
@@ -18,6 +18,14 @@ async function includeHTML() {
                 file = '../assets/templates/sidebar.html';
             } else {
                 file = '../assets/templates/sidebar_guest.html';
+            }
+        }
+
+        // Dynamic mobile sidebar loading based on login status
+        if (file.includes('mobile_sidebar.html')) {
+            let user = sessionStorage.getItem('current_user');
+            if (!user) {
+                file = file.replace('mobile_sidebar.html', 'mobile_sidebar_guest.html');
             }
         }
 
