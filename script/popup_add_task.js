@@ -35,6 +35,13 @@ async function openAddTaskPopup() {
  * Also adds an event listener for handling form submission.
  */
 function initializePopupComponents() {
+  // Prevent manual date input and set minimum date
+  const dateInput = document.getElementById("due-date");
+  if (dateInput) {
+    dateInput.addEventListener("keydown", e => e.preventDefault());
+    dateInput.min = new Date().toISOString().split("T")[0];
+  }
+
   if (typeof initializePriorityButtons === "function") {
     initializePriorityButtons();
   }
