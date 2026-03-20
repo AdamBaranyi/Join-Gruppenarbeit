@@ -173,7 +173,6 @@ function isValidEmail(email) {
  */
 async function collectUserFormData() {
   const userId =  await generateUserId();
-  console.log(userId);
   let newUser = {
     id: userId,
     name: username.value.trim(),
@@ -218,7 +217,6 @@ async function generateUserId() {
  * @throws {Error} If registration fails
  */
 async function saveUserToDatabase(userData, userId) {
-  console.log(userData);
   const response = await fetch(`${BASE_URL}/users/${userId}.json`, 
     {
     method: "PUT",

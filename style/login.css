@@ -541,16 +541,18 @@ img.login-password-icon {
         height: auto;
         min-height: 100vh;
         justify-content: center; 
-        padding-top: 100px; 
-        padding-bottom: 20px;
+        padding-top: 112px; 
+        padding-bottom: 0px;
         display: flex;
         flex-direction: column;
     }
 
     /* Logo */
     .no-anim .logo-container {
-         top: 20px;
-         left: 20px;
+         /* top: 20px;
+         left: 20px; */
+         top: 12px;
+         left: 12px;
          transform: scale(0.85); 
          position: fixed; 
     }
@@ -635,8 +637,10 @@ img.login-password-icon {
         width: 100%;
         flex-wrap: wrap; 
         white-space: normal;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        /* margin-top: 20px;
+        margin-bottom: 20px; */
+        margin-top: 10px;
+        margin-bottom: 0px;
         gap: 8px;
         justify-content: center;
         text-align: center;
@@ -652,8 +656,8 @@ img.login-password-icon {
     .legal-links {
         position: relative; 
         bottom: auto;
-        margin-top: 30px;
-        padding-bottom: 40px;
+        margin-top: 0px;
+        padding-bottom: 0px;
         gap: 24px; 
         flex-direction: row; 
         align-items: center;
@@ -716,8 +720,9 @@ img.login-password-icon {
 
     /* Login Card */
     .login-card {
-        margin-top: 20px; 
-        padding: 20px 16px;
+        /* margin-top: 20px;  */
+        /* padding: 20px 16px; */
+            padding: 0px 16px 16px;
     }
 
     .separator-blue {

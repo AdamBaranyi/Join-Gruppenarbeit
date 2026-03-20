@@ -142,7 +142,6 @@
     align-items: center;
     padding: 0 24px;
     z-index: 100;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
   }
   .popup-page-header h1 {
     font-size: 48px;
@@ -151,7 +150,8 @@
   .popup-main-container {
     flex: 1;
     overflow-y: auto;
-    padding: 130px 24px 140px 24px;
+    /* padding: 130px 24px 140px 24px; */
+    padding: 106px 24px 106px 24px;
   }
   .form-grid {
     grid-template-columns: 1fr;
@@ -233,7 +233,10 @@
 }
 
 @media (max-width: 360px){
-  .clear-btn,
+  .clear-btn{
+    min-width: 100px;
+    height: 50px;
+  }
   .create-btn {
     height: 50px;
     font-size: 16px;

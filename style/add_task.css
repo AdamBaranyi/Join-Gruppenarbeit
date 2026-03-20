@@ -103,6 +103,18 @@ input:focus, textarea:focus {
     border-color: var(--color-secondary);
 }
 
+#due-date {
+  cursor: pointer;
+}
+
+#due-date::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+
+#due-date:hover {
+  border-color: var(--color-secondary);
+}
+
 .priority-buttons {
     display: flex;
     gap: 10px;
@@ -541,18 +553,17 @@ input:focus, textarea:focus {
 }
 
 .footer-section {
-    position: fixed;
-    bottom: 0;
-    left: var(--sidebar-width);
-    width: calc(100% - var(--sidebar-width));
-    padding: 0 0 300px;
+    position: relative;
+    left: 0;
+    width: 100%;
     z-index: 100;
+    margin-bottom: 30px;
 }
 
 .footer-container {
     max-width: 1440px;
-    padding-left: 96px;
-    padding-right: 80px;
+    /* padding-left: 96px;
+    padding-right: 80px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -610,7 +621,7 @@ input:focus, textarea:focus {
   font-size: 21px;
   font-weight: 700;
   transition: background-color 0.2s;
-  width: 183px;
+  width: 186px;
   gap: 4px;
 }
 

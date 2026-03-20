@@ -225,7 +225,7 @@
         display: flex;
         flex-direction: column;
         cursor: pointer;
-        top: 70%;
+        top: 100%;
         right: 10%;
         background-color: white;
         width: 116px;
@@ -478,6 +478,10 @@
 
         .contact-initials-edit {
             top: 30%;
+        }
+
+        .mobile-menu {
+            top: 70%;
         }
     }
 }
