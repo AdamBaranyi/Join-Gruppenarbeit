@@ -549,8 +549,10 @@ img.login-password-icon {
 
     /* Logo */
     .no-anim .logo-container {
-         top: 20px;
-         left: 20px;
+         /* top: 20px;
+         left: 20px; */
+         top: 12px;
+         left: 12px;
          transform: scale(0.85); 
          position: fixed; 
     }
@@ -635,8 +637,10 @@ img.login-password-icon {
         width: 100%;
         flex-wrap: wrap; 
         white-space: normal;
-        margin-top: 5px;
-        margin-bottom: 5px;
+        /* margin-top: 20px;
+        margin-bottom: 20px; */
+        margin-top: 10px;
+        margin-bottom: 0px;
         gap: 8px;
         justify-content: center;
         text-align: center;
@@ -720,9 +724,12 @@ img.login-password-icon {
             padding: 10px 6px;
         }
 
-        .separator-blue {
-            margin-bottom: 20px;
-        }
+    /* Login Card */
+    .login-card {
+        /* margin-top: 20px;  */
+        /* padding: 20px 16px; */
+            padding: 0px 16px 16px;
+    }
 
         .login-card h1 {
             font-size: 32px;

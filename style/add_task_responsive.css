@@ -84,9 +84,10 @@
 
 @media (max-width: 1040px) {
     .page-header {
-        position: fixed;
+        /* position: fixed;
         top: 96px; 
-        left: 0;
+        left: 0; */
+        margin-top: 90px;
         width: 100%;
         height: 120px;
         background: var(--color-bg);
@@ -108,8 +109,8 @@
     .main-container {
         padding-left: 340px;
         padding-right: 100px;
-        margin-top:230px;
-        padding-bottom: 164px;
+        /* margin-top:230px; */
+        padding-bottom: 100px;
     } 
 
     .trigger{
@@ -134,17 +135,14 @@
     }
 }
 
-@media (max-width: 965px) {
-     
-    .button-group {
-        margin-left: 0;
-        width: 100%;
-        justify-content: flex-end;
-    }
-      .form-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        padding-right: 16px;
+@media (max-width: 990px){
+    
+    .footer-container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+
     }
 }
 
@@ -161,7 +159,7 @@
         bottom: 0;
         width: 100%;
         left: 0;
-        padding-bottom: 60px;
+        padding-bottom: 2px;
     }
 
     .footer-container {
@@ -179,9 +177,9 @@
     }
     
   .page-header {
-        position: fixed;
+        /* position: fixed;
         top: 96px; 
-        left: 0;
+        left: 0; */
         width: 100%;
         height: 120px;
         background: var(--color-bg);
@@ -207,7 +205,7 @@
     }
       .footer-section{
         background: var(--color-bg);
-        padding-top: 26px;
+        padding-top: 6px;
     }
 }
 
@@ -255,9 +253,10 @@
 
 @media (max-width: 405px) {
     .page-header {
-        position: fixed;
+        /* position: fixed;
         top: 40px;
-        left: 0;
+        left: 0; */
+        margin-top: 70px;
         width: 100%;
         height: 120px;
         background: var(--color-bg);
@@ -275,6 +274,7 @@
         padding-right: 16px;
         gap: 16px;
         padding-bottom: 200px;
+        margin-top: 10px;
     }
     .footer-container {
         padding-left: 16px;
@@ -342,7 +342,7 @@
     .footer-container {
         padding-left: 16px;
         padding-right: 10px;
-        gap: 16px;
+        gap: 10px;
     }
     .priority-buttons button{
         width: 90px;
@@ -375,9 +375,14 @@
     .create-btn{
         font-size: 16px;
         height: 46px;
+        width: 161px;
     }
+    .button-group {
+    display: flex;
+    gap: 10px;
+}
     .footer-container p{
-        font-size: 18px;
+        font-size: 18px; 
     }
     .page-header h1{
         font-size: 26px;

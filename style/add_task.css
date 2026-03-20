@@ -15,20 +15,22 @@
 .main-container {
     width: calc(1440px + var(--sidebar-width));
     max-width: 100%;
-    padding-left: 328px;
-    padding-right: 80px;
+    padding-left: 344px;
+    padding-right: 112px;
     display: flex;
     flex-direction: column;
     flex: 1;
 }
-
+.page-header{
+    height: 210px;
+}
 .page-header h1 {
     height: 90px;
     font-size: 61px;
     color: var(--color-text);
-    margin-top: 190px;
-    padding-left: 328px;
-    padding-bottom: 130px;
+    margin-top: 120px;
+    padding-left: 344px;
+    padding-bottom: 100px;
 }
 
 #taskForm {
@@ -41,7 +43,7 @@
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     gap: 40px;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
 }
 
 .column-separator {
@@ -101,6 +103,18 @@ input:focus, textarea:focus {
  input:hover {
     outline: none;
     border-color: var(--color-secondary);
+}
+
+#due-date {
+  cursor: pointer;
+}
+
+#due-date::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+
+#due-date:hover {
+  border-color: var(--color-secondary);
 }
 
 .priority-buttons {
@@ -338,6 +352,7 @@ input:focus, textarea:focus {
 
 .subtask-group {
     position: relative;
+    min-height: 220px;
 }
 
 .subtask-input-wrapper {
@@ -491,7 +506,7 @@ input:focus, textarea:focus {
 }
 
 #subtaskList {
-  max-height: 160px; 
+  height: 160px; 
   overflow-y: auto;
 }
 #subtaskList::-webkit-scrollbar {
@@ -545,12 +560,13 @@ input:focus, textarea:focus {
     left: 0;
     width: 100%;
     z-index: 100;
+    margin-bottom: 30px;
 }
 
 .footer-container {
     max-width: 1440px;
-    padding-left: 96px;
-    padding-right: 80px;
+    /* padding-left: 96px;
+    padding-right: 80px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -608,7 +624,7 @@ input:focus, textarea:focus {
   font-size: 21px;
   font-weight: 700;
   transition: background-color 0.2s;
-  width: 183px;
+  width: 186px;
   gap: 4px;
 }
 

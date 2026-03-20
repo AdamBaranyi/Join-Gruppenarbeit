@@ -7,9 +7,11 @@
 .main-content {
     display: flex;
     height: calc(100dvh - 96px);
-    width: 1440px;
+    width: calc(100% - 232px);
+    max-width: 1208px; /* 1440 - 232 */
     margin-left: 232px; 
     margin-top: 96px;   
+    justify-content: flex-start;
     background: var(--clolor-bg);
 }
 
@@ -46,22 +48,28 @@
 
 /* Scrollbar Styling */
 ul::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
 }
 
 ul::-webkit-scrollbar-thumb {
-    background: var(--color-bg-hover);
+    background: var(--color-text-secondary);
     border-radius: 10px;
 }
 
 ul::-webkit-scrollbar-thumb:hover {
-    background: var(--color-bg-hover);
+    background: var(--color-placeholder-primary);
+}
+
+ul {
+    -ms-overflow-style: auto;
+    scrollbar-width: auto;
+    overflow-x: hidden;
 }
 
 
 /* Buttons */
 .add-contact-btn {
-    max-width: 354px;
+    width: calc(100% - 40px);
     height: 56px;
     background: #2A3647;
     color: var(--color-white);
@@ -73,9 +81,8 @@ ul::-webkit-scrollbar-thumb:hover {
     justify-content: center;
     align-items: center;
     gap: 12px;
-    margin-bottom: 32px;
+    margin: 32px auto 24px auto;
     transition: background 0.2s ease;
-    margin-left: 20px;
     z-index: 1000;
 }
 
@@ -101,6 +108,14 @@ ul::-webkit-scrollbar-thumb:hover {
     transition: all 0.2s ease;
 }
 
+.contact-list-item .mail-style {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    max-width: 100%;
+}
+
 .contact-row:hover {
     background: var(--color-bg-hover);
 }
@@ -117,7 +132,8 @@ ul::-webkit-scrollbar-thumb:hover {
     display: flex;
     flex-direction: column;
     width: 354px;
-    padding-left: 20px;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 #contact-card-content {
@@ -144,8 +160,8 @@ ul {
     margin-top: 50px;
     width: fit-content;
     opacity: 0;
-    transform: translateX(40px);
-    transition: all 250ms ease-in-out;
+    transform: translateX(100vw);
+    transition: all 400ms ease-out;
     border-radius: 20px;
     padding: 32px;
 }
@@ -262,6 +278,13 @@ ul {
     display: flex;
     align-items: flex-start;
     gap: 16px;
+    min-width: 0;
+    width: 100%;
+}
+
+.contact-list-item > div:not(.contact-circle) {
+    min-width: 0;
+    flex: 1;
 }
 
 .contact-circle {
@@ -321,8 +344,6 @@ ul {
 .contact-row.active {
     background: #2A3647;
     color: var(--color-white);
-    transform: scale(1.02);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 }
 
 

@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const input = document.getElementById("due-date");
   if (input) {
     input.addEventListener("keydown", e => e.preventDefault());
-    input.min = new Date().toISOString().split("T")[0]; // verhindert Vergangenheit
+    input.min = new Date().toISOString().split("T")[0]; 
   }
 
   initializePriorityButtons();
