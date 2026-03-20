@@ -35,7 +35,12 @@
 
 @media (max-width: 1250px) {
     .contact-list-style {
-        width: 250px;
+        min-width: 250px;
+        max-width: 300px;
+    }
+
+    #contact-list-content {
+        max-width: 100%;
     }
 
     .slogan h2 {
@@ -54,9 +59,17 @@
     }
 }
 
+@media (max-width: 1100px) {
+    .main-content {
+        max-width: 100%;
+    }
+
+    .slogan-and-card-container {
+        padding: 40px;
+    }
+}
+
 @media (max-width: 910px) {
-
-
     .slogan {
         padding: 0;
     }
@@ -68,6 +81,10 @@
     #contact-card.show {
         padding: 0;
     }
+
+    .slogan-and-card-container {
+        padding: 20px;
+    }
 }
 
 /* Tablet/Mobile Adjustments (Max Width: 850px) */
@@ -75,6 +92,7 @@
     
     /* Layout Adjustments */
     .main-content {
+        height: calc(100vh - 96px - 80px);
         height: calc(100dvh - 96px - 80px);
         width: 100%;
         position: relative;
@@ -105,6 +123,7 @@
         position: absolute;
         left: 0;
         width: 100%;
+        height: calc(100vh - 180px);
         height: calc(100dvh - 180px);
         box-sizing: border-box;
     }
@@ -139,6 +158,7 @@
         display: none;
         position: absolute;
         left: 0;
+        height: calc(100vh - 180px);
         height: calc(100dvh - 180px);
         width: 100%;
         padding: 30px 15px;
