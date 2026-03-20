@@ -41,7 +41,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 6px;
+  padding: 10px 13px;
 }
 
 .card {
