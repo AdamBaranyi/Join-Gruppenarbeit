@@ -77,12 +77,7 @@ function renderContactList(contacts) {
           initials,
           bgColor,
         );
-        const cardWrapper = document.getElementById("contact-card");
-        cardWrapper.classList.remove("show");
 
-        setTimeout(() => {
-          cardWrapper.classList.add("show");
-        }, 10);
       });
     });
 }
@@ -126,7 +121,11 @@ function openModal() {
 
 // close the modal
 function closeModal() {
-  contactModal.close();
+  contactModal.classList.add("slide-out");
+  setTimeout(() => {
+    contactModal.close();
+    contactModal.classList.remove("slide-out");
+  }, 380);
 }
 
 // add a new contact
@@ -216,6 +215,12 @@ function renderContactCard(contact) {
   mainContent.classList.add("show-contact-card");
   card.innerHTML = contactCard(contact);
   showInitials(contact);
+  
+  const cardWrapper = document.getElementById("contact-card");
+  cardWrapper.classList.remove("show");
+  setTimeout(() => {
+     cardWrapper.classList.add("show");
+  }, 10);
   
   card.querySelector(".edit-btn").addEventListener("click", () => {
     renderEditForm(contact);
