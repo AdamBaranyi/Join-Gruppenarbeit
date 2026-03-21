@@ -133,13 +133,14 @@ form input {
     position: relative;
     margin: 0;
     padding: 0;
+    padding-bottom: 16px;
 }
 
 .input-group input {
     height: 48px;
     border-radius: 10px;
     border: 1px solid var(--color-text-secondary);
-    font-size: 16px;
+    font-size: 20px;
     width: 100%;
     padding-left: 16px;
     padding-right: 40px;
@@ -366,10 +367,6 @@ button:hover {
 .error-message {
     color: var(--color-error);
     font-size: 16px;
-    margin-top: 4px;
-    margin-left: 4px;
-    display: block;
-    position: relative;
     z-index: 1;
     line-height: 1.2;
 }
@@ -378,8 +375,17 @@ button:hover {
     border: 1px solid var(--color-error) ;
 }
 
-.input-group.error .input-icon {
-    top: 24px;
+.input-group {
+    position: relative;
+}
+
+.error-message {
+    position: absolute;
+    bottom: -8px;
+}
+
+.input-group.error .error-message {
+    opacity: 1;
 }
 
 @media (max-width: 900px) {

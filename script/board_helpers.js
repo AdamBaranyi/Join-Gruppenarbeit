@@ -55,16 +55,35 @@ async function renderEditAssigneesDropdown() {
         ? getColorFromName(name)
         : "#FF7A00";
     const isChecked = editSelectedContacts.includes(name) ? "checked" : "";
+    const checkedClass = isChecked ? "checked" : "";
 
-    list.innerHTML += `
-            <div class="contact-item">
+    const contactItem = document.createElement('div');
+    contactItem.className = `contact-item ${checkedClass}`;
+    contactItem.innerHTML = `
                 <div class="contact-left">
                   <div class="contact-circle" style="background-color: ${bgColor};">${initials}</div>
                   <span>${name}</span>
                 </div>
-                <input type="checkbox" value="${name}" ${isChecked} onchange="toggleEditContact('${name}', this.checked)">
-            </div>
-        `;
+                <input type="checkbox" value="${name}" ${isChecked}>
+    `;
+
+    const checkbox = contactItem.querySelector('input[type="checkbox"]');
+
+    // Add event listener to checkbox
+    checkbox.addEventListener('change', () => {
+      toggleEditContact(name, checkbox.checked);
+      contactItem.classList.toggle('checked', checkbox.checked);
+    });
+
+    // Add click handler to the entire item
+    contactItem.addEventListener('click', (e) => {
+      if (e.target.tagName.toLowerCase() === 'input') return;
+      checkbox.checked = !checkbox.checked;
+      contactItem.classList.toggle('checked', checkbox.checked);
+      toggleEditContact(name, checkbox.checked);
+    });
+
+    list.appendChild(contactItem);
   });
 }
 
@@ -95,9 +114,13 @@ function renderEditSubtasks() {
             <li>
                 <div class="subtask-text">${sub.title}</div>
                 <div class="subtask-actions">
-                    <img src="../assets/imgs/edit.svg" alt="Edit" onclick="editModalSubtask(${index})">
+                    <button type="button" class="subtask-action-btn" onclick="editModalSubtask(${index})">
+                        <img src="../assets/imgs/edit.svg" alt="Edit">
+                    </button>
                     <div class="divider"></div>
-                    <img src="../assets/imgs/delete.svg" alt="Delete" onclick="deleteEditSubtask(${index})">
+                    <button type="button" class="subtask-action-btn" onclick="deleteEditSubtask(${index})">
+                        <img src="../assets/imgs/delete.svg" alt="Delete">
+                    </button>
                 </div>
             </li>
         `;
@@ -346,6 +369,13 @@ function editTask() {
   let editContainer = document.getElementById("taskModalEdit");
 
   editContainer.innerHTML = generateEditFormHTML(task);
+
+  // Prevent manual date input and set minimum date
+  const dateInput = document.getElementById("editTaskDueDate");
+  if (dateInput) {
+    dateInput.addEventListener("keydown", e => e.preventDefault());
+    dateInput.min = new Date().toISOString().split("T")[0];
+  }
 
   // Populate the form fields dynamically
   renderEditAssignees();

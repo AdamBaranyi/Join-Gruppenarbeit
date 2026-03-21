@@ -426,10 +426,30 @@
     padding: 10px 16px;
     cursor: pointer;
     transition: background 0.2s;
+    border-radius: 10px;
 }
 
 .edit-task-form .contact-item:hover {
-    background: #f0f0f0;
+    background: #e0e0e0;
+}
+
+.edit-task-form .contact-item.checked {
+    background-color: #2a3647;
+    color: #ffffff;
+    margin: 1px;
+}
+
+.edit-task-form .contact-item.checked .contact-left span {
+    color: #ffffff;
+}
+
+.edit-task-form .contact-item.checked:hover {
+    background-color: #091931;
+}
+
+.edit-task-form .contact-item.checked input[type="checkbox"]:checked {
+    background-color: #2a3647;
+    border-color: #ffffff;
 }
 
 .edit-task-form .contact-left {
@@ -604,6 +624,27 @@
 
 .edit-task-form .subtask-list li:hover .subtask-actions {
     display: flex;
+}
+
+.edit-task-form .subtask-action-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.edit-task-form .subtask-action-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.edit-task-form .subtask-action-btn img {
+    width: 24px;
+    height: 24px;
 }
 
 .edit-task-form .subtask-actions img {
