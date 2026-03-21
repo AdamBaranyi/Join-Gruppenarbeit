@@ -11,7 +11,7 @@ async function openAddTaskPopup() {
     const cleanHtml = html;
 
     const closeButton = `<button class="popup-close-btn" onclick="closeAddTaskPopup()">
-            <img src="../assets/imgs/close.png" alt="Close">
+            <img src="../assets/imgs/Close.png" alt="Close">
         </button>`;
 
     popupContainer.innerHTML = closeButton + cleanHtml;
