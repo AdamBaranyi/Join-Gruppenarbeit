@@ -355,7 +355,7 @@
     /* Modal Profile & Initials */
     .profile-img {
         position: absolute;
-        top: 38%;
+        top: 44%;
     }
 
     .contact-initials {
@@ -460,9 +460,6 @@
         margin-left: 24%;
     }
 
-    .profile-img {
-            top: 38%;
-    }
 }
 
 @media (max-height: 1080px) {
