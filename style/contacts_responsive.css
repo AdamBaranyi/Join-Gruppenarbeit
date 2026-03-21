@@ -181,8 +181,6 @@
         align-items: flex-start;
     }
 
-    
-
     /* Mobile Action Buttons */
     #close-card-btn {
         display: flex;
@@ -396,9 +394,6 @@
         display: none;
     }
 }
-
-
-
 
 /* Small Mobile Adjustments (Max Width: 550px) */
 @media (max-width: 600px) {
