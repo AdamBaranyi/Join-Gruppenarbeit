@@ -123,8 +123,8 @@
         position: absolute;
         left: 0;
         width: 100%;
+        max-width: 850px;
         height: calc(100vh - 180px);
-        height: calc(100dvh - 180px);
         box-sizing: border-box;
     }
 
@@ -143,9 +143,9 @@
         box-sizing: border-box;
     }
 
-    .contact-row {
-        width: 100%;
+    .contact-row.active{
         box-sizing: border-box;
+        width: 100%;
     }
 
     .contact-row span {
@@ -468,6 +468,7 @@
 @media (max-height: 1080px) {
     @media (max-width: 850px) {
         dialog:open {
+            top: 5px;
             max-height: 40%;
         }
 
@@ -476,10 +477,14 @@
         }
 
         .contact-initials-edit {
-            top: 38%;
+            top: 32%;
         }
 
         .mobile-edit-container {
+            top: 70%;
+        }
+
+        .mobile-menu {
             top: 70%;
         }
 
@@ -492,11 +497,7 @@
         }
 
         .contact-initials-edit {
-            top: 30%;
-        }
-
-        .mobile-menu {
-            top: 70%;
+            top: 22%;
         }
     }
 }
