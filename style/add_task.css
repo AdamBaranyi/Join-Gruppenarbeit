@@ -1,4 +1,4 @@
- * {
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -12,6 +12,21 @@
     height: 100vh;
 }
 
+.page-header {
+    margin-bottom: 46px;
+    width: 100%;
+    padding-left: 344px;
+    padding-right: 112px;
+    margin-top: 146px;
+}
+
+.page-header h1 {
+    font-size: 61px;
+    color: var(--color-text);
+    font-weight: 700;
+    margin: 0;
+}
+
 .main-container {
     width: calc(1440px + var(--sidebar-width));
     max-width: 100%;
@@ -20,17 +35,6 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-}
-.page-header{
-    height: 210px;
-}
-.page-header h1 {
-    height: 90px;
-    font-size: 61px;
-    color: var(--color-text);
-    margin-top: 120px;
-    padding-left: 344px;
-    padding-bottom: 100px;
 }
 
 #taskForm {
@@ -128,7 +132,6 @@ input:focus, textarea:focus {
     border-radius: 10px;
     border: 0.3px solid #d1d1d1;
     background: var(--color-white);
-    /* border: none; */
     cursor: pointer;
     font-size: 20px;
     font-weight: 400;
@@ -350,6 +353,44 @@ input:focus, textarea:focus {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+.custom-dropdown.input-error .dropdown-header {
+    border: 1px solid var(--color-error);
+}
+
+.bg-orange {
+  background-color: var(--color-btn-medium);
+}
+
+.bg-teal {
+  background-color: var(--color-contact-iocn1);
+}
+
+.bg-purple {
+  background-color: var(--color-contact-iocn2);
+}
+
+.bg-blue {
+  background-color: var(--color-contact-iocn3);
+}
+
+.user-circle, .contact-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:var(--color-white);
+  font-weight: bold;
+  border: 2px solid var(--color-white);
+}
+
+.user-circle.more {
+  background-color: #e0e0e0;
+  color: #333;
+  font-weight: 600;
+}
+
 .subtask-group {
     position: relative;
     min-height: 220px;
@@ -506,7 +547,7 @@ input:focus, textarea:focus {
 }
 
 #subtaskList {
-  height: 160px; 
+  height: 114px; 
   overflow-y: auto;
 }
 #subtaskList::-webkit-scrollbar {
@@ -520,6 +561,10 @@ input:focus, textarea:focus {
 
 .subtask-item.error {
   border-bottom: 1px solid var(--color-error);
+}
+
+.required-text{
+    display: none;
 }
 
 .overlay {
@@ -556,17 +601,22 @@ input:focus, textarea:focus {
 }
 
 .footer-section {
-    position: relative;
+    position: fixed;
     left: 0;
-    width: 100%;
-    z-index: 100;
-    margin-bottom: 30px;
+    right: 0;
+    bottom: 0;
+    height: 100px;
+    background-color: var(--color-bg);
+    z-index: 999;
+    display: flex; 
+    align-items: center;
 }
 
 .footer-container {
-    max-width: 1440px;
-    /* padding-left: 96px;
-    padding-right: 80px; */
+    width: calc(1440px + var(--sidebar-width));
+    max-width: 100%;
+    padding-left: 344px;
+    padding-right: 112px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -638,50 +688,10 @@ input:focus, textarea:focus {
     font-size: 16px;
     min-height: 25px;
     height: 25px;
-
 }
 
 .input-error {
     border-color:var(--color-error);
 }
-
-.custom-dropdown.input-error .dropdown-header {
-    border: 1px solid var(--color-error);
-}
-
-.bg-orange {
-  background-color: var(--color-btn-medium);
-}
-
-.bg-teal {
-  background-color: var(--color-contact-iocn1);
-}
-
-.bg-purple {
-  background-color: var(--color-contact-iocn2);
-}
-
-.bg-blue {
-  background-color: var(--color-contact-iocn3);
-}
-
-.user-circle, .contact-circle {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color:var(--color-white);
-  font-weight: bold;
-  border: 2px solid var(--color-white);
-}
-
-.user-circle.more {
-  background-color: #e0e0e0;
-  color: #333;
-  font-weight: 600;
-}
-
 
 
