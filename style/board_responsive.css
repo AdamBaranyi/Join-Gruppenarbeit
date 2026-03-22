@@ -69,6 +69,7 @@
     .tasks-container {
         min-height: 130px;
         flex-direction: row;
+        padding-top: 45px;
     }
     
     .task-card {
