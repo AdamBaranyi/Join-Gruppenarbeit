@@ -394,17 +394,17 @@ input:focus, textarea:focus {
 .subtask-group {
     position: relative;
     max-height: 220px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .subtask-list {
     max-height: 80px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .modal-subtasks-list {
     max-height: 110px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .subtask-input-wrapper {
