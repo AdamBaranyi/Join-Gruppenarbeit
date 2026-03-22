@@ -134,7 +134,7 @@ function generateEditFormHTML(task) {
         <div class="edit-task-form">
             <div class="modal-close-container">
                 <button class="modal-close-btn" onclick="closeTaskPopup()">
-                    <img src="../assets/imgs/close.png" alt="Close">
+                    <img src="../assets/imgs/Close.png" alt="Close">
                 </button>
             </div>
             

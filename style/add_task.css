@@ -393,7 +393,18 @@ input:focus, textarea:focus {
 
 .subtask-group {
     position: relative;
-    min-height: 220px;
+    max-height: 220px;
+    overflow-y: scroll;
+}
+
+.subtask-list {
+    max-height: 80px;
+    overflow-y: scroll;
+}
+
+.modal-subtasks-list {
+    max-height: 110px;
+    overflow-y: scroll;
 }
 
 .subtask-input-wrapper {

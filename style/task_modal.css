@@ -17,6 +17,7 @@
 }
 
 .task-modal-content {
+    overflow-y: scroll;
     background: #FFFFFF;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
@@ -29,7 +30,6 @@
     flex-direction: column;
     gap: 24px;
     max-height: 90vh;
-    overflow-y: auto;
     transform: translateX(100vw);
     animation: slideInRight 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
 }
@@ -158,6 +158,8 @@
     flex-direction: column;
     gap: 16px;
     margin-top: 8px;
+    max-height: 200px;
+    overflow: scroll;
 }
 
 .assignee-row {
@@ -345,11 +347,6 @@
 .edit-task-form .trigger.low.active { background-color: #7ae229; font-weight: 700; }
 
 /* Ok Button */
-.edit-footer {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 32px;
-}
 
 .edit-ok-btn {
     background-color: #2a3647;
@@ -364,6 +361,9 @@
     gap: 8px;
     cursor: pointer;
     transition: background-color 0.2s;
+    position: relative;
+    bottom: 0;
+    right: 5%;
 }
 
 .edit-ok-btn:hover {
