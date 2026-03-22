@@ -3,6 +3,7 @@
         padding-left: 340px;
         padding-right: 120px;
     }
+    
     .page-header {
         padding-left: 340px;
         padding-right: 120px;
@@ -30,12 +31,12 @@
 
 @media (max-width: 1200px) {
     .main-container {
-        padding-left: 332px;
+        padding-left: 300px;
         padding-right: 100px;
     }
-
+    
     .page-header {
-        padding-left: 332px;
+        padding-left: 300px;
         padding-right: 100px;
     }
 
@@ -93,7 +94,7 @@
 
 @media (max-width: 1040px) {
     .page-header {
-        margin-bottom: 42px;
+        margin-bottom: 36px;
         padding-left: 340px;
         padding-right: 100px;
     }
@@ -129,15 +130,8 @@
     .form-grid {
         grid-template-columns: 1fr;
         gap: 0;
-        padding-right: 0; 
     }
 
-    .left-column,
-    .right-column {
-        padding-right: 0;
-        margin-right: 0;
-    }
-    
     .column-separator {
         display: none;
     }
@@ -149,20 +143,11 @@
     .required-text {
         display: block;
     }
-
-    .subtask-group {
-        margin-bottom: 0;
-    }
-    
-    .subtask-input-wrapper {
-        margin-bottom: 0;
-    }
     
     #subtaskList {
         height: auto;
-        max-height: 114px;
+        max-height: 140px;
         overflow-y: auto;
-        margin-bottom: 0;
     }
     
     .button-group {
@@ -174,7 +159,7 @@
     .page-header {
         padding-left: 16px;
         padding-right: 16px;
-        margin-bottom: 40px;
+        margin-bottom: 36px;
     }
     
     .page-header h1 {
@@ -211,7 +196,7 @@
     
     .form-grid {
         grid-template-columns: 1fr;
-        gap: 0;
+        gap: 20px;
         padding-right: 0;
     }
     
@@ -222,7 +207,7 @@
     
     #subtaskList {
         height: auto;
-        max-height: 114px;
+        max-height: 140px;
         overflow-y: auto;
     }
 }
@@ -279,16 +264,12 @@
     
     #subtaskList {
         height: auto;
-        max-height: 114px;
+        max-height: 140px;
         overflow-y: auto;
     }
 }
 
-@media (max-width: 405px) {
-    .page-header {
-        margin-bottom: 36px;
-    }
-    
+@media (max-width: 405px) {    
     .page-header h1 {
         font-size: 28px;
     }
@@ -334,7 +315,7 @@
     
     .form-grid {
         grid-template-columns: 1fr;
-        gap:0;
+        gap: 0;
         padding-right: 0;
         margin-bottom: 12px;
     }
@@ -353,7 +334,7 @@
     
     #subtaskList {
         height: auto;
-        max-height: 114px;
+        max-height: 120px;
         overflow-y: auto;
     }
 }
@@ -376,7 +357,7 @@
     
     #subtaskList {
         height: auto;
-        max-height: 114px;
+        max-height: 120px;
         overflow-y: auto;
     }
 }
@@ -452,7 +433,7 @@
     
     #subtaskList {
         height: auto;
-        max-height: 114px;
+        max-height: 120px;
         overflow-y: auto;
     }
 }
