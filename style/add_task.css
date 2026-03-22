@@ -547,7 +547,7 @@ input:focus, textarea:focus {
 }
 
 #subtaskList {
-  height: 150px; 
+  height: 114px; 
   overflow-y: auto;
 }
 #subtaskList::-webkit-scrollbar {
