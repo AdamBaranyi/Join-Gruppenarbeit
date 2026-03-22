@@ -51,7 +51,7 @@
     }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1300px) {
     .board-container {
         padding: 0 40px;
     }
@@ -63,12 +63,12 @@
     
     .board-column {
         width: 100%;
+        overflow-x: auto;
     }
     
     .tasks-container {
         min-height: 130px;
         flex-direction: row;
-        padding-bottom: 20px;
     }
     
     .task-card {
@@ -76,13 +76,7 @@
     }
 }
 
-@media (max-width: 1300px) {
-    .mobile-move-btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-}
+
 
 @media (max-width: 800px) {
     .board-container {
