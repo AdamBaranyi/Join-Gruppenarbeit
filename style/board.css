@@ -111,7 +111,8 @@
     display: flex;
     gap: 24px;
     width: 100%;
-    height: calc(100% - 129px)
+    height: calc(100% - 129px);
+    padding-top: 25px;
 }
 
 .board-column {
@@ -128,6 +129,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    top: 200px;
 }
 
 .column-header h2 {
@@ -162,7 +164,7 @@
     flex-direction: column;
     gap: 16px;
     min-height: 200px;
-    padding-top: 45px;
+    padding-top: 25px;
 }
 
 .no-tasks {

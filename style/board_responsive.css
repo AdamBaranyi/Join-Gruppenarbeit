@@ -66,12 +66,16 @@
         height: 100%;
         overflow-x: auto;
     }
+
+    .column-header {
+        position: static;
+    }
     
     .tasks-container {
         min-height: 130px;
         height: 100%;
         flex-direction: row;
-        padding-top: 45px;
+        padding-top: 0;
     }
     
     .task-card {
@@ -93,6 +97,7 @@
     .board-header h1 {
         font-size: 47px;
     }
+
 }
 
 @media (max-width: 450px) {
