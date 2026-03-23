@@ -244,10 +244,7 @@ main {
 }
 
 /* Responsive: Mobile (max-width: 850px) */
-/* .content-container{
-    padding-right: 180px;
-    padding-left: 1px;
-} */
+
 @media(max-width: 850px) {
 
     /* Sidebar */

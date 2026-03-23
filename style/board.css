@@ -8,6 +8,7 @@
     height: calc(100dvh - var(--header-height));
     min-width: 0;
     max-width: 1440px;
+    padding: 0 64px;
 }
 
 /* Header Bereich */
@@ -105,6 +106,11 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.add-task-btn:active {
+    background: #091931;
+    border-color: #091931;
+}
+
 /* Board Spalten */
 
 .board-columns-container {
@@ -121,15 +127,15 @@
     flex: 1;
     height: 100%;
     min-width: 250px;
-    overflow-y: auto;
+    
 }
 
 .column-header {
-    position: absolute;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    top: 200px;
+    width: 100%;
+    padding-bottom: 15px;
 }
 
 .column-header h2 {
@@ -164,7 +170,15 @@
     flex-direction: column;
     gap: 16px;
     min-height: 200px;
-    padding-top: 25px;
+    padding-top: 10px;
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+}
+
+.tasks-container::-webkit-scrollbar {
+    display: none; 
 }
 
 .no-tasks {

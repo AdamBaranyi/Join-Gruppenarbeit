@@ -110,7 +110,8 @@
         border-radius: 46px;
         border-width: 1px;
         padding: 12px;
-        top: 80%;
+        top: auto;
+        bottom: 50px;
         right: 10%;
     }
 
@@ -139,7 +140,7 @@
         width: 100%;
         position: relative;
         left: 0;
-        padding-left: 0;
+        padding: 0 16px;
         box-sizing: border-box;
     }
 
@@ -225,6 +226,16 @@
         top: 100%;
         right: 8%;
         z-index: 1000;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .mobile-edit-container:hover {
+        background-color: var(--color-secondary);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .mobile-edit-container:active {
+        background-color: #091931;
     }
 
     /* Mobile Menu */
@@ -247,12 +258,13 @@
         right: 10%;
         background-color: white;
         width: 116px;
-        height: 100px;
+        height: auto;
         opacity: 1;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         border-bottom-left-radius: 20px;
-        padding: 10px;
+        padding: 14px;
+        gap: 12px;
     }
 
     .mobile-menu button {
@@ -266,10 +278,12 @@
 
     /* Dialog Modal */
     dialog:open {
-        position: relative;
+        position: fixed;
         width: 100%;
         max-width: 396px;
-        min-height: 760px;
+        min-height: auto;
+        max-height: 100dvh;
+        overflow-y: auto;
         top: 10%;
         left: 5%;
         display: flex;
@@ -419,6 +433,8 @@
 @media (max-width: 600px) {
     dialog:open {
         height: 90%;
+        max-height: 90dvh;
+        overflow-y: auto;
         left: 0;
     }
 
@@ -453,7 +469,8 @@
 
     .contact-initials-edit {
         position: absolute;
-        top: 43%;
+        top: auto;
+        margin-top: -50px;
     }
 
     .check-icon {
@@ -466,7 +483,7 @@
     @media (max-width: 850px) {
         dialog:open {
             top: 5px;
-            max-height: 40%;
+            
         }
 
         .profile-img {
@@ -474,7 +491,8 @@
         }
 
         .contact-initials-edit {
-            top: 32%;
+            top: auto;
+            margin-top: -30px;
         }
 
         .mobile-edit-container {
@@ -494,7 +512,57 @@
         }
 
         .contact-initials-edit {
-            top: 22%;
+            top: auto;
+            margin-top: -30px;
         }
+    }
+}
+
+@media (max-width: 350px) {
+    dialog:open {
+        width: 100%;
+        margin: 0;
+        left: 0;
+        top: 0;
+        height: 100%;
+        max-height: 100dvh;
+        border-radius: 0;
+        overflow-y: auto;
+    }
+    
+    .left-side-modal {
+        padding: 30px 20px;
+    }
+    
+    .img-and-form {
+        padding: 20px 10px;
+    }
+    
+    form {
+        width: 100%;
+        padding-top: 15px; 
+    }
+
+    .btn-container {
+        gap: 8px;
+    }
+    
+    .profile-img, .contact-initials-edit {
+        width: 90px;
+        height: 90px;
+        top: auto;   
+        position: relative;
+        margin-top: -45px; 
+        font-size: 36px;
+    }
+
+    .img-and-form {
+        padding: 0 10px 20px 10px;
+    }
+
+
+    .close-btn {
+        right: 15px;
+        top: 15px;
     }
 }
