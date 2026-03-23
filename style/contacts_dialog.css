@@ -1,7 +1,7 @@
 dialog {
-    position: relative;
     top: 15%;
     left: 15%;
+    will-change: transform, opacity;
 }
 
 dialog:open {
@@ -12,6 +12,52 @@ dialog:open {
     min-height: 500px;
     border-radius: 30px;
     border: none;
+    animation: slideInFromRight 0.38s ease-out forwards;
+}
+
+dialog.slide-out {
+    animation: slideOutToRight 0.38s ease-in forwards;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+    animation: fadeInBackground 0.38s forwards;
+}
+
+dialog.slide-out::backdrop {
+    animation: fadeOutBackground 0.38s forwards;
+}
+
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100vw);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutToRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100vw);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeInBackground {
+    from { background-color: rgba(0, 0, 0, 0); }
+    to { background-color: rgba(0, 0, 0, 0.4); }
+}
+
+@keyframes fadeOutBackground {
+    from { background-color: rgba(0, 0, 0, 0.4); }
+    to { background-color: rgba(0, 0, 0, 0); }
 }
 
 .left-side-modal {
@@ -183,10 +229,6 @@ input:focus {
     font-size: 16px;
 }
 
-/* .error {
-    border: solid, 1px, red;
-} */
-
 .mail-style {
     color: var(--color-secondary);
 }
@@ -207,7 +249,7 @@ button:hover {
     display: none;
 }
 
-/* ---------------------Add new Contact Dialog Buttons beginn--------*/
+/* Add new Contact Dialog Buttons */
 .btn-container {
     display: flex;
     justify-content: flex-start;
@@ -268,7 +310,7 @@ button:hover {
     background: var(--color-secondary);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
 }
-/* ---------------------Add new Contact Dialog Buttons ende--------*/
+/* Add new Contact Dialog Buttons ende*/
 
 .edit-btn {
     opacity: 1;
@@ -433,11 +475,12 @@ button:hover {
 @media (max-width: 480px) {
     dialog {
         top: 5%;
-        left: 2.5%;
+        left: 5%;
+        margin: 0;
     }
 
     dialog:open {
-        width: 95%;
+        width: 90%;
     }
 
     .left-side-modal h3 {

@@ -108,7 +108,6 @@ function getColorFromName(name) {
 
 // open the modal to create a new contact
 function openModal() {
-  contactModal.showModal();
   const modalInitials = document.getElementById("modal-initials");
   modalInitials.style.backgroundColor = "transparent";
   modalInitials.classList.remove("contact-initials");
@@ -117,6 +116,8 @@ function openModal() {
   modalInitials.textContent = "";
   leftSide.innerHTML = openModalLeftSide();
   contactWindow.innerHTML = openModalRightSide();
+  
+  contactModal.showModal();
 }
 
 // close the modal
@@ -127,6 +128,17 @@ function closeModal() {
     contactModal.classList.remove("slide-out");
   }, 380);
 }
+
+// Ensure ESC key triggers the smooth CSS close animation too
+document.addEventListener("DOMContentLoaded", () => {
+    const dialogModal = document.getElementById("dialog-modal");
+    if (dialogModal) {
+        dialogModal.addEventListener("cancel", (e) => {
+            e.preventDefault();
+            closeModal();
+        });
+    }
+});
 
 // add a new contact
 async function addContact(contactData) {
@@ -549,7 +561,6 @@ function openModal() {
 
 // Update renderEditForm function (keep this one)
 function renderEditForm(contact) {
-    openModal();
     leftSide.innerHTML = editFormleftSide();
     contactWindow.innerHTML = editFormRightSide(contact);
     const form = document.getElementById("edit-contact-form");
@@ -560,6 +571,8 @@ function renderEditForm(contact) {
     contactImg.classList.remove("contact-initials");
     contactImg.classList.remove("profile-img");
     showInitials(contact);
+    
+    contactModal.showModal();
     
     setTimeout(() => {
         clearAllErrors('edit');

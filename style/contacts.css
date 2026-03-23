@@ -91,8 +91,15 @@ ul {
 }
 
 .add-contact-btn:hover {
-    background-color: var(--color-primary);
+    background-color: var(--color-secondary);
     color: var(--color-white);
+    border-color: var(--color-secondary);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.add-contact-btn:active {
+    background: #091931;
+    border-color: #091931;
 }
 
 /* Contact List */

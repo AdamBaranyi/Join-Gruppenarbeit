@@ -70,6 +70,12 @@
         height: auto;
         overflow-x: auto;
         flex: none;
+        scrollbar-width: none; 
+        -ms-overflow-style: none; 
+    }
+
+    .board-column::-webkit-scrollbar {
+        display: none; 
     }
 
     .column-header {
@@ -82,6 +88,7 @@
         flex-direction: row;
         padding-top: 0;
         padding-bottom: 10px;
+        overflow-x: visible;
     }
 
     .task-card {
