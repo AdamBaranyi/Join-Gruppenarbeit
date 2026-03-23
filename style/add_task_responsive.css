@@ -130,8 +130,9 @@
     .form-grid {
         grid-template-columns: 1fr;
         gap: 0;
+        margin-bottom: 0;
     }
-
+   
     .column-separator {
         display: none;
     }
@@ -146,7 +147,7 @@
     
     #subtaskList {
         height: auto;
-        max-height: 140px;
+        max-height: 116px;
         overflow-y: auto;
     }
     
@@ -198,6 +199,7 @@
         grid-template-columns: 1fr;
         gap: 20px;
         padding-right: 0;
+        margin-bottom: 0;
     }
     
     .footer-section {
@@ -207,7 +209,7 @@
     
     #subtaskList {
         height: auto;
-        max-height: 140px;
+        max-height: 116px;
         overflow-y: auto;
     }
 }
@@ -264,7 +266,7 @@
     
     #subtaskList {
         height: auto;
-        max-height: 140px;
+        max-height: 116px;
         overflow-y: auto;
     }
 }
@@ -278,7 +280,7 @@
         padding-left: 16px;
         padding-right: 16px;
         gap: 16px;
-        padding-bottom: 200px;
+        padding-bottom: 124px;
     }
 
     .footer-container {
@@ -334,7 +336,7 @@
     
     #subtaskList {
         height: auto;
-        max-height: 120px;
+        max-height: 116px;
         overflow-y: auto;
     }
 }
@@ -371,7 +373,7 @@
         padding-left: 16px;
         padding-right: 16px;
         gap: 16px;
-        padding-bottom: 200px;
+        padding-bottom: 124px;
     }
     
     .footer-container {
@@ -433,7 +435,7 @@
     
     #subtaskList {
         height: auto;
-        max-height: 120px;
+        max-height: 116px;
         overflow-y: auto;
     }
 }
