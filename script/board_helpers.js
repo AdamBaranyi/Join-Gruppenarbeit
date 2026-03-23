@@ -10,7 +10,12 @@ function renderEditAssignees() {
   if (!container) return;
   container.innerHTML = "";
 
-  editSelectedContacts.forEach((name) => {
+  const maxVisible = 3;
+  const totalCount = editSelectedContacts.length;
+  const visibleContacts = editSelectedContacts.slice(0, maxVisible);
+  const remaining = totalCount - maxVisible;
+
+  visibleContacts.forEach((name) => {
     const initials = name
       .split(" ")
       .map((n) => n[0])
@@ -26,6 +31,11 @@ function renderEditAssignees() {
 
     container.innerHTML += `<div class="user-circle" style="background-color: ${bgColor};">${initials}</div>`;
   });
+
+  // Add +X circle if more than 3 selected
+  if (remaining > 0) {
+    container.innerHTML += `<div class="user-circle user-circle-more">+${remaining}</div>`;
+  }
 }
 
 /**

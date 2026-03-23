@@ -189,6 +189,12 @@
 .bg-purple { background-color: #9327FF; }
 .bg-blue { background-color: #0038FF; }
 
+.assignee-badge-more {
+    background-color: #2A3647;
+    font-size: 14px;
+    font-weight: 400;
+}
+
 .task-priority img {
     width: 17px;
     height: 12px;
