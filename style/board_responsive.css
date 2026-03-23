@@ -23,8 +23,8 @@
     }
     
     .header-left {
-        width: 100%;
-        justify-content: space-between;
+        width: 100% !important;
+        justify-content: space-between !important;
     }
     
     .add-btn-desktop {
@@ -39,6 +39,7 @@
         justify-content: center;
         align-items: center;
         border-radius: 10px;
+        margin-left: auto;
     }
     
     .add-btn-mobile img {
@@ -54,33 +55,49 @@
 @media (max-width: 1300px) {
     .board-container {
         padding: 0 40px;
+        height: auto;
+        min-height: calc(100dvh - var(--header-height));
     }
-    
+
     .board-columns-container {
         flex-direction: column;
         gap: 26px;
+        height: auto;
     }
-    
+
     .board-column {
         width: 100%;
-        height: 100%;
+        height: auto;
         overflow-x: auto;
+        flex: none;
     }
 
     .column-header {
         position: static;
     }
-    
+
     .tasks-container {
         min-height: 130px;
         height: 100%;
         flex-direction: row;
         padding-top: 0;
+        padding-bottom: 10px;
     }
-    
+
     .task-card {
         min-width: 250px;
         height: max-content;
+    }
+
+    .no-tasks {
+        min-width: 250px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .mobile-move-btn {
+        display: flex;
     }
 }
 
@@ -88,7 +105,7 @@
 
 @media (max-width: 800px) {
     .board-container {
-        padding: 0 16px;
+        padding: 0 16px 100px 16px;
         margin-top: 30px;
         width: 100%;
         box-sizing: border-box;
@@ -145,13 +162,122 @@
 
 @media (max-width: 350px) {
     .board-container {
-        padding: 0 10px;
+        padding: 0 10px 100px 10px;
     }
     .board-header h1 {
         font-size: 42px;
     }
-    
+
     .progress-bar-bg {
         width: 100px;
+    }
+}
+
+/* Landscape Mode for Mobile/Tablet */
+@media (max-height: 500px) and (orientation: landscape) {
+    .board-container {
+        padding: 0 16px;
+        margin-top: 10px;
+    }
+
+    .board-header {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .board-header h1 {
+        font-size: 32px;
+    }
+
+    .search-container {
+        height: 36px;
+        padding: 6px 12px;
+    }
+
+    .search-container input {
+        font-size: 14px;
+    }
+
+    .add-task-btn {
+        height: 36px;
+        font-size: 16px;
+        padding: 8px 12px;
+    }
+
+    .board-columns-container {
+        gap: 16px;
+    }
+
+    .task-card {
+        padding: 10px;
+        min-width: 200px;
+    }
+
+    .task-title {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+
+    .task-description {
+        font-size: 13px;
+    }
+
+    .task-category {
+        font-size: 13px;
+        padding: 3px 10px;
+    }
+
+    .task-footer {
+        margin-top: 12px;
+    }
+
+    .assignee-badge {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
+
+    .progress-text {
+        font-size: 13px;
+    }
+}
+
+/* Extra small landscape (iPhone SE) */
+@media (max-height: 360px) and (orientation: landscape) {
+    .board-header h1 {
+        font-size: 28px;
+    }
+
+    .board-header {
+        margin-top: 5px;
+        margin-bottom: 8px;
+    }
+
+    .search-container {
+        height: 32px;
+    }
+
+    .add-task-btn {
+        height: 32px;
+        font-size: 14px;
+    }
+
+    .task-card {
+        padding: 8px;
+        min-width: 180px;
+    }
+
+    .task-title {
+        font-size: 13px;
+    }
+
+    .task-description {
+        font-size: 12px;
+    }
+
+    .assignee-badge {
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
     }
 }

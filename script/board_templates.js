@@ -54,8 +54,12 @@ function generateAssignedHTML(assignedTo) {
   if (assigneesArray.length === 0) return "";
 
   const colors = ["bg-orange", "bg-teal", "bg-purple", "bg-blue"];
+  const maxVisible = 3;
+  const totalCount = assigneesArray.length;
+  const visibleAssignees = assigneesArray.slice(0, maxVisible);
+  const remaining = totalCount - maxVisible;
 
-  return assigneesArray
+  let html = visibleAssignees
     .map((name, index) => {
       const initials = name
         .split(" ")
@@ -68,6 +72,13 @@ function generateAssignedHTML(assignedTo) {
       return `<div class="assignee-badge ${colorClass}">${initials}</div>`;
     })
     .join("");
+
+  // Add +X badge if more than 3 assignees
+  if (remaining > 0) {
+    html += `<div class="assignee-badge assignee-badge-more">+${remaining}</div>`;
+  }
+
+  return html;
 }
 
 /**
