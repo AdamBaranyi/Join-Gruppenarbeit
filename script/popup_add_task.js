@@ -2,6 +2,32 @@ const overlay = document.getElementById("addTaskOverlay");
 const popupContainer = document.getElementById("popupContainer");
 
 /**
+ * Verhindert das Scrollen des Hintergrunds
+ */
+function disableBodyScroll() {
+  const scrollY = window.scrollY;
+  document.body.style.overflow = 'hidden';
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${scrollY}px`;
+  document.body.style.width = '100%';
+}
+
+/**
+ * Aktiviert das Scrollen des Hintergrunds wieder
+ */
+function enableBodyScroll() {
+  const scrollY = document.body.style.top;
+  document.body.style.overflow = '';
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.width = '';
+  
+  if (scrollY) {
+    window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+  }
+}
+
+/**
  * Opens "Add Task" popup with slide-in animation, shows overlay,
  * and initializes its components.
  */
@@ -21,6 +47,9 @@ async function openAddTaskPopup() {
 
     overlay.classList.remove("d-none");
     overlay.style.display = "flex";
+
+    // Hintergrund-Scrollen verhindern
+    disableBodyScroll();
 
     setTimeout(() => {
       initializePopupComponents();
@@ -102,6 +131,9 @@ function closeAddTaskPopup() {
   setTimeout(() => {
     overlay.classList.add("d-none");
     overlay.style.display = "none";
+
+    // Hintergrund-Scrollen wieder aktivieren
+    enableBodyScroll();
 
     const taskForm = document.getElementById("taskForm");
     if (taskForm && typeof clearForm === "function") {

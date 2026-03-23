@@ -149,6 +149,7 @@ function getTaskPopupTemplate() {
                              </div>
                          </div>
                          <div id="subtaskList" class="subtask-list"></div>
+                         <p class="required-text"><span class="required">*</span> This field is required</p>
                      </div>
 
                  </div>
