@@ -164,7 +164,7 @@
     flex-direction: column;
     gap: 16px;
     min-height: 200px;
-    margin-top: 12px;
+    padding-top: 25px;
 }
 
 .no-tasks {
