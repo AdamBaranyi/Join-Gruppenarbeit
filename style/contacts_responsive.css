@@ -435,8 +435,8 @@
 /* Small Mobile Adjustments (Max Width: 550px) */
 @media (max-width: 600px) {
     dialog:open {
-        height: 90%;
-        max-height: 90dvh;
+        height: 100dvh;
+        top: 0;
         overflow-y: auto;
         left: 0;
     }
@@ -492,10 +492,10 @@
 
     
 
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
 
         .profile-img {
-            top: 33%;
+            top: 26%;
         }
 
         .contact-initials-edit {
