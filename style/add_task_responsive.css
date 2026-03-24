@@ -10,7 +10,7 @@
     }    
 
     .footer-section{
-        height:100px;
+        height:110px;
         padding-top: 20px;
     }
 
@@ -160,6 +160,11 @@
     
     .button-group {
         justify-content: flex-end;
+    }
+
+    .footer-section{
+        height: 110px;
+        padding-top:0;
     }
 }
 
