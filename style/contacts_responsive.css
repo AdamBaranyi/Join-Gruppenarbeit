@@ -469,7 +469,7 @@
 
     .contact-initials-edit {
         position: absolute;
-        top: auto;
+        top: 48%;
         margin-top: -50px;
     }
 
@@ -486,12 +486,16 @@
             
         }
 
+        .mobile-menu {
+            top: 70%;
+        }
+    }
         .profile-img {
             top: 32%;
         }
 
         .contact-initials-edit {
-            top: auto;
+            top: 45%;
             margin-top: -30px;
         }
 
@@ -499,11 +503,9 @@
             top: 70%;
         }
 
-        .mobile-menu {
-            top: 70%;
-        }
+        
 
-    }
+    
 
     @media (max-width: 500px) {
 
@@ -512,7 +514,7 @@
         }
 
         .contact-initials-edit {
-            top: auto;
+            top: 25%;
             margin-top: -30px;
         }
     }

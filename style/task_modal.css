@@ -125,6 +125,8 @@
     font-weight: 400;
     color: #000000;
     margin: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .modal-details-row {
@@ -165,6 +167,7 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    padding-top: 15px;
 }
 
 .modal-assignees-list {
@@ -199,6 +202,10 @@
     flex-direction: column;
     gap: 8px;
     max-height: 115px;
+    padding-top: 15px;
+}
+
+.modal-subtasks-list {
     overflow-y: auto;
     scrollbar-width: thin;
 }
@@ -284,7 +291,6 @@
 
 @media (max-width: 450px) {
     .task-modal-content {
-        padding: 32px 24px;
         gap: 16px;
     }
     
@@ -303,7 +309,6 @@
 
 @media (max-width: 350px) {
     .task-modal-content {
-        padding: 24px 16px;
         width: 100%;
         max-width: calc(100% - 20px);
     }
