@@ -630,4 +630,14 @@ document.addEventListener("click", function(e) {
         e.preventDefault();
         closeModal();
     }
+
+    // Close mobile edit/delete menu when clicking outside
+    let menu = document.getElementById("mobile-menu");
+    let editContainer = document.querySelector(".mobile-edit-container");
+    if (menu && !menu.classList.contains("display-none")) {
+        if (!menu.contains(e.target) && (!editContainer || !editContainer.contains(e.target))) {
+            menu.classList.add("display-none");
+            menu.classList.remove("mobile-menu");
+        }
+    }
 });
