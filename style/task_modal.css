@@ -69,10 +69,25 @@
     }
 }
 
-.modal-header-row {
+.modal-header-row, .modal-close-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    top: -48px;
+    z-index: 100;
+    margin-top: -48px;
+    padding-top: 48px;
+    margin-left: -40px;
+    margin-right: -40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background: white;
+    padding-bottom: 16px;
+}
+
+.modal-close-container {
+    justify-content: flex-end;
 }
 
 .modal-close-btn {
@@ -85,9 +100,7 @@
     padding: 8px;
     border-radius: 50%;
     transition: background-color 0.2s;
-    position: absolute;
-    top: 40px;
-    right: 40px;
+    margin-right: -8px; /* counteract button padding */
 }
 
 .modal-close-btn:hover {
@@ -405,6 +418,21 @@
 
 /* Ok Button */
 
+.edit-footer {
+    position: sticky;
+    bottom: -48px;
+    z-index: 100;
+    margin-bottom: -48px;
+    padding-bottom: 48px;
+    margin-left: -40px;
+    margin-right: -40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background: white;
+    padding-top: 16px;
+    border-radius: 0 0 30px 30px;
+}
+
 .edit-ok-btn {
     background-color: #2a3647;
     color: white;
@@ -418,9 +446,6 @@
     gap: 8px;
     cursor: pointer;
     transition: background-color 0.2s;
-    position: relative;
-    bottom: 0;
-    right: 5%;
 }
 
 .edit-ok-btn:hover {

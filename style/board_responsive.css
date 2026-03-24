@@ -68,14 +68,7 @@
     .board-column {
         width: 100%;
         height: auto;
-        overflow-x: auto;
         flex: none;
-        scrollbar-width: none; 
-        -ms-overflow-style: none; 
-    }
-
-    .board-column::-webkit-scrollbar {
-        display: none; 
     }
 
     .column-header {
@@ -87,8 +80,15 @@
         height: 100%;
         flex-direction: row;
         padding-top: 0;
-        padding-bottom: 10px;
-        overflow-x: visible;
+        padding-bottom: 5px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding-left: 2px; /* Slight safe area for first task card */
+    }
+
+    .tasks-container::-webkit-scrollbar {
+        display: none; 
     }
 
     .task-card {
