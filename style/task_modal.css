@@ -185,6 +185,22 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    max-height: 115px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.modal-subtasks-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-subtasks-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.modal-subtasks-container::-webkit-scrollbar-thumb {
+    background: #A8A8A8;
+    border-radius: 10px;
 }
 
 .subtask-row {
@@ -634,6 +650,22 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
+    max-height: 115px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.edit-task-form .subtask-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.edit-task-form .subtask-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.edit-task-form .subtask-list::-webkit-scrollbar-thumb {
+    background: #A8A8A8;
+    border-radius: 10px;
 }
 
 .edit-task-form .subtask-list li {
