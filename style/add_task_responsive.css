@@ -3,11 +3,17 @@
         padding-left: 340px;
         padding-right: 120px;
     }
-    
+
     .page-header {
         padding-left: 340px;
         padding-right: 120px;
     }    
+
+    .footer-section{
+        height:100px;
+        padding-top: 20px;
+    }
+
 }
 
 @media (max-width: 1250px) {
@@ -55,6 +61,7 @@
     .trigger.low.active {
         font-weight: 600;
     }
+    
 }
 
 @media (max-width: 1150px) {
@@ -130,7 +137,7 @@
     .form-grid {
         grid-template-columns: 1fr;
         gap: 0;
-        margin-bottom: 0;
+        margin-bottom: 80px;
     }
    
     .column-separator {
@@ -179,6 +186,7 @@
         bottom: 0;
         width: 100%;
         left: 0;
+        height: 100px;
         margin-bottom: 80px;
     }
 
@@ -199,7 +207,7 @@
         grid-template-columns: 1fr;
         gap: 20px;
         padding-right: 0;
-        margin-bottom: 0;
+        margin-bottom: 80px;
     }
     
     .footer-section {
@@ -261,7 +269,7 @@
     .form-grid {
         grid-template-columns: 1fr;
         gap: 0;
-        padding-right: 0;
+        padding-right:0;
     }
     
     #subtaskList {
@@ -319,7 +327,7 @@
         grid-template-columns: 1fr;
         gap: 0;
         padding-right: 0;
-        margin-bottom: 12px;
+        margin-bottom:50px;
     }
     
     input {
