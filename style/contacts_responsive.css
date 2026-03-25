@@ -211,6 +211,7 @@
         height: 32px;
         top: 0;
         right: 5%;
+        margin-top: -110px;
     }
 
     .mobile-edit-container {
@@ -223,8 +224,7 @@
         border-radius: 56%;
         height: 50px;
         width: 50px;
-        bottom: 130px; 
-        top: auto;
+        bottom: 20px; 
         right: 10%;
         z-index: 1000;
         transition: all 0.2s ease-in-out;
@@ -255,9 +255,9 @@
         display: flex;
         flex-direction: column;
         cursor: pointer;
-        bottom: 190px; 
+        bottom: 40px; 
         top: auto !important;
-        right: 10%;
+        right: 15%;
         background-color: white;
         width: 116px;
         height: auto;
@@ -287,11 +287,11 @@
         min-height: auto;
         max-height: 100dvh;
         overflow-y: auto;
-        top: 10%;
-        left: 5%;
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
+        top: 25%;
+        left: 25%;
     }
 
     dialog h3 {
@@ -371,8 +371,7 @@
 
     /* Modal Profile & Initials */
     .profile-img {
-        position: absolute;
-        top: 44%;
+        margin-top: -50px;
     }
 
     .contact-initials {
@@ -381,13 +380,13 @@
     }
 
     .contact-initials-edit {
-        position: absolute;
-        top: 44%;
+        position: relative;
+        margin-top: -50px;
     }
 
     form {
-        padding-top: 70px;
-        padding-bottom: 30px;
+        padding-top: 15px;
+        padding-bottom: 15px;
         width: 100%;
     }
 
@@ -430,6 +429,38 @@
     .edit-and-delete-btn-container {
         display: none;
     }
+
+   
+
+    @media (max-height: 900px) {
+        
+        dialog:open {
+            top: 10%;
+        }
+
+        #contact-card {
+            margin-top: 0;
+        }
+
+        .contact-info-header {
+            margin-top: 20px;
+        }
+        
+        #close-card-btn {
+            margin-top: -40px;
+        }
+    }
+
+    @media (max-height: 700px) {
+        .input-group {
+            padding-bottom: 0;
+        }
+
+        form {
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+    }
 }
 
 /* Small Mobile Adjustments (Max Width: 550px) */
@@ -470,38 +501,8 @@
         height: 100px;
     }
 
-    .contact-initials-edit {
-        position: absolute;
-        top: 48%;
-        margin-top: -50px;
-    }
-
     .check-icon {
         margin-left: 24%;
-    }
-
-}
-
-@media (max-height: 1080px) {
-        .contact-initials-edit {
-            top: 45%;
-            margin-top: -30px;
-        }
-
-        
-
-    
-
-    @media (max-width: 600px) {
-
-        .profile-img {
-            top: 26%;
-        }
-
-        .contact-initials-edit {
-            top: 25%;
-            margin-top: -30px;
-        }
     }
 }
 
