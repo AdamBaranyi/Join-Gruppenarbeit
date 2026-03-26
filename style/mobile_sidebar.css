@@ -1,5 +1,6 @@
-/* Desktop Defaults */
+/* Mobile Sidebar Styles */
 
+/* Desktop Defaults */
 .mobile-sidebar {
     position: fixed;
     bottom: 0;
@@ -10,11 +11,11 @@
     justify-content: space-around;
     align-items: center;
     z-index: 1000;
-    display: none ;
+    display: none;
 }
 
 .mobile-only {
-    display: none ;
+    display: none;
 }
 
 .header-logo-mobile {
@@ -22,11 +23,10 @@
 }
 
 .header-logo-mobile img {
-    height: 32px; 
+    height: 32px;
 }
 
 /* Navigation Items */
-
 .mobile-sidebar .nav-item {
     display: flex;
     flex-direction: column;
@@ -53,7 +53,6 @@
 }
 
 /* Navigation States */
-
 .mobile-sidebar .nav-item:hover {
     background-color: #344762;
     color: white;
@@ -64,7 +63,7 @@
     color: white;
 }
 
-/* Guest-only nav items */
+/* Guest Links */
 .mobile-sidebar .nav-item.guest-link {
     width: auto;
     padding: 10px 14px;
@@ -82,15 +81,13 @@
     max-width: 80px;
 }
 
-/* Responsive: Mobile (max-width: 850px) */
-
+/* Mobile (max-width: 850px) */
 @media(max-width: 850px) {
-
     /* Visibility */
     .mobile-sidebar {
         display: flex;
     }
-    
+
     .header-logo-mobile {
         display: block;
     }

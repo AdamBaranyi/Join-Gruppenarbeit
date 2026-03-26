@@ -1,0 +1,367 @@
+/* Login Responsive Styles */
+
+/* Tablet & Mobile (max-width: 850px) */
+@media(max-width: 850px) {
+    /* Layout */
+    body {
+        padding-top: 0;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .login-container {
+        justify-content: center;
+        padding-bottom: 60px;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    /* Logo Animation */
+    .logo-container {
+        background-color: #2A3647;
+        animation: fadeOutBg 1s ease-in-out forwards;
+        animation-delay: 1.2s;
+        pointer-events: none;
+    }
+
+    .logo-anim {
+        width: 80px;
+        animation: moveLogoMobile 1.2s ease-in-out forwards;
+        animation-delay: 0.5s;
+    }
+
+    .logo-white {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        animation: fadeOutWhite 1.2s ease-in-out forwards;
+        animation-delay: 0.5s;
+    }
+
+    .logo-colored {
+        width: 100%;
+    }
+
+    /* No-Animation State */
+    .no-anim .logo-container {
+        top: 40px;
+        left: 40px;
+        transform: none;
+        width: auto;
+        height: auto;
+        background-color: transparent;
+        animation: none;
+    }
+
+    .no-anim .logo-anim {
+        width: 80px;
+        animation: none;
+    }
+
+    .no-anim .logo-white {
+        display: none;
+        animation: none;
+    }
+
+    /* Login Card */
+    .login-card {
+        padding: 30px 16px;
+        width: min(400px, 90%);
+        margin-top: 100px;
+        order: 1;
+    }
+
+    /* Sign Up Link */
+    .top-signup-link {
+        display: flex;
+        position: static;
+        margin-top: 24px;
+        margin-bottom: 24px;
+        font-size: 16px;
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+        justify-content: center;
+        width: 100%;
+        text-align: center;
+        z-index: 10;
+        order: 2;
+    }
+
+    .top-signup-link span {
+        font-size: 16px;
+    }
+
+    .top-signup-link .btn-dark {
+        width: auto;
+        padding: 8px 16px;
+        font-size: 16px;
+        background-color: var(--color-primary);
+        color: white;
+        border-radius: 8px;
+        text-decoration: none;
+    }
+
+    /* Form Inputs */
+    .input-group {
+        width: 100%;
+    }
+
+    .input-group input {
+        width: 100%;
+    }
+
+    /* Buttons */
+    .login-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 16px;
+        margin-top: 24px;
+    }
+
+    .login-buttons .btn-dark, .login-buttons .btn-light {
+        width: 100%;
+        padding: 12px 0;
+    }
+
+    .btn-primary-small {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+
+    /* Footer & Legal Links */
+    .legal-links {
+        position: relative;
+        bottom: auto;
+        margin-top: 30px;
+        padding-bottom: 40px;
+        gap: 24px;
+        flex-direction: row;
+        align-items: center;
+        order: 3;
+    }
+
+    .legal-links a {
+        font-size: 16px;
+        padding: 8px;
+    }
+
+    /* Keyframe Animations */
+    @keyframes moveLogoMobile {
+        0% { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100px; opacity: 1; }
+        100% { top: 40px; left: 40px; transform: translate(0, 0); width: 80px; opacity: 1; }
+    }
+
+    @keyframes fadeOutWhite {
+        0% { opacity: 1; }
+        100% { opacity: 0; }
+    }
+
+    @keyframes fadeOutBg {
+        from { background-color: #2A3647; }
+        to { background-color: transparent; }
+    }
+}
+
+/* Small Mobile (max-width: 480px) */
+@media(max-width: 480px) {
+    /* Layout */
+    html, body {
+        width: 100%;
+        padding-top: 0;
+    }
+
+    .login-container {
+        height: auto;
+        min-height: 100vh;
+        justify-content: center;
+        padding-top: 100px;
+        padding-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Logo */
+    .no-anim .logo-container {
+        top: 12px;
+        left: 12px;
+        transform: scale(0.85);
+        position: fixed;
+    }
+
+    .logo-anim {
+        width: 60px;
+    }
+
+    /* Login Card */
+    .login-card {
+        width: 92%;
+        max-width: 320px;
+        padding: 24px 16px;
+        margin: 0 auto;
+    }
+
+    .login-card h1 {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    .separator-blue {
+        margin-bottom: 24px;
+        width: 80px;
+    }
+
+    /* Form Inputs */
+    .input-group {
+        width: 100%;
+        margin-bottom: 16px;
+        max-width: none;
+    }
+
+    .input-group input {
+        padding: 10px 40px 10px 14px;
+        font-size: 16px;
+        height: 44px;
+        line-height: normal;
+    }
+
+    .input-group img, .password-toggle {
+        width: 18px;
+        height: 18px;
+        right: 12px;
+        top: 50%;
+    }
+
+    #loginPassword {
+        padding-right: 40px;
+    }
+
+    .checkbox-group label,
+    .checkbox-group span {
+        font-size: 16px;
+    }
+
+    /* Buttons */
+    .login-buttons {
+        gap: 12px;
+        margin-top: 24px;
+    }
+
+    .login-buttons .btn-dark,
+    .login-buttons .btn-light {
+        padding: 0;
+        height: 44px;
+        font-size: 16px;
+        min-height: unset;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-primary-small {
+        padding: 8px 16px;
+        font-size: 16px;
+        height: auto;
+    }
+
+    /* Sign Up Link */
+    .top-signup-link {
+        width: 100%;
+        flex-wrap: wrap;
+        white-space: normal;
+        margin-top: 10px;
+        margin-bottom: 0px;
+        gap: 8px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .top-signup-link span {
+        font-size: 16px;
+        white-space: normal;
+        color: #000;
+    }
+
+    /* Footer & Legal Links */
+    .legal-links {
+        position: relative;
+        bottom: auto;
+        margin-top: 0px;
+        padding-bottom: 0px;
+        gap: 24px;
+        flex-direction: row;
+        align-items: center;
+        order: 3;
+    }
+
+    .legal-links a {
+        font-size: 16px;
+        padding: 8px;
+    }
+
+    /* Keyframe Animations */
+    @keyframes moveLogoMobile {
+        0% { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; }
+        100% { top: 20px; left: 20px; transform: translate(0, 0); width: 60px; }
+    }
+}
+
+/* Medium Mobile (700px - 481px) */
+@media(max-width: 700px) and (min-width: 481px) {
+    .logo-anim, .no-anim .logo-anim {
+        width: 60px;
+    }
+
+    .no-anim .logo-container {
+        top: 20px;
+        left: 20px;
+    }
+
+    .login-card {
+        margin-top: 130px;
+    }
+
+    @keyframes moveLogoMobile {
+        0% { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100px; }
+        100% { top: 20px; left: 20px; transform: translate(0, 0); width: 60px; }
+    }
+}
+
+/* Tablet (1100px - 851px) */
+@media(max-width: 1100px) and (min-width: 851px) {
+    .no-anim .logo-container {
+        top: 30px;
+        left: 30px;
+    }
+
+    .no-anim .logo-anim {
+        width: 80px;
+    }
+
+    @keyframes moveLogo {
+        0% { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 250px; }
+        100% { top: 30px; left: 30px; transform: translate(0, 0); width: 80px; }
+    }
+}
+
+/* Short Screens (max-height: 800px) */
+@media(max-height: 800px) {
+    @media (max-width: 850px) {
+        .login-card {
+            margin-top: 20px;
+            padding: 0px 16px 16px;
+        }
+
+        .login-card h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .top-signup-link {
+            margin-bottom: 0;
+            margin-top: 0;
+        }
+    }
+}

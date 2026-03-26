@@ -1,11 +1,11 @@
-/* Content Container */
+/* Simple Page Styles */
 
+/* Content Container */
 .simple-page-content {
-    padding: 80px 80px 80px 120px
+    padding: 80px 80px 80px 120px;
 }
 
 /* Header */
-
 .simple-page-header {
     display: flex;
     justify-content: space-between;
@@ -14,7 +14,6 @@
 }
 
 /* Typography */
-
 .simple-page-content h1 {
     font-size: 61px;
     font-weight: 700;
@@ -35,14 +34,12 @@
 }
 
 /* Lists */
-
 .simple-page-content ul {
     margin-bottom: 15px;
     margin-left: 20px;
 }
 
 /* Back Button */
-
 .btn-back {
     cursor: pointer;
     transition: transform 0.2s;
@@ -56,7 +53,7 @@
     filter: invert(56%) sepia(68%) saturate(3088%) hue-rotate(176deg) brightness(96%) contrast(85%);
 }
 
-/* Help Page Specific Styling */
+/* Help Page */
 .help-text {
     font-size: 16px;
     line-height: 1.5;
@@ -116,8 +113,7 @@
     text-decoration: underline;
 }
 
-/* Responsive: Tablet & Mobile (max-width: 850px) */
-
+/* Tablet & Mobile (max-width: 850px) */
 @media(max-width: 850px) {
     .simple-page-content {
         padding: 40px;
@@ -128,22 +124,21 @@
         font-size: 40px;
     }
 
-    /* Help Page Specific */
+    /* Help Page */
     .help-section-title {
         font-size: 21px;
     }
-    
+
     .step-item::before {
         font-size: 21px;
     }
-    
+
     .step-content h3 {
         font-size: 21px;
     }
 }
 
-/* Responsive: Small Mobile (max-width: 450px) */
-
+/* Small Mobile (max-width: 450px) */
 @media(max-width: 450px) {
     .simple-page-content {
         padding: 20px;
