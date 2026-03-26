@@ -68,6 +68,7 @@
 
     .board-column {
         width: 100%;
+        max-width: 100dvw;
         min-height: auto;
         flex: none;
     }
@@ -82,7 +83,7 @@
         flex-direction: row;
         padding-top: 0;
         padding-bottom: 5px;
-        overflow-x: auto;
+        overflow-x: scroll;
         scrollbar-width: none;
         -ms-overflow-style: none;
         padding-left: 2px; 
