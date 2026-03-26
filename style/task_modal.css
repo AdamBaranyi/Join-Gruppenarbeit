@@ -119,7 +119,7 @@
     padding: 8px;
     border-radius: 50%;
     transition: background-color 0.2s;
-    margin-right: -8px; /* counteract button padding */
+    margin-right: -8px; 
 }
 
 .modal-close-btn:hover {
@@ -308,10 +308,6 @@
     #modalTitle {
         font-size: 36px;
     }
-
-    .edit-task-heading {
-        font-size: 32px;
-    }
 }
 
 @media (max-width: 450px) {
@@ -336,10 +332,6 @@
     #modalTitle {
         font-size: 28px;
         margin-bottom: 8px;
-    }
-
-    .edit-task-heading {
-        font-size: 24px;
     }
 
     #modalDescription {
@@ -403,10 +395,6 @@
     #modalTitle {
         font-size: 24px;
         margin-bottom: 12px;
-    }
-
-    .edit-task-heading {
-        font-size: 20px;
     }
 
     .detail-label {
@@ -1036,6 +1024,25 @@
     .edit-ok-btn {
         font-size: 16px;
         padding: 12px 18px;
+    }
+}
+
+/* Responsive adjustments for edit-task-heading */
+@media (max-width: 550px) {
+    .edit-task-heading {
+        font-size: 42px !important;
+    }
+}
+
+@media (max-width: 450px) {
+    .edit-task-heading {
+        font-size: 32px !important;
+    }
+}
+
+@media (max-width: 350px) {
+    .edit-task-heading {
+        font-size: 24px !important;
     }
 }
 
