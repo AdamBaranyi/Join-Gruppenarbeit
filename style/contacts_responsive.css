@@ -4,8 +4,12 @@
         left: 5%;
     }
 
+    .contact-name {
+        font-size: 38px;
+    }
+
     .slogan-and-card-container {
-        padding: 0;
+        padding: 30px;
         width: 100%;
     }
 
@@ -56,6 +60,7 @@
 
     .contact-name {
         font-size: 26px;
+        max-width: 300px;
     }
 }
 
@@ -65,17 +70,22 @@
     }
 
     .slogan-and-card-container {
-        padding: 40px;
+        padding: 20px;
+    }
+
+    .contact-name {
+        max-width: 250px;
     }
 }
 
-@media (max-width: 910px) {
+@media (max-width: 980px) {
     .slogan {
         padding: 0;
     }
 
     .contact-name {
         font-size: 22px;
+        max-width: 150px;
     }
 
     #contact-card.show {
@@ -84,6 +94,12 @@
 
     .slogan-and-card-container {
         padding: 20px;
+    }
+}
+
+@media (max-width: 900px) {
+    .slogan-and-card-container {
+        padding: 20px 0 0 0;
     }
 }
 
@@ -187,6 +203,8 @@
     .btn-and-name-container {
         display: flex;
         flex-direction: column;
+        margin-left: 150px;
+
     }
 
     .content-slogan {
@@ -194,6 +212,7 @@
         flex-direction: column;
         max-width: 432px;
         box-sizing: border-box;
+        margin-bottom: 10px;
     }
 
     .contact-item {
@@ -211,10 +230,11 @@
         height: 32px;
         top: 0;
         right: 5%;
+        margin-top: -90px;
     }
 
     .mobile-edit-container {
-        position: fixed;
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -223,11 +243,10 @@
         border-radius: 56%;
         height: 50px;
         width: 50px;
-        bottom: 130px; 
-        top: auto;
-        right: 10%;
         z-index: 1000;
         transition: all 0.2s ease-in-out;
+        left: 85%;
+        top: 90%;
     }
 
     .mobile-edit-container:hover {
@@ -255,9 +274,9 @@
         display: flex;
         flex-direction: column;
         cursor: pointer;
-        bottom: 190px; 
+        bottom: 40px; 
         top: auto !important;
-        right: 10%;
+        right: 15%;
         background-color: white;
         width: 116px;
         height: auto;
@@ -287,11 +306,11 @@
         min-height: auto;
         max-height: 100dvh;
         overflow-y: auto;
-        top: 10%;
-        left: 5%;
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
+        top: 25%;
+        left: 25%;
     }
 
     dialog h3 {
@@ -363,6 +382,7 @@
     line-height: 120%;
     color: #000000;
     white-space: nowrap;
+    max-width: 500px;
 }
 
     .mobile-menu {
@@ -371,23 +391,21 @@
 
     /* Modal Profile & Initials */
     .profile-img {
-        position: absolute;
-        top: 44%;
+        margin-top: -50px;
     }
 
     .contact-initials {
-        position: relative;
         top: 20;
     }
 
     .contact-initials-edit {
-        position: absolute;
-        top: 44%;
+        position: relative;
+        margin-top: -50px;
     }
 
     form {
-        padding-top: 70px;
-        padding-bottom: 30px;
+        padding-top: 15px;
+        padding-bottom: 15px;
         width: 100%;
     }
 
@@ -430,6 +448,44 @@
     .edit-and-delete-btn-container {
         display: none;
     }
+
+   
+
+    @media (max-height: 900px) {
+        
+        dialog:open {
+            top: 10%;
+        }
+
+        #contact-card {
+            margin-top: 0;
+        }
+
+        .contact-info-header {
+            margin-top: 40px;
+        }
+        
+        #close-card-btn {
+            margin-top: -40px;
+        }
+    }
+
+    @media (max-height: 700px) {
+        .input-group {
+            padding-bottom: 0;
+        }
+
+        form {
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+    }
+}
+
+@media (max-width: 700px) {
+    .contact-name {
+        max-width: 300px;
+    }
 }
 
 /* Small Mobile Adjustments (Max Width: 550px) */
@@ -464,44 +520,22 @@
     }
 
     .contact-initials {
-        position: relative;
-        top: 0;
         width: 100px;
         height: 100px;
     }
 
-    .contact-initials-edit {
-        position: absolute;
-        top: 48%;
-        margin-top: -50px;
+    .btn-and-name-container {
+        margin-left: 100px;
     }
 
     .check-icon {
         margin-left: 24%;
     }
-
 }
 
-@media (max-height: 1080px) {
-        .contact-initials-edit {
-            top: 45%;
-            margin-top: -30px;
-        }
-
-        
-
-    
-
-    @media (max-width: 600px) {
-
-        .profile-img {
-            top: 26%;
-        }
-
-        .contact-initials-edit {
-            top: 25%;
-            margin-top: -30px;
-        }
+@media (max-width: 400px) {
+    .contact-name {
+        max-width: 200px;
     }
 }
 

@@ -1,6 +1,6 @@
 dialog {
-    top: 15%;
-    left: 15%;
+    top: 25%;
+    left: 25%;
     will-change: transform, opacity;
 }
 
@@ -154,6 +154,7 @@ dialog span {
     opacity: 1;
     border-radius: 70px;
     border-width: 3px;
+    margin-top: 90px;
 }
 
 form {
@@ -441,6 +442,8 @@ button:hover {
         flex-direction: column;
         width: 95%;
         height: auto;
+        top: 25%;
+        left: 25%;
     }
 
     .left-side-modal {
