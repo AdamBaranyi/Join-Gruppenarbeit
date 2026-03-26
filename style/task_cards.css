@@ -86,12 +86,14 @@
     font-weight: 400;
     padding: 8px 12px;
     border-radius: 8px;
-    transition: background-color 0.2s;
+    transition: all 0.2s ease-in-out;
     color: white;
 }
 
 .mobile-move-menu-item:hover {
     background-color: #091931;
+    transform: rotate(2deg) scale(1.05);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
 }
 
 .mobile-move-menu-item img {

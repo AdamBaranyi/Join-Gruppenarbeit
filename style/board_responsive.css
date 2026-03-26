@@ -54,20 +54,21 @@
 
 @media (max-width: 1375px) {
     .board-container {
-        padding: 0 40px;
+        padding: 0 40px 60px 40px;
         height: auto;
         min-height: calc(100dvh - var(--header-height));
     }
 
     .board-columns-container {
         flex-direction: column;
-        gap: 26px;
+        gap: 12px;
         height: auto;
+        padding-bottom: 60px;
     }
 
     .board-column {
         width: 100%;
-        height: auto;
+        min-height: auto;
         flex: none;
     }
 
@@ -76,7 +77,7 @@
     }
 
     .tasks-container {
-        min-height: 130px;
+        min-height: auto;
         height: 100%;
         flex-direction: row;
         padding-top: 0;
@@ -84,7 +85,8 @@
         overflow-x: auto;
         scrollbar-width: none;
         -ms-overflow-style: none;
-        padding-left: 2px; /* Slight safe area for first task card */
+        padding-left: 2px; 
+        gap: 12px; 
     }
 
     .tasks-container::-webkit-scrollbar {
@@ -249,7 +251,7 @@
     }
 }
 
-/* Extra small landscape (iPhone SE) */
+/* Extra small landscape */
 @media (max-height: 360px) and (orientation: landscape) {
     .board-header h1 {
         font-size: 28px;

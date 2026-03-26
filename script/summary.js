@@ -233,49 +233,84 @@ function getInitials(name) {
 /* Firebase Metrics Integration */
 
 /**
- * Fetches all tasks from Firebase and calculates the totals
- * for various statuses and priorities, as well as the
- * upcoming deadline for urgent tasks, to update the UI.
+ * Fetches all tasks from Firebase and calculates metrics.
  */
 async function loadSummaryMetrics() {
   try {
-    const response = await fetch(BASE_URL + "/tasks.json");
-    const data = (await response.json()) || {};
-    const tasks = Object.values(data);
-
-    let metrics = {
-      total: tasks.length,
-      todo: 0,
-      inProgress: 0,
-      awaitingFeedback: 0,
-      done: 0,
-      urgent: 0,
-    };
-
-    let earliestUrgentDate = null;
-
-    tasks.forEach((task) => {
-      if (task.status === "todo") metrics.todo++;
-      else if (task.status === "inProgress") metrics.inProgress++;
-      else if (task.status === "awaitingFeedback") metrics.awaitingFeedback++;
-      else if (task.status === "done") metrics.done++;
-
-      if (task.priority === "Urgent") {
-        metrics.urgent++;
-
-        if (task.dueDate) {
-          const taskDate = new Date(task.dueDate);
-          if (!earliestUrgentDate || taskDate < earliestUrgentDate) {
-            earliestUrgentDate = taskDate;
-          }
-        }
-      }
-    });
+    const tasks = await fetchTasksFromFirebase();
+    const metrics = calculateTaskMetrics(tasks);
+    const earliestUrgentDate = findEarliestUrgentDate(tasks);
 
     updateSummaryUI(metrics, earliestUrgentDate);
   } catch (e) {
     console.error("Error loading summary metrics:", e);
   }
+}
+
+/**
+ * Fetches tasks from Firebase.
+ * @async
+ * @returns {Array} The tasks array.
+ */
+async function fetchTasksFromFirebase() {
+  const response = await fetch(BASE_URL + "/tasks.json");
+  const data = (await response.json()) || {};
+  return Object.values(data);
+}
+
+/**
+ * Calculates task metrics from tasks array.
+ * @param {Array} tasks - The tasks array.
+ * @returns {Object} The metrics object.
+ */
+function calculateTaskMetrics(tasks) {
+  let metrics = {
+    total: tasks.length,
+    todo: 0,
+    inProgress: 0,
+    awaitingFeedback: 0,
+    done: 0,
+    urgent: 0,
+  };
+
+  tasks.forEach((task) => {
+    incrementStatusMetric(metrics, task.status);
+    if (task.priority === "Urgent") metrics.urgent++;
+  });
+
+  return metrics;
+}
+
+/**
+ * Increments the metric for a specific status.
+ * @param {Object} metrics - The metrics object.
+ * @param {string} status - The task status.
+ */
+function incrementStatusMetric(metrics, status) {
+  if (status === "todo") metrics.todo++;
+  else if (status === "inProgress") metrics.inProgress++;
+  else if (status === "awaitingFeedback") metrics.awaitingFeedback++;
+  else if (status === "done") metrics.done++;
+}
+
+/**
+ * Finds the earliest urgent task date.
+ * @param {Array} tasks - The tasks array.
+ * @returns {Date|null} The earliest date or null.
+ */
+function findEarliestUrgentDate(tasks) {
+  let earliestDate = null;
+
+  tasks.forEach((task) => {
+    if (task.priority === "Urgent" && task.dueDate) {
+      const taskDate = new Date(task.dueDate);
+      if (!earliestDate || taskDate < earliestDate) {
+        earliestDate = taskDate;
+      }
+    }
+  });
+
+  return earliestDate;
 }
 
 

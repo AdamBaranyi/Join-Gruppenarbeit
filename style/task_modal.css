@@ -17,7 +17,7 @@
 }
 
 .task-modal-content {
-    overflow-y:visible;
+    overflow-y: auto;
     background: #FFFFFF;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
@@ -32,6 +32,24 @@
     max-height: 90vh;
     transform: translateX(100vw);
     animation: slideInRight 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    scrollbar-width: thin;
+    scrollbar-color: #A8A8A8 #f0f0f0;
+}
+
+.task-modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.task-modal-content::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.task-modal-content::-webkit-scrollbar-thumb {
+    background: #A8A8A8;
+    border-radius: 10px;
+    border: 2px solid #f0f0f0;
 }
 
 @keyframes slideInRight {
@@ -81,9 +99,10 @@
     margin-left: -40px;
     margin-right: -40px;
     padding-left: 40px;
-    padding-right: 40px;
+    padding-right: 32px;
     background: white;
     padding-bottom: 16px;
+    margin-bottom: 8px;
 }
 
 .modal-close-container {
@@ -100,7 +119,7 @@
     padding: 8px;
     border-radius: 50%;
     transition: background-color 0.2s;
-    margin-right: -8px; /* counteract button padding */
+    margin-right: -8px; 
 }
 
 .modal-close-btn:hover {
@@ -133,6 +152,7 @@
     display: flex;
     align-items: center;
     gap: 25px;
+    margin-bottom: 8px;
 }
 
 .modal-details-row:has(#modalPriority) {
@@ -168,6 +188,7 @@
     flex-direction: column;
     gap: 8px;
     padding-top: 15px;
+    margin-bottom: 8px;
 }
 
 .modal-assignees-list {
@@ -292,18 +313,62 @@
 @media (max-width: 450px) {
     .task-modal-content {
         gap: 16px;
+        padding: 32px 24px;
+        max-height: 95vh;
     }
-    
+
+    .modal-header-row, .modal-close-container {
+        top: -32px;
+        margin-top: -32px;
+        padding-top: 32px;
+        margin-left: -24px;
+        margin-right: -24px;
+        padding-left: 24px;
+        padding-right: 24px;
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+    }
+
     #modalTitle {
         font-size: 28px;
+        margin-bottom: 8px;
     }
 
     #modalDescription {
         font-size: 16px;
+        padding-top: 8px;
+        padding-bottom: 8px;
     }
 
     .detail-label, .detail-value {
         font-size: 16px;
+    }
+
+    .modal-details-row {
+        margin-bottom: 12px;
+    }
+
+    .modal-assignees-container {
+        margin-bottom: 12px;
+        padding-top: 8px;
+    }
+
+    .modal-subtasks-container {
+        padding-top: 8px;
+    }
+
+    .assignee-name {
+        font-size: 16px;
+    }
+
+    .assignee-row .assignee-badge {
+        width: 38px;
+        height: 38px;
+        font-size: 14px;
+    }
+
+    .modal-footer-actions {
+        margin-top: 12px;
     }
 }
 
@@ -311,16 +376,69 @@
     .task-modal-content {
         width: 100%;
         max-width: calc(100% - 20px);
+        padding: 24px 16px;
+        gap: 12px;
+    }
+
+    .modal-header-row, .modal-close-container {
+        top: -24px;
+        margin-top: -24px;
+        padding-top: 24px;
+        margin-left: -16px;
+        margin-right: -16px;
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-bottom: 12px;
+        margin-bottom: 12px;
     }
 
     #modalTitle {
-        font-size: 24px; /* Minimum size requested */
+        font-size: 24px;
+        margin-bottom: 12px;
     }
 
     .detail-label {
         width: 80px;
+        font-size: 14px;
     }
-    
+
+    .detail-value {
+        font-size: 14px;
+    }
+
+    #modalDescription {
+        font-size: 14px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .modal-details-row {
+        margin-bottom: 12px;
+    }
+
+    .modal-assignees-container {
+        margin-bottom: 12px;
+        padding-top: 12px;
+    }
+
+    .modal-subtasks-container {
+        padding-top: 12px;
+    }
+
+    .assignee-name {
+        font-size: 14px;
+    }
+
+    .assignee-row .assignee-badge {
+        width: 36px;
+        height: 36px;
+        font-size: 12px;
+    }
+
+    .modal-footer-actions {
+        margin-top: 12px;
+    }
+
     .modal-close-btn {
         top: 20px;
         right: 20px;
@@ -334,6 +452,14 @@
     flex-direction: column;
     gap: 16px;
     width: 100%;
+}
+
+.edit-task-heading {
+    font-size: 61px;
+    font-weight: 700;
+    margin: 0;
+    color: #000000;
+    word-break: break-word;
 }
 
 .modal-close-container {
@@ -543,11 +669,21 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    min-width: 0;
+    flex: 1;
+}
+
+.edit-task-form .contact-left span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .edit-task-form .contact-circle {
     width: 32px;
     height: 32px;
+    min-width: 32px;
+    min-height: 32px;
     border-radius: 50%;
     background: #2a3647;
     color: white;
@@ -556,6 +692,8 @@
     justify-content: center;
     font-size: 16px;
     font-weight: 500;
+    flex-shrink: 0;
+    box-sizing: border-box;
 }
 
 .edit-task-form .contact-item input[type="checkbox"] {
@@ -596,13 +734,16 @@
 .edit-task-form .selected-users {
     display: flex;
     gap: 8px;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     margin-top: 8px;
+    align-items: center;
 }
 
 .edit-task-form .user-circle {
     width: 42px;
     height: 42px;
+    min-width: 42px;
+    min-height: 42px;
     border-radius: 50%;
     color: white;
     display: flex;
@@ -611,6 +752,8 @@
     font-size: 16px;
     font-weight: 500;
     border: 2px solid white;
+    flex-shrink: 0;
+    box-sizing: border-box;
 }
 
 .edit-task-form .user-circle-more {
@@ -634,6 +777,16 @@
 .edit-task-form .subtask-input-wrapper input {
     width: 100%;
     padding-right: 100px;
+    font-size: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.edit-task-form .subtask-input-wrapper input::placeholder {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .edit-task-form .subtask-input-actions {
@@ -772,5 +925,124 @@
     width: 1px;
     height: 16px;
     background: #d1d1d1;
+}
+
+/* Responsive adjustments for subtask input */
+@media (max-width: 450px) {
+    .edit-task-form .subtask-input-wrapper input {
+        font-size: 16px;
+        padding-right: 90px;
+    }
+
+    .edit-task-form label {
+        font-size: 16px;
+    }
+
+    .edit-input, .edit-textarea {
+        font-size: 16px;
+    }
+
+    .edit-task-form .trigger {
+        font-size: 16px;
+    }
+
+    .edit-task-form .dropdown-header {
+        font-size: 16px;
+    }
+
+    .edit-task-form .user-circle {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        min-height: 38px;
+        font-size: 14px;
+    }
+
+    .edit-footer {
+        bottom: -32px;
+        margin-bottom: -32px;
+        padding-bottom: 32px;
+        margin-left: -24px;
+        margin-right: -24px;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .edit-ok-btn {
+        font-size: 18px;
+        padding: 14px 20px;
+    }
+}
+
+@media (max-width: 350px) {
+    .edit-task-form .subtask-input-wrapper input {
+        font-size: 14px;
+        padding-right: 80px;
+    }
+
+    .edit-task-form .subtask-input-wrapper input::placeholder {
+        font-size: 14px;
+    }
+
+    .edit-task-form label {
+        font-size: 14px;
+    }
+
+    .edit-input, .edit-textarea {
+        font-size: 14px;
+        height: 44px;
+    }
+
+    .edit-task-form .trigger {
+        font-size: 14px;
+        height: 48px;
+    }
+
+    .edit-task-form .dropdown-header {
+        font-size: 14px;
+        height: 44px;
+    }
+
+    .edit-task-form .user-circle {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        min-height: 36px;
+        font-size: 12px;
+    }
+
+    .edit-footer {
+        bottom: -24px;
+        margin-bottom: -24px;
+        padding-bottom: 24px;
+        margin-left: -16px;
+        margin-right: -16px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .edit-ok-btn {
+        font-size: 16px;
+        padding: 12px 18px;
+    }
+}
+
+/* Responsive adjustments for edit-task-heading */
+@media (max-width: 550px) {
+    .edit-task-heading {
+        font-size: 42px !important;
+    }
+}
+
+@media (max-width: 450px) {
+    .edit-task-heading {
+        font-size: 32px !important;
+    }
+}
+
+@media (max-width: 350px) {
+    .edit-task-heading {
+        font-size: 24px !important;
+    }
 }
 

@@ -27,17 +27,42 @@ async function loadTasks() {
  * @param {Object} tasks - An object containing tasks fetched from the database.
  */
 function renderTasks(tasks) {
-  const columns = {
+  const columns = getBoardColumns();
+
+  clearAllColumns(columns);
+  populateColumns(tasks, columns);
+  showEmptyStateMessages(columns);
+}
+
+/**
+ * Gets all board column elements.
+ * @returns {Object} The column elements.
+ */
+function getBoardColumns() {
+  return {
     todo: document.getElementById("taskTodo"),
     inProgress: document.getElementById("taskInProgress"),
     awaitingFeedback: document.getElementById("taskAwaitingFeedback"),
     done: document.getElementById("taskDone"),
   };
+}
 
+/**
+ * Clears all column contents.
+ * @param {Object} columns - The column elements.
+ */
+function clearAllColumns(columns) {
   Object.values(columns).forEach((col) => {
     if (col) col.innerHTML = "";
   });
+}
 
+/**
+ * Populates columns with task cards.
+ * @param {Object} tasks - The tasks object.
+ * @param {Object} columns - The column elements.
+ */
+function populateColumns(tasks, columns) {
   for (let id in tasks) {
     const task = tasks[id];
     const column = columns[task.status];
@@ -46,15 +71,19 @@ function renderTasks(tasks) {
 
     column.innerHTML += generateTaskHTML(task, id);
   }
+}
 
+/**
+ * Shows empty state messages in columns with no tasks.
+ * @param {Object} columns - The column elements.
+ */
+function showEmptyStateMessages(columns) {
   if (columns.todo && columns.todo.innerHTML === "")
     columns.todo.innerHTML = '<div class="no-tasks">No tasks To do</div>';
   if (columns.inProgress && columns.inProgress.innerHTML === "")
-    columns.inProgress.innerHTML =
-      '<div class="no-tasks">No tasks in progress</div>';
+    columns.inProgress.innerHTML = '<div class="no-tasks">No tasks in progress</div>';
   if (columns.awaitingFeedback && columns.awaitingFeedback.innerHTML === "")
-    columns.awaitingFeedback.innerHTML =
-      '<div class="no-tasks">No tasks awaiting feedback</div>';
+    columns.awaitingFeedback.innerHTML = '<div class="no-tasks">No tasks awaiting feedback</div>';
   if (columns.done && columns.done.innerHTML === "")
     columns.done.innerHTML = '<div class="no-tasks">No tasks done</div>';
 }
@@ -76,11 +105,61 @@ function allowDrop(ev) {
 }
 
 /**
+ * Adds visual highlight to the column when dragging over it.
+ * @param {DragEvent} ev - The drag event.
+ */
+function highlightColumn(ev) {
+  ev.preventDefault();
+  let column = ev.currentTarget;
+
+  // Falls das Event von einem Child-Element kommt, finde die board-column
+  if (!column.classList.contains('board-column')) {
+    column = column.closest('.board-column');
+  }
+
+  if (column) {
+    // Entferne ALLE Highlights von ALLEN Spalten
+    removeAllHighlights();
+
+    // Füge Highlight nur zur aktuellen Spalte hinzu
+    column.classList.add('drag-over');
+  }
+}
+
+/**
+ * Removes visual highlight from the column when dragging leaves it.
+ * @param {DragEvent} ev - The drag event.
+ */
+function removeHighlight(ev) {
+  let column = ev.currentTarget;
+
+  // Falls das Event von einem Child-Element kommt, finde die board-column
+  if (!column.classList.contains('board-column')) {
+    column = column.closest('.board-column');
+  }
+
+  if (column) {
+    column.classList.remove('drag-over');
+  }
+}
+
+/**
+ * Removes all highlights from all columns.
+ */
+function removeAllHighlights() {
+  const allColumns = document.querySelectorAll('.board-column');
+  allColumns.forEach(col => col.classList.remove('drag-over'));
+}
+
+/**
  * Moves the currently dragged task to a new status category and updates the backend.
  * Reloads the tasks after successful update to reflect the change visually.
  * @param {string} newStatus - The new status to assign to the task (e.g., 'todo', 'inProgress').
  */
 async function moveTo(newStatus) {
+  // Entferne alle Highlights nach dem Drop
+  removeAllHighlights();
+
   try {
     await fetch(BASE_URL + `/tasks/${currentDraggedElement}/status.json`, {
       method: "PUT",
@@ -131,29 +210,56 @@ function openTaskPopup(id) {
   currentTaskId = id;
   let task = allLoadedTasks[id];
 
-  if (task) {
-    document.getElementById("taskModal").classList.remove("d-none");
-    document.getElementById("taskModalView").classList.remove("d-none");
-    document.getElementById("taskModalEdit").classList.add("d-none");
+  if (!task) return;
 
-    document.getElementById("modalTitle").innerHTML = task.title || "";
-    document.getElementById("modalDescription").innerHTML =
-      task.description || "";
-    document.getElementById("modalDate").innerHTML = task.dueDate || "";
+  showTaskModal();
+  populateTaskModal(task);
+}
 
-    let priorityIconStr = getPriorityIcon(task.priority);
-    document.getElementById("modalPriority").innerHTML = `
-            ${task.priority || ""} <img src="${priorityIconStr}" alt="${task.priority}">
-        `;
+/**
+ * Shows the task modal and ensures correct view is displayed.
+ */
+function showTaskModal() {
+  document.getElementById("taskModal").classList.remove("d-none");
+  document.getElementById("taskModalView").classList.remove("d-none");
+  document.getElementById("taskModalEdit").classList.add("d-none");
+}
 
-    let trimmedCategory = (task.category || "").trim();
-    let modalCategory = document.getElementById("modalCategory");
-    modalCategory.innerHTML = trimmedCategory;
-    modalCategory.className = `task-category ${getCategoryClass(trimmedCategory)}`;
+/**
+ * Populates the task modal with task data.
+ * @param {Object} task - The task object.
+ */
+function populateTaskModal(task) {
+  document.getElementById("modalTitle").innerHTML = task.title || "";
+  document.getElementById("modalDescription").innerHTML = task.description || "";
+  document.getElementById("modalDate").innerHTML = task.dueDate || "";
 
-    renderModalAssignees(task.assignedTo);
-    renderModalSubtasks(task.subtasks);
-  }
+  populateTaskPriority(task.priority);
+  populateTaskCategory(task.category);
+  renderModalAssignees(task.assignedTo);
+  renderModalSubtasks(task.subtasks);
+}
+
+/**
+ * Populates the task priority in the modal.
+ * @param {string} priority - The priority level.
+ */
+function populateTaskPriority(priority) {
+  let priorityIconStr = getPriorityIcon(priority);
+  document.getElementById("modalPriority").innerHTML = `
+    ${priority || ""} <img src="${priorityIconStr}" alt="${priority}">
+  `;
+}
+
+/**
+ * Populates the task category in the modal.
+ * @param {string} category - The category name.
+ */
+function populateTaskCategory(category) {
+  let trimmedCategory = (category || "").trim();
+  let modalCategory = document.getElementById("modalCategory");
+  modalCategory.innerHTML = trimmedCategory;
+  modalCategory.className = `task-category ${getCategoryClass(trimmedCategory)}`;
 }
 
 /**
@@ -208,40 +314,80 @@ async function saveTask() {
  */
 function openMoveMenu(event, taskId) {
   event.stopPropagation();
-  
   closeMoveMenu();
 
   const task = allLoadedTasks[taskId];
   if (!task) return;
 
-  const statuses = [
-      { id: 'todo', label: 'To-do' },
-      { id: 'inProgress', label: 'In progress' },
-      { id: 'awaitingFeedback', label: 'Awaiting feedback' },
-      { id: 'done', label: 'Done' }
-  ];
-
+  const statuses = getStatusOptions();
   const currentIndex = statuses.findIndex(s => s.id === task.status);
   if (currentIndex === -1) return;
 
-  const menuContent = generateMobileMoveMenuHTML(taskId, statuses, currentIndex);
+  createAndShowMoveMenu(event, taskId, statuses, currentIndex);
+}
 
+/**
+ * Gets the available status options.
+ * @returns {Array<Object>} The status options.
+ */
+function getStatusOptions() {
+  return [
+    { id: 'todo', label: 'To-do' },
+    { id: 'inProgress', label: 'In progress' },
+    { id: 'awaitingFeedback', label: 'Awaiting feedback' },
+    { id: 'done', label: 'Done' }
+  ];
+}
+
+/**
+ * Creates and shows the move menu.
+ * @param {Event} event - The click event.
+ * @param {string} taskId - The task ID.
+ * @param {Array} statuses - The status options.
+ * @param {number} currentIndex - The current status index.
+ */
+function createAndShowMoveMenu(event, taskId, statuses, currentIndex) {
+  const menuContent = generateMobileMoveMenuHTML(taskId, statuses, currentIndex);
+  const menu = createMoveMenuElement(menuContent);
+
+  positionMoveMenu(menu, event.currentTarget);
+  attachMoveMenuListener();
+}
+
+/**
+ * Creates the move menu element.
+ * @param {string} content - The HTML content.
+ * @returns {HTMLElement} The menu element.
+ */
+function createMoveMenuElement(content) {
   const menu = document.createElement('div');
   menu.className = 'mobile-move-menu';
   menu.id = 'mobileMoveMenu';
-  menu.innerHTML = menuContent;
-
-  const btnRect = event.currentTarget.getBoundingClientRect();
+  menu.innerHTML = content;
   document.body.appendChild(menu);
+  return menu;
+}
 
+/**
+ * Positions the move menu relative to the button.
+ * @param {HTMLElement} menu - The menu element.
+ * @param {HTMLElement} button - The button element.
+ */
+function positionMoveMenu(menu, button) {
+  const btnRect = button.getBoundingClientRect();
   const top = btnRect.bottom + window.scrollY + 8;
   const left = btnRect.right + window.scrollX - 140;
-  
+
   menu.style.top = `${top}px`;
   menu.style.left = `${left}px`;
+}
 
+/**
+ * Attaches the click listener to close the menu.
+ */
+function attachMoveMenuListener() {
   setTimeout(() => {
-      document.addEventListener('click', closeMoveMenuHandler);
+    document.addEventListener('click', closeMoveMenuHandler);
   }, 0);
 }
 
