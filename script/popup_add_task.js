@@ -36,8 +36,8 @@ async function openAddTaskPopup() {
     const html = getTaskPopupTemplate();
     const cleanHtml = html;
 
-    const closeButton = `<button class="popup-close-btn" onclick="closeAddTaskPopup()">
-            <img src="../assets/imgs/Close.png" alt="Close">
+    const closeButton = `<button class="popup-close-btn">
+            <img src="../assets/imgs/iconoir_cancel.svg" alt="Close">
         </button>`;
 
     popupContainer.innerHTML = closeButton + cleanHtml;
@@ -48,11 +48,16 @@ async function openAddTaskPopup() {
     overlay.classList.remove("d-none");
     overlay.style.display = "flex";
 
-    // Hintergrund-Scrollen verhindern
     disableBodyScroll();
 
     setTimeout(() => {
       initializePopupComponents();
+      
+      // Event-Listener für Close-Button hinzufügen
+      const closeBtn = document.querySelector('.popup-close-btn');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeAddTaskPopup);
+      }
     }, 150);
   } catch (err) {
     console.error("Popup konnte nicht geladen werden:", err);
@@ -99,6 +104,8 @@ function initializePopupComponents() {
         }
       }
     });
+
+    
   }
 }
 
@@ -140,10 +147,20 @@ function closeAddTaskPopup() {
       clearForm();
     }
   }, 400);
+
 }
+
+document.addEventListener("click", (e) => {
+  document.querySelectorAll(".custom-dropdown").forEach(dropdown => {
+    if (!dropdown.contains(e.target)) {
+      dropdown.classList.remove("open");
+    }
+  });
+});
 
 document.addEventListener("keydown", function (e) {
   if (e.key === "Escape" && !overlay.classList.contains("d-none")) {
     closeAddTaskPopup();
   }
 });
+
