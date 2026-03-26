@@ -54,7 +54,7 @@
 
 @media (max-width: 1375px) {
     .board-container {
-        padding: 0 40px;
+        padding: 0 40px 60px 40px;
         height: auto;
         min-height: calc(100dvh - var(--header-height));
     }
@@ -63,11 +63,12 @@
         flex-direction: column;
         gap: 26px;
         height: auto;
+        padding-bottom: 60px;
     }
 
     .board-column {
         width: 100%;
-        height: auto;
+        min-height: 400px;
         flex: none;
     }
 

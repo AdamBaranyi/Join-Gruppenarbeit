@@ -76,11 +76,61 @@ function allowDrop(ev) {
 }
 
 /**
+ * Adds visual highlight to the column when dragging over it.
+ * @param {DragEvent} ev - The drag event.
+ */
+function highlightColumn(ev) {
+  ev.preventDefault();
+  let column = ev.currentTarget;
+
+  // Falls das Event von einem Child-Element kommt, finde die board-column
+  if (!column.classList.contains('board-column')) {
+    column = column.closest('.board-column');
+  }
+
+  if (column) {
+    // Entferne ALLE Highlights von ALLEN Spalten
+    removeAllHighlights();
+
+    // Füge Highlight nur zur aktuellen Spalte hinzu
+    column.classList.add('drag-over');
+  }
+}
+
+/**
+ * Removes visual highlight from the column when dragging leaves it.
+ * @param {DragEvent} ev - The drag event.
+ */
+function removeHighlight(ev) {
+  let column = ev.currentTarget;
+
+  // Falls das Event von einem Child-Element kommt, finde die board-column
+  if (!column.classList.contains('board-column')) {
+    column = column.closest('.board-column');
+  }
+
+  if (column) {
+    column.classList.remove('drag-over');
+  }
+}
+
+/**
+ * Removes all highlights from all columns.
+ */
+function removeAllHighlights() {
+  const allColumns = document.querySelectorAll('.board-column');
+  allColumns.forEach(col => col.classList.remove('drag-over'));
+}
+
+/**
  * Moves the currently dragged task to a new status category and updates the backend.
  * Reloads the tasks after successful update to reflect the change visually.
  * @param {string} newStatus - The new status to assign to the task (e.g., 'todo', 'inProgress').
  */
 async function moveTo(newStatus) {
+  // Entferne alle Highlights nach dem Drop
+  removeAllHighlights();
+
   try {
     await fetch(BASE_URL + `/tasks/${currentDraggedElement}/status.json`, {
       method: "PUT",
