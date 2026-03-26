@@ -14,6 +14,12 @@
         padding-top: 20px;
     }
 
+    @media (max-height: 1100px) {
+        .footer-section {
+            margin-top: 500px;
+        }
+    }
+
 }
 
 @media (max-width: 1250px) {
@@ -125,6 +131,8 @@
     .footer-section{
         background: var(--color-bg);
         align-items: center;
+        bottom: 0;
+        margin-top: 0;
     }
     
     .footer-container {

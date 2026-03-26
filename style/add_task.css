@@ -567,7 +567,7 @@ input:focus, textarea:focus {
     position: fixed;
     left: 0;
     right: 0;
-    bottom: 0;
+    margin-top: 750px;
     height: 200px;
     background-color: var(--color-bg);
     z-index: 999;
