@@ -1,5 +1,6 @@
-/* Variables */
+/* Sidebar Styles */
 
+/* Variables */
 :root {
     --sidebar-bg: #2A3647;
     --sidebar-width: 232px;
@@ -7,7 +8,6 @@
 }
 
 /* Base Layout */
-
 body {
     margin: 0;
     padding: 0;
@@ -28,7 +28,6 @@ main {
 }
 
 /* Sidebar */
-
 .sidebar {
     position: fixed;
     top: 0;
@@ -54,7 +53,6 @@ main {
 }
 
 /* Sidebar Navigation */
-
 .sidebar-nav {
     display: flex;
     flex-direction: column;
@@ -97,7 +95,6 @@ main {
 }
 
 /* Sidebar Footer */
-
 .sidebar-footer {
     display: flex;
     flex-direction: column;
@@ -122,7 +119,6 @@ main {
 }
 
 /* Header */
-
 .header-content {
     position: fixed;
     top: 0;
@@ -131,10 +127,8 @@ main {
     height: var(--header-height);
     width: calc(100dvw - var(--sidebar-width));
     background-color: white;
-
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.04);
     z-index: 900;
-    
 }
 
 .content-limitation {
@@ -169,7 +163,6 @@ main {
 }
 
 /* User Profile Badge */
-
 .user-profile-initials {
     width: 56px;
     height: 56px;
@@ -197,7 +190,6 @@ main {
 }
 
 /* Profile Dropdown */
-
 .profile-dropdown {
     position: absolute;
     top: 65px;
@@ -233,20 +225,17 @@ main {
 }
 
 /* Main Content Area */
-
 .simple-page-content, .content-container {
     margin-left: var(--sidebar-width);
-    margin-top: var(--header-height); 
+    margin-top: var(--header-height);
     padding-left: 64px;
     box-sizing: border-box;
     width: calc(100% - var(--sidebar-width));
     max-width: 1440px;
 }
 
-/* Responsive: Mobile (max-width: 850px) */
-
+/* Mobile (max-width: 850px) */
 @media(max-width: 850px) {
-
     /* Sidebar */
     .sidebar {
         display: none;
@@ -261,13 +250,13 @@ main {
         width: 100%;
         box-sizing: border-box;
     }
-    
+
     .content-limitation {
         padding: 0;
     }
-    
+
     .header-title {
-        display: none; 
+        display: none;
     }
 
     .header-logo-mobile {

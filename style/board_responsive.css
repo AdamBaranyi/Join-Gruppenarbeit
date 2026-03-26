@@ -1,6 +1,6 @@
-/* Responsives Design */
+/* Board Responsive Design */
 
-
+/* Base Styles */
 .header-left {
     display: flex;
     align-items: center;
@@ -10,27 +10,30 @@
     display: none;
 }
 
+/* Tablet & Mobile (max-width: 1375px) */
 @media (max-width: 1375px) {
+    /* Header */
     .board-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 20px;
     }
-    
+
     .board-header-right {
         width: 100%;
         justify-content: space-between;
     }
-    
+
     .header-left {
         width: 100% !important;
         justify-content: space-between !important;
     }
-    
+
+    /* Buttons */
     .add-btn-desktop {
-        display: none; 
+        display: none;
     }
-    
+
     .add-btn-mobile {
         display: flex;
         width: 40px;
@@ -41,24 +44,25 @@
         border-radius: 10px;
         margin-left: auto;
     }
-    
+
     .add-btn-mobile img {
         width: 16px;
         height: 16px;
     }
-    
+
+    /* Search */
     .search-container {
         width: 100%;
     }
-}
 
-@media (max-width: 1375px) {
+    /* Board Container */
     .board-container {
         padding: 0 40px 60px 40px;
         height: auto;
         min-height: calc(100dvh - var(--header-height));
     }
 
+    /* Columns */
     .board-columns-container {
         flex-direction: column;
         gap: 12px;
@@ -77,6 +81,7 @@
         position: static;
     }
 
+    /* Tasks Container - Horizontal Scroll */
     .tasks-container {
         min-height: auto;
         height: 100%;
@@ -86,14 +91,15 @@
         overflow-x: scroll;
         scrollbar-width: none;
         -ms-overflow-style: none;
-        padding-left: 2px; 
-        gap: 12px; 
+        padding-left: 2px;
+        gap: 12px;
     }
 
     .tasks-container::-webkit-scrollbar {
-        display: none; 
+        display: none;
     }
 
+    /* Task Cards */
     .task-card {
         min-width: 250px;
         height: max-content;
@@ -105,14 +111,14 @@
     }
 }
 
+/* Mobile Move Button (max-width: 1024px) */
 @media (max-width: 1024px) {
     .mobile-move-btn {
         display: flex;
     }
 }
 
-
-
+/* Tablet (max-width: 800px) */
 @media (max-width: 800px) {
     .board-container {
         padding: 0 16px 100px 16px;
@@ -120,60 +126,64 @@
         width: 100%;
         box-sizing: border-box;
     }
-    
+
     .board-header h1 {
         font-size: 47px;
     }
-
 }
 
+/* Small Mobile (max-width: 450px) */
 @media (max-width: 450px) {
     .board-header h1 {
         font-size: 47px;
     }
-    
+
+    /* Task Cards */
     .task-card {
         padding: 12px;
     }
-    
+
     .task-title {
         font-size: 16px;
     }
-    
+
     .task-category {
         font-size: 16px;
         padding: 4px 12px;
         margin-bottom: 20px;
     }
-    
+
     .task-description {
         font-size: 16px;
     }
-    
+
+    /* Search */
     .search-container {
         padding: 8px 12px;
         height: 44px;
     }
-    
+
     .search-container input {
         font-size: 16px;
     }
-    
+
     .search-divider {
         margin: 0 10px;
         height: 24px;
     }
-    
+
     .search-container img {
         width: 28px;
         height: 28px;
     }
 }
 
+/* Extra Small Mobile (max-width: 350px) */
 @media (max-width: 350px) {
     .board-container {
         padding: 0 10px 100px 10px;
     }
+
     .board-header h1 {
         font-size: 42px;
     }
@@ -183,7 +193,7 @@
     }
 }
 
-/* Landscape Mode for Mobile/Tablet */
+/* Landscape Mode - Mobile/Tablet */
 @media (max-height: 500px) and (orientation: landscape) {
     .board-container {
         padding: 0 16px;
@@ -199,6 +209,7 @@
         font-size: 32px;
     }
 
+    /* Search */
     .search-container {
         height: 36px;
         padding: 6px 12px;
@@ -208,16 +219,19 @@
         font-size: 14px;
     }
 
+    /* Buttons */
     .add-task-btn {
         height: 36px;
         font-size: 16px;
         padding: 8px 12px;
     }
 
+    /* Columns */
     .board-columns-container {
         gap: 16px;
     }
 
+    /* Task Cards */
     .task-card {
         padding: 10px;
         min-width: 200px;
@@ -252,7 +266,7 @@
     }
 }
 
-/* Extra small landscape */
+/* Landscape Mode - Extra Small */
 @media (max-height: 360px) and (orientation: landscape) {
     .board-header h1 {
         font-size: 28px;

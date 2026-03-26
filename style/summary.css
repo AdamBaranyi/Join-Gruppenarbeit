@@ -1,10 +1,11 @@
-/* Layout */
+/* Summary Page Styles */
 
+/* Layout */
 .summary-content {
     background-color: #F6F7F8;
     height: calc(100vh - 96px);
     overflow-y: auto;
-    padding: 110px 30px 127px 114px ;
+    padding: 110px 30px 127px 114px;
     max-width: 1440px;
 }
 
@@ -15,7 +16,6 @@
 }
 
 /* Header */
-
 .summary-header-container {
     display: flex;
     align-items: center;
@@ -46,11 +46,10 @@
 }
 
 /* Metrics Container */
-
 .metrics-container {
     display: flex;
     flex-direction: column;
-    gap: 30px; 
+    gap: 30px;
     width: 560px;
     margin-right: 65px;
 }
@@ -61,7 +60,6 @@
 }
 
 /* Metric Cards */
-
 .metric-card {
     background-color: white;
     border-radius: 30px;
@@ -69,17 +67,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 18px; 
-    padding: 38px 58px; 
+    gap: 18px;
+    padding: 38px 58px;
     cursor: pointer;
-    transition: transform 0.08s ease-in-out, box-shadow 0.08s; 
+    transition: transform 0.08s ease-in-out, box-shadow 0.08s;
     height: 168px;
-    width: 264px; 
+    width: 264px;
     min-width: unset;
 }
 
 /* Card Hover States */
-
 .metric-card:hover {
     transform: scale(1.05);
     background-color: #2A3647;
@@ -100,7 +97,6 @@
 }
 
 /* Card Content */
-
 .metric-info {
     display: flex;
     flex-direction: column;
@@ -126,7 +122,6 @@
 }
 
 /* Urgent Card */
-
 .urgent-card {
     background-color: white;
     width: 560px;
@@ -173,7 +168,6 @@
 }
 
 /* Urgent Card Hover */
-
 .urgent-card:hover .metric-icon-circle.icon-urgent {
     background-color: #FF3D00;
 }
@@ -192,15 +186,14 @@
 }
 
 /* Small Cards */
-
 .small-cards .metric-card {
     flex-direction: column;
-    flex: 1; 
+    flex: 1;
     min-width: unset;
-    height: 168px; 
+    height: 168px;
     padding: 25px;
-    align-items: center; 
-    justify-content: center; 
+    align-items: center;
+    justify-content: center;
 }
 
 .small-cards .metric-label {
@@ -213,7 +206,6 @@
 }
 
 /* Icons */
-
 .metric-icon-circle {
     width: 69px;
     height: 69px;
@@ -234,7 +226,6 @@
 }
 
 /* Greeting */
-
 .greeting-container {
     display: flex;
     flex-direction: column;
@@ -259,389 +250,4 @@
     line-height: 120%;
     letter-spacing: 0;
     color: #29ABE2;
-}
-
-@media (max-width: 1400px) {
-    .summary-content {
-        padding-left: 30px;
-    }
-
-    .metrics-container {
-        margin-right: 0;
-    }
-}
-
-/* Greeting Desktop Override */
-
-@media(min-width: 851px) {
-    .greeting-container {
-        display: flex ;
-        opacity: 1 ;
-    }
-}
-
-/* Responsive: Tablet (max-width: 1250px) */
-
-@media(max-width: 1260px) {
-
-    /* Header */
-    .summary-header-container {
-        width: 100%;
-        max-width: 560px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    /* Layout */
-    .summary-main-wrapper {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    /* Greeting */
-    .greeting-container {
-        margin: 0;
-        align-items: center;
-        text-align: center;
-        order: -1;
-    }
-
-    /* Metrics */
-    .metrics-container {
-        width: 100%;
-        max-width: 560px;
-        margin-right: 0;
-    }
-}
-
-@media (max-width: 1150px) {
-
-    .summary-content {
-        padding: 0;
-    }
-}
-
-/* Responsive: Short Desktop (max-height: 800px) */
-
-@media(max-height: 800px) {
-
-    /* Header */
-    .summary-header-container {
-        margin-bottom: 20px;
-    }
-    
-    .summary-header-container h1 {
-        font-size: 48px;
-    }
-
-    /* Metrics */
-    .metrics-container {
-        gap: 15px;
-    }
-    
-    .metrics-row {
-        gap: 15px;
-    }
-
-    /* Cards */
-    .metric-card {
-        padding: 20px;
-        min-height: 140px;
-    }
-    
-    .urgent-card {
-        padding: 10px 30px;
-        gap: 30px;
-    }
-    
-    .small-cards .metric-card {
-        min-height: 140px;
-    }
-
-    /* Typography */
-    .metric-number {
-        font-size: 48px;
-    }
-    
-    #greeting-time {
-        font-size: 36px;
-    }
-
-    #greeting-name {
-        font-size: 48px;
-    }
-}
-
-/* Responsive: Very Short Screen (max-height: 600px) */
-
-@media(max-height: 600px) {
-
-    /* Layout */
-    .summary-content {
-        padding-top: 10px;
-        padding-bottom: 10px; 
-    }
-
-    /* Header */
-    .summary-header-container {
-        margin-bottom: 10px;
-    }
-    
-    .summary-header-container h1 {
-        font-size: 36px;
-    }
-
-    /* Cards */
-    .metric-card {
-        padding: 10px;
-        min-height: 100px;
-    }
-    
-    .small-cards .metric-card {
-        min-height: 100px;
-    }
-
-    /* Typography */
-    .metric-number {
-        font-size: 36px;
-    }
-    
-    .metric-label {
-        font-size: 16px;
-        margin-top: 0;
-    }
-
-    /* Icons */
-    .metric-icon-circle {
-        width: 50px;
-        height: 50px;
-    }
-    
-    .metric-icon-circle img {
-        width: 20px;
-        height: 20px;
-    }
-
-    /* Urgent Card */
-    .urgent-divider {
-        height: 60px;
-    }
-}
-
-/* Responsive: Mobile (max-width: 850px) */
-
-@media(max-width: 850px) {
-
-    /* Layout */
-    .summary-content {
-        padding: 10px 16px 85px 16px ;
-        display: block;
-        height: auto;
-        min-height: 0;
-    }
-
-    .summary-main-wrapper {
-        flex-direction: column;
-        width: 100%;
-        height: auto;
-        justify-content: flex-start;
-    }
-
-    /* Splash Screen */
-    .summary-content.splash-active {
-        padding: 0 ;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: calc(100vh - var(--header-height));
-        overflow: hidden;
-    }
-
-    .summary-content.splash-active .summary-main-wrapper {
-        height: 100%;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .splash-hidden {
-        display: none ;
-    }
-
-    /* Dashboard Visibility */
-    .metrics-container, 
-    .summary-header-container {
-        display: none;
-        width: 100%;
-        margin-right: 0;
-    }
-
-    .metrics-container.dashboard-ready,
-    .summary-header-container.dashboard-ready {
-        display: flex ;
-    }
-
-    /* Greeting */
-    .greeting-container {
-        display: none;
-        margin: 0;
-        align-items: center;
-        text-align: center;
-        width: 100%;
-    }
-    
-    #greeting-time {
-        font-size: 36px;
-    }
-    
-    #greeting-name {
-        font-size: 47px;
-        color: #29ABE2;
-    }
-
-    /* Header */
-    .summary-header-container {
-        margin-top: 5px;
-        margin-bottom: 10px;
-        align-items: flex-start;
-        flex-direction: column;
-        width: 100%;
-    }
-    
-    .summary-header-container h1 {
-        font-size: 42px;
-        margin-bottom: 5px;
-    }
-
-    .summary-divider {
-        width: 90px;
-        height: 3px;
-        margin: 5px 0 15px 0;
-        background-color: #29ABE2;
-    }
-
-    .subtitle {
-        font-size: 18px;
-        white-space: nowrap;
-    }
-
-    /* Metrics */
-    .metrics-container {
-        gap: 10px;
-        margin-bottom: 0;
-    }
-
-    .metrics-row {
-        display: flex;
-        gap: 8px;
-        flex-wrap: nowrap;
-        width: 100%;
-        justify-content: space-between;
-    }
-
-    /* Cards */
-    .metric-card {
-        flex: 1;
-        padding: 10px;
-        min-height: 80px;
-        height: auto;
-        min-width: 0;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        gap: 0px;
-    }
-
-    /* Top Row Cards */
-    .metrics-row:first-child .metric-card {
-        flex-direction: row;
-        align-items: center;
-        text-align: left;
-        padding: 22px 10px;
-        min-width: 120px;
-        min-height: 80px;
-    }
-    
-    .metrics-row:first-child .metric-icon-circle {
-        margin-bottom: 0;
-        margin-right: 15px;
-    }
-    
-    .metrics-row:first-child .metric-info {
-        align-items: flex-start;
-    }
-
-    /* Icons */
-    .metric-icon-circle {
-        width: 40px;
-        height: 40px;
-        flex-shrink: 0;
-        margin-right: 0; 
-        margin-bottom: 10px;
-    }
-
-    /* Typography */
-    .metric-number {
-        font-size: 38px;
-        line-height: 100%;
-        margin-bottom: 2px;
-    }
-
-    .metric-label {
-         font-size: 16px ; 
-         line-height: 110%;
-         text-align: center;
-         white-space: normal; 
-         word-wrap: break-word; 
-         overflow-wrap: break-word;
-         hyphens: auto;
-    }
-
-    .metric-info span {
-        white-space: nowrap;
-    }
-
-    /* Urgent Card */
-    .urgent-card {
-        flex-direction: row; 
-        width: 100%;
-        padding: 14px 15px;
-        flex-wrap: nowrap;
-        gap: 10px;
-        justify-content: space-between;
-        align-items: center;
-        min-height: 80px;
-    }
-
-    .urgent-left {
-        gap: 15px;
-        min-width: 0;
-        flex-shrink: 1;
-    }
-    
-    .urgent-divider {
-        margin: 0 5px;
-        height: 60px;
-        width: 2px;
-        background-color: #D1D1D1; 
-        display: block; 
-    }
-
-    .urgent-right span {
-        font-size: 16px ;
-    }
-
-    /* Bottom Row Cards */
-    .small-cards .metric-card {
-        padding: 15px 8px;
-        min-height: 80px;
-        height: auto;
-        justify-content: center;
-        flex: 1;
-        min-width: 0; 
-    }
-
-    .small-cards .metric-label {
-        font-size: 16px;
-    }
 }
