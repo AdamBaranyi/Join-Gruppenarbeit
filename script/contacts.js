@@ -540,6 +540,7 @@ document.addEventListener("click", function(e) {
     if (e.target.id === "delete-contact") {
         const form = document.getElementById("edit-contact-form");
         const id = form.dataset.id;
+        closeModal()
         deleteContact(id);
     }
 });
