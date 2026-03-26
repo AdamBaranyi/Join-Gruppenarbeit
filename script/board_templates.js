@@ -245,23 +245,17 @@ function generateEditFormHTML(task) {
 function generateMobileMoveMenuHTML(taskId, statuses, currentIndex) {
   let menuContent = `<div class="mobile-move-menu-header">Move to</div>`;
 
-  if (currentIndex > 0) {
-      const prev = statuses[currentIndex - 1];
+  // Zeige ALLE Spalten außer der aktuellen
+  statuses.forEach((status, index) => {
+    // Überspringe die aktuelle Spalte
+    if (index !== currentIndex) {
       menuContent += `
-          <div class="mobile-move-menu-item" onclick="moveTaskToStatus(event, '${taskId}', '${prev.id}')">
-              <img src="../assets/imgs/arrow_upward.svg" alt="Up"> <span>${prev.label}</span>
+          <div class="mobile-move-menu-item" onclick="moveTaskToStatus(event, '${taskId}', '${status.id}')">
+              <span>${status.label}</span>
           </div>
       `;
-  }
-
-  if (currentIndex < statuses.length - 1) {
-      const next = statuses[currentIndex + 1];
-      menuContent += `
-          <div class="mobile-move-menu-item" onclick="moveTaskToStatus(event, '${taskId}', '${next.id}')">
-              <img src="../assets/imgs/arrow_downward.svg" alt="Down"> <span>${next.label}</span>
-          </div>
-      `;
-  }
+    }
+  });
 
   return menuContent;
 }

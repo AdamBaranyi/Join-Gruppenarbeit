@@ -32,6 +32,24 @@
     max-height: 90vh;
     transform: translateX(100vw);
     animation: slideInRight 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    scrollbar-width: thin;
+    scrollbar-color: #A8A8A8 #f0f0f0;
+}
+
+.task-modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.task-modal-content::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.task-modal-content::-webkit-scrollbar-thumb {
+    background: #A8A8A8;
+    border-radius: 10px;
+    border: 2px solid #f0f0f0;
 }
 
 @keyframes slideInRight {
@@ -81,7 +99,7 @@
     margin-left: -40px;
     margin-right: -40px;
     padding-left: 40px;
-    padding-right: 40px;
+    padding-right: 32px;
     background: white;
     padding-bottom: 16px;
 }
@@ -432,7 +450,7 @@
     margin-left: -40px;
     margin-right: -40px;
     padding-left: 40px;
-    padding-right: 40px;
+    padding-right: 32px;
     background: white;
     padding-top: 16px;
     border-radius: 0 0 30px 30px;

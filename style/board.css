@@ -7,7 +7,7 @@
     width: 100%;
     height: calc(100dvh - var(--header-height));
     min-width: 0;
-    max-width: 1440px;
+    max-width: 100%;
     padding: 0 64px;
 }
 
@@ -117,18 +117,33 @@
     display: flex;
     gap: 24px;
     width: 100%;
-    height: calc(100% - 129px);
+    min-height: calc(100vh - var(--header-height) - 129px);
     padding-top: 25px;
+    padding-bottom: 80px;
+    align-items: stretch;
 }
 
 .board-column {
     display: flex;
     flex-direction: column;
     flex: 1;
-    height: 100%;
+    min-height: 100%;
     min-width: 250px;
+    max-width: 400px;
     border-radius: 24px;
-    transition: background-color 0.2s;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+/* Highlight für Drop-Zone beim Dragging */
+.board-column.drag-over {
+    background-color: rgba(41, 171, 226, 0.08);
+    border: 2px solid #29ABE2;
+    box-shadow: 0 0 20px rgba(41, 171, 226, 0.3);
+}
+
+.board-column.drag-over .tasks-container {
+    background-color: rgba(41, 171, 226, 0.05);
 }
 
 .column-header {
@@ -172,14 +187,8 @@
     gap: 16px;
     min-height: 200px;
     padding-top: 10px;
+    padding-bottom: 10px;
     flex: 1;
-    overflow-y: auto;
-    scrollbar-width: none; 
-    -ms-overflow-style: none; 
-}
-
-.tasks-container::-webkit-scrollbar {
-    display: none; 
 }
 
 .no-tasks {

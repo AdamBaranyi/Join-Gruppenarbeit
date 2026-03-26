@@ -82,6 +82,7 @@
             id="todo"
             ondrop="moveTo('todo')"
             ondragover="allowDrop(event)"
+            ondragenter="highlightColumn(event)"
           >
             <div class="column-header">
               <h2>To do</h2>
@@ -99,6 +100,7 @@
             id="inProgress"
             ondrop="moveTo('inProgress')"
             ondragover="allowDrop(event)"
+            ondragenter="highlightColumn(event)"
           >
             <div class="column-header">
               <h2>In progress</h2>
@@ -116,6 +118,7 @@
             id="awaitingFeedback"
             ondrop="moveTo('awaitingFeedback')"
             ondragover="allowDrop(event)"
+            ondragenter="highlightColumn(event)"
           >
             <div class="column-header">
               <h2>Await feedback</h2>
@@ -133,6 +136,7 @@
             id="done"
             ondrop="moveTo('done')"
             ondragover="allowDrop(event)"
+            ondragenter="highlightColumn(event)"
           >
             <div class="column-header">
               <h2>Done</h2>
