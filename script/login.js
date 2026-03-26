@@ -15,9 +15,6 @@ async function init() {
 
 /**
  * Handles the login form submission.
- * Validates email and password inputs dynamically, fetches users from Firebase,
- * checks credentials, and redirects on success or shows specific error messages on failure.
- * 
  * @async
  * @param {Event} event - The form submission event.
  */
@@ -28,47 +25,72 @@ async function handleLogin(event) {
   let email = document.getElementById("loginEmail").value.trim();
   let password = document.getElementById("loginPassword").value;
 
+  if (!validateLoginInputs(email, password)) return;
+
+  await authenticateUser(email, password);
+}
+
+/**
+ * Validates login inputs.
+ * @param {string} email - The email input.
+ * @param {string} password - The password input.
+ * @returns {boolean} True if valid.
+ */
+function validateLoginInputs(email, password) {
   if (!email && !password) {
     showLoginError("Please enter your email and password.");
-    return;
+    return false;
   } else if (!email) {
     showLoginError("Please enter your email.");
-    return;
+    return false;
   } else if (!password) {
     showLoginError("Please enter your password.");
-    return;
+    return false;
   }
+  return true;
+}
 
+/**
+ * Authenticates the user with Firebase.
+ * @async
+ * @param {string} email - The user email.
+ * @param {string} password - The user password.
+ */
+async function authenticateUser(email, password) {
   try {
     let response = await fetch(BASE_URL + "/users.json");
     let users = await response.json();
 
-    let userFound = false;
-    let loggedInUser = null;
+    let loggedInUser = findUserByCredentials(users, email, password);
 
-    for (let id in users) {
-      if (
-        users[id].email === email &&
-        users[id].password === password
-      ) {
-        userFound = true;
-        loggedInUser = users[id];
-        loggedInUser.id = id;
-        break;
-      }
-    }
-
-    if (userFound) {
+    if (loggedInUser) {
       sessionStorage.setItem("current_user", JSON.stringify(loggedInUser));
       showSuccessMessage();
     } else {
       showLoginError("Check your email and password. Please try again.");
     }
-
   } catch (error) {
     console.error("Fehler beim Login:", error);
     showLoginError("An error occurred during login. Please try again.");
   }
+}
+
+/**
+ * Finds a user by credentials.
+ * @param {Object} users - The users object.
+ * @param {string} email - The email to find.
+ * @param {string} password - The password to match.
+ * @returns {Object|null} The user object or null.
+ */
+function findUserByCredentials(users, email, password) {
+  for (let id in users) {
+    if (users[id].email === email && users[id].password === password) {
+      let user = users[id];
+      user.id = id;
+      return user;
+    }
+  }
+  return null;
 }
 
 /**
