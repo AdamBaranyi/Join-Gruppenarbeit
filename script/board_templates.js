@@ -136,103 +136,189 @@ function getCategoryClass(category) {
  * @returns {string} The HTML string for the edit form.
  */
 function generateEditFormHTML(task) {
-  // Determine priority button states
+  return `
+    <div class="edit-task-form">
+      ${generateEditFormHeader()}
+      ${generateEditFormFields(task)}
+      ${generateEditFormFooter()}
+    </div>
+  `;
+}
+
+/**
+ * Generates the edit form header.
+ * @returns {string} The HTML string for the header.
+ */
+function generateEditFormHeader() {
+  return `
+    <div class="modal-header-row">
+      <h2 class="edit-task-heading">Edit Task</h2>
+      <button class="modal-close-btn" onclick="closeTaskPopup()">
+        <img src="../assets/imgs/Close.png" alt="Close">
+      </button>
+    </div>
+  `;
+}
+
+/**
+ * Generates all edit form fields.
+ * @param {Object} task - The task object.
+ * @returns {string} The HTML string for all fields.
+ */
+function generateEditFormFields(task) {
+  return `
+    ${generateEditTitleField(task)}
+    ${generateEditDescriptionField(task)}
+    ${generateEditDueDateField(task)}
+    ${generateEditPriorityField(task)}
+    ${generateEditAssignedToField()}
+    ${generateEditSubtasksField()}
+  `;
+}
+
+/**
+ * Generates the title field.
+ * @param {Object} task - The task object.
+ * @returns {string} The HTML string.
+ */
+function generateEditTitleField(task) {
+  return `
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" id="editTaskTitle" value="${task.title || ""}" class="edit-input">
+    </div>
+  `;
+}
+
+/**
+ * Generates the description field.
+ * @param {Object} task - The task object.
+ * @returns {string} The HTML string.
+ */
+function generateEditDescriptionField(task) {
+  return `
+    <div class="form-group">
+      <label>Description</label>
+      <textarea id="editTaskDescription" class="edit-textarea">${task.description || ""}</textarea>
+    </div>
+  `;
+}
+
+/**
+ * Generates the due date field.
+ * @param {Object} task - The task object.
+ * @returns {string} The HTML string.
+ */
+function generateEditDueDateField(task) {
+  return `
+    <div class="form-group">
+      <label>Due date</label>
+      <input type="date" id="editTaskDueDate" value="${task.dueDate || ""}" class="edit-input">
+    </div>
+  `;
+}
+
+/**
+ * Generates the priority field.
+ * @param {Object} task - The task object.
+ * @returns {string} The HTML string.
+ */
+function generateEditPriorityField(task) {
   const isUrgent = task.priority === "Urgent" ? "active" : "";
   const isMedium = task.priority === "Medium" ? "active" : "";
   const isLow = task.priority === "Low" ? "active" : "";
 
   return `
-        <div class="edit-task-form">
-            <div class="modal-close-container">
-                <button class="modal-close-btn" onclick="closeTaskPopup()">
-                    <img src="../assets/imgs/Close.png" alt="Close">
-                </button>
-            </div>
-            
-            <div class="form-group">
-                <label>Title</label>
-                <input type="text" id="editTaskTitle" value="${task.title || ""}" class="edit-input">
-            </div>
-            
-            <div class="form-group">
-                <label>Description</label>
-                <textarea id="editTaskDescription" class="edit-textarea">${task.description || ""}</textarea>
-            </div>
-            
-            <div class="form-group">
-                <label>Due date</label>
-                <input type="date" id="editTaskDueDate" value="${task.dueDate || ""}" class="edit-input">
-            </div>
-            
-            <div class="form-group">
-                <label>Priority</label>
-                <div class="priority-buttons">
-                    <button type="button" class="trigger urgent ${isUrgent}" onclick="setEditPriority('Urgent', this)">
-                        <span class="btn-text">Urgent</span>
-                        <span class="btn-icon urgent-icon">
-                            <img src="../assets/imgs/urgent-priority-board.svg" alt="Urgent">
-                        </span>
-                    </button>
-                    <button type="button" class="trigger medium ${isMedium}" onclick="setEditPriority('Medium', this)">
-                        <span class="btn-text">Medium</span>
-                        <span class="btn-icon medium-icon">
-                            <img src="../assets/imgs/priority_medium.svg" alt="Medium">
-                        </span>
-                    </button>
-                    <button type="button" class="trigger low ${isLow}" onclick="setEditPriority('Low', this)">
-                        <span class="btn-text">Low</span>
-                        <span class="btn-icon low-icon">
-                            <img src="../assets/imgs/low-priority-board.svg" alt="Low">
-                        </span>
-                    </button>
-                </div>
-                <input type="hidden" id="editTaskPriority" value="${task.priority || "Medium"}">
-            </div>
-            
-            <div class="form-group">
-                <label>Assigned to</label>
-                <div class="custom-dropdown" id="editAssignedDropdown">
-                    <div class="dropdown-header" onclick="toggleEditAssignedDropdown()">
-                        <span class="placeholder">Select contacts to assign</span>
-                        <span class="arrow">
-                            <img src="../assets/imgs/arrow_drop_downaa.png" alt="Dropdown">
-                        </span>
-                    </div>
-                    <div class="dropdown-list" id="editDropdownList">
-                        <!-- Filled by JS -->
-                    </div>
-                </div>
-                <div class="selected-users" id="editModalAssignees">
-                    <!-- Rendered by JS -->
-                </div>
-            </div>
-            
-            <div class="form-group subtask-group">
-                <label>Subtasks</label>
-                <div class="subtask-input-wrapper" id="editSubtaskInputWrapper" onclick="focusEditSubtaskInput()">
-                    <input type="text" id="editSubtaskInput" placeholder="Add new subtask" class="edit-input" onkeypress="handleEditSubtaskKeypress(event)" oninput="handleEditSubtaskInput()">
-                    <div class="subtask-input-actions">
-                        <button type="button" class="clear-subtask-btn" onclick="clearEditSubtaskInput()">
-                            <img src="../assets/imgs/iconoir_cancel.svg" alt="">
-                        </button>
-                        <span class="divider"></span>
-                        <button type="button" class="add-subtask-btn" onclick="addEditSubtask()"> 
-                            <img src="../assets/imgs/check.svg" class="subtask-icons" alt="Add Subtask">
-                        </button>
-                    </div>
-                </div>
-                <ul class="subtask-list" id="editModalSubtasks">
-                    <!-- Filled by JS -->
-                </ul>
-            </div>
-            
-            <div class="modal-footer-actions edit-footer">
-                <button class="edit-ok-btn" onclick="saveTask()">
-                    Ok <img src="../assets/imgs/check.svg" style="width: 16px; height: auto;">
-                </button>
-            </div>
+    <div class="form-group">
+      <label>Priority</label>
+      <div class="priority-buttons">
+        ${generatePriorityButton('urgent', 'Urgent', isUrgent)}
+        ${generatePriorityButton('medium', 'Medium', isMedium)}
+        ${generatePriorityButton('low', 'Low', isLow)}
+      </div>
+      <input type="hidden" id="editTaskPriority" value="${task.priority || "Medium"}">
+    </div>
+  `;
+}
+
+/**
+ * Generates a priority button.
+ * @param {string} type - The priority type.
+ * @param {string} label - The button label.
+ * @param {string} activeClass - The active class if selected.
+ * @returns {string} The HTML string.
+ */
+function generatePriorityButton(type, label, activeClass) {
+  return `
+    <button type="button" class="trigger ${type} ${activeClass}" onclick="setEditPriority('${label}', this)">
+      <span class="btn-text">${label}</span>
+      <span class="btn-icon ${type}-icon">
+        <img src="../assets/imgs/${type === 'medium' ? 'priority_medium' : type + '-priority-board'}.svg" alt="${label}">
+      </span>
+    </button>
+  `;
+}
+
+/**
+ * Generates the assigned to field.
+ * @returns {string} The HTML string.
+ */
+function generateEditAssignedToField() {
+  return `
+    <div class="form-group">
+      <label>Assigned to</label>
+      <div class="custom-dropdown" id="editAssignedDropdown">
+        <div class="dropdown-header" onclick="toggleEditAssignedDropdown(event)">
+          <span class="placeholder">Select contacts to assign</span>
+          <span class="arrow">
+            <img src="../assets/imgs/arrow_drop_downaa.png" alt="Dropdown">
+          </span>
         </div>
-    `;
+        <div class="dropdown-list" id="editDropdownList"></div>
+      </div>
+      <div class="selected-users" id="editModalAssignees"></div>
+    </div>
+  `;
+}
+
+/**
+ * Generates the subtasks field.
+ * @returns {string} The HTML string.
+ */
+function generateEditSubtasksField() {
+  return `
+    <div class="form-group subtask-group">
+      <label>Subtasks</label>
+      <div class="subtask-input-wrapper" id="editSubtaskInputWrapper" onclick="focusEditSubtaskInput()">
+        <input type="text" id="editSubtaskInput" placeholder="Add new subtask" class="edit-input"
+               onkeypress="handleEditSubtaskKeypress(event)" oninput="handleEditSubtaskInput()">
+        <div class="subtask-input-actions">
+          <button type="button" class="clear-subtask-btn" onclick="clearEditSubtaskInput()">
+            <img src="../assets/imgs/iconoir_cancel.svg" alt="">
+          </button>
+          <span class="divider"></span>
+          <button type="button" class="add-subtask-btn" onclick="addEditSubtask()">
+            <img src="../assets/imgs/check.svg" class="subtask-icons" alt="Add Subtask">
+          </button>
+        </div>
+      </div>
+      <ul class="subtask-list" id="editModalSubtasks"></ul>
+    </div>
+  `;
+}
+
+/**
+ * Generates the form footer.
+ * @returns {string} The HTML string.
+ */
+function generateEditFormFooter() {
+  return `
+    <div class="modal-footer-actions edit-footer">
+      <button class="edit-ok-btn" onclick="saveTask()">
+        Ok <img src="../assets/imgs/check.svg" style="width: 16px; height: auto;">
+      </button>
+    </div>
+  `;
 }
 
 /**
