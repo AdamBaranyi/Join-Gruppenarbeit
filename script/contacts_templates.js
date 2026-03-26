@@ -43,7 +43,7 @@ function openModalRightSide() {
       </div>
 
       <div class="input-group">
-        <input type="text" id="add-phone" placeholder="Phone Number">
+        <input type="number" id="add-phone" placeholder="Phone Number">
         <img class="input-icon" src="../assets/imgs/call.png">
       </div>
 

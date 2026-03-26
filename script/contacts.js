@@ -34,7 +34,7 @@ function groupContactsByLetter(contacts) {
   return groups;
 }
 
-// load contacts of a user
+// load all contacts 
 async function loadContacts() {
   url = `${BASE_URL}/contacts/.json`;
 
@@ -52,7 +52,7 @@ async function loadContacts() {
   renderContactList(contacts);
 }
 
-// render contact list with currentuser contacts
+// render contact list with contacts
 function renderContactList(contacts) {
   const container = document.getElementById("contact-list-content");
   const sorted = sortContactsByFirstname(contacts);
@@ -129,17 +129,6 @@ function closeModal() {
   }, 380);
 }
 
-// Ensure ESC key triggers the smooth CSS close animation too
-document.addEventListener("DOMContentLoaded", () => {
-    const dialogModal = document.getElementById("dialog-modal");
-    if (dialogModal) {
-        dialogModal.addEventListener("cancel", (e) => {
-            e.preventDefault();
-            closeModal();
-        });
-    }
-});
-
 // add a new contact
 async function addContact(contactData) {
   const res = await fetch(url);
@@ -211,29 +200,7 @@ async function showContactDetails(contactId) {
 // render contact card with the details of a contact
 function renderContactCard(contact) {
   const card = document.getElementById("contact-card-content");
-  const sloganAndCardContainer = document.getElementById(
-    "slogan-and-card-container",
-  );
-  const contactListContainer = document.getElementById(
-    "contact-list-container",
-  );
-  const closeCardBtn = document.getElementById("close-card-btn");
-  const mainContent = document.querySelector(".main-content");
-
-  if (contactListContainer) contactListContainer.style.display = "";
-  if (sloganAndCardContainer) sloganAndCardContainer.style.display = "";
-
-  card.classList.remove("display-none");
-  mainContent.classList.add("show-contact-card");
-  card.innerHTML = contactCard(contact);
-  showInitials(contact);
-  
-  const cardWrapper = document.getElementById("contact-card");
-  cardWrapper.classList.remove("show");
-  setTimeout(() => {
-     cardWrapper.classList.add("show");
-  }, 10);
-  
+  helpRenderContactCard(contact);
   card.querySelector(".edit-btn").addEventListener("click", () => {
     renderEditForm(contact);
   });
@@ -244,10 +211,8 @@ function renderContactCard(contact) {
 
 function showInitials(contact) {
     if (!contact) return;
-
     const cardInitials = document.getElementById("contact-initials");
     const modalInitials = document.getElementById("modal-initials");
-
     const fullName = contact.firstname + contact.lastname;
     const initials = contact.firstname.charAt(0) + contact.lastname.charAt(0);
     const color = getColorFromName(fullName);
@@ -263,31 +228,7 @@ function showInitials(contact) {
     }
 }
 
-// check for mobile render card
-function checkForMobileRenderCard() {
-  const card = document.getElementById("contact-card-content");
-  const sloganAndCardContainer = document.getElementById(
-    "slogan-and-card-container",
-  );
-  const contactListContainer = document.getElementById(
-    "contact-list-container",
-  );
-  const closeCardBtn = document.getElementById("close-card-btn");
-  const mobileSlogan = document.getElementById("mobile-slogan");
 
-  if (window.innerWidth <= 850) {
-    mobileSlogan.classList.remove("display-none");
-    card.classList.remove("display-none");
-    closeCardBtn.classList.remove("display-none");
-    contactListContainer.style.display = "none";
-    sloganAndCardContainer.style.display = "flex";
-  } else {
-    mobileSlogan.classList.add("display-none");
-    card.classList.remove("display-none");
-    closeCardBtn.classList.add("display-none");
-    contactListContainer.style.display = "flex";
-  }
-}
 
 // close the contact card on mobile devices
 function closeContactCard() {
@@ -330,7 +271,7 @@ async function editContact(contactId, data) {
     body: JSON.stringify(data),
   });
 
-  await mobileSucessfulEdited();
+  mobileSucessfulEdited();
   await loadContacts();
   await showContactDetails(contactId);
 
@@ -369,7 +310,6 @@ function markAsError() {
 
     mailError.classList.add('error')
     mailErrorMsg.classList.remove('display-none')
-
     return
 }
 
@@ -387,6 +327,9 @@ async function deleteContact(contactId) {
   const card = document.getElementById("contact-card-content");
   if (card) {
     card.innerHTML = "";
+  }
+  if (window.innerWidth = 850) {
+    closeContactCard()
   }
 }
 
@@ -459,36 +402,19 @@ function clearAllErrors(formType) {
 }
 
 function validateContact(data, formType) {
-    let isValid = true;
+  let allValid;
+  clearAllErrors(formType);
 
-    clearAllErrors(formType);
-    
-    if (!data.firstname) {
-        setError(formType === 'add' ? 'add-firstname' : 'edit-firstname', '* First name is required');
-        isValid = false;
-    } else if (data.firstname.length < 2) {
-        setError(formType === 'add' ? 'add-firstname' : 'edit-firstname', '* First name must be at least 2 characters');
-        isValid = false;
-    }
-
-    if (!data.lastname) {
-        setError(formType === 'add' ? 'add-lastname' : 'edit-lastname', '* Last name is required');
-        isValid = false;
-    } else if (data.lastname.length < 2) {
-        setError(formType === 'add' ? 'add-lastname' : 'edit-lastname', '* Last name must be at least 2 characters');
-        isValid = false;
-    }
-    
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!data.email) {
-        setError(formType === 'add' ? 'add-email' : 'edit-email', '* Email is required');
-        isValid = false;
-    } else if (!emailRegex.test(data.email)) {
-        setError(formType === 'add' ? 'add-email' : 'edit-email', '* Please enter a valid email address');
-        isValid = false;
-    }
-    
-    return isValid;
+  const firstnameValid = checkFirstname(data, formType);
+  const lastnameValid = checkLastname(data, formType);
+  const mailValid = checkMail(data, formType);
+  
+  if (firstnameValid && lastnameValid && mailValid) { 
+    allValid = true
+  }
+  else {allValid = false}
+  
+  return allValid;
 }
 
 function addInputValidationListeners() {
@@ -502,7 +428,6 @@ function addInputValidationListeners() {
             input.addEventListener('input', handleInputValidation);
         }
     });
-
     // For edit form inputs
     const editInputs = ['edit-firstname', 'edit-lastname', 'edit-email'];
     editInputs.forEach(id => {
@@ -590,9 +515,10 @@ document.addEventListener("submit", function(e) {
         e.preventDefault();
         const data = getAddFormData();
         
-        if (!validateContact(data, 'add')) return;
-        
-        addContact(data);
+        if (!validateContact(data, 'add')) {return}
+          else {
+            addContact(data);
+          };
     }
 });
 
@@ -602,9 +528,11 @@ document.addEventListener("submit", function(e) {
         const id = e.target.dataset.id;
         const data = getEditFormData();
         
-        if (!validateContact(data, 'edit')) return;
+        if (!validateContact(data, 'edit')) {return}
+          else {
+            editContact(id, data);
+          };
         
-        editContact(id, data);
     }
 });
 
