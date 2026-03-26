@@ -1,38 +1,22 @@
-let currentUser;
 let userId;
 let url;
 let leftSide = document.getElementById("left-side-modal");
 const contactWindow = document.getElementById("contact-modal");
 const contactModal = document.getElementById("dialog-modal");
 
-//load current user from session storage
-function getCurrentUser() {
-  let currentUser = JSON.parse(sessionStorage.getItem("current_user"));
-  return currentUser;
-}
 
-// sort contacts by firstname
-function sortContactsByFirstname(contacts) {
-  return [...contacts].sort((a, b) =>
-    a.firstname.localeCompare(b.firstname, "de", { sensitivity: "base" }),
-  );
-}
-
-// group contacts by the first letter of the firstname
-function groupContactsByLetter(contacts) {
-  const groups = {};
-
-  contacts.forEach((contact) => {
-    const letter = contact.firstname.charAt(0).toUpperCase();
-
-    if (!groups[letter]) {
-      groups[letter] = [];
-    }
-    groups[letter].push(contact);
-  });
-
-  return groups;
-}
+const contactColors = [
+  "#FF7A00",
+  "#9327FF",
+  "#6E52FF",
+  "#FC71FF",
+  "#FFBB2B",
+  "#1FD7C1",
+  "#462F8A",
+  "#FF4646",
+  "#00BEE8",
+  "#FF745E",
+];
 
 // load all contacts 
 async function loadContacts() {
@@ -82,18 +66,28 @@ function renderContactList(contacts) {
     });
 }
 
-const contactColors = [
-  "#FF7A00",
-  "#9327FF",
-  "#6E52FF",
-  "#FC71FF",
-  "#FFBB2B",
-  "#1FD7C1",
-  "#462F8A",
-  "#FF4646",
-  "#00BEE8",
-  "#FF745E",
-];
+// sort contacts by firstname
+function sortContactsByFirstname(contacts) {
+  return [...contacts].sort((a, b) =>
+    a.firstname.localeCompare(b.firstname, "de", { sensitivity: "base" }),
+  );
+}
+
+// group contacts by the first letter of the firstname
+function groupContactsByLetter(contacts) {
+  const groups = {};
+
+  contacts.forEach((contact) => {
+    const letter = contact.firstname.charAt(0).toUpperCase();
+
+    if (!groups[letter]) {
+      groups[letter] = [];
+    }
+    groups[letter].push(contact);
+  });
+
+  return groups;
+}
 
 function getColorFromName(name) {
   let hash = 0;
@@ -166,15 +160,6 @@ async function addContact(contactData) {
   }
 }
 
-// save a new contact to the database
-async function putContactInBackend(newId, contactWithId) {
-  await fetch(`${BASE_URL}/contacts/${newId}.json`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(contactWithId),
-  });
-}
-
 // show a success message after creating a new contact
 function showSuccessMessage() {
   let successMessage = document.getElementById("success-message");
@@ -187,15 +172,6 @@ function showSuccessMessage() {
   }, 3000);
 }
 
-async function showContactDetails(contactId) {
-  const response = await fetch(url);
-  const data = await response.json();
-
-  if (!data) return;
-
-  const contact = data[contactId];
-  renderContactCard(contact);
-}
 
 // render contact card with the details of a contact
 function renderContactCard(contact) {
@@ -227,8 +203,6 @@ function showInitials(contact) {
         modalInitials.textContent = initials.toUpperCase();
     }
 }
-
-
 
 // close the contact card on mobile devices
 function closeContactCard() {
@@ -263,8 +237,8 @@ function mobileEditMenu(contact, event) {
   });
 }
 
+// 
 async function editContact(contactId, data) {
-
   await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },

@@ -88,3 +88,23 @@ function checkMail(data, formType) {
     } else {isValid = true}
     return isValid;
 }
+
+// save a new contact to the database
+async function putContactInBackend(newId, contactWithId) {
+  await fetch(`${BASE_URL}/contacts/${newId}.json`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(contactWithId),
+  });
+}
+
+//help function for loading contact details
+async function showContactDetails(contactId) {
+  const response = await fetch(url);
+  const data = await response.json();
+
+  if (!data) return;
+
+  const contact = data[contactId];
+  renderContactCard(contact);
+}
