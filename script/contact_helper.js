@@ -179,6 +179,27 @@ function markAsError() {
 }
 
 /**
+ * Generates the next contact ID.
+ * @param {Object} contacts - Existing contacts object.
+ * @returns {string} The new contact ID.
+ */
+function generateNextContactId(contacts) {
+    let nextIdNumber = 1;
+
+    if (contacts) {
+      const ids = Object.keys(contacts)
+        .filter((id) => id.startsWith("c"))
+        .map((id) => parseInt(id.substring(1)))
+        .filter((num) => !isNaN(num));
+
+      if (ids.length > 0) {
+        nextIdNumber = Math.max(...ids) + 1;
+      }
+    }
+    return `c${nextIdNumber}`;
+}
+
+/**
  * Retrieves form data from the add contact form.
  * @returns {Object} An object containing the contact data (firstname, lastname, email, phonenumber).
  */
