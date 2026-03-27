@@ -18,7 +18,9 @@ const contactColors = [
   "#FF745E",
 ];
 
-// load all contacts 
+/**
+ * Loads all contacts from Firebase and renders them in the contact list.
+ */
 async function loadContacts() {
   url = `${BASE_URL}/contacts/.json`;
 
@@ -36,7 +38,10 @@ async function loadContacts() {
   renderContactList(contacts);
 }
 
-// render contact list with contacts
+/**
+ * Renders the contact list with contacts grouped by the first letter of firstname.
+ * @param {Array} contacts - Array of contact objects to render.
+ */
 function renderContactList(contacts) {
   const container = document.getElementById("contact-list-content");
   const sorted = sortContactsByFirstname(contacts);
@@ -66,14 +71,22 @@ function renderContactList(contacts) {
     });
 }
 
-// sort contacts by firstname
+/**
+ * Sorts contacts alphabetically by firstname.
+ * @param {Array} contacts - Array of contact objects to sort.
+ * @returns {Array} Sorted array of contacts.
+ */
 function sortContactsByFirstname(contacts) {
   return [...contacts].sort((a, b) =>
     a.firstname.localeCompare(b.firstname, "de", { sensitivity: "base" }),
   );
 }
 
-// group contacts by the first letter of the firstname
+/**
+ * Groups contacts by the first letter of their firstname.
+ * @param {Array} contacts - Array of contact objects to group.
+ * @returns {Object} Object with letters as keys and arrays of contacts as values.
+ */
 function groupContactsByLetter(contacts) {
   const groups = {};
 
@@ -89,7 +102,11 @@ function groupContactsByLetter(contacts) {
   return groups;
 }
 
-// get the color for the name initals 
+/**
+ * Generates a consistent color from the contact name using a hash function.
+ * @param {string} name - The contact name to generate a color for.
+ * @returns {string} A hex color code from the predefined color palette.
+ */
 function getColorFromName(name) {
   let hash = 0;
 
@@ -101,7 +118,9 @@ function getColorFromName(name) {
   return contactColors[index];
 }
 
-// open the modal to create a new contact
+/**
+ * Opens the modal dialog to create a new contact.
+ */
 function openModal() {
     contactModal.showModal();
     const modalInitials = document.getElementById("modal-initials");
@@ -118,7 +137,9 @@ function openModal() {
         addInputValidationListeners();
     }, 100);
 }
-// close the modal
+/**
+ * Closes the modal dialog with a slide-out animation.
+ */
 function closeModal() {
   contactModal.classList.add("slide-out");
   setTimeout(() => {
@@ -127,7 +148,11 @@ function closeModal() {
   }, 380);
 }
 
-// add a new contact
+/**
+ * Adds a new contact to Firebase and updates the contact list.
+ * @param {Object} contactData - The contact data (firstname, lastname, email, phonenumber).
+ * @returns {string|undefined} The new contact ID if successful.
+ */
 async function addContact(contactData) {
   const res = await fetch(url);
   const contacts = await res.json();
@@ -164,7 +189,9 @@ async function addContact(contactData) {
   }
 }
 
-// show a success message after creating a new contact
+/**
+ * Displays a success message after creating a new contact.
+ */
 function showSuccessMessage() {
   let successMessage = document.getElementById("success-message");
   successMessage.classList.remove("display-none");
@@ -177,7 +204,10 @@ function showSuccessMessage() {
 }
 
 
-// render contact card with the details of a contact
+/**
+ * Renders the contact card with the details of a selected contact.
+ * @param {Object} contact - The contact object to display.
+ */
 function renderContactCard(contact) {
   const card = document.getElementById("contact-card-content");
   helpRenderContactCard(contact);
@@ -189,6 +219,10 @@ function renderContactCard(contact) {
   });
 }
 
+/**
+ * Displays the contact initials with a colored background in the card and modal.
+ * @param {Object} contact - The contact object containing firstname and lastname.
+ */
 function showInitials(contact) {
     if (!contact) return;
     const cardInitials = document.getElementById("contact-initials");
@@ -208,7 +242,9 @@ function showInitials(contact) {
     }
 }
 
-// close the contact card on mobile devices
+/**
+ * Closes the contact card on mobile devices.
+ */
 function closeContactCard() {
   const card = document.getElementById("contact-card-content");
   const mainContent = document.querySelector(".main-content");
@@ -226,7 +262,11 @@ function closeContactCard() {
   if (sloganAndCardContainer) sloganAndCardContainer.style.display = "";
 }
 
-// open the dropdown menu on mobile devices
+/**
+ * Opens the edit/delete dropdown menu on mobile devices.
+ * @param {Object} contact - The contact object.
+ * @param {Event} event - The click event.
+ */
 function mobileEditMenu(contact, event) {
   event.stopPropagation();
   let menu = document.getElementById("mobile-menu");
@@ -241,7 +281,11 @@ function mobileEditMenu(contact, event) {
   });
 }
 
-// patch contact in backend
+/**
+ * Updates an existing contact in Firebase.
+ * @param {string} contactId - The ID of the contact to update.
+ * @param {Object} data - The updated contact data.
+ */
 async function editContact(contactId, data) {
   await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
     method: "PATCH",
@@ -257,7 +301,6 @@ async function editContact(contactId, data) {
 
 /**
  * Provides visual feedback for a successful contact edit on mobile devices.
- * Changes the background color of the mobile option menu temporarily.
  */
 function mobileSucessfulEdited() {
   if (window.innerWidth <= 850) {
@@ -271,7 +314,10 @@ function mobileSucessfulEdited() {
   }
 }
 
-// delete a contact
+/**
+ * Deletes a contact from Firebase and updates the UI.
+ * @param {string} contactId - The ID of the contact to delete.
+ */
 async function deleteContact(contactId) {
   const contactImg = document.getElementById("modal-initials");
   if (contactImg) {
@@ -291,7 +337,11 @@ async function deleteContact(contactId) {
   }
 }
 
-// Function to set error message
+/**
+ * Sets an error message for a specific input field.
+ * @param {string} inputId - The ID of the input element.
+ * @param {string} message - The error message to display.
+ */
 function setError(inputId, message) {
     const inputGroup = document.getElementById(inputId).closest('.input-group');
     
@@ -308,7 +358,10 @@ function setError(inputId, message) {
     inputGroup.appendChild(errorSpan);
 }
 
-// Function to clear error from a specific field
+/**
+ * Clears the error message from a specific input field.
+ * @param {string} inputId - The ID of the input element.
+ */
 function clearError(inputId) {
     const input = document.getElementById(inputId);
     if (!input) return; 
@@ -324,12 +377,15 @@ function clearError(inputId) {
     }
 }
 
-// Function to clear all errors
+/**
+ * Clears all error messages from the form.
+ * @param {string} formType - The form type ('add' or 'edit').
+ */
 function clearAllErrors(formType) {
-    const fields = formType === 'add' 
-        ? ['add-firstname', 'add-lastname', 'add-email']
-        : ['edit-firstname', 'edit-lastname', 'edit-email'];
-    
+    const fields = formType === 'add'
+        ? ['add-firstname', 'add-lastname', 'add-email', 'add-phone']
+        : ['edit-firstname', 'edit-lastname', 'edit-email', 'edit-phone'];
+
     fields.forEach(id => {
         if (document.getElementById(id)) {
             clearError(id);
@@ -337,7 +393,12 @@ function clearAllErrors(formType) {
     });
 }
 
-// function to validate the contact form
+/**
+ * Validates all fields in the contact form.
+ * @param {Object} data - The contact data to validate.
+ * @param {string} formType - The form type ('add' or 'edit').
+ * @returns {boolean} True if all fields are valid, false otherwise.
+ */
 function validateContact(data, formType) {
   let allValid;
   clearAllErrors(formType);
@@ -345,17 +406,20 @@ function validateContact(data, formType) {
   const firstnameValid = checkFirstname(data, formType);
   const lastnameValid = checkLastname(data, formType);
   const mailValid = checkMail(data, formType);
-  
-  if (firstnameValid && lastnameValid && mailValid) { 
+  const phoneValid = checkPhone(data, formType);
+
+  if (firstnameValid && lastnameValid && mailValid && phoneValid) {
     allValid = true
   }
   else {allValid = false}
   return allValid;
 }
 
-// add input validation listner
+/**
+ * Adds real-time input validation listeners to form fields.
+ */
 function addInputValidationListeners() {
-    const addInputs = ['add-firstname', 'add-lastname', 'add-email'];
+    const addInputs = ['add-firstname', 'add-lastname', 'add-email', 'add-phone'];
     addInputs.forEach(id => {
         const input = document.getElementById(id);
         if (input) {
@@ -365,7 +429,7 @@ function addInputValidationListeners() {
         }
     });
     // For edit form inputs
-    const editInputs = ['edit-firstname', 'edit-lastname', 'edit-email'];
+    const editInputs = ['edit-firstname', 'edit-lastname', 'edit-email', 'edit-phone'];
     editInputs.forEach(id => {
         const input = document.getElementById(id);
         if (input) {
@@ -375,12 +439,15 @@ function addInputValidationListeners() {
     });
 }
 
-// Handle input validation in real-time
+/**
+ * Handles real-time input validation as the user types.
+ * @param {Event} e - The input event.
+ */
 function handleInputValidation(e) {
     const input = e.target;
     const inputId = input.id;
     const formType = inputId.startsWith('add-') ? 'add' : 'edit';
-    
+
     clearError(inputId);
     const value = input.value.trim();
     if (inputId.includes('firstname') && value.length === 1) {
@@ -388,12 +455,15 @@ function handleInputValidation(e) {
     }
     if (inputId.includes('lastname') && value.length === 1) {
         return;
-    }    
+    }
     if (inputId.includes('email') && value.length > 0) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(value) && value.length > 5) {
             setError(inputId, '* Please enter a valid email address');
         }
+    }
+    if (inputId.includes('phone') && value.length > 0 && value.length < 6) {
+        setError(inputId, '* Phone number must be at least 6 digits');
     }
 }
 
@@ -401,7 +471,10 @@ document.addEventListener('DOMContentLoaded', function() {
     addInputValidationListeners();
 });
 
-// Update renderEditForm function 
+/**
+ * Opens the modal with the edit form populated with contact data.
+ * @param {Object} contact - The contact object to edit.
+ */
 function renderEditForm(contact) {
     leftSide.innerHTML = editFormleftSide();
     contactWindow.innerHTML = editFormRightSide(contact);

@@ -1,4 +1,10 @@
-// template for displaying contact list items
+/**
+ * Generates HTML template for a contact list item.
+ * @param {Object} contact - The contact object.
+ * @param {string} initials - The contact's initials.
+ * @param {string} bgColor - The background color for the contact circle.
+ * @returns {string} HTML string for the contact list item.
+ */
 function renderContactListItem(contact, initials, bgColor) {
   return `
     <div class="contact-row" onclick='renderContactCard(${JSON.stringify(contact)}); this.parentElement.querySelectorAll(".contact-row").forEach(row => row.classList.remove("active")); this.classList.add("active");'>
@@ -15,7 +21,10 @@ function renderContactListItem(contact, initials, bgColor) {
   `;
 }
 
-// template for the left side of the dialog modal
+/**
+ * Generates HTML template for the left side of the add contact modal.
+ * @returns {string} HTML string for the modal left side.
+ */
 function openModalLeftSide() {
   return `
         <img class="logo-white" src="../assets/imgs/logo_white.svg" alt="">
@@ -25,7 +34,10 @@ function openModalLeftSide() {
     `;
 }
 
-// template for the right side of the dialog modal with form
+/**
+ * Generates HTML template for the right side of the add contact modal with the form.
+ * @returns {string} HTML string for the add contact form.
+ */
 function openModalRightSide() {
   return `
     <form id="add-contact-form" class="contact-form">
@@ -60,7 +72,11 @@ function openModalRightSide() {
   `;
 }
 
-// template for contact card
+/**
+ * Generates HTML template for the contact details card.
+ * @param {Object} contact - The contact object.
+ * @returns {string} HTML string for the contact card.
+ */
 function contactCard(contact) {
   return `
         <div class="contact-item">
@@ -88,7 +104,10 @@ function contactCard(contact) {
     `;
 }
 
-// template for left side of edit dialog modal
+/**
+ * Generates HTML template for the left side of the edit contact modal.
+ * @returns {string} HTML string for the modal left side.
+ */
 function editFormleftSide() {
   return `
         <img class="logo-white" src="../assets/imgs/logo_white.svg" alt="Logo White">
@@ -97,8 +116,11 @@ function editFormleftSide() {
   `;
 }
 
-// template for right side of edit dialog modal with form
-
+/**
+ * Generates HTML template for the right side of the edit contact modal with the form.
+ * @param {Object} contact - The contact object to edit.
+ * @returns {string} HTML string for the edit contact form.
+ */
 function editFormRightSide(contact) {
   return `
     <form id="edit-contact-form" class="contact-form">
@@ -130,7 +152,11 @@ function editFormRightSide(contact) {
   `;
 }
 
-// template for mobile menu to edit and delete contacts
+/**
+ * Generates HTML template for the mobile edit/delete menu.
+ * @param {Object} contact - The contact object.
+ * @returns {string} HTML string for the mobile menu.
+ */
 function menuTempl(contact) {
   return `
       <div class="mobile-menu">
