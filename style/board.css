@@ -136,14 +136,11 @@
 }
 
 /* Drag & Drop Highlight */
-.board-column.drag-over {
+.board-column.drag-over .tasks-container {
     background-color: rgba(41, 171, 226, 0.08);
     border: 2px solid #29ABE2;
     box-shadow: 0 0 20px rgba(41, 171, 226, 0.3);
-}
-
-.board-column.drag-over .tasks-container {
-    background-color: rgba(41, 171, 226, 0.05);
+    border-radius: 10px;
 }
 
 /* Column Header */

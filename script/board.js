@@ -131,7 +131,16 @@ function highlightColumn(ev) {
  * @param {DragEvent} ev - The drag event.
  */
 function removeHighlight(ev) {
-  let column = ev.currentTarget;
+  // Verhindere das Entfernen wenn wir zu einem Child-Element wechseln
+  const relatedTarget = ev.relatedTarget;
+  const currentTarget = ev.currentTarget;
+
+  // Prüfe ob das relatedTarget ein Child der aktuellen Spalte ist
+  if (relatedTarget && currentTarget.contains(relatedTarget)) {
+    return; // Bleib in der gleichen Spalte, entferne Highlight nicht
+  }
+
+  let column = currentTarget;
 
   // Falls das Event von einem Child-Element kommt, finde die board-column
   if (!column.classList.contains('board-column')) {
