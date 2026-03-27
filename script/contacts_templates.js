@@ -1,3 +1,4 @@
+// template for displaying contact list items
 function renderContactListItem(contact, initials, bgColor) {
   return `
     <div class="contact-row" onclick='renderContactCard(${JSON.stringify(contact)}); this.parentElement.querySelectorAll(".contact-row").forEach(row => row.classList.remove("active")); this.classList.add("active");'>
@@ -14,6 +15,7 @@ function renderContactListItem(contact, initials, bgColor) {
   `;
 }
 
+// template for the left side of the dialog modal
 function openModalLeftSide() {
   return `
         <img class="logo-white" src="../assets/imgs/logo_white.svg" alt="">
@@ -23,6 +25,7 @@ function openModalLeftSide() {
     `;
 }
 
+// template for the right side of the dialog modal with form
 function openModalRightSide() {
   return `
     <form id="add-contact-form" class="contact-form">
@@ -57,6 +60,7 @@ function openModalRightSide() {
   `;
 }
 
+// template for contact card
 function contactCard(contact) {
   return `
         <div class="contact-item">
@@ -84,6 +88,7 @@ function contactCard(contact) {
     `;
 }
 
+// template for left side of edit dialog modal
 function editFormleftSide() {
   return `
         <img class="logo-white" src="../assets/imgs/logo_white.svg" alt="Logo White">
@@ -91,6 +96,9 @@ function editFormleftSide() {
         <img class="vector-horizontel" src="../assets/imgs/Vector horizontel.png" alt="">
   `;
 }
+
+// template for right side of edit dialog modal with form
+
 function editFormRightSide(contact) {
   return `
     <form id="edit-contact-form" class="contact-form">
@@ -122,6 +130,7 @@ function editFormRightSide(contact) {
   `;
 }
 
+// template for mobile menu to edit and delete contacts
 function menuTempl(contact) {
   return `
       <div class="mobile-menu">

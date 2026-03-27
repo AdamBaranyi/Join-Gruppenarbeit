@@ -85,7 +85,6 @@
 
 .popup-main-container {
   flex: 1;
-  overflow-y: auto;
   padding: 0 80px;
   min-height: 0;
   position: relative;

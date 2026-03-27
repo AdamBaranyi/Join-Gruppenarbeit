@@ -1,4 +1,3 @@
-
 // help initialise content for card
 function helpRenderContactCard(contact) {
     const card = document.getElementById("contact-card-content");
@@ -107,4 +106,54 @@ async function showContactDetails(contactId) {
 
   const contact = data[contactId];
   renderContactCard(contact);
+}
+
+// help function for error styling
+function markAsError() {
+  const firstnameError = document.getElementById('firstname')
+  const lastnameError = document.getElementById('lastname')
+  const mailError = document.getElementById('email')
+  const firstnameErrorMsg = document.getElementById('error-firstname')
+  const lastnameErrorMsg = document.getElementById('error-lastname')
+  const mailErrorMsg = document.getElementById('error-mail-adress')
+
+    firstnameError.classList.add('error')
+    firstnameErrorMsg.classList.remove('display-none')
+
+    lastnameError.classList.add('error')
+    lastnameErrorMsg.classList.remove('display-none')
+
+    mailError.classList.add('error')
+    mailErrorMsg.classList.remove('display-none')
+    return
+}
+
+// help functions to get data from form
+function getAddFormData(){
+    return {
+        firstname: document.getElementById("add-firstname").value.trim(),
+        lastname: document.getElementById("add-lastname").value.trim(),
+        email: document.getElementById("add-email").value.trim(),
+        phonenumber: document.getElementById("add-phone").value.trim()
+    };
+
+}
+
+function getEditFormData(){
+    return {
+        firstname: document.getElementById("edit-firstname").value.trim(),
+        lastname: document.getElementById("edit-lastname").value.trim(),
+        email: document.getElementById("edit-email").value.trim(),
+        phonenumber: document.getElementById("edit-phone").value.trim()
+    };
+
+}
+
+function fillEditForm(contact) {
+    const form = document.getElementById("edit-contact-form");
+    form.dataset.id = contact.id;
+    document.getElementById("edit-firstname").value = contact.firstname;
+    document.getElementById("edit-lastname").value = contact.lastname;
+    document.getElementById("edit-email").value = contact.email;
+    document.getElementById("edit-phone").value = contact.phonenumber;
 }
