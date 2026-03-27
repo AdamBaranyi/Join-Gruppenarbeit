@@ -13,8 +13,8 @@
 }
 
 .page-header {
-    margin-bottom: 40px;
-    margin-top: 140px;
+    margin-bottom: 52px;
+    margin-top: 185px;
     width: 100%;
     padding-left: 344px;
     padding-right: 112px;
@@ -529,7 +529,6 @@ input:focus, textarea:focus {
     display: none;
 }
 
-
 .overlay {
   position: fixed;
   top: 0;
@@ -567,12 +566,13 @@ input:focus, textarea:focus {
     position: fixed;
     left: 0;
     right: 0;
-    margin-top: 600px;
-    height: 200px;
+    bottom: 0;
+    padding-top: 20px;
+    height: 128px;
     background-color: var(--color-bg);
     z-index: 999;
-    display: flex; 
-    /* align-items: center; */
+    display: flex
+;
 }
 
 .footer-container {
@@ -590,6 +590,7 @@ input:focus, textarea:focus {
     font-weight: 400;
     line-height: 120%;
     color: var(--color-text);
+    padding-top: 20px;
 }
 
 .button-group {
