@@ -1,4 +1,7 @@
-// help initialise content for card
+/**
+ * Initializes and renders the contact card with the provided contact information.
+ * @param {Object} contact - The contact object containing contact details.
+ */
 function helpRenderContactCard(contact) {
     const card = document.getElementById("contact-card-content");
     const sloganAndCardContainer = document.getElementById("slogan-and-card-container");
@@ -18,7 +21,9 @@ function helpRenderContactCard(contact) {
     setTimeout(() => {cardWrapper.classList.add("show");}, 10);
 }
 
-// check for mobile render card
+/**
+ * Adjusts the contact card display for mobile devices based on window width.
+ */
 function checkForMobileRenderCard() {
   const card = document.getElementById("contact-card-content");
   const sloganAndCardContainer = document.getElementById("slogan-and-card-container",);
@@ -50,7 +55,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-//help functions for validation 
+/**
+ * Validates the firstname field in the contact form.
+ * @param {Object} data - The contact data object containing firstname.
+ * @param {string} formType - The form type ('add' or 'edit').
+ * @returns {boolean} True if valid, false otherwise.
+ */
 function checkFirstname(data, formType) {
   let isValid;
   if (!data.firstname) {
@@ -63,6 +73,12 @@ function checkFirstname(data, formType) {
     return isValid;
 }
 
+/**
+ * Validates the lastname field in the contact form.
+ * @param {Object} data - The contact data object containing lastname.
+ * @param {string} formType - The form type ('add' or 'edit').
+ * @returns {boolean} True if valid, false otherwise.
+ */
 function checkLastname(data, formType) {
   let isValid;
   if (!data.lastname) {
@@ -75,6 +91,12 @@ function checkLastname(data, formType) {
     return isValid;
 }
 
+/**
+ * Validates the email field in the contact form.
+ * @param {Object} data - The contact data object containing email.
+ * @param {string} formType - The form type ('add' or 'edit').
+ * @returns {boolean} True if valid, false otherwise.
+ */
 function checkMail(data, formType) {
   let isValid;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -88,7 +110,29 @@ function checkMail(data, formType) {
     return isValid;
 }
 
-// save a new contact to the database
+/**
+ * Validates the phone number field in the contact form.
+ * @param {Object} data - The contact data object containing phonenumber.
+ * @param {string} formType - The form type ('add' or 'edit').
+ * @returns {boolean} True if valid, false otherwise.
+ */
+function checkPhone(data, formType) {
+  let isValid;
+    if (!data.phonenumber) {
+        setError(formType === 'add' ? 'add-phone' : 'edit-phone', '* Phone number is required');
+        isValid = false;
+    } else if (data.phonenumber.length < 6) {
+        setError(formType === 'add' ? 'add-phone' : 'edit-phone', '* Phone number must be at least 6 digits');
+        isValid = false;
+    } else {isValid = true}
+    return isValid;
+}
+
+/**
+ * Saves a new contact to the Firebase database.
+ * @param {string} newId - The unique ID for the new contact.
+ * @param {Object} contactWithId - The contact object with ID included.
+ */
 async function putContactInBackend(newId, contactWithId) {
   await fetch(`${BASE_URL}/contacts/${newId}.json`, {
     method: "PUT",
@@ -97,7 +141,10 @@ async function putContactInBackend(newId, contactWithId) {
   });
 }
 
-//help function for loading contact details
+/**
+ * Loads and displays the details of a specific contact.
+ * @param {string} contactId - The unique ID of the contact to display.
+ */
 async function showContactDetails(contactId) {
   const response = await fetch(url);
   const data = await response.json();
@@ -108,7 +155,10 @@ async function showContactDetails(contactId) {
   renderContactCard(contact);
 }
 
-// help function for error styling
+/**
+ * Marks form fields as invalid by adding error styling.
+ * @deprecated This function is no longer used in the current validation system.
+ */
 function markAsError() {
   const firstnameError = document.getElementById('firstname')
   const lastnameError = document.getElementById('lastname')
@@ -128,7 +178,31 @@ function markAsError() {
     return
 }
 
-// help functions to get data from form
+/**
+ * Generates the next contact ID.
+ * @param {Object} contacts - Existing contacts object.
+ * @returns {string} The new contact ID.
+ */
+function generateNextContactId(contacts) {
+    let nextIdNumber = 1;
+
+    if (contacts) {
+      const ids = Object.keys(contacts)
+        .filter((id) => id.startsWith("c"))
+        .map((id) => parseInt(id.substring(1)))
+        .filter((num) => !isNaN(num));
+
+      if (ids.length > 0) {
+        nextIdNumber = Math.max(...ids) + 1;
+      }
+    }
+    return `c${nextIdNumber}`;
+}
+
+/**
+ * Retrieves form data from the add contact form.
+ * @returns {Object} An object containing the contact data (firstname, lastname, email, phonenumber).
+ */
 function getAddFormData(){
     return {
         firstname: document.getElementById("add-firstname").value.trim(),
@@ -139,6 +213,10 @@ function getAddFormData(){
 
 }
 
+/**
+ * Retrieves form data from the edit contact form.
+ * @returns {Object} An object containing the contact data (firstname, lastname, email, phonenumber).
+ */
 function getEditFormData(){
     return {
         firstname: document.getElementById("edit-firstname").value.trim(),
@@ -149,6 +227,10 @@ function getEditFormData(){
 
 }
 
+/**
+ * Populates the edit contact form with the contact's current data.
+ * @param {Object} contact - The contact object containing the data to fill into the form.
+ */
 function fillEditForm(contact) {
     const form = document.getElementById("edit-contact-form");
     form.dataset.id = contact.id;
