@@ -101,12 +101,13 @@
 
     /* Task Cards */
     .task-card {
-        min-width: 250px;
+        width: 280px;
+        min-width: 280px;
         height: max-content;
     }
 
     .no-tasks {
-        min-width: 250px;
+        min-width: 280px;
         width: 100%;
     }
 }
