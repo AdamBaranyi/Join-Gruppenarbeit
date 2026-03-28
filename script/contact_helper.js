@@ -7,15 +7,12 @@ function helpRenderContactCard(contact) {
     const sloganAndCardContainer = document.getElementById("slogan-and-card-container");
     const contactListContainer = document.getElementById("contact-list-container");
     const mainContent = document.querySelector(".main-content");
-
     if (contactListContainer) contactListContainer.style.display = "";
     if (sloganAndCardContainer) sloganAndCardContainer.style.display = "";
-
     card.classList.remove("display-none");
     mainContent.classList.add("show-contact-card");
     card.innerHTML = contactCard(contact);
     showInitials(contact);
-    
     const cardWrapper = document.getElementById("contact-card");
     cardWrapper.classList.remove("show");
     setTimeout(() => {cardWrapper.classList.add("show");}, 10);
@@ -25,23 +22,37 @@ function helpRenderContactCard(contact) {
  * Adjusts the contact card display for mobile devices based on window width.
  */
 function checkForMobileRenderCard() {
-  const card = document.getElementById("contact-card-content");
-  const sloganAndCardContainer = document.getElementById("slogan-and-card-container",);
-  const contactListContainer = document.getElementById("contact-list-container",);
-  const closeCardBtn = document.getElementById("close-card-btn");
-  const mobileSlogan = document.getElementById("mobile-slogan");
   if (window.innerWidth <= 850) {
+    stylingForMobileView();
+  } else {stylingForDisplayView();}
+}
+/**
+ * Applies styling changes to display the contact card in a mobile-friendly format, hiding the contact list and showing the card and slogan.
+ */
+function stylingForMobileView() {
+    const card = document.getElementById("contact-card-content");
+    const sloganAndCardContainer = document.getElementById("slogan-and-card-container",);
+    const contactListContainer = document.getElementById("contact-list-container",);
+    const closeCardBtn = document.getElementById("close-card-btn");
+    const mobileSlogan = document.getElementById("mobile-slogan");
     mobileSlogan.classList.remove("display-none");
     card.classList.remove("display-none");
     closeCardBtn.classList.remove("display-none");
     contactListContainer.style.display = "none";
     sloganAndCardContainer.style.display = "flex";
-  } else {
+}
+
+/**
+ * Reverts the styling changes made for mobile view, showing the contact list and hiding the contact card and slogan.
+ */
+function stylingForDisplayView() {
+    const contactListContainer = document.getElementById("contact-list-container",);
+    const closeCardBtn = document.getElementById("close-card-btn");
+    const mobileSlogan = document.getElementById("mobile-slogan");
     mobileSlogan.classList.add("display-none");
     card.classList.remove("display-none");
     closeCardBtn.classList.add("display-none");
     contactListContainer.style.display = "flex";
-  }
 }
 
 // Ensure ESC key triggers the smooth CSS close animation
@@ -166,13 +177,10 @@ function markAsError() {
   const firstnameErrorMsg = document.getElementById('error-firstname')
   const lastnameErrorMsg = document.getElementById('error-lastname')
   const mailErrorMsg = document.getElementById('error-mail-adress')
-
     firstnameError.classList.add('error')
     firstnameErrorMsg.classList.remove('display-none')
-
     lastnameError.classList.add('error')
     lastnameErrorMsg.classList.remove('display-none')
-
     mailError.classList.add('error')
     mailErrorMsg.classList.remove('display-none')
     return
@@ -238,4 +246,55 @@ function fillEditForm(contact) {
     document.getElementById("edit-lastname").value = contact.lastname;
     document.getElementById("edit-email").value = contact.email;
     document.getElementById("edit-phone").value = contact.phonenumber;
+}
+
+/**
+ * Changes the display of the contact image to show the user contact initials.
+ */
+function changeDisplayToEditCard() {
+  const contactImg = document.getElementById("modal-initials");
+  contactImg.classList.add("contact-initials-edit");
+  contactImg.classList.remove("contact-initials");
+  contactImg.classList.remove("profile-img");
+}
+
+/**
+ *  Closes the contact card and resets the display for mobile devices if necessary.
+ * @returns 
+ */
+function mobileDeleteContactResponse() {
+  if (window.innerWidth = 850) {
+    closeContactCard()
+  }
+  else {return}
+}
+
+/**
+ * Removes the "active" class from all contact rows to reset their state.
+ */
+function removeActiveClass() {
+  document
+    .querySelectorAll(".contact-row")
+    .forEach((row) => row.classList.remove("active"));
+}
+
+/**
+ * Styles the contact list items based on their first letter.
+ * @param {Array} contacts - Array of contact objects to style.
+    * This function sorts the contacts by their first name, groups them by the first letter, 
+    * and then renders each contact with appropriate styling. 
+    * It also adds letter headers for each group of contacts.
+ */
+function stylingForContactListItem(contacts) {
+  const container = document.getElementById("contact-list-content");
+  const sorted = sortContactsByFirstname(contacts);
+  const groups = groupContactsByLetter(sorted);
+  Object.keys(groups) .sort() .forEach((letter) => {
+      container.innerHTML += `<div class="letter-header">${letter}</div>`;
+      groups[letter].forEach((contact) => {
+        const initials = contact.firstname.charAt(0) + contact.lastname.charAt(0);
+        const bgColor = getColorFromName(contact.firstname + contact.lastname);
+        container.innerHTML += renderContactListItem(contact, initials, bgColor);
+      });
+    });
 }

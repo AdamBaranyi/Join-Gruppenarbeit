@@ -44,31 +44,9 @@ async function loadContacts() {
  */
 function renderContactList(contacts) {
   const container = document.getElementById("contact-list-content");
-  const sorted = sortContactsByFirstname(contacts);
-  const groups = groupContactsByLetter(sorted);
-
-  document
-    .querySelectorAll(".contact-row")
-    .forEach((row) => row.classList.remove("active"));
+  removeActiveClass();
   container.innerHTML = "";
-  Object.keys(groups)
-    .sort()
-    .forEach((letter) => {
-      container.innerHTML += `
-      <div class="letter-header">${letter}</div>
-    `;
-      groups[letter].forEach((contact) => {
-        const initials =
-          contact.firstname.charAt(0) + contact.lastname.charAt(0);
-        const bgColor = getColorFromName(contact.firstname + contact.lastname);
-        container.innerHTML += renderContactListItem(
-          contact,
-          initials,
-          bgColor,
-        );
-
-      });
-    });
+  stylingForContactListItem(contacts);
 }
 
 /**
@@ -131,7 +109,6 @@ function openModal() {
     modalInitials.textContent = "";
     leftSide.innerHTML = openModalLeftSide();
     contactWindow.innerHTML = openModalRightSide();
-
     setTimeout(() => {
         clearAllErrors('add');
         addInputValidationListeners();
@@ -210,12 +187,10 @@ function showInitials(contact) {
     const fullName = contact.firstname + contact.lastname;
     const initials = contact.firstname.charAt(0) + contact.lastname.charAt(0);
     const color = getColorFromName(fullName);
-
     if (cardInitials) {
         cardInitials.style.backgroundColor = color;
         cardInitials.textContent = initials.toUpperCase();
     }
-
     if (modalInitials) {
         modalInitials.style.backgroundColor = color;
         modalInitials.textContent = initials.toUpperCase();
@@ -228,12 +203,8 @@ function showInitials(contact) {
 function closeContactCard() {
   const card = document.getElementById("contact-card-content");
   const mainContent = document.querySelector(".main-content");
-  const contactListContainer = document.getElementById(
-    "contact-list-container",
-  );
-  const sloganAndCardContainer = document.getElementById(
-    "slogan-and-card-container",
-  );
+  const contactListContainer = document.getElementById("contact-list-container",);
+  const sloganAndCardContainer = document.getElementById("slogan-and-card-container",);
 
   card.innerHTML = "";
   mainContent.classList.remove("show-contact-card");
@@ -306,15 +277,12 @@ async function deleteContact(contactId) {
   await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
     method: "DELETE",
   });
-
   await loadContacts();
   const card = document.getElementById("contact-card-content");
   if (card) {
     card.innerHTML = "";
   }
-  if (window.innerWidth = 850) {
-    closeContactCard()
-  }
+  mobileDeleteContactResponse();
 }
 
 /**
@@ -327,16 +295,12 @@ function renderEditForm(contact) {
     const form = document.getElementById("edit-contact-form");
     form.dataset.id = contact.id;
     fillEditForm(contact);
-    const contactImg = document.getElementById("modal-initials");
-    contactImg.classList.add("contact-initials-edit");
-    contactImg.classList.remove("contact-initials");
-    contactImg.classList.remove("profile-img");
+    changeDisplayToEditCard();
     showInitials(contact);
-
     contactModal.showModal();
-
     setTimeout(() => {
         clearAllErrors('edit');
         addInputValidationListeners();
     }, 100);
 }
+
