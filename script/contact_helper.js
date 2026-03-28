@@ -314,3 +314,54 @@ function fillEditForm(contact) {
     document.getElementById("edit-email").value = contact.email;
     document.getElementById("edit-phone").value = contact.phonenumber;
 }
+
+/**
+ * Changes the display of the contact image to show the user contact initials.
+ */
+function changeDisplayToEditCard() {
+  const contactImg = document.getElementById("modal-initials");
+  contactImg.classList.add("contact-initials-edit");
+  contactImg.classList.remove("contact-initials");
+  contactImg.classList.remove("profile-img");
+}
+
+/**
+ *  Closes the contact card and resets the display for mobile devices if necessary.
+ * @returns 
+ */
+function mobileDeleteContactResponse() {
+  if (window.innerWidth = 850) {
+    closeContactCard()
+  }
+  else {return}
+}
+
+/**
+ * Removes the "active" class from all contact rows to reset their state.
+ */
+function removeActiveClass() {
+  document
+    .querySelectorAll(".contact-row")
+    .forEach((row) => row.classList.remove("active"));
+}
+
+/**
+ * Styles the contact list items based on their first letter.
+ * @param {Array} contacts - Array of contact objects to style.
+    * This function sorts the contacts by their first name, groups them by the first letter, 
+    * and then renders each contact with appropriate styling. 
+    * It also adds letter headers for each group of contacts.
+ */
+function stylingForContactListItem(contacts) {
+  const container = document.getElementById("contact-list-content");
+  const sorted = sortContactsByFirstname(contacts);
+  const groups = groupContactsByLetter(sorted);
+  Object.keys(groups) .sort() .forEach((letter) => {
+      container.innerHTML += `<div class="letter-header">${letter}</div>`;
+      groups[letter].forEach((contact) => {
+        const initials = contact.firstname.charAt(0) + contact.lastname.charAt(0);
+        const bgColor = getColorFromName(contact.firstname + contact.lastname);
+        container.innerHTML += renderContactListItem(contact, initials, bgColor);
+      });
+    });
+}

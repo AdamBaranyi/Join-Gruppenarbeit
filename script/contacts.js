@@ -53,29 +53,6 @@ function renderContactList(contacts) {
 }
 
 /**
- * Clears active state from all contact rows.
- */
-function clearActiveContacts() {
-  document
-    .querySelectorAll(".contact-row")
-    .forEach((row) => row.classList.remove("active"));
-}
-
-/**
- * Renders grouped contacts into the container.
- * @param {HTMLElement} container - The container element.
- * @param {Object} groups - The grouped contacts object.
- */
-function renderGroupedContacts(container, groups) {
-  Object.keys(groups)
-    .sort()
-    .forEach((letter) => {
-      container.innerHTML += renderLetterHeader(letter);
-      renderContactsForLetter(container, groups[letter]);
-    });
-}
-
-/**
  * Renders all contacts for a specific letter group.
  * @param {HTMLElement} container - The container element.
  * @param {Array} contacts - Array of contacts for this letter.
@@ -350,15 +327,12 @@ async function deleteContact(contactId) {
   await fetch(`${BASE_URL}/contacts/${contactId}.json`, {
     method: "DELETE",
   });
-
   await loadContacts();
   const card = document.getElementById("contact-card-content");
   if (card) {
     card.innerHTML = "";
   }
-  if (window.innerWidth = 850) {
-    closeContactCard()
-  }
+  mobileDeleteContactResponse();
 }
 
 /**
@@ -412,3 +386,4 @@ function initializeEditFormValidation() {
         addInputValidationListeners();
     }, 100);
 }
+
