@@ -85,18 +85,15 @@ function validateContact(data, formType) {
  */
 function addInputValidationListeners() {
     const addInputs = ['add-firstname', 'add-lastname', 'add-email', 'add-phone'];
+    addInputs.forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+            input.removeEventListener('input', handleInputValidation);
+            input.addEventListener('input', handleInputValidation);
+        }
+    });
     const editInputs = ['edit-firstname', 'edit-lastname', 'edit-email', 'edit-phone'];
-
-    attachValidationListeners(addInputs);
-    attachValidationListeners(editInputs);
-}
-
-/**
- * Attaches validation listeners to a list of input IDs.
- * @param {string[]} inputIds - Array of input element IDs.
- */
-function attachValidationListeners(inputIds) {
-    inputIds.forEach(id => {
+    editInputs.forEach(id => {
         const input = document.getElementById(id);
         if (input) {
             input.removeEventListener('input', handleInputValidation);
@@ -112,60 +109,23 @@ function attachValidationListeners(inputIds) {
 function handleInputValidation(e) {
     const input = e.target;
     const inputId = input.id;
+    const formType = inputId.startsWith('add-') ? 'add' : 'edit';
 
     clearError(inputId);
     const value = input.value.trim();
-
-    validateFieldRealtime(inputId, value);
-}
-
-/**
- * Validates a specific field in real-time.
- * @param {string} inputId - The input element ID.
- * @param {string} value - The trimmed input value.
- */
-function validateFieldRealtime(inputId, value) {
-    if (shouldSkipNameValidation(inputId, value)) return;
-
-    if (inputId.includes('email')) {
-        validateEmailRealtime(inputId, value);
+    if (inputId.includes('firstname') && value.length === 1) {
+        return;
     }
-    if (inputId.includes('phone')) {
-        validatePhoneRealtime(inputId, value);
+    if (inputId.includes('lastname') && value.length === 1) {
+        return;
     }
-}
-
-/**
- * Checks if name validation should be skipped.
- * @param {string} inputId - The input element ID.
- * @param {string} value - The input value.
- * @returns {boolean} True if should skip.
- */
-function shouldSkipNameValidation(inputId, value) {
-    return (inputId.includes('firstname') || inputId.includes('lastname')) && value.length === 1;
-}
-
-/**
- * Validates email in real-time.
- * @param {string} inputId - The input element ID.
- * @param {string} value - The input value.
- */
-function validateEmailRealtime(inputId, value) {
-    if (value.length > 0) {
+    if (inputId.includes('email') && value.length > 0) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(value) && value.length > 5) {
             setError(inputId, '* Please enter a valid email address');
         }
     }
-}
-
-/**
- * Validates phone in real-time.
- * @param {string} inputId - The input element ID.
- * @param {string} value - The input value.
- */
-function validatePhoneRealtime(inputId, value) {
-    if (value.length > 0 && value.length < 6) {
+    if (inputId.includes('phone') && value.length > 0 && value.length < 6) {
         setError(inputId, '* Phone number must be at least 6 digits');
     }
 }

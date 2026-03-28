@@ -165,12 +165,3 @@ function menuTempl(contact) {
       </div>
     `;
 }
-
-/**
- * Generates HTML template for a letter header in the contact list.
- * @param {string} letter - The letter for the header.
- * @returns {string} HTML string for the letter header.
- */
-function renderLetterHeader(letter) {
-  return `<div class="letter-header">${letter}</div>`;
-}

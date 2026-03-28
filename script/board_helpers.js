@@ -171,30 +171,14 @@ function editTask() {
  * @param {Object} task - The task object.
  */
 function prepareEditState(task) {
-  const assignedToArray = convertTaskAssignees(task.assignedTo);
-  editSelectedContacts = normalizeContactNames(assignedToArray);
-  editCurrentSubtasks = [...(task.subtasks || [])];
-}
+  let assignedToArray = task.assignedTo
+    ? (Array.isArray(task.assignedTo) ? task.assignedTo : Object.values(task.assignedTo))
+    : [];
 
-/**
- * Converts task assignees to array.
- * @param {*} assignedTo - The assignedTo data.
- * @returns {Array} Array of assignee names.
- */
-function convertTaskAssignees(assignedTo) {
-  if (!assignedTo) return [];
-  return Array.isArray(assignedTo) ? assignedTo : Object.values(assignedTo);
-}
-
-/**
- * Normalizes an array of contact names.
- * @param {Array} names - Array of names.
- * @returns {Array} Normalized names.
- */
-function normalizeContactNames(names) {
-  return names.map(name =>
+  editSelectedContacts = assignedToArray.map(name =>
     name.split(/\s+/).filter(Boolean).join(' ').trim()
   );
+  editCurrentSubtasks = [...(task.subtasks || [])];
 }
 
 /**
