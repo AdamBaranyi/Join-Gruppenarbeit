@@ -9,14 +9,11 @@
  */
 function setError(inputId, message) {
     const inputGroup = document.getElementById(inputId).closest('.input-group');
-
     const existingError = inputGroup.querySelector('.error-message');
     if (existingError) {
         existingError.remove();
     }
-
     inputGroup.classList.add('error');
-
     const errorSpan = document.createElement('span');
     errorSpan.className = 'error-message';
     errorSpan.textContent = message;
@@ -30,12 +27,9 @@ function setError(inputId, message) {
 function clearError(inputId) {
     const input = document.getElementById(inputId);
     if (!input) return;
-
     const inputGroup = input.closest('.input-group');
     if (!inputGroup) return;
-
     inputGroup.classList.remove('error');
-
     const existingError = inputGroup.querySelector('.error-message');
     if (existingError) {
         existingError.remove();
@@ -67,7 +61,6 @@ function clearAllErrors(formType) {
 function validateContact(data, formType) {
   let allValid;
   clearAllErrors(formType);
-
   const firstnameValid = checkFirstname(data, formType);
   const lastnameValid = checkLastname(data, formType);
   const mailValid = checkMail(data, formType);
@@ -98,8 +91,7 @@ function addInputValidationListeners() {
         if (input) {
             input.removeEventListener('input', handleInputValidation);
             input.addEventListener('input', handleInputValidation);
-        }
-    });
+        }});
 }
 
 /**
@@ -110,22 +102,12 @@ function handleInputValidation(e) {
     const input = e.target;
     const inputId = input.id;
     const formType = inputId.startsWith('add-') ? 'add' : 'edit';
-
     clearError(inputId);
     const value = input.value.trim();
-    if (inputId.includes('firstname') && value.length === 1) {
-        return;
-    }
-    if (inputId.includes('lastname') && value.length === 1) {
-        return;
-    }
+    if (inputId.includes('firstname') && value.length === 1) {return;}
+    if (inputId.includes('lastname') && value.length === 1) {return;}
     if (inputId.includes('email') && value.length > 0) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(value) && value.length > 5) {
-            setError(inputId, '* Please enter a valid email address');
-        }
-    }
-    if (inputId.includes('phone') && value.length > 0 && value.length < 6) {
-        setError(inputId, '* Phone number must be at least 6 digits');
-    }
+        if (!emailRegex.test(value) && value.length > 5) {setError(inputId, '* Please enter a valid email address');}}
+    if (inputId.includes('phone') && value.length > 0 && value.length < 6) {setError(inputId, '* Phone number must be at least 6 digits');}
 }
