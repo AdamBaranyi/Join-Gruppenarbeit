@@ -44,9 +44,25 @@ async function loadContacts() {
  */
 function renderContactList(contacts) {
   const container = document.getElementById("contact-list-content");
-  removeActiveClass();
+  const sorted = sortContactsByFirstname(contacts);
+  const groups = groupContactsByLetter(sorted);
+
+  clearActiveContacts();
   container.innerHTML = "";
-  stylingForContactListItem(contacts);
+  renderGroupedContacts(container, groups);
+}
+
+/**
+ * Renders all contacts for a specific letter group.
+ * @param {HTMLElement} container - The container element.
+ * @param {Array} contacts - Array of contacts for this letter.
+ */
+function renderContactsForLetter(container, contacts) {
+  contacts.forEach((contact) => {
+    const initials = contact.firstname.charAt(0) + contact.lastname.charAt(0);
+    const bgColor = getColorFromName(contact.firstname + contact.lastname);
+    container.innerHTML += renderContactListItem(contact, initials, bgColor);
+  });
 }
 
 /**
@@ -101,14 +117,34 @@ function getColorFromName(name) {
  */
 function openModal() {
     contactModal.showModal();
+    resetModalInitials();
+    populateAddContactForm();
+    initializeAddFormValidation();
+}
+
+/**
+ * Resets the modal initials styling.
+ */
+function resetModalInitials() {
     const modalInitials = document.getElementById("modal-initials");
     modalInitials.style.backgroundColor = "transparent";
-    modalInitials.classList.remove("contact-initials");
+    modalInitials.classList.remove("contact-initials", "contact-initials-edit");
     modalInitials.classList.add("profile-img");
-    modalInitials.classList.remove("contact-initials-edit");
     modalInitials.textContent = "";
+}
+
+/**
+ * Populates the add contact form.
+ */
+function populateAddContactForm() {
     leftSide.innerHTML = openModalLeftSide();
     contactWindow.innerHTML = openModalRightSide();
+}
+
+/**
+ * Initializes validation for add form.
+ */
+function initializeAddFormValidation() {
     setTimeout(() => {
         clearAllErrors('add');
         addInputValidationListeners();
@@ -182,18 +218,25 @@ function renderContactCard(contact) {
  */
 function showInitials(contact) {
     if (!contact) return;
-    const cardInitials = document.getElementById("contact-initials");
-    const modalInitials = document.getElementById("modal-initials");
     const fullName = contact.firstname + contact.lastname;
     const initials = contact.firstname.charAt(0) + contact.lastname.charAt(0);
     const color = getColorFromName(fullName);
-    if (cardInitials) {
-        cardInitials.style.backgroundColor = color;
-        cardInitials.textContent = initials.toUpperCase();
-    }
-    if (modalInitials) {
-        modalInitials.style.backgroundColor = color;
-        modalInitials.textContent = initials.toUpperCase();
+
+    updateInitialsElement("contact-initials", initials, color);
+    updateInitialsElement("modal-initials", initials, color);
+}
+
+/**
+ * Updates an initials element with initials and color.
+ * @param {string} elementId - The element ID.
+ * @param {string} initials - The initials to display.
+ * @param {string} color - The background color.
+ */
+function updateInitialsElement(elementId, initials, color) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.style.backgroundColor = color;
+        element.textContent = initials.toUpperCase();
     }
 }
 
@@ -203,11 +246,18 @@ function showInitials(contact) {
 function closeContactCard() {
   const card = document.getElementById("contact-card-content");
   const mainContent = document.querySelector(".main-content");
-  const contactListContainer = document.getElementById("contact-list-container",);
-  const sloganAndCardContainer = document.getElementById("slogan-and-card-container",);
 
   card.innerHTML = "";
   mainContent.classList.remove("show-contact-card");
+  resetContactDisplayContainers();
+}
+
+/**
+ * Resets the display of contact list containers.
+ */
+function resetContactDisplayContainers() {
+  const contactListContainer = document.getElementById("contact-list-container");
+  const sloganAndCardContainer = document.getElementById("slogan-and-card-container");
 
   if (contactListContainer) contactListContainer.style.display = "";
   if (sloganAndCardContainer) sloganAndCardContainer.style.display = "";
@@ -290,14 +340,47 @@ async function deleteContact(contactId) {
  * @param {Object} contact - The contact object to edit.
  */
 function renderEditForm(contact) {
+    populateEditModalContent(contact);
+    setupEditFormData(contact);
+    updateEditModalInitials(contact);
+    contactModal.showModal();
+    initializeEditFormValidation();
+}
+
+/**
+ * Populates the edit modal with form content.
+ * @param {Object} contact - The contact object.
+ */
+function populateEditModalContent(contact) {
     leftSide.innerHTML = editFormleftSide();
     contactWindow.innerHTML = editFormRightSide(contact);
+}
+
+/**
+ * Sets up the edit form with contact data.
+ * @param {Object} contact - The contact object.
+ */
+function setupEditFormData(contact) {
     const form = document.getElementById("edit-contact-form");
     form.dataset.id = contact.id;
     fillEditForm(contact);
-    changeDisplayToEditCard();
+}
+
+/**
+ * Updates the modal initials for edit mode.
+ * @param {Object} contact - The contact object.
+ */
+function updateEditModalInitials(contact) {
+    const contactImg = document.getElementById("modal-initials");
+    contactImg.classList.add("contact-initials-edit");
+    contactImg.classList.remove("contact-initials", "profile-img");
     showInitials(contact);
-    contactModal.showModal();
+}
+
+/**
+ * Initializes validation for edit form.
+ */
+function initializeEditFormValidation() {
     setTimeout(() => {
         clearAllErrors('edit');
         addInputValidationListeners();

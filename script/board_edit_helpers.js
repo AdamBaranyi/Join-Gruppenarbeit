@@ -11,16 +11,32 @@ function renderEditAssignees() {
   container.innerHTML = "";
 
   const maxVisible = 3;
-  const totalCount = editSelectedContacts.length;
   const visibleContacts = editSelectedContacts.slice(0, maxVisible);
-  const remaining = totalCount - maxVisible;
+  const remaining = editSelectedContacts.length - maxVisible;
 
-  visibleContacts.forEach((name) => {
+  renderVisibleAssignees(container, visibleContacts);
+  renderRemainingBadge(container, remaining);
+}
+
+/**
+ * Renders visible assignee badges.
+ * @param {HTMLElement} container - The container element.
+ * @param {Array} contacts - The visible contacts.
+ */
+function renderVisibleAssignees(container, contacts) {
+  contacts.forEach((name) => {
     const initials = getContactInitials(name);
     const bgColor = getContactColor(name);
     container.innerHTML += `<div class="user-circle" style="background-color: ${bgColor};">${initials}</div>`;
   });
+}
 
+/**
+ * Renders the remaining count badge if needed.
+ * @param {HTMLElement} container - The container element.
+ * @param {number} remaining - The remaining count.
+ */
+function renderRemainingBadge(container, remaining) {
   if (remaining > 0) {
     container.innerHTML += `<div class="user-circle user-circle-more">+${remaining}</div>`;
   }
@@ -164,13 +180,31 @@ function buildContactItemHTML(name, initials, bgColor, isChecked) {
  */
 function attachContactItemListeners(contactItem, name) {
   const checkbox = contactItem.querySelector('input[type="checkbox"]');
+  attachCheckboxListener(checkbox, name, contactItem);
+  attachContactClickListener(contactItem, checkbox, name);
+}
 
+/**
+ * Attaches checkbox change listener.
+ * @param {HTMLElement} checkbox - The checkbox element.
+ * @param {string} name - The contact name.
+ * @param {HTMLElement} contactItem - The contact item element.
+ */
+function attachCheckboxListener(checkbox, name, contactItem) {
   checkbox.addEventListener('change', (e) => {
     e.stopPropagation();
     toggleEditContact(name, checkbox.checked);
     contactItem.classList.toggle('checked', checkbox.checked);
   });
+}
 
+/**
+ * Attaches contact item click listener.
+ * @param {HTMLElement} contactItem - The contact item element.
+ * @param {HTMLElement} checkbox - The checkbox element.
+ * @param {string} name - The contact name.
+ */
+function attachContactClickListener(contactItem, checkbox, name) {
   contactItem.addEventListener('click', (e) => {
     e.stopPropagation();
     if (e.target.tagName.toLowerCase() === 'input') return;
