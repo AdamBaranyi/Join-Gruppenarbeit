@@ -264,32 +264,23 @@ function handleUserSaveError(error) {
 }
 
 initInputs();
+
 /**
  * Initializes all input fields with event listeners
  */
 function initInputs() {
-  /** @type {NodeListOf<HTMLElement>} */
-  const groups = document.querySelectorAll(".input-group");
-
-  groups.forEach((group) => {
-    /** @type {HTMLInputElement} */
+  document.querySelectorAll(".input-group").forEach((group) => {
     const input = group.querySelector("input");
-    /** @type {HTMLImageElement} */
     const icon = group.querySelector(".input-icon");
-    /** @type {string} */
     const type = group.dataset.type;
 
     if (input && icon) {
-      // Bestehende Event-Listener
       input.addEventListener("input", () => handleInput(input, icon, type));
       icon.addEventListener("click", () => handleIconClick(input, icon, type));
-      
-      // NEU: Fehler zurücksetzen bei Eingabe
       input.addEventListener("input", () => clearFieldError(input));
     }
   });
 
-  // NEU: Speziell für Checkbox
   if (checkbox) {
     checkbox.addEventListener("change", () => {
       document.getElementById("error-privacy").innerText = "";
@@ -302,14 +293,11 @@ function initInputs() {
  * @param {HTMLInputElement} input - The input field to clear error from
  */
 function clearFieldError(input) {
-  // Entferne die error-Klasse
   input.classList.remove("input-error");
-  
-  // Finde die zugehörige error-message
+
   const fieldId = input.id;
   const errorDiv = document.getElementById("error-" + fieldId);
   
-  // Leere die error-message
   if (errorDiv) {
     errorDiv.innerText = "";
   }

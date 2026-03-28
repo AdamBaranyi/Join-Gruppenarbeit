@@ -88,31 +88,19 @@ function validateTaskTitle() {
 
 /**
  * Validates the due date field.
- * @returns {boolean} True if a date has been selected.
+ * @returns {boolean} True if a date has been selected and is valid.
  */
 function validateTaskDate() {
   const input = document.getElementById("due-date");
   const value = input.value;
-
-  if (!value) {
-    setError("due-date", "* This field is required");
-    return false;
-  }
-
   const date = new Date(value);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  if (isNaN(date.getTime())) {
-    setError("due-date", "* Invalid date");
-    return false;
-  }
-
-  if (date < today) {
-    setError("due-date", "* Date cannot be in the past");
-    return false;
-  }
-
+  if (!value) return setError("due-date", "* This field is required"), false;
+  if (isNaN(date.getTime())) return setError("due-date", "* Invalid date"), false;
+  if (date < today) return setError("due-date", "* Date cannot be in the past"), false;
+  
   return true;
 }
 
@@ -155,7 +143,6 @@ function clearErrors() {
 }
 
 // ---------- Dropdown Initialisation (calls helper functions) ----------
-
 /**
  * Initialises the "Assigned to" dropdown.
  * @async
@@ -206,34 +193,20 @@ function initializeSubtasks() {
 }
 
 // ---------- Form Resets ----------
-
 /**
  * Resets the entire form (without reloading the page).
  */
 function clearForm() {
   document.getElementById("taskForm").reset();
   clearErrors();
-
   document.getElementById("selectedUsers").innerHTML = "";
-  document.querySelector("#assignedDropdown .placeholder").style.display =
-    "inline";
-
-  const categoryPlaceholder = document.querySelector(
-    ".category-dropdown .placeholder",
-  );
-  if (categoryPlaceholder) {
-    categoryPlaceholder.textContent = "Select task category";
-    categoryPlaceholder.style.color = "#666";
-  }
-
+  document.querySelector("#assignedDropdown .placeholder").style.display = "inline";
+  document.querySelector(".category-dropdown .placeholder").textContent = "Select task category";
+  document.querySelector(".category-dropdown .placeholder").style.color = "#666";
   document.getElementById("subtaskList").innerHTML = "";
-  document
-    .querySelectorAll('#dropdownList input[type="checkbox"]')
-    .forEach((cb) => (cb.checked = false));
-
+  document.querySelectorAll('#dropdownList input[type="checkbox"]').forEach(cb => cb.checked = false);
   selectedContacts = [];
 }
-
 /**
  * Resets the entire form and also clears the subtask input field.
  */
@@ -243,7 +216,6 @@ function clearCompleteForm() {
 }
 
 // ---------- Firebase Save Process ----------
-
 /**
  * Collects all form data, creates a task object and saves it to Firebase.
  * @async

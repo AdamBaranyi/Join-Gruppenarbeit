@@ -1,11 +1,4 @@
 /**
- * @fileoverview Helper functions for the Add Task page: dropdown logic,
- * contact management, subtasks, Firebase interactions and UI updates.
- */
-
-// ---------- Assigned-To Dropdown Helper Functions ----------
-
-/**
  * Extracts the relevant DOM elements of the assigned dropdown.
  * @param {HTMLElement} dropdown - The dropdown container element.
  * @returns {Object} Contains header, dropdownList, selectedContainer, placeholder.
@@ -30,20 +23,16 @@ async function renderAllContacts(elements) {
 
   contacts.forEach((contact) => {
     const fullName = `${contact.firstname} ${contact.lastname}`;
-    const bgColor =
-      typeof getColorFromName === "function"
-        ? getColorFromName(fullName)
-        : "#FF7A00";
+    const bgColor = typeof getColorFromName === "function" ? getColorFromName(fullName) : "#FF7A00";
     createContactElement(fullName, bgColor, elements);
   });
-
   updateSelectedUsersDisplay(elements);
 }
 
 /**
  * Fetches the contact list from Firebase.
  * @async
- * @returns {Promise<Object[]>} Array of contact objects (firstname, lastname, …).
+ * @returns {Promise<Object[]>} Array of contact objects.
  */
 async function getContactsList() {
   const response = await fetch(BASE_URL + "/contacts.json");
@@ -54,22 +43,17 @@ async function getContactsList() {
 /**
  * Extracts initials from a full name.
  * @param {string} name - The full name.
- * @returns {string} The initials (max. 2 letters, uppercase).
+ * @returns {string} The initials.
  */
 function getInitials(name) {
-  return name
-    .split(" ")
-    .map((n) => n[0])
-    .join("")
-    .substring(0, 2)
-    .toUpperCase();
+  return name.split(" ").map(n => n[0]).join("").substring(0, 2).toUpperCase();
 }
 
 /**
  * Creates a DOM element for a contact and appends it to the dropdown list.
  * @param {string} name - Full name.
- * @param {string} bgColor - Background colour as hex.
- * @param {Object} elements - Dropdown elements (for checkbox event).
+ * @param {string} bgColor - Background colour.
+ * @param {Object} elements - Dropdown elements.
  */
 function createContactElement(name, bgColor, elements) {
   const initials = getInitials(name);
@@ -91,7 +75,7 @@ function setupContactCheckbox(item, name, isYou, elements) {
   const checkbox = item.querySelector("input");
   if (isYou) selectedContacts.push(name);
 
-    checkbox.addEventListener("change", () => {
+  checkbox.addEventListener("change", () => {
     updateSelectedContacts(name, checkbox.checked);
     updateSelectedUsersDisplay(elements);
     item.classList.toggle("selected", checkbox.checked);
@@ -115,7 +99,7 @@ function updateSelectedContacts(name, isChecked) {
   if (isChecked && !selectedContacts.includes(name)) {
     selectedContacts.push(name);
   } else if (!isChecked) {
-    selectedContacts = selectedContacts.filter((c) => c !== name);
+    selectedContacts = selectedContacts.filter(c => c !== name);
   }
 }
 
@@ -126,15 +110,13 @@ function updateSelectedContacts(name, isChecked) {
 function updateSelectedUsersDisplay(elements) {
   const c = elements.selectedContainer;
   c.innerHTML = "";
-
   const max = 6, total = selectedContacts.length;
   const visible = total > max ? max - 1 : total;
 
-  selectedContacts.slice(0, visible).forEach(name =>
-    c.appendChild(createUserCircle(name,
-      typeof getColorFromName === "function" ? getColorFromName(name) : "#FF7A00"
-    ))
-  );
+  selectedContacts.slice(0, visible).forEach(name => {
+    const color = typeof getColorFromName === "function" ? getColorFromName(name) : "#FF7A00";
+    c.appendChild(createUserCircle(name, color));
+  });
 
   if (total > max) {
     const more = document.createElement("div");
@@ -142,15 +124,13 @@ function updateSelectedUsersDisplay(elements) {
     more.innerText = `+${total - visible}`;
     c.appendChild(more);
   }
-
   elements.placeholder.style.display = total ? "none" : "inline";
 }
 
-
 /**
- * Creates a user circle (div) with initials and background colour.
+ * Creates a user circle with initials and background colour.
  * @param {string} name - Full name.
- * @param {string} bgColor - Background colour as hex.
+ * @param {string} bgColor - Background colour.
  * @returns {HTMLElement} The circle element.
  */
 function createUserCircle(name, bgColor) {
@@ -163,7 +143,7 @@ function createUserCircle(name, bgColor) {
 }
 
 /**
- * Sets up event listeners for the assigned dropdown (open/close).
+ * Sets up event listeners for the assigned dropdown.
  * @param {HTMLElement} dropdown - The dropdown container element.
  * @param {Object} elements - Dropdown elements.
  */
@@ -174,13 +154,9 @@ function setupDropdownEventListeners(dropdown, elements) {
   });
 
   document.addEventListener("click", (e) => {
-    if (!dropdown.contains(e.target)) {
-      dropdown.classList.remove("open");
-    }
-  }); 
+    if (!dropdown.contains(e.target)) dropdown.classList.remove("open");
+  });
 }
-
-// ---------- Category Dropdown Helper Functions ----------
 
 /**
  * Extracts the relevant DOM elements of the category dropdown.
@@ -203,7 +179,7 @@ function getCategoryDropdownElements(dropdown) {
 function setupDropdownHeaderListener(dropdown, elements) {
   elements.header.addEventListener("click", (event) => {
     event.stopPropagation();
-    toggleDropdown(dropdown);
+    dropdown.classList.toggle("open");
   });
 }
 
@@ -233,20 +209,15 @@ function setupCategoryItemsListeners(elements) {
  * @param {Object} elements - Category dropdown elements.
  */
 function handleCategorySelection(selectedItem, elements) {
-  updatePlaceholderWithSelectedCategory(selectedItem, elements);
-  removeCategoryDropdownError();
-  closeDropdown(elements);
-}
-
-/**
- * Updates the placeholder text with the selected category.
- * @param {HTMLElement} selectedItem - The selected item.
- * @param {Object} elements - Category dropdown elements.
- */
-function updatePlaceholderWithSelectedCategory(selectedItem, elements) {
-  const categoryValue = selectedItem.textContent.trim();
-  elements.placeholder.textContent = categoryValue;
+  elements.placeholder.textContent = selectedItem.textContent.trim();
   elements.placeholder.style.color = "#000";
+  
+  const dropdown = document.querySelector(".category-dropdown");
+  dropdown.classList.remove("input-error");
+  const errorElement = document.getElementById("error-categoryDropdown");
+  if (errorElement) errorElement.innerText = "";
+  
+  dropdown.classList.remove("open");
 }
 
 /**
@@ -274,7 +245,7 @@ function closeDropdown(elements) {
  */
 function setupOutsideClickListener(dropdown) {
   document.addEventListener("click", (event) => {
-    closeDropdownIfClickOutside(event, dropdown);
+    if (!dropdown.contains(event.target)) dropdown.classList.remove("open");
   });
 }
 
@@ -284,12 +255,8 @@ function setupOutsideClickListener(dropdown) {
  * @param {HTMLElement} dropdown - The dropdown container element.
  */
 function closeDropdownIfClickOutside(event, dropdown) {
-  if (!dropdown.contains(event.target)) {
-    dropdown.classList.remove("open");
-  }
+  if (!dropdown.contains(event.target)) dropdown.classList.remove("open");
 }
-
-// ---------- Subtask Helper Functions ----------
 
 /**
  * Collects the DOM elements for subtasks.
@@ -317,7 +284,6 @@ function addSubtaskButtonListeners(elements) {
       elements.input.value = "";
     }
   });
-
   elements.clearButton.addEventListener("click", (event) => {
     event.preventDefault();
     elements.input.value = "";
@@ -325,7 +291,7 @@ function addSubtaskButtonListeners(elements) {
 }
 
 /**
- * Sets up keyboard listener for the subtask input field (Enter = add).
+ * Sets up keyboard listener for the subtask input field.
  * @param {Object} elements - The subtask elements.
  */
 function addSubtaskInputListeners(elements) {
@@ -338,17 +304,42 @@ function addSubtaskInputListeners(elements) {
 }
 
 /**
- * Sets up global click listener for the subtask list (edit/delete).
+ * Sets up global click listener for the subtask list.
  * @param {Object} elements - The subtask elements.
  */
 function addSubtaskListListener(elements) {
   elements.list.addEventListener("click", (event) => {
     const subtaskItem = event.target.closest(".subtask-item");
     if (!subtaskItem) return;
-
-    handleDeleteButtonClick(event, subtaskItem);
-    handleEditButtonClick(event, subtaskItem);
+    
+    if (event.target.closest(".delete-btn")) {
+      subtaskItem.remove();
+    } else {
+      handleSubtaskEdit(event, subtaskItem);
+    }
   });
+}
+
+/**
+ * Handles the edit functionality for a subtask.
+ * @param {MouseEvent} event - The click event.
+ * @param {HTMLElement} subtaskItem - The subtask item.
+ */
+function handleSubtaskEdit(event, subtaskItem) {
+  const editButton = event.target.closest(".edit-btn");
+  if (!editButton) return;
+  
+  const input = subtaskItem.querySelector("input");
+  if (!input.disabled && !input.value.trim()) {
+    subtaskItem.classList.add("error");
+    input.focus();
+    return;
+  }
+  
+  subtaskItem.classList.remove("error");
+  input.disabled = !input.disabled;
+  subtaskItem.classList.toggle("editing");
+  editButton.classList.toggle("editing");
 }
 
 /**
@@ -357,10 +348,7 @@ function addSubtaskListListener(elements) {
  * @param {HTMLElement} subtaskItem - The subtask item.
  */
 function handleDeleteButtonClick(event, subtaskItem) {
-  const deleteButton = event.target.closest(".delete-btn");
-  if (deleteButton) {
-    subtaskItem.remove();
-  }
+  if (event.target.closest(".delete-btn")) subtaskItem.remove();
 }
 
 /**
@@ -384,17 +372,6 @@ function handleEditButtonClick(event, subtaskItem) {
   input.disabled = !input.disabled;
   subtaskItem.classList.toggle("editing");
   editButton.classList.toggle("editing");
-
-  if (!input.disabled) {
-    input.focus();
-    input.addEventListener("input", () => {
-      if (input.value.trim()) {
-        subtaskItem.classList.remove("error"); 
-      } else {
-        subtaskItem.classList.add("error");
-      }
-    });
-  }
 }
 
 /**
@@ -410,7 +387,7 @@ function addSubtaskItem(value) {
 }
 
 /**
- * Toggles the edit mode of a subtask (for inline onclick).
+ * Toggles the edit mode of a subtask.
  * @param {HTMLElement} btn - The clicked edit button.
  */
 function toggleEdit(btn) {
