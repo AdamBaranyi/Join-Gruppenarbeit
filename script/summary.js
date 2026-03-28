@@ -50,22 +50,40 @@ function ensureDashboardVisible() {
  * and reveals the dashboard content (metrics, header, sidebar).
  */
 function handleMobileSplash() {
-  const mobileSidebar = document.querySelector(".mobile-sidebar");
-  const summaryContent = document.querySelector(".summary-content");
-  const metricsContainer = document.querySelector(".metrics-container");
-  const headerContainer = document.querySelector(".summary-header-container");
-  const greetingContainer = document.querySelector(".greeting-container");
+  const elements = getSplashElements();
 
-  if (summaryContent) summaryContent.classList.add("splash-active");
-  showGreetingForSplash(greetingContainer);
-  hideDashboardElements(mobileSidebar, metricsContainer, headerContainer);
+  prepareSplashScreen(elements);
   startSplashTransition(
-    greetingContainer,
-    summaryContent,
-    mobileSidebar,
-    metricsContainer,
-    headerContainer,
+    elements.greetingContainer,
+    elements.summaryContent,
+    elements.mobileSidebar,
+    elements.metricsContainer,
+    elements.headerContainer,
   );
+}
+
+/**
+ * Gets all splash screen related elements.
+ * @returns {Object} Object containing all splash elements.
+ */
+function getSplashElements() {
+  return {
+    mobileSidebar: document.querySelector(".mobile-sidebar"),
+    summaryContent: document.querySelector(".summary-content"),
+    metricsContainer: document.querySelector(".metrics-container"),
+    headerContainer: document.querySelector(".summary-header-container"),
+    greetingContainer: document.querySelector(".greeting-container")
+  };
+}
+
+/**
+ * Prepares the splash screen by showing greeting and hiding dashboard.
+ * @param {Object} elements - The splash elements object.
+ */
+function prepareSplashScreen(elements) {
+  if (elements.summaryContent) elements.summaryContent.classList.add("splash-active");
+  showGreetingForSplash(elements.greetingContainer);
+  hideDashboardElements(elements.mobileSidebar, elements.metricsContainer, elements.headerContainer);
 }
 
 /**
@@ -116,14 +134,8 @@ function startSplashTransition(
   headerContainer,
 ) {
   setTimeout(() => {
-    fadeOutGreeting(greetingContainer, () => {
-      showDashboard(
-        summaryContent,
-        mobileSidebar,
-        metricsContainer,
-        headerContainer,
-      );
-    });
+    const onComplete = () => showDashboard(summaryContent, mobileSidebar, metricsContainer, headerContainer);
+    fadeOutGreeting(greetingContainer, onComplete);
   }, 2000);
 }
 
@@ -171,10 +183,30 @@ function showDashboard(
  * the greeting text, user name, and profile initials.
  */
 function greetUser() {
-  const timeElement = document.getElementById("greeting-time");
-  const nameElement = document.getElementById("greeting-name");
-  const userInitialsElement = document.querySelector(".user-profile-initials");
+  const elements = getGreetingElements();
+  const userData = getUserDataFromSession();
+  const greetingText = formatGreetingText(userData.userName);
 
+  updateGreetingDisplay(elements, greetingText, userData);
+}
+
+/**
+ * Gets all greeting-related DOM elements.
+ * @returns {Object} Object containing greeting elements.
+ */
+function getGreetingElements() {
+  return {
+    timeElement: document.getElementById("greeting-time"),
+    nameElement: document.getElementById("greeting-name"),
+    userInitialsElement: document.querySelector(".user-profile-initials")
+  };
+}
+
+/**
+ * Gets user data from session storage.
+ * @returns {Object} Object with userName and userInitials.
+ */
+function getUserDataFromSession() {
   let user = JSON.parse(sessionStorage.getItem("current_user"));
   let userName = "Guest";
   let userInitials = "G";
@@ -184,17 +216,35 @@ function greetUser() {
     userInitials = getInitials(userName);
   }
 
-  let greetingText = getGreetingByTime();
+  return { userName, userInitials };
+}
 
+/**
+ * Formats the greeting text based on user name.
+ * @param {string} userName - The user's name.
+ * @returns {string} The formatted greeting text.
+ */
+function formatGreetingText(userName) {
+  let greetingText = getGreetingByTime();
   if (userName === "Guest") {
     greetingText = greetingText.slice(0, -1) + "!";
-    if (nameElement) nameElement.innerText = "";
-  } else {
-    if (nameElement) nameElement.innerText = userName;
   }
+  return greetingText;
+}
 
-  if (timeElement) timeElement.innerText = greetingText;
-  if (userInitialsElement) userInitialsElement.innerText = userInitials;
+/**
+ * Updates the greeting display elements.
+ * @param {Object} elements - The greeting elements.
+ * @param {string} greetingText - The greeting text.
+ * @param {Object} userData - The user data object.
+ */
+function updateGreetingDisplay(elements, greetingText, userData) {
+  if (elements.timeElement) elements.timeElement.innerText = greetingText;
+  if (elements.userInitialsElement) elements.userInitialsElement.innerText = userData.userInitials;
+
+  if (elements.nameElement) {
+    elements.nameElement.innerText = userData.userName === "Guest" ? "" : userData.userName;
+  }
 }
 
 /**
@@ -322,21 +372,33 @@ function findEarliestUrgentDate(tasks) {
  * @param {Date|null} earliestUrgentDate - The earliest Date object among urgent tasks.
  */
 function updateSummaryUI(metrics, earliestUrgentDate) {
+  updateMetricsDisplay(metrics);
+  updateUrgentDateDisplay(earliestUrgentDate);
+}
+
+/**
+ * Updates all metric displays with current values.
+ * @param {Object} metrics - The metrics object.
+ */
+function updateMetricsDisplay(metrics) {
   document.getElementById("metric-board").innerText = metrics.total;
   document.getElementById("metric-progress").innerText = metrics.inProgress;
-  document.getElementById("metric-feedback").innerText =
-    metrics.awaitingFeedback;
+  document.getElementById("metric-feedback").innerText = metrics.awaitingFeedback;
   document.getElementById("metric-urgent").innerText = metrics.urgent;
   document.getElementById("metric-todo").innerText = metrics.todo;
   document.getElementById("metric-done").innerText = metrics.done;
+}
 
+/**
+ * Updates the urgent date display.
+ * @param {Date|null} earliestUrgentDate - The earliest urgent date.
+ */
+function updateUrgentDateDisplay(earliestUrgentDate) {
   const dateDisplay = document.getElementById("urgent-date-display");
+
   if (earliestUrgentDate) {
     const options = { year: "numeric", month: "long", day: "numeric" };
-    dateDisplay.innerText = earliestUrgentDate.toLocaleDateString(
-      "en-US",
-      options,
-    );
+    dateDisplay.innerText = earliestUrgentDate.toLocaleDateString("en-US", options);
   } else {
     dateDisplay.innerText = "No upcoming deadline";
   }

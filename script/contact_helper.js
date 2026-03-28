@@ -3,19 +3,40 @@
  * @param {Object} contact - The contact object containing contact details.
  */
 function helpRenderContactCard(contact) {
-    const card = document.getElementById("contact-card-content");
+    resetContainerDisplays();
+    displayContactCard(contact);
+    animateCardEntry();
+}
+
+/**
+ * Resets the display properties of contact containers.
+ */
+function resetContainerDisplays() {
     const sloganAndCardContainer = document.getElementById("slogan-and-card-container");
     const contactListContainer = document.getElementById("contact-list-container");
-    const mainContent = document.querySelector(".main-content");
 
     if (contactListContainer) contactListContainer.style.display = "";
     if (sloganAndCardContainer) sloganAndCardContainer.style.display = "";
+}
+
+/**
+ * Displays the contact card with contact information.
+ * @param {Object} contact - The contact object.
+ */
+function displayContactCard(contact) {
+    const card = document.getElementById("contact-card-content");
+    const mainContent = document.querySelector(".main-content");
 
     card.classList.remove("display-none");
     mainContent.classList.add("show-contact-card");
     card.innerHTML = contactCard(contact);
     showInitials(contact);
-    
+}
+
+/**
+ * Animates the card entry.
+ */
+function animateCardEntry() {
     const cardWrapper = document.getElementById("contact-card");
     cardWrapper.classList.remove("show");
     setTimeout(() => {cardWrapper.classList.add("show");}, 10);
@@ -25,23 +46,50 @@ function helpRenderContactCard(contact) {
  * Adjusts the contact card display for mobile devices based on window width.
  */
 function checkForMobileRenderCard() {
-  const card = document.getElementById("contact-card-content");
-  const sloganAndCardContainer = document.getElementById("slogan-and-card-container",);
-  const contactListContainer = document.getElementById("contact-list-container",);
-  const closeCardBtn = document.getElementById("close-card-btn");
-  const mobileSlogan = document.getElementById("mobile-slogan");
+  const elements = getMobileCardElements();
+
   if (window.innerWidth <= 850) {
-    mobileSlogan.classList.remove("display-none");
-    card.classList.remove("display-none");
-    closeCardBtn.classList.remove("display-none");
-    contactListContainer.style.display = "none";
-    sloganAndCardContainer.style.display = "flex";
+    applyMobileLayout(elements);
   } else {
-    mobileSlogan.classList.add("display-none");
-    card.classList.remove("display-none");
-    closeCardBtn.classList.add("display-none");
-    contactListContainer.style.display = "flex";
+    applyDesktopLayout(elements);
   }
+}
+
+/**
+ * Gets all elements needed for mobile card rendering.
+ * @returns {Object} Object containing all relevant elements.
+ */
+function getMobileCardElements() {
+  return {
+    card: document.getElementById("contact-card-content"),
+    sloganContainer: document.getElementById("slogan-and-card-container"),
+    listContainer: document.getElementById("contact-list-container"),
+    closeBtn: document.getElementById("close-card-btn"),
+    mobileSlogan: document.getElementById("mobile-slogan")
+  };
+}
+
+/**
+ * Applies mobile layout to contact card.
+ * @param {Object} elements - The elements object.
+ */
+function applyMobileLayout(elements) {
+  elements.mobileSlogan.classList.remove("display-none");
+  elements.card.classList.remove("display-none");
+  elements.closeBtn.classList.remove("display-none");
+  elements.listContainer.style.display = "none";
+  elements.sloganContainer.style.display = "flex";
+}
+
+/**
+ * Applies desktop layout to contact card.
+ * @param {Object} elements - The elements object.
+ */
+function applyDesktopLayout(elements) {
+  elements.mobileSlogan.classList.add("display-none");
+  elements.card.classList.remove("display-none");
+  elements.closeBtn.classList.add("display-none");
+  elements.listContainer.style.display = "flex";
 }
 
 // Ensure ESC key triggers the smooth CSS close animation
@@ -160,22 +208,36 @@ async function showContactDetails(contactId) {
  * @deprecated This function is no longer used in the current validation system.
  */
 function markAsError() {
-  const firstnameError = document.getElementById('firstname')
-  const lastnameError = document.getElementById('lastname')
-  const mailError = document.getElementById('email')
-  const firstnameErrorMsg = document.getElementById('error-firstname')
-  const lastnameErrorMsg = document.getElementById('error-lastname')
-  const mailErrorMsg = document.getElementById('error-mail-adress')
+  const elements = getErrorElements();
+  applyErrorStyling(elements);
+}
 
-    firstnameError.classList.add('error')
-    firstnameErrorMsg.classList.remove('display-none')
+/**
+ * Gets all error-related elements.
+ * @returns {Object} Object containing error elements.
+ */
+function getErrorElements() {
+  return {
+    firstnameInput: document.getElementById('firstname'),
+    lastnameInput: document.getElementById('lastname'),
+    mailInput: document.getElementById('email'),
+    firstnameMsg: document.getElementById('error-firstname'),
+    lastnameMsg: document.getElementById('error-lastname'),
+    mailMsg: document.getElementById('error-mail-adress')
+  };
+}
 
-    lastnameError.classList.add('error')
-    lastnameErrorMsg.classList.remove('display-none')
-
-    mailError.classList.add('error')
-    mailErrorMsg.classList.remove('display-none')
-    return
+/**
+ * Applies error styling to form elements.
+ * @param {Object} elements - The error elements object.
+ */
+function applyErrorStyling(elements) {
+  elements.firstnameInput.classList.add('error');
+  elements.firstnameMsg.classList.remove('display-none');
+  elements.lastnameInput.classList.add('error');
+  elements.lastnameMsg.classList.remove('display-none');
+  elements.mailInput.classList.add('error');
+  elements.mailMsg.classList.remove('display-none');
 }
 
 /**
@@ -184,19 +246,32 @@ function markAsError() {
  * @returns {string} The new contact ID.
  */
 function generateNextContactId(contacts) {
-    let nextIdNumber = 1;
+    const nextIdNumber = calculateNextIdNumber(contacts);
+    return `c${nextIdNumber}`;
+}
 
-    if (contacts) {
-      const ids = Object.keys(contacts)
+/**
+ * Calculates the next ID number from existing contacts.
+ * @param {Object} contacts - Existing contacts object.
+ * @returns {number} The next ID number.
+ */
+function calculateNextIdNumber(contacts) {
+    if (!contacts) return 1;
+
+    const ids = extractContactIdNumbers(contacts);
+    return ids.length > 0 ? Math.max(...ids) + 1 : 1;
+}
+
+/**
+ * Extracts numeric ID values from contacts.
+ * @param {Object} contacts - The contacts object.
+ * @returns {number[]} Array of numeric IDs.
+ */
+function extractContactIdNumbers(contacts) {
+    return Object.keys(contacts)
         .filter((id) => id.startsWith("c"))
         .map((id) => parseInt(id.substring(1)))
         .filter((num) => !isNaN(num));
-
-      if (ids.length > 0) {
-        nextIdNumber = Math.max(...ids) + 1;
-      }
-    }
-    return `c${nextIdNumber}`;
 }
 
 /**
