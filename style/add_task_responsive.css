@@ -12,13 +12,19 @@
     .footer-section{
         padding-top: 20px;
     }
+}
 
-    @media (max-height: 1100px) {
+@media (max-height: 1600px) {
         .footer-section {
-            margin-top: 500px;
+            position: fixed;
+            margin-top: 0;
+            bottom: 0;
+        }
+
+        .footer-container {
+            justify-content: space-between;
         }
     }
-}
 
 @media (max-width: 1250px) {
        .trigger{
@@ -131,6 +137,7 @@
         align-items: center;
         padding-bottom: 24px;
         margin-top: 0;
+        bottom: 0;
     }
     
     .footer-container {
